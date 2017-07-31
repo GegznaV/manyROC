@@ -7,11 +7,10 @@
 
 ------------------------------------------------------------------------
 
-<!--  
-<img src="https://raw.githubusercontent.com/GegznaV/multiROC/master/docs/logo.png" width="30%" height="30%" style="display: block; margin: auto;" />
--->
-R package **multiROC**
-======================
+<img src="logo.png" width="50%" height="50%" style="display: block; margin: auto;" /> <!-- "https://raw.githubusercontent.com/GegznaV/multiROC/master/docs/logo.png" -->
+
+R package ***`multiROC`***
+==========================
 
 **Package is under construction.**
 

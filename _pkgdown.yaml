@@ -1,0 +1,22 @@
+favicon: "favicon.png"
+
+
+template:
+  params:
+    bootswatch: cerulean
+
+navbar:
+  title: "multiROC | R package"
+  type: default
+  left:
+  - icon: fa-home fa-lg
+    href: /index.html
+  - icon: fa-book fa-lg
+    text: Functions
+    href: reference/index.html
+  - icon: fa-book fa-lg
+    text: Tutorials and examples
+    href: articles/index.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/GegznaV/multiROC

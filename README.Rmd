@@ -21,13 +21,13 @@ knitr::opts_chunk$set(
 
 ***
 
-<!--  
-```{r, fig.align='center', out.height='30%', out.width='30%',echo=FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/GegznaV/multiROC/master/docs/logo.png")
+ 
+```{r, fig.align='center', out.height='50%', out.width='50%',echo=FALSE}
+knitr::include_graphics("logo.png")
 ```
--->
+<!-- "https://raw.githubusercontent.com/GegznaV/multiROC/master/docs/logo.png" -->
 
-R package **multiROC** 
+R package _**`multiROC`**_ 
 ==========================================
 
 **Package is under construction.**
