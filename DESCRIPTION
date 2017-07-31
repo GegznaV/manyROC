@@ -1,0 +1,26 @@
+Package: multiROC
+Type: Package
+Title: MultiROC algorithm for spectroscopic data analysis
+Description: [!!!] MultiROC algorithm for spectroscopic data analysis.
+Version: 0.0.1
+Date: 2017-07-31
+Authors@R: person("Vilmantas", "Gegzna",
+                  role = c("aut", "cre"),
+                  email = "GegznaV@gmail.com")
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Depends:
+    R (>= 3.2)
+Imports:
+    checkmate,
+    hyperSpec,
+    magrittr,
+    glue,
+    parallelMap,
+    purrr
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat

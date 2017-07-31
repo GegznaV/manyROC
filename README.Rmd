@@ -1,0 +1,53 @@
+---
+output: github_document
+---
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+ 
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = FALSE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+***
+
+[![CRAN version](http://www.r-pkg.org/badges/version/multiROC)](http://cran.rstudio.com/web/packages/multiROC/index.html)
+[![GitHub version](https://img.shields.io/badge/GitHub-v`r packageVersion("multiROC")`-brightgreen.svg)](https://github.com/GegznaV/multiROC)
+[![Travis-CI Build Status](https://travis-ci.org/GegznaV/multiROC.png?branch=master)](https://travis-ci.org/GegznaV/multiROC)
+[![codecov.io](https://codecov.io/github/GegznaV/multiROC/coverage.svg?branch=master)](https://codecov.io/github/GegznaV/multiROC?branch=master)
+[![Last-update](https://img.shields.io/badge/last%20update-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](/commits/master)
+
+***
+
+<!--  
+```{r, fig.align='center', out.height='30%', out.width='30%',echo=FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/GegznaV/multiROC/master/docs/logo.png")
+```
+-->
+
+R package **multiROC** 
+==========================================
+
+**Package is under construction.**
+
+*MultiROC* algorithm for spectroscopic data analysis.
+
+* * *
+
+Install package:
+
+```{r Install package, eval=FALSE}
+library(devtools)
+install_github("GegznaV/multiROC")
+```
+
+
+* * *
+
+ <p align="right"> </p>    
+
+
+ 
+
