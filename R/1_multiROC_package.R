@@ -1,6 +1,6 @@
-#' @title MultiROC algorithm for spectroscopic data analysis
+#' MultiROC algorithm for spectroscopic data analysis
 #'
-#'
+#' MultiROC algorithm for spectroscopic data analysis.
 #'
 #'
 #' @name multiROC
@@ -14,4 +14,5 @@
 #'                       assert_set_equal assert_string assert_subset
 #'                       assert_class
 #' @import parallelMap
+#' @import hyperSpec
 NULL

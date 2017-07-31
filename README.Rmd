@@ -27,7 +27,7 @@ knitr::include_graphics("logo.png")
 ```
 <!-- "https://raw.githubusercontent.com/GegznaV/multiROC/master/docs/logo.png" -->
 
-R package _**`multiROC`**_ 
+R package _**multiROC**_ 
 ==========================================
 
 **Package is under construction.**

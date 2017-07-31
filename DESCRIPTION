@@ -19,7 +19,9 @@ Imports:
     magrittr,
     glue,
     parallelMap,
-    purrr
+    purrr,
+    dplyr,
+    tibble
 Suggests:
     knitr,
     rmarkdown,

@@ -5,6 +5,9 @@
 \alias{multiROC}
 \alias{multiROC-package}
 \title{MultiROC algorithm for spectroscopic data analysis}
+\description{
+MultiROC algorithm for spectroscopic data analysis.
+}
 \author{
 Vilmantas Gegzna
 }
