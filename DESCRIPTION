@@ -3,7 +3,7 @@ Type: Package
 Title: MultiROC algorithm for spectroscopic data analysis
 Description: [!!!] MultiROC algorithm for spectroscopic data analysis.
 Version: 0.0.1
-Date: 2017-07-31
+Date: 2017-08-01
 Authors@R: person("Vilmantas", "Gegzna",
                   role = c("aut", "cre"),
                   email = "GegznaV@gmail.com")
@@ -21,7 +21,8 @@ Imports:
     parallelMap,
     purrr,
     dplyr,
-    tibble
+    tibble,
+    pracma
 Suggests:
     knitr,
     rmarkdown,

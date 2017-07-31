@@ -9,6 +9,8 @@
 #'
 #'
 #' @importFrom magrittr '%>%'
+#' @importFrom glue glue
+#' @importFrom pracma trapz
 #' @importFrom checkmate assert_choice assert_numeric assert_vector
 #'                       assert_factor assert_flag assert_character
 #'                       assert_set_equal assert_string assert_subset

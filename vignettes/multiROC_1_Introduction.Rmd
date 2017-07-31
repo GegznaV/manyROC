@@ -1,0 +1,34 @@
+---
+title: "Introduction to `multiROC`"
+author: "Vilmantas Gegzna"
+date: "`r Sys.Date()` (v`r packageVersion('multiROC')`)"
+output:
+    rmarkdown::html_vignette: 
+        toc: yes
+        number_sections: yes
+
+vignette: >
+  %\VignetteIndexEntry{1 multiROC Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteDepends{glue}
+  %\VignetteEncoding{UTF-8}
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = FALSE,
+                      comment = "#>",
+                      fig.align = 'center',
+                      fig.width = 6)
+optDEF <- knitr::opts_chunk$get()
+```
+
+Load package
+
+```{r Load main package, message = FALSE, warning = FALSE}
+library(multiROC)
+```
+
+// Introduction is being prepared... //
+
+<!-- # ```{r session info} -->
+<!-- # devtools::session_info() -->
+<!-- # ``` -->

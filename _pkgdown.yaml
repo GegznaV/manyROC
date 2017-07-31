@@ -20,3 +20,20 @@ navbar:
   right:
   - icon: fa-github fa-lg
     href: https://github.com/GegznaV/multiROC
+    menu:
+    - text: Introduction to `multiROC`
+      href: articles/multiROC_1_Introduction.html
+
+reference:
+- title: All functions
+  desc: ~
+  contents:
+  - '`multiROC`'
+- title: Helper and utility functions
+  desc: ~
+  contents:
+  - '`class_add`'
+- title: Datasets
+  desc: ~
+  contents:
+  - '`DataSets-fluorescence`'
