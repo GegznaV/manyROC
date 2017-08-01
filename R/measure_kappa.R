@@ -12,14 +12,21 @@
 #' @family measures_
 #'
 #' @examples
-#' # [!!!] // none //
 #'
-#' # matrix(c("TP", "FN", "FP", "TN"), 2)
+#'      truth <- rep(1:3, times = 50)
+#' prediction <- rep(3:1, each = 50)
 #'
-#' make_conf_matrix <- function(TP, FN, FP, TN)
-#'                  matrix(c(TP, FN, FP, TN), 2)
+#' measure_kappa(truth, prediction)
 #'
-
+#' square_matrix <- table(truth, prediction)
+#' measure_kappa(conf_mat = square_matrix)
+#'
+#'
+# # matrix(c("TP", "FN", "FP", "TN"), 2)
+#
+# make_conf_matrix <- function(TP, FN, FP, TN)
+#                  matrix(c(TP, FN, FP, TN), 2)
+#
 measure_kappa <- function(truth = NULL, response = NULL, conf_mat = NULL) {
     if (is.null(conf_mat)) {
         conf_mat <- table(truth, response)

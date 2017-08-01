@@ -20,7 +20,14 @@ measure_wkappa(truth = NULL, response = NULL, conf_mat = NULL)
 This function is based on function `measureWKAPPA` from `mlr` package.
 }
 \examples{
-# [!!!] // none //
+     truth <- rep(1:3, times = 50)
+prediction <- rep(3:1, each = 50)
+
+measure_wkappa(truth, prediction)
+
+square_matrix <- table(truth, prediction)
+measure_wkappa(conf_mat = square_matrix)
+
 }
 \seealso{
 Other measures_: \code{\link{measure_kappa}}

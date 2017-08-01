@@ -7,7 +7,7 @@
 \usage{
 class_add(x, new_class)
 
-class_remove(x, old_class)
+class_remove(x, drop_class)
 }
 \arguments{
 \item{x}{An object to modify.}
@@ -15,7 +15,7 @@ class_remove(x, old_class)
 \item{new_class}{(\code{character})\cr A name of a new class.
 May be a vector of names.}
 
-\item{old_class}{(\code{character})\cr A name of a class to remove.
+\item{drop_class}{(\code{character})\cr A name of a class to remove.
 May be a vector of names.}
 }
 \description{

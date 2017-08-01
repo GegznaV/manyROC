@@ -8,7 +8,7 @@
 #' @param x An object to modify.
 #' @param new_class (\code{character})\cr A name of a new class.
 #'                   May be a vector of names.
-#' @param old_class (\code{character})\cr A name of a class to remove.
+#' @param drop_class (\code{character})\cr A name of a class to remove.
 #'                   May be a vector of names.
 #' @export
 #' @examples
@@ -22,11 +22,11 @@ class_add <- function(x, new_class) {
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname class_add
 #' @export
-class_remove <- function(x, old_class) {
-    assert_character(old_class)
+class_remove <- function(x, drop_class) {
+    assert_character(drop_class)
     all_classes <- class(x)
-    assert_subset(old_class, all_classes)
+    assert_subset(drop_class, all_classes)
 
-    class(x) <- setdiff(old_class, all_classes)
+    class(x) <- setdiff(all_classes, drop_class)
     x
 }

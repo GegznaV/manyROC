@@ -147,7 +147,6 @@ roc_multiroc.matrix <- function(x,
 
     # Output
     class_add(OBJ, "roc_performance")
-
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_multiroc
@@ -168,7 +167,5 @@ roc_multiroc.hyperSpec <- function(x, gr = NULL, optimize_by = "bac",  ...) {
     assert_class(x, "hyperSpec")
     roc_multiroc(x[[]], gr, optimize_by, ...)
 }
-
-
 # =============================================================================
 

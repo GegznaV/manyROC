@@ -12,7 +12,14 @@
 #' @family measures_
 #'
 #' @examples
-#' # [!!!] // none //
+#'      truth <- rep(1:3, times = 50)
+#' prediction <- rep(3:1, each = 50)
+#'
+#' measure_wkappa(truth, prediction)
+#'
+#' square_matrix <- table(truth, prediction)
+#' measure_wkappa(conf_mat = square_matrix)
+#'
 measure_wkappa <- function(truth = NULL, response = NULL, conf_mat = NULL) {
 
     # "wkappa" might be incorrect if NA values exist in any
@@ -23,11 +30,10 @@ measure_wkappa <- function(truth = NULL, response = NULL, conf_mat = NULL) {
     }
     if (nrow(conf_mat) != ncol(conf_mat)) {
         stop("Confusion matrix `conf_mat` must be square.")
-        class_values <- seq_along(1:nrow(conf_mat)) - 1L
-        ## Original code line:
-        # class_values <- seq_along(levels(truth)) - 1L
-
     }
+    ## Original code line:
+    # class_values <- seq_along(levels(truth)) - 1L
+    class_values  <- seq_along(1:nrow(conf_mat)) - 1L
 
     conf_mat <- conf_mat/sum(conf_mat)
     rowsum <- rowSums(conf_mat)

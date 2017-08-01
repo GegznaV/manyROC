@@ -112,7 +112,7 @@ roc_analysis <- function(x,
 
     assert_flag(pos_is_larger, null.ok = TRUE)
 
-    assert_string(optimize_by)
+    assert_string(optimize_by, null.ok = TRUE)
     assert_choice(optimize_by, c("bac", "youden", "kappa"), null.ok = TRUE)
 
     assert_choice(results, c("all", "optimal"))
