@@ -27,11 +27,10 @@ navbar:
 reference:
 - title: ROC analysis
   desc: >
-       The main functions for ROC analysis are `roc_analysis`
-       and `roc_multi_analysis`.
+       The main functions for ROC analysis.
   contents:
-  - '`print.roc_results`'
-  - '`print.roc_performance`'
+  - '`roc_analysis`'
+  - '`roc_multi_analysis`'
 - title: Objects management functions
   desc: ~
   contents:

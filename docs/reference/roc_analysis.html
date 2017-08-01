@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>[!] Carry the ROC analysis � print.roc_results • multiROC</title>
+<title>[!] Carry the ROC analysis � roc_analysis • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -113,25 +113,25 @@ specificity, etc.
 [!!!]</p>
     
 
-    <pre class="usage"><span class='fu'>print.roc_results</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='fu'>levels</span>(<span class='no'>gr</span>)[<span class='fl'>2</span>], <span class='kw'>pos_is_larger</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='st'>"all"</span>)
 
-<span class='fu'>print.roc_optimal</span>(<span class='no'>x</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>...</span>)
+<span class='co'># S3 method for roc_results</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
-<span class='fu'>print.roc_info</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='co'># S3 method for roc_optimal</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>...</span>)
 
-<span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='fu'>levels</span>(<span class='no'>gr</span>)[<span class='fl'>2</span>], <span class='kw'>pos_is_larger</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='st'>"all"</span>)</pre>
+<span class='co'># S3 method for roc_info</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>(in <code>print</code> function) An object to print.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>[!!!] Passed to further methods.</p></td>
+      <td><p>(<code>numeric</code>)  A numeric vector.
+(in <code>print</code> function) An object to print.</p></td>
     </tr>
     <tr>
       <th>gr</th>
@@ -164,8 +164,12 @@ should be returned: either <code>"all"</code> (as described in
 section "Values") or just <code>"optimal"</code>.</p></td>
     </tr>
     <tr>
-      <th>x</th>
-      <td><p>(<code>numeric</code>)  A numeric vector.</p></td>
+      <th>...</th>
+      <td><p>[!!!] Passed to further methods.</p></td>
+    </tr>
+    <tr>
+      <th>digits</th>
+      <td><p>(<code>integer(1)</code>) Number of significant digits to display.</p></td>
     </tr>
     </table>
     
