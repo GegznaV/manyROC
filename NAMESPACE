@@ -2,8 +2,8 @@
 
 S3method(cvo_count_folds,cvo_caret)
 S3method(cvo_count_folds,cvo_mlr)
+S3method(cvo_get_inds,cvo_caret)
 S3method(cvo_get_inds,cvo_mlr)
-S3method(cvo_get_inds,default)
 S3method(print,multiroc_result)
 S3method(print,roc_info)
 S3method(print,roc_optimal)
