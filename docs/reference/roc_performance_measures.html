@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Datasets of simulated spectroscopic data � DataSets-fluorescence • multiROC</title>
+<title>[!!!] Calculate various performance measures for classificatory analysis � roc_performance_measures • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -99,53 +99,100 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Datasets of simulated spectroscopic data</h1>
+    <h1>[!!!] Calculate various performance measures for classificatory analysis</h1>
     </div>
 
     
-    <p><code>fluorescence</code> is a dataset of simulated spectroscopic data.</p>
+    <p>[!!!] The description is missing...</p>
     
 
-    <pre class="usage"><span class='no'>fluorescence</span></pre>
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <pre class="usage"><span class='fu'>calculate_acc</span>(<span class='no'>TP</span>, <span class='no'>FN</span>, <span class='no'>FP</span>, <span class='no'>TN</span>)
 
-    <p><code><a href='http://www.rdocumentation.org/packages/hyperSpec/topics/hyperSpec-class'>hyperSpec</a></code> objects with spectroscopic
-data and additional variables.</p>
-<p>Spectra and these nonspectroscopic variables:</p><dl class='dl-horizontal'>
-  <dt>class</dt><dd><p>A factor variable with 4 classes.</p></dd>
-  <dt>gr</dt><dd><p>A factor variable with 3 classes.</p></dd>
-</dl>
+<span class='fu'>roc_calculate_acc</span>(<span class='no'>obj</span>)
+
+<span class='fu'>calculate_bac</span>(<span class='no'>SE</span>, <span class='no'>SP</span>)
+
+<span class='fu'>roc_calculate_bac</span>(<span class='no'>obj</span>)
+
+<span class='fu'>calculate_auc</span>(<span class='no'>SE</span>, <span class='no'>SP</span>)
+
+<span class='fu'>roc_calculate_auc</span>(<span class='no'>obj</span>)
+
+<span class='fu'>calculate_npv</span>(<span class='no'>TN</span>, <span class='no'>FN</span>)
+
+<span class='fu'>roc_calculate_npv</span>(<span class='no'>obj</span>)
+
+<span class='fu'>calculate_ppv</span>(<span class='no'>TP</span>, <span class='no'>FP</span>)
+
+<span class='fu'>roc_calculate_ppv</span>(<span class='no'>obj</span>)
+
+<span class='fu'>calculate_sensitivity</span>(<span class='no'>TP</span>, <span class='no'>FN</span>)
+
+<span class='fu'>roc_calculate_se</span>(<span class='no'>obj</span>)
+
+<span class='fu'>calculate_specificity</span>(<span class='no'>TN</span>, <span class='no'>FP</span>)
+
+<span class='fu'>roc_calculate_sp</span>(<span class='no'>obj</span>)
+
+<span class='fu'>calculate_youdens_j</span>(<span class='no'>SE</span>, <span class='no'>SP</span>)
+
+<span class='fu'>roc_youdens_j</span>(<span class='no'>obj</span>)
+
+<span class='fu'>calculate_kappa</span>(<span class='no'>TP</span>, <span class='no'>FN</span>, <span class='no'>FP</span>, <span class='no'>TN</span>)
+
+<span class='fu'>roc_calculate_kappa</span>(<span class='no'>obj</span>)
+
+<span class='fu'>calculate_wkappa</span>(<span class='no'>TP</span>, <span class='no'>FN</span>, <span class='no'>FP</span>, <span class='no'>TN</span>)
+
+<span class='fu'>roc_calculate_wkappa</span>(<span class='no'>obj</span>)</pre>
     
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>TP</th>
+      <td><p>(<code>numeric</code>) Number of true positives.</p></td>
+    </tr>
+    <tr>
+      <th>FN</th>
+      <td><p>(<code>numeric</code>) Number of false negatives.</p></td>
+    </tr>
+    <tr>
+      <th>FP</th>
+      <td><p>(<code>numeric</code>) Number of false positives.</p></td>
+    </tr>
+    <tr>
+      <th>TN</th>
+      <td><p>(<code>numeric</code>) Number of true negatives.</p></td>
+    </tr>
+    <tr>
+      <th>obj</th>
+      <td><p>Either an <code>roc_result_list</code> or an <code>roc_results</code> object.</p></td>
+    </tr>
+    <tr>
+      <th>SE</th>
+      <td><p>(<code>numeric</code>) Vector of sensitivities.</p></td>
+    </tr>
+    <tr>
+      <th>SP</th>
+      <td><p>(<code>numeric</code>) Vector of specificities</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Artificially generated in <code>R</code>.</p>
+    <p>Other functions for ROC: <code><a href='access_elements.html'>access_elements</a></code>,
+  <code><a href='roc_analysis.html'>print.roc_results</a></code></p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>hyperSpec</span>)
-
-<span class='no'>fluorescence</span></div><div class='output co'>#&gt; hyperSpec object
-#&gt;    150 spectra
-#&gt;    3 data columns
-#&gt;    501 data points / spectrum
-#&gt; wavelength: lambda/nm [integer] 300 301 ... 800 
-#&gt; data:  (150 rows x 3 columns)
-#&gt;    1. gr:  [factor] B B ... A 
-#&gt;    2. class:  [factor] N l ... S1 
-#&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/hyperSpec/topics/plot'>plot</a></span>(<span class='no'>fluorescence</span>[<span class='fl'>30</span>:<span class='fl'>60</span>,])</div><div class='img'><img src='DataSets-fluorescence-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#source">Source</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
     <h2>Author</h2>
     

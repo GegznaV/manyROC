@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Datasets of simulated spectroscopic data � DataSets-fluorescence • multiROC</title>
+<title>Weighted Cohen's kappa � measure_wkappa • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -99,57 +99,56 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Datasets of simulated spectroscopic data</h1>
+    <h1>Weighted Cohen's kappa</h1>
     </div>
 
     
-    <p><code>fluorescence</code> is a dataset of simulated spectroscopic data.</p>
+    <p>This function is based on function `measureWKAPPA` from `mlr` package.</p>
     
 
-    <pre class="usage"><span class='no'>fluorescence</span></pre>
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p><code><a href='http://www.rdocumentation.org/packages/hyperSpec/topics/hyperSpec-class'>hyperSpec</a></code> objects with spectroscopic
-data and additional variables.</p>
-<p>Spectra and these nonspectroscopic variables:</p><dl class='dl-horizontal'>
-  <dt>class</dt><dd><p>A factor variable with 4 classes.</p></dd>
-  <dt>gr</dt><dd><p>A factor variable with 3 classes.</p></dd>
-</dl>
+    <pre class="usage"><span class='fu'>measure_wkappa</span>(<span class='kw'>truth</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>response</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>conf_mat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>truth</th>
+      <td><p>a vector with true (reference) values.</p></td>
+    </tr>
+    <tr>
+      <th>response</th>
+      <td><p>a vector with response (predicted) values.</p></td>
+    </tr>
+    <tr>
+      <th>conf_mat</th>
+      <td><p>a table similar to (<code>table(truth, response, useNA = "no")</code>).</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Artificially generated in <code>R</code>.</p>
+    <p>[!!!]</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Other measures_: <code><a href='measure_kappa.html'>measure_kappa</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>hyperSpec</span>)
-
-<span class='no'>fluorescence</span></div><div class='output co'>#&gt; hyperSpec object
-#&gt;    150 spectra
-#&gt;    3 data columns
-#&gt;    501 data points / spectrum
-#&gt; wavelength: lambda/nm [integer] 300 301 ... 800 
-#&gt; data:  (150 rows x 3 columns)
-#&gt;    1. gr:  [factor] B B ... A 
-#&gt;    2. class:  [factor] N l ... S1 
-#&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/hyperSpec/topics/plot'>plot</a></span>(<span class='no'>fluorescence</span>[<span class='fl'>30</span>:<span class='fl'>60</span>,])</div><div class='img'><img src='DataSets-fluorescence-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+    <pre class="examples"><div class='input'># [!!!] // none //
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#format">Format</a></li>
+      <li><a href="#value">Value</a></li>
 
-      <li><a href="#source">Source</a></li>
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
-
-    <h2>Author</h2>
-    
-Vilmantas Gegzna
 
   </div>
 </div>

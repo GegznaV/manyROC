@@ -25,10 +25,23 @@ navbar:
       href: articles/multiROC_1_Introduction.html
 
 reference:
-- title: All functions
+- title: ROC analysis
+  desc: >
+       The main functions for ROC analysis are `roc_analysis`
+       and `roc_multi_analysis`.
+  contents:
+  - '`print.roc_results`'
+  - '`print.roc_performance`'
+- title: Objects management functions
   desc: ~
   contents:
-  - '`multiROC`'
+  - '`access_elements`'
+- title: Performance measures
+  desc: ~
+  contents:
+  - '`roc_performance_measures`'
+  - '`measure_kappa`'
+  - '`measure_wkappa`'
 - title: Helper and utility functions
   desc: ~
   contents:
@@ -37,3 +50,9 @@ reference:
   desc: ~
   contents:
   - '`DataSets-fluorescence`'
+- title: Other functions
+  desc: ~
+  contents:
+  - '`multiROC`'
+
+

@@ -116,16 +116,62 @@
       <tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+            <h2 id="section-roc-analysis" class="hasAnchor"><a href="#section-roc-analysis" class="anchor"></a>ROC analysis</h2>
+            <p class="section-desc"><p>The main functions for ROC analysis are <code>roc_analysis</code> and <code>roc_multi_analysis</code>.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="roc_analysis.html">print.roc_results</a></code> <code><a href="roc_analysis.html">print.roc_optimal</a></code> <code><a href="roc_analysis.html">print.roc_info</a></code> <code><a href="roc_analysis.html">roc_analysis</a></code> </p>
+          </td>
+          <td><p>[!] Carry the ROC analysis</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="roc_multi_analysis.html">print.roc_performance</a></code> <code><a href="roc_multi_analysis.html">roc_multi_analysis</a></code> </p>
+          </td>
+          <td><p>[!] Carry out ROC analysis for each feature in pairs of groups</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-objects-management-functions" class="hasAnchor"><a href="#section-objects-management-functions" class="anchor"></a>Objects management functions</h2>
             <p class="section-desc"></p>
           </th>
         </tr>
         <tr>
           <!--  -->
           <td>
-            <p></p>
+            <p><code><a href="access_elements.html">roc_get</a></code> <code><a href="access_elements.html">roc_get_all_results</a></code> <code><a href="access_elements.html">roc_cutoff</a></code> <code><a href="access_elements.html">roc_tp</a></code> <code><a href="access_elements.html">roc_fn</a></code> <code><a href="access_elements.html">roc_fp</a></code> <code><a href="access_elements.html">roc_tn</a></code> <code><a href="access_elements.html">roc_sens</a></code> <code><a href="access_elements.html">roc_spec</a></code> </p>
           </td>
-          <td><p>MultiROC algorithm for spectroscopic data analysis</p></td>
+          <td><p>[!] Access elements of roc_result_list object</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-performance-measures" class="hasAnchor"><a href="#section-performance-measures" class="anchor"></a>Performance measures</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="roc_performance_measures.html">calculate_acc</a></code> <code><a href="roc_performance_measures.html">roc_calculate_acc</a></code> <code><a href="roc_performance_measures.html">calculate_bac</a></code> <code><a href="roc_performance_measures.html">roc_calculate_bac</a></code> <code><a href="roc_performance_measures.html">calculate_auc</a></code> <code><a href="roc_performance_measures.html">roc_calculate_auc</a></code> <code><a href="roc_performance_measures.html">calculate_npv</a></code> <code><a href="roc_performance_measures.html">roc_calculate_npv</a></code> <code><a href="roc_performance_measures.html">calculate_ppv</a></code> <code><a href="roc_performance_measures.html">roc_calculate_ppv</a></code> <code><a href="roc_performance_measures.html">calculate_sensitivity</a></code> <code><a href="roc_performance_measures.html">roc_calculate_se</a></code> <code><a href="roc_performance_measures.html">calculate_specificity</a></code> <code><a href="roc_performance_measures.html">roc_calculate_sp</a></code> <code><a href="roc_performance_measures.html">calculate_youdens_j</a></code> <code><a href="roc_performance_measures.html">roc_youdens_j</a></code> <code><a href="roc_performance_measures.html">calculate_kappa</a></code> <code><a href="roc_performance_measures.html">roc_calculate_kappa</a></code> <code><a href="roc_performance_measures.html">calculate_wkappa</a></code> <code><a href="roc_performance_measures.html">roc_calculate_wkappa</a></code> </p>
+          </td>
+          <td><p>[!!!] Calculate various performance measures for classificatory analysis</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="measure_kappa.html">measure_kappa</a></code> </p>
+          </td>
+          <td><p>Cohen's kappa</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="measure_wkappa.html">measure_wkappa</a></code> </p>
+          </td>
+          <td><p>Weighted Cohen's kappa</p></td>
         </tr>
       </tbody><tbody>
         <tr>
@@ -155,6 +201,20 @@
           </td>
           <td><p>Datasets of simulated spectroscopic data</p></td>
         </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-other-functions" class="hasAnchor"><a href="#section-other-functions" class="anchor"></a>Other functions</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p></p>
+          </td>
+          <td><p>MultiROC algorithm for spectroscopic data analysis</p></td>
+        </tr>
       </tbody>
       </table>
     </div>
@@ -163,9 +223,12 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-roc-analysis">ROC analysis</a></li>
+      <li><a href="#section-objects-management-functions">Objects management functions</a></li>
+      <li><a href="#section-performance-measures">Performance measures</a></li>
       <li><a href="#section-helper-and-utility-functions">Helper and utility functions</a></li>
       <li><a href="#section-datasets">Datasets</a></li>
+      <li><a href="#section-other-functions">Other functions</a></li>
     </ul>
   </div>
 </div>
