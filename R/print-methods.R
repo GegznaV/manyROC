@@ -34,7 +34,7 @@ print.roc_info <- function(x,  ...) {
     if (nrow(x) == 1) print.data.frame(x, row.names = FALSE, ...) else print.data.frame(x, ...)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# @param x \code{roc_performance} object for method \code{print}.
+# @param x \code{multiroc_result} object for method \code{print}.
 #' @rdname roc_multiroc
 #'
 #'
@@ -50,15 +50,11 @@ print.roc_info <- function(x,  ...) {
 #'            \code{"\%.4g"}.
 #'
 #' @export
-#' @method print roc_performance
-print.roc_performance <- function(x, ..., digits = 2, cutoff_fmt = "%.4g") {
+#' @method print multiroc_result
+print.multiroc_result <- function(x, ..., digits = 2, cutoff_fmt = "%.4g") {
 
-    perf_names <- c("sens","spec",
-                    "PPV","NPV",
-                    "BAC","Youden",
-                    "Kappa","AUC")
+    perf_names <- c("sens","spec","PPV","NPV","BAC","Youden","Kappa","AUC")
     cutoff_names <- c("cutoff","mean_neg", "mean_pos")
-
 
     x %>%
         dplyr::mutate_at(perf_names, sprintf, fmt = glue::glue("%.{digits}f")) %>%

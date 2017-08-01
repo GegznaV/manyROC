@@ -10,7 +10,7 @@
 #' @param gr_sep Group separator used to paste the names of groups. Default is
 #'              \code{" vs. "}.
 #'
-#' @inheritParams roc_performance_measures
+#' @inheritParams multiroc_result_measures
 #'
 #' @param optimize_by (\code{string(1)})\cr A string with the name of
 #'                 classification performance measure to use. Currently
@@ -21,7 +21,7 @@
 #'       \item \code{"youden"} - for Youden's index;
 #' }
 #'
-#' @return Object of classes \code{roc_performance} and \code{data.frame} with
+#' @return Object of classes \code{multiroc_result} and \code{data.frame} with
 #' columns:#' \itemize{
 #'       \item \code{compared_groups} Names of compared groups (separated by
 #'                   \code{gr_sep} with default value \code{" vs. "});
@@ -146,7 +146,7 @@ roc_multiroc.matrix <- function(x,
                       dplyr::everything())
 
     # Output
-    class_add(OBJ, "roc_performance")
+    class_add(OBJ, "multiroc_result")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_multiroc
