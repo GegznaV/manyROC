@@ -22,7 +22,8 @@ Imports:
     purrr,
     dplyr,
     pracma,
-    tibble
+    tibble,
+    data.table
 Suggests:
     knitr,
     rmarkdown,

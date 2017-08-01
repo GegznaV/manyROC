@@ -33,20 +33,24 @@ test_that("roc_analysis() works", {
 })
 
 
-test_that("roc_analysis() gives correct marginal results", {
+test_that("roc_analysis() gives correct marginal results (1)", {
     set.seed(1)
     x_1  <- rep(1:2, times = 50)
-    x_2  <- rep(1:2, each = 50)
-    x_34 <- rep(1,   each = 100)
     gr_  <- gl(n = 2, k = 1, length = 100, labels = c("A","B"))
-
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     calculated_res1 <- roc_analysis(x_1, gr_)$optimal %>% as.data.frame()
     expected_res1   <- data.table::fread(data.table = FALSE,
 "cutoff tp fn fp tn sens spec ppv npv bac youden kappa auc mean_neg mean_pos
       2 50  0  0 50    1    1   1   1   1      1     1   1        1        2")
     expect_equivalent(calculated_res1, expected_res1)
+})
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+test_that("roc_analysis() gives correct marginal results (2)", {
+    set.seed(1)
+    x_2  <- rep(1:2, each = 50)
+    gr_  <- gl(n = 2, k = 1, length = 100, labels = c("A","B"))
+
     calculated_res2 <- roc_analysis(x_2, gr_)$optimal %>% as.data.frame()
 
     expected_res2 <- data.table::fread(data.table = FALSE,
@@ -54,6 +58,14 @@ test_that("roc_analysis() gives correct marginal results", {
       1 25 25 25 25  0.5  0.5 0.5 0.5 0.5      0     0 0.5      1.5      1.5")
     expect_equivalent(calculated_res2, expected_res2)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+})
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+test_that("roc_analysis() gives correct marginal results (3)", {
+    set.seed(1)
+    x_34 <- rep(1,   each = 100)
+    gr_  <- gl(n = 2, k = 1, length = 100, labels = c("A","B"))
+
     calculated_res3 <-
         roc_analysis(x_34, gr_, pos_is_larger = TRUE)$optimal %>% as.data.frame()
 
@@ -62,6 +74,13 @@ test_that("roc_analysis() gives correct marginal results", {
     Inf  0 50  0 50    0    1 NaN 0.5 0.5      0     0 0.5        1        1")
     expect_equivalent(calculated_res3, expected_res3)
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+})
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+test_that("roc_analysis() gives correct marginal results (4)", {
+    set.seed(1)
+    x_34 <- rep(1,   each = 100)
+    gr_  <- gl(n = 2, k = 1, length = 100, labels = c("A","B"))
     calculated_res4 <-
         roc_analysis(x_34, gr_, pos_is_larger = FALSE)$optimal %>% as.data.frame()
 

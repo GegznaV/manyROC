@@ -7,6 +7,7 @@
 #' @docType package
 #' @author Vilmantas Gegzna
 #'
+#' @importFrom data.table fread
 #' @importFrom magrittr '%>%'
 #' @importFrom glue glue
 #' @importFrom pracma trapz

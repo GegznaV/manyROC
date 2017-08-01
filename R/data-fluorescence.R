@@ -1,8 +1,9 @@
 # Datasets-Spectra --------------------------------------------------------
 # @name DataSets-fluorescence
 #'
-#' @title Datasets of simulated spectroscopic data
-#' @description \code{fluorescence} is a dataset of simulated spectroscopic data.
+#' Dataset of simulated fluorescence spectra
+#'
+#' \code{fluorescence} is a dataset of simulated spectroscopic data.
 #'
 #' @format \code{\link[=hyperSpec-class]{hyperSpec}} objects with spectroscopic
 #' data and additional variables.
@@ -13,6 +14,9 @@
 #'   \item{class}{A factor variable with 4 classes.}
 #'   \item{gr}{A factor variable with 3 classes.}
 #' }
+#'
+#' @details
+#' Artificially generated dataset.
 #'
 #' @examples
 #' library(hyperSpec)
