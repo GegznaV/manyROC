@@ -1,8 +1,8 @@
-#' [!] Carry out ROC analysis for each feature in pairs of groups
+#' [!] Carry out multiROC analysis
 #'
 #' For spectroscopic data: compare spectra of each pair of indicated groups
 #' at each wavelength.
-#' @name roc_multi_analysis
+#' @name roc_multiroc
 #' @param x A numeric matrix, a data frame, a \code{hyperSpec} object or another
 #'           type of object, convertible to a numeric matrix.
 #' @param gr Either a string (scalar, \code{character(1)}) or a \code{factor}
@@ -23,11 +23,13 @@
 #'
 #' @return Object of classes \code{roc_performance} and \code{data.frame} with
 #' columns:#' \itemize{
-#'       \item \code{compared_groups} Names of compared groups separated by
-#'             \code{gr_sep} (default value is \code{" vs. "});
-#'       \item \code{feature} names of compared features;
+#'       \item \code{compared_groups} Names of compared groups (separated by
+#'                   \code{gr_sep} with default value \code{" vs. "});
+#'       \item \code{feature} names of numeric features used in analysis;
+#'       \item \code{mean_neg} 10\% trimmed mean of negatives;
 #'       \item \code{cutoff} for optimal threshold/cut-off values and
 #'                   corresponding performance measures;
+#'       \item \code{mean_pos} 10\% trimmed mean of positives;
 #'       \item \code{TP} number of true positives;
 #'       \item \code{FN} number of false negatives;
 #'       \item \code{FP} number of false positives;
@@ -54,27 +56,27 @@
 #' # --- For numeric vectors objects ---
 #'
 #' data(PlantGrowth)
-#' roc_multi_analysis(PlantGrowth$weight, PlantGrowth$group)
+#' roc_multiroc(PlantGrowth$weight, PlantGrowth$group)
 #'
 #' # --- For dataframes objects ---
 #'
 #' data(CO2)
-#' roc_multi_analysis(CO2[, c("conc", "uptake")], CO2$Type)
+#' roc_multiroc(CO2[, c("conc", "uptake")], CO2$Type)
 #'
 #' # --- For hyperSpec objects ---
 #'
 #' library(hyperSpec)
 #' fluorescence
-#' roc_multi_analysis(fluorescence[ , , 500~502], fluorescence$gr)
-roc_multi_analysis <- function(x, gr = NULL, optimize_by = "bac",  ...) {
-    UseMethod("roc_multi_analysis")
+#' roc_multiroc(fluorescence[ , , 500~502], fluorescence$gr)
+roc_multiroc <- function(x, gr = NULL, optimize_by = "bac",  ...) {
+    UseMethod("roc_multiroc")
 }
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~ The default method, that does the job ~~~
-#' @rdname roc_multi_analysis
+#' @rdname roc_multiroc
 #' @export
-roc_multi_analysis.matrix <- function(x,
+roc_multiroc.matrix <- function(x,
                                gr = NULL,
                                optimize_by = "bac",
                                ...,
@@ -129,7 +131,8 @@ roc_multi_analysis.matrix <- function(x,
     # in variable `optimal`.
     result_names <- c("cutoff", "TP","FN","FP","TN",
                       "sens","spec","PPV","NPV",
-                      "BAC","Youden", "Kappa","AUC")
+                      "BAC","Youden", "Kappa","AUC",
+                      "mean_neg", "mean_pos")
 
     # Clean the result
     OBJ <- grouppair_results  %>%
@@ -138,31 +141,32 @@ roc_multi_analysis.matrix <- function(x,
                        magrittr::set_colnames(result_names)  %>%
                        tibble::rownames_to_column(var = "feature")) %>%
         dplyr::bind_rows(.id = "compared_groups")  %>%
-        dplyr::select(compared_groups, feature, dplyr::everything())
-
+        dplyr::select(compared_groups, feature,
+                      mean_neg, cutoff, mean_pos,
+                      dplyr::everything())
 
     # Output
     class_add(OBJ, "roc_performance")
 
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_multi_analysis
+#' @rdname roc_multiroc
 #' @export
-roc_multi_analysis.numeric <- function(x, gr = NULL, optimize_by = "bac",  ...) {
-    roc_multi_analysis(as.matrix(x), gr, optimize_by, ...)
+roc_multiroc.numeric <- function(x, gr = NULL, optimize_by = "bac",  ...) {
+    roc_multiroc(as.matrix(x), gr, optimize_by, ...)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_multi_analysis
+#' @rdname roc_multiroc
 #' @export
-roc_multi_analysis.data.frame <- function(x, gr = NULL, optimize_by = "bac",  ...) {
-    roc_multi_analysis(as.matrix(x), gr, optimize_by, ...)
+roc_multiroc.data.frame <- function(x, gr = NULL, optimize_by = "bac",  ...) {
+    roc_multiroc(as.matrix(x), gr, optimize_by, ...)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_multi_analysis
+#' @rdname roc_multiroc
 #' @export
-roc_multi_analysis.hyperSpec <- function(x, gr = NULL, optimize_by = "bac",  ...) {
+roc_multiroc.hyperSpec <- function(x, gr = NULL, optimize_by = "bac",  ...) {
     assert_class(x, "hyperSpec")
-    roc_multi_analysis(x[[]], gr, optimize_by, ...)
+    roc_multiroc(x[[]], gr, optimize_by, ...)
 }
 
 

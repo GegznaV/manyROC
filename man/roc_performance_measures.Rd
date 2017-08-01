@@ -22,7 +22,7 @@
 \alias{roc_calculate_kappa}
 \alias{calculate_wkappa}
 \alias{roc_calculate_wkappa}
-\title{[!!!] Calculate various performance measures for classificatory analysis}
+\title{[!!!] Performance measures}
 \usage{
 calculate_acc(TP, FN, FP, TN)
 
@@ -80,7 +80,8 @@ roc_calculate_wkappa(obj)
 \item{SP}{(\code{numeric}) Vector of specificities}
 }
 \description{
-[!!!] The description is missing...
+Calculate various performance measures for classificatory analysis \cr
+  [!!!] (...The description is incomplete...)
 }
 \seealso{
 Other functions for ROC: \code{\link{access_elements}},

@@ -75,13 +75,13 @@
 #' @examples
 #' # Make some data
 #' set.seed(1)
-#' (x_ <- rnorm(10))
-#' (gr_ <- gl(n = 2, k = 5, length = 10, labels = c("H","S")))
+#' (x <- rnorm(10))
+#' (gr <- gl(n = 2, k = 5, length = 10, labels = c("H","S")))
 #'
 #' # Explore the functions
 #'
-#' roc_analysis(x_, gr_)
-#' roc_analysis(x_, gr_, pos_label = "H")
+#' roc_analysis(x, gr)
+#' roc_analysis(x, gr, pos_label = "H")
 #'
 
 roc_analysis <- function(x,
@@ -94,18 +94,14 @@ roc_analysis <- function(x,
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Check the input
 
-
     # [!!!] Inputs `optimize_by = NULL` and `results = "optimize"` are
     # incompatible. An assertion and warning are needed
-
 
     assert_numeric(x)
     assert_vector(x, strict = TRUE)
 
     assert_factor(gr, n.levels = 2)
 
-    # [!!!] This assertion gives uninformative message.
-    #       Imptovement is needed.
     if (length(x) != length(gr)) {
         warning("Number of cases in `x` and `gr` must agree." )
     }
@@ -113,7 +109,6 @@ roc_analysis <- function(x,
 
     assert_string(pos_label)
     assert_choice(pos_label, levels(gr))
-
 
     assert_flag(pos_is_larger, null.ok = TRUE)
 
@@ -131,16 +126,20 @@ roc_analysis <- function(x,
     # Order factor levels so that the first was negative
     # and the second was positive
     neg_label <- setdiff(levels(gr), pos_label)
-    n_pos <- sum(gr == pos_label)
+
+    ## Reorder levels to get predictabe results:
+    ##  first - always negative, second - positive
+    levels <- c(neg_label, pos_label)
+    gr <- ordered(gr, levels = levels)
+
     n_neg <- sum(gr == neg_label)
+    n_pos <- sum(gr == pos_label)
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Automatically determine, which group has  smaller `x` values on average
+    means <- tapply(x, gr, mean, trim = .10)
     if (is.null(pos_is_larger)) {
-        trim_mean <- function(gr, LABEL) {mean(x[gr == LABEL], trim = .10)}
-        mean__pos_gr <- trim_mean(gr, pos_label)
-        mean__neg_gr <- trim_mean(gr, neg_label)
-        decreasing <- mean__pos_gr > mean__neg_gr
+        decreasing <- means[1] < means[2]  # mean__neg_gr < mean__pos_gr
     } else {
         decreasing <- pos_is_larger
     }
@@ -174,16 +173,16 @@ roc_analysis <- function(x,
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     all_results <- cbind(cutoff = cutoffs,
-                          tp = tp,
-                          fn = fn,
-                          fp = fp,
-                          tn = tn,
-                          sens = SE,
-                          spec = SP,
-                          ppv  = ppv,
-                          npv  = npv,
-                          bac  = bac,
-                          youden = youden
+                         tp = tp,
+                         fn = fn,
+                         fp = fp,
+                         tn = tn,
+                         sens = SE,
+                         spec = SP,
+                         ppv  = ppv,
+                         npv  = npv,
+                         bac  = bac,
+                         youden = youden
                           # pos = tp + fp,
                           # neg = tn + fn
     )
@@ -210,7 +209,9 @@ roc_analysis <- function(x,
                                              fn[max_ind],
                                              fp[max_ind],
                                              tn[max_ind]),
-                     auc = calculate_auc(SE, SP)
+                     auc = calculate_auc(SE, SP),
+                     mean_neg = means[1],
+                     mean_pos = means[2]
         )
         optimal <- t(as.matrix(optimal))
         attr(optimal, "optimized_by") <- optimize_by
@@ -233,10 +234,14 @@ roc_analysis <- function(x,
                 data.frame(
                     var_name  = "",
                     neg_label = neg_label,
-                    n_neg     = n_neg,
                     pos_label = pos_label,
+                    mean_neg  = means[1],
+                    mean_pos  = means[2],
+                pos_is_larger = decreasing,
+                    n_neg     = n_neg,
                     n_pos     = n_pos,
-                    n_total   = n_neg + n_pos),
+                    n_total   = n_neg + n_pos
+                ),
                 c("roc_info")
             ),
         optimal = optimal,

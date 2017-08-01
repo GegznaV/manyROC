@@ -5,3 +5,4 @@
 README.Rmd
 _pkgdown.yaml
 docs.*
+^\.travis\.yml$

@@ -212,18 +212,22 @@ from <span class="pkg">ROCR</span> package.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Make some data</span>
 <span class='fu'>set.seed</span>(<span class='fl'>1</span>)
-(<span class='no'>x_</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>10</span>))</div><div class='output co'>#&gt;  [1] -0.6264538  0.1836433 -0.8356286  1.5952808  0.3295078 -0.8204684
-#&gt;  [7]  0.4874291  0.7383247  0.5757814 -0.3053884</div><div class='input'>(<span class='no'>gr_</span> <span class='kw'>&lt;-</span> <span class='fu'>gl</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>length</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"H"</span>,<span class='st'>"S"</span>)))</div><div class='output co'>#&gt;  [1] H H H H H S S S S S
+(<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>10</span>))</div><div class='output co'>#&gt;  [1] -0.6264538  0.1836433 -0.8356286  1.5952808  0.3295078 -0.8204684
+#&gt;  [7]  0.4874291  0.7383247  0.5757814 -0.3053884</div><div class='input'>(<span class='no'>gr</span> <span class='kw'>&lt;-</span> <span class='fu'>gl</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>length</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"H"</span>,<span class='st'>"S"</span>)))</div><div class='output co'>#&gt;  [1] H H H H H S S S S S
 #&gt; Levels: H S</div><div class='input'>
 <span class='co'># Explore the functions</span>
 
-<span class='fu'>roc_analysis</span>(<span class='no'>x_</span>, <span class='no'>gr_</span>)</div><div class='output co'>#&gt; $info
-#&gt;  var_name neg_label n_neg pos_label n_pos n_total
-#&gt;                   H     5         S     5      10
+<span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>)</div><div class='output co'>#&gt; $info
+#&gt;  var_name neg_label pos_label  mean_neg  mean_pos pos_is_larger n_neg n_pos
+#&gt;                   H         S 0.1292699 0.1351357          TRUE     5     5
+#&gt;  n_total
+#&gt;       10
 #&gt; 
 #&gt; $optimal
-#&gt;  cutoff tp fn fp tn sens spec  ppv   npv bac youden kappa auc
-#&gt;   0.487  3  2  1  4  0.6  0.8 0.75 0.667 0.7    0.4   0.4 0.6
+#&gt;  cutoff tp fn fp tn sens spec  ppv   npv bac youden kappa auc mean_neg.H
+#&gt;   0.487  3  2  1  4  0.6  0.8 0.75 0.667 0.7    0.4   0.4 0.6      0.129
+#&gt;  mean_pos.S
+#&gt;       0.135
 #&gt; 
 #&gt; * The optimal cut-off value selected by: max BAC
 #&gt; 
@@ -240,13 +244,17 @@ from <span class="pkg">ROCR</span> package.</p>
 #&gt; 11  -0.836   5   0   5   0    1    0   0.5   NaN 0.5      0
 #&gt; 
 #&gt; attr(,"class")
-#&gt; [1] "roc_result_list" "list"           </div><div class='input'><span class='fu'>roc_analysis</span>(<span class='no'>x_</span>, <span class='no'>gr_</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='st'>"H"</span>)</div><div class='output co'>#&gt; $info
-#&gt;  var_name neg_label n_neg pos_label n_pos n_total
-#&gt;                   S     5         H     5      10
+#&gt; [1] "roc_result_list" "list"           </div><div class='input'><span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='st'>"H"</span>)</div><div class='output co'>#&gt; $info
+#&gt;  var_name neg_label pos_label  mean_neg  mean_pos pos_is_larger n_neg n_pos
+#&gt;                   S         H 0.1351357 0.1292699         FALSE     5     5
+#&gt;  n_total
+#&gt;       10
 #&gt; 
 #&gt; $optimal
-#&gt;  cutoff tp fn fp tn sens spec   ppv  npv bac youden kappa auc
-#&gt;    0.33  4  1  2  3  0.8  0.6 0.667 0.75 0.7    0.4   0.4 0.6
+#&gt;  cutoff tp fn fp tn sens spec   ppv  npv bac youden kappa auc mean_neg.S
+#&gt;    0.33  4  1  2  3  0.8  0.6 0.667 0.75 0.7    0.4   0.4 0.6      0.135
+#&gt;  mean_pos.H
+#&gt;       0.129
 #&gt; 
 #&gt; * The optimal cut-off value selected by: max BAC
 #&gt; 

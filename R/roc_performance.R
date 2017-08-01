@@ -1,7 +1,8 @@
 #' @name roc_performance_measures
-#' @title [!!!] Calculate various performance measures for classificatory analysis
+#' @title [!!!] Performance measures
 #'
-#' @description  [!!!] The description is missing...
+#' @description Calculate various performance measures for classificatory analysis \cr
+#'   [!!!] (...The description is incomplete...)
 #'
 #' @param obj Either an \code{roc_result_list} or an \code{roc_results} object.
 #'

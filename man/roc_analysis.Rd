@@ -85,13 +85,13 @@ from \pkg{ROCR} package.
 \examples{
 # Make some data
 set.seed(1)
-(x_ <- rnorm(10))
-(gr_ <- gl(n = 2, k = 5, length = 10, labels = c("H","S")))
+(x <- rnorm(10))
+(gr <- gl(n = 2, k = 5, length = 10, labels = c("H","S")))
 
 # Explore the functions
 
-roc_analysis(x_, gr_)
-roc_analysis(x_, gr_, pos_label = "H")
+roc_analysis(x, gr)
+roc_analysis(x, gr, pos_label = "H")
 
 }
 \seealso{

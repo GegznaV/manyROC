@@ -1,5 +1,5 @@
 # Datasets-Spectra --------------------------------------------------------
-#' @name DataSets-fluorescence
+# @name DataSets-fluorescence
 #'
 #' @title Datasets of simulated spectroscopic data
 #' @description \code{fluorescence} is a dataset of simulated spectroscopic data.

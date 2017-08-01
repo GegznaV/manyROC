@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>[!] Carry out ROC analysis for each feature in pairs of groups � print.roc_performance • multiROC</title>
+<title>[!] Carry out multiROC analysis � print.roc_performance • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -99,7 +99,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>[!] Carry out ROC analysis for each feature in pairs of groups</h1>
+    <h1>[!] Carry out multiROC analysis</h1>
     </div>
 
     
@@ -107,31 +107,31 @@
 at each wavelength.</p>
     
 
-    <pre class="usage"><span class='fu'>print.roc_performance</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>cutoff_fmt</span> <span class='kw'>=</span> <span class='st'>"%.4g"</span>)
+    <pre class="usage"><span class='co'># S3 method for roc_performance</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>cutoff_fmt</span> <span class='kw'>=</span> <span class='st'>"%.4g"</span>)
 
-<span class='fu'>roc_analysis_multi</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
+<span class='fu'>roc_multiroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for matrix</span>
-<span class='fu'>roc_analysis_multi</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>,
+<span class='fu'>roc_multiroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>,
   <span class='kw'>gr_sep</span> <span class='kw'>=</span> <span class='st'>" vs. "</span>)
 
 <span class='co'># S3 method for numeric</span>
-<span class='fu'>roc_analysis_multi</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
+<span class='fu'>roc_multiroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>roc_analysis_multi</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>,
-  <span class='no'>...</span>)
+<span class='fu'>roc_multiroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for hyperSpec</span>
-<span class='fu'>roc_analysis_multi</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>,
-  <span class='no'>...</span>)</pre>
+<span class='fu'>roc_multiroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>roc_performance</code> object for method <code>print</code>.</p></td>
+      <td><p>A numeric matrix, a data frame, a <code>hyperSpec</code> object or another
+type of object, convertible to a numeric matrix.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -145,7 +145,8 @@ for <em>performance measures</em>. Default is 2.</p></td>
     <tr>
       <th>cutoff_fmt</th>
       <td><p>(<code>character(1)</code>) A string with a number display
-format for <em>cut-off values</em>.
+format for <em>cut-off values</em>, <code>mean_neg</code>
+ and <code>mean_pos</code>.
 Will be passed to <code><a href='http://www.rdocumentation.org/packages/base/topics/sprintf'>sprintf</a></code>. Default is
 <code>"%.4g"</code>.</p></td>
     </tr>
@@ -169,22 +170,19 @@ variable (a vector) which defines groups in <code>x</code>.</p></td>
       <td><p>Group separator used to paste the names of groups. Default is
 <code>" vs. "</code>.</p></td>
     </tr>
-    <tr>
-      <th>x</th>
-      <td><p>A numeric matrix, a data frame, a <code>hyperSpec</code> object or another
-type of object, convertible to a numeric matrix.</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Object of classes <code>roc_performance</code> and <code>data.frame</code> with
 columns:#'</p><ul>
-<li><p><code>compared_groups</code> Names of compared groups separated by
-            <code>gr_sep</code> (default value is <code>" vs. "</code>);</p></li>
-<li><p><code>feature</code> names of compared features;</p></li>
+<li><p><code>compared_groups</code> Names of compared groups (separated by
+                  <code>gr_sep</code> with default value <code>" vs. "</code>);</p></li>
+<li><p><code>feature</code> names of numeric features used in analysis;</p></li>
+<li><p><code>mean_neg</code> 10% trimmed mean of negatives;</p></li>
 <li><p><code>cutoff</code> for optimal threshold/cut-off values and
                   corresponding performance measures;</p></li>
+<li><p><code>mean_pos</code> 10% trimmed mean of positives;</p></li>
 <li><p><code>TP</code> number of true positives;</p></li>
 <li><p><code>FN</code> number of false negatives;</p></li>
 <li><p><code>FP</code> number of false positives;</p></li>
@@ -205,22 +203,26 @@ columns:#'</p><ul>
     <pre class="examples"><div class='input'>
 <span class='fu'>library</span>(<span class='no'>multiROC</span>)
 
+<span class='co'># --- For numeric vectors objects ---</span>
+
 <span class='fu'>data</span>(<span class='no'>PlantGrowth</span>)
-<span class='fu'>roc_analysis_multi</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='no'>PlantGrowth</span>$<span class='no'>group</span>)</div><div class='output co'>#&gt;   compared_groups feature cutoff TP FN FP TN sens spec  PPV  NPV  BAC Youden
-#&gt; 1   ctrl vs. trt1       1   4.41  5  5  1  9 0.50 0.90 0.83 0.64 0.70   0.40
-#&gt; 2   ctrl vs. trt2       1   5.26  8  2  3  7 0.80 0.70 0.73 0.78 0.75   0.50
-#&gt; 3   trt1 vs. trt2       1   4.92 10  0  2  8 1.00 0.80 0.83 1.00 0.90   0.80
-#&gt;   Kappa  AUC
-#&gt; 1  0.40 0.67
-#&gt; 2  0.50 0.75
-#&gt; 3  0.80 0.84</div><div class='input'>
+<span class='fu'>roc_multiroc</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='no'>PlantGrowth</span>$<span class='no'>group</span>)</div><div class='output co'>#&gt;   compared_groups feature mean_neg cutoff mean_pos TP FN FP TN sens spec  PPV
+#&gt; 1   ctrl vs. trt1       1    5.005   4.41    4.624  5  5  1  9 0.50 0.90 0.83
+#&gt; 2   ctrl vs. trt2       1    5.005   5.26    5.504  8  2  3  7 0.80 0.70 0.73
+#&gt; 3   trt1 vs. trt2       1    4.624   4.92    5.504 10  0  2  8 1.00 0.80 0.83
+#&gt;    NPV  BAC Youden Kappa  AUC
+#&gt; 1 0.64 0.70   0.40  0.40 0.67
+#&gt; 2 0.78 0.75   0.50  0.50 0.75
+#&gt; 3 1.00 0.90   0.80  0.80 0.84</div><div class='input'>
+<span class='co'># --- For dataframes objects ---</span>
+
 <span class='fu'>data</span>(<span class='no'>CO2</span>)
-<span class='fu'>roc_analysis_multi</span>(<span class='no'>CO2</span>[, <span class='fu'>c</span>(<span class='st'>"conc"</span>, <span class='st'>"uptake"</span>)], <span class='no'>CO2</span>$<span class='no'>Type</span>)</div><div class='output co'>#&gt;          compared_groups feature cutoff TP FN FP TN sens spec  PPV  NPV  BAC
-#&gt; 1 Quebec vs. Mississippi    conc    250 18 24 18 24 0.43 0.57 0.50 0.50 0.50
-#&gt; 2 Quebec vs. Mississippi  uptake   32.4 41  1 13 29 0.98 0.69 0.76 0.97 0.83
-#&gt;   Youden Kappa  AUC
-#&gt; 1   0.00  0.00 0.50
-#&gt; 2   0.67  0.67 0.84</div><div class='input'>
+<span class='fu'>roc_multiroc</span>(<span class='no'>CO2</span>[, <span class='fu'>c</span>(<span class='st'>"conc"</span>, <span class='st'>"uptake"</span>)], <span class='no'>CO2</span>$<span class='no'>Type</span>)</div><div class='output co'>#&gt;          compared_groups feature mean_neg cutoff mean_pos TP FN FP TN sens spec
+#&gt; 1 Quebec vs. Mississippi    conc    408.5    250    408.5 18 24 18 24 0.43 0.57
+#&gt; 2 Quebec vs. Mississippi  uptake    34.71   32.4    20.75 41  1 13 29 0.98 0.69
+#&gt;    PPV  NPV  BAC Youden Kappa  AUC
+#&gt; 1 0.50 0.50 0.50   0.00  0.00 0.50
+#&gt; 2 0.76 0.97 0.83   0.67  0.67 0.84</div><div class='input'>
 <span class='co'># --- For hyperSpec objects ---</span>
 
 <span class='fu'>library</span>(<span class='no'>hyperSpec</span>)
@@ -232,8 +234,26 @@ columns:#'</p><ul>
 #&gt; data:  (150 rows x 3 columns)
 #&gt;    1. gr:  [factor] B B ... A 
 #&gt;    2. class:  [factor] N l ... S1 
-#&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'><span class='fu'>roc_analysis_multi</span>(<span class='no'>fluorescence</span>[ , , <span class='fl'>500</span>~<span class='fl'>502</span>], <span class='no'>fluorescence</span>$<span class='no'>gr</span>)</div><div class='output co'>#&gt; <span class='error'>Error in nrow(DATA) %if_null% length(DATA): could not find function "%if_null%"</span></div><div class='input'>
-</div></pre>
+#&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'><span class='fu'>roc_multiroc</span>(<span class='no'>fluorescence</span>[ , , <span class='fl'>500</span>~<span class='fl'>502</span>], <span class='no'>fluorescence</span>$<span class='no'>gr</span>)</div><div class='output co'>#&gt;   compared_groups feature mean_neg cutoff mean_pos TP FN FP TN sens spec  PPV
+#&gt; 1         A vs. B     500    339.9  335.6    330.5 35 20 24 28 0.64 0.54 0.59
+#&gt; 2         A vs. B     501    337.8  327.8    329.3 29 26 19 33 0.53 0.63 0.60
+#&gt; 3         A vs. B     502    336.4  332.6    328.5 36 19 24 28 0.65 0.54 0.60
+#&gt; 4         A vs. C     500    339.9  343.3    340.7 21 22 20 32 0.49 0.62 0.51
+#&gt; 5         A vs. C     501    337.8  344.1    339.7 21 22 19 33 0.49 0.63 0.52
+#&gt; 6         A vs. C     502    336.4  340.3    337.4 22 21 22 30 0.51 0.58 0.50
+#&gt; 7         B vs. C     500    330.5  343.3    340.7 21 22 15 40 0.49 0.73 0.58
+#&gt; 8         B vs. C     501    329.3  344.1    339.7 21 22 15 40 0.49 0.73 0.58
+#&gt; 9         B vs. C     502    328.5  340.3    337.4 22 21 16 39 0.51 0.71 0.58
+#&gt;    NPV  BAC Youden Kappa  AUC
+#&gt; 1 0.58 0.59   0.17  0.18 0.57
+#&gt; 2 0.56 0.58   0.16  0.16 0.56
+#&gt; 3 0.60 0.60   0.19  0.19 0.56
+#&gt; 4 0.59 0.55   0.10  0.10 0.50
+#&gt; 5 0.60 0.56   0.12  0.12 0.51
+#&gt; 6 0.59 0.54   0.09  0.09 0.51
+#&gt; 7 0.65 0.61   0.22  0.22 0.57
+#&gt; 8 0.65 0.61   0.22  0.22 0.57
+#&gt; 9 0.65 0.61   0.22  0.22 0.56</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

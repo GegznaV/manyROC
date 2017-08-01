@@ -35,7 +35,7 @@ print.roc_info <- function(x,  ...) {
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # @param x \code{roc_performance} object for method \code{print}.
-#' @rdname roc_multi_analysis
+#' @rdname roc_multiroc
 #'
 #'
 #' @param ... Arguments passed for further methods.
@@ -44,7 +44,8 @@ print.roc_info <- function(x,  ...) {
 #'            for \emph{performance measures}. Default is 2.
 #'
 #' @param cutoff_fmt (\code{character(1)})\cr A string with a number display
-#'            format for \emph{cut-off values}.
+#'            format for \emph{cut-off values}, \code{mean_neg}
+#'             and \code{mean_pos}.
 #'            Will be passed to \code{\link[base]{sprintf}}. Default is
 #'            \code{"\%.4g"}.
 #'
@@ -56,9 +57,12 @@ print.roc_performance <- function(x, ..., digits = 2, cutoff_fmt = "%.4g") {
                     "PPV","NPV",
                     "BAC","Youden",
                     "Kappa","AUC")
+    cutoff_names <- c("cutoff","mean_neg", "mean_pos")
+
+
     x %>%
         dplyr::mutate_at(perf_names, sprintf, fmt = glue::glue("%.{digits}f")) %>%
-        dplyr::mutate_at("cutoff", sprintf, fmt = cutoff_fmt)  %>%
+        dplyr::mutate_at(cutoff_names, sprintf, fmt = cutoff_fmt)  %>%
         print(...)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -30,7 +30,7 @@ reference:
        The main functions for ROC analysis.
   contents:
   - '`roc_analysis`'
-  - '`roc_multi_analysis`'
+  - '`roc_multiroc`'
 - title: Objects management functions
   desc: ~
   contents:
@@ -48,7 +48,7 @@ reference:
 - title: Datasets
   desc: ~
   contents:
-  - '`DataSets-fluorescence`'
+  - '`fluorescence`'
 - title: Other functions
   desc: ~
   contents:
