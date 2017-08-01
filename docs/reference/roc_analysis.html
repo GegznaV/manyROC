@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>[!] Carry the ROC analysis � print.roc_results • multiROC</title>
+<title>[!] Carry out the ROC analysis � print.roc_results • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -65,28 +65,32 @@
     Functions
   </a>
 </li>
-<li>
-  <a href="../articles/index.html">
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-book fa-lg"></span>
      
     Tutorials and examples
-  </a>
-</li>
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fa fa-github fa-lg"></span>
-     
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/index.html">List of vignettes</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/multiROC_1_Introduction.html">Introduction to `multiROC`</a>
     </li>
   </ul>
+</li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/GegznaV/multiROC">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -99,11 +103,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>[!] Carry the ROC analysis</h1>
+    <h1>[!] Carry out the ROC analysis</h1>
     </div>
 
     
-    <p>DO the ROC (receiver operating characteristic) analysis and calculate
+    <p>Do the ROC (receiver operating characteristic) analysis and calculate
 vector of cut-off values and associated number of
 true positives (TP),
 false negatives (FN),
@@ -176,26 +180,24 @@ section "Values") or just <code>"optimal"</code>.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list (which also inherits from class <code>"roc_result_list"</code>)
-with three fields: <code>$info</code>, <code>$optimal</code>, <code>$all_results</code>.
-
-<b><code>$info</code></b> is a data frame with columns
-      <code>var_name</code> - empty string reserved for variable name,
-      <code>neg_label</code>, <code>pos_label</code> labels of negative and positive
-                        groups respectively,
-      <code>n_neg</code>, <code>n_pos</code>, <code>n_total</code> - number of negative
-and positive cases as well as number of cases in total.
-
-<b><code>$optimal</code></b> one row from <code>$all_results</code>, which was
+with three fields: <code>$info</code>, <code>$optimal</code>, <code>$all_results</code>.</p><ul>
+<li><p><b><code>$info</code></b> is a data frame with columns
+     <code>var_name</code> - empty string reserved for variable name,
+     <code>neg_label</code>, <code>pos_label</code> labels of negative and positive
+                             groups respectively,
+     <code>n_neg</code>, <code>n_pos</code>, <code>n_total</code> - number of negative
+and positive cases as well as number of cases in total.</p></li>
+<li><p><b><code>$optimal</code></b> one row from <code>$all_results</code>, which was
 determined as having optima threshold (cut-off) value. Sometimes it can be
-several rows, if the performance is equally good. 
-
-<b><code>$all_results</code></b> is a data frame with columns
-       <code>cutoffs</code> for cutoff values,
-       <code>tp</code> (number of true positives),
-       <code>fn</code> (number of false negatives),
-       <code>fp</code> (number of false positives),
-       <code>tn</code> (number of true negatives),
-       ... [!!!]</p>
+several rows, if the performance is equally good.</p></li>
+<li><p><b><code>$all_results</code></b> is a data frame with columns
+      <code>cutoffs</code> for cutoff values,
+      <code>tp</code> (number of true positives),
+      <code>fn</code> (number of false negatives),
+      <code>fp</code> (number of false positives),
+      <code>tn</code> (number of true negatives),
+      ... [!!!]</p></li>
+</ul><p></p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
@@ -213,8 +215,10 @@ from <span class="pkg">ROCR</span> package.</p>
     <pre class="examples"><div class='input'><span class='co'># Make some data</span>
 <span class='fu'>set.seed</span>(<span class='fl'>1</span>)
 (<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>10</span>))</div><div class='output co'>#&gt;  [1] -0.6264538  0.1836433 -0.8356286  1.5952808  0.3295078 -0.8204684
-#&gt;  [7]  0.4874291  0.7383247  0.5757814 -0.3053884</div><div class='input'>(<span class='no'>gr</span> <span class='kw'>&lt;-</span> <span class='fu'>gl</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>length</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"H"</span>,<span class='st'>"S"</span>)))</div><div class='output co'>#&gt;  [1] H H H H H S S S S S
+#&gt;  [7]  0.4874291  0.7383247  0.5757814 -0.3053884</div><div class='input'>
+(<span class='no'>gr</span> <span class='kw'>&lt;-</span> <span class='fu'>gl</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>length</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"H"</span>,<span class='st'>"S"</span>)))</div><div class='output co'>#&gt;  [1] H H H H H S S S S S
 #&gt; Levels: H S</div><div class='input'>
+
 <span class='co'># Explore the functions</span>
 
 <span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>)</div><div class='output co'>#&gt; $info
@@ -244,7 +248,8 @@ from <span class="pkg">ROCR</span> package.</p>
 #&gt; 11  -0.836   5   0   5   0    1    0   0.5   NaN 0.5      0
 #&gt; 
 #&gt; attr(,"class")
-#&gt; [1] "roc_result_list" "list"           </div><div class='input'><span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='st'>"H"</span>)</div><div class='output co'>#&gt; $info
+#&gt; [1] "roc_result_list" "list"           </div><div class='input'>
+<span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='st'>"H"</span>)</div><div class='output co'>#&gt; $info
 #&gt;  var_name neg_label pos_label  mean_neg  mean_pos pos_is_larger n_neg n_pos
 #&gt;                   S         H 0.1351357 0.1292699         FALSE     5     5
 #&gt;  n_total

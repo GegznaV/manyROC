@@ -42,27 +42,32 @@
     Functions
   </a>
 </li>
-<li>
-  <a href="articles/index.html">
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-book fa-lg"></span>
      
     Tutorials and examples
-  </a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fa fa-github fa-lg"></span>
-     
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/index.html">List of vignettes</a>
+    </li>
+    <li class="divider">
+    </li>
+<li>
       <a href="articles/multiROC_1_Introduction.html">Introduction to `multiROC`</a>
     </li>
   </ul>
+</li>
+      </ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/GegznaV/multiROC">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
 </li>
       </ul>
 </div>
@@ -91,9 +96,12 @@
 <p><strong>Package is under construction.</strong></p>
 <p><em>MultiROC</em> workflow for spectroscopic data analysis.</p>
 <hr>
-<p>Install package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">"GegznaV/multiROC"</span>)</code></pre></div>
+<p>Symbol <strong>[!!!]</strong> in documentation means, that the desctription is not finished or imprecise and needs special attention.</p>
+<!-- Install package: -->
+<!-- ```{r Install package, eval=FALSE} -->
+<!-- library(devtools) -->
+<!-- install_github("GegznaV/multiROC") -->
+<!-- ``` -->
 <hr>
 <p align="right">
 </p>
@@ -112,7 +120,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="http://cran.rstudio.com/web/packages/multiROC/index.html"><img src="http://www.r-pkg.org/badges/version/multiROC" alt="CRAN version"></a></li>
-<li><a href="https://github.com/GegznaV/multiROC"><img src="https://img.shields.io/badge/GitHub-v0.0.2-brightgreen.svg" alt="GitHub version"></a></li>
+<li><a href="https://github.com/GegznaV/multiROC"><img src="https://img.shields.io/badge/GitHub-v0.0.3-brightgreen.svg" alt="GitHub version"></a></li>
 <li><a href="https://travis-ci.org/GegznaV/multiROC"><img src="https://travis-ci.org/GegznaV/multiROC.png?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://codecov.io/gh/GegznaV/multiROC"><img src="https://codecov.io/gh/GegznaV/multiROC/branch/master/graph/badge.svg" alt="codecov"></a></li>
 <li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20update-2017--08--01-yellowgreen.svg" alt="Last-update"></a></li>

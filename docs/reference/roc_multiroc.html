@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>[!] Carry out multiROC analysis � print.roc_performance • multiROC</title>
+<title>[!] Carry out the multiROC analysis � print.multiroc_result • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -65,28 +65,32 @@
     Functions
   </a>
 </li>
-<li>
-  <a href="../articles/index.html">
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-book fa-lg"></span>
      
     Tutorials and examples
-  </a>
-</li>
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fa fa-github fa-lg"></span>
-     
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/index.html">List of vignettes</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/multiROC_1_Introduction.html">Introduction to `multiROC`</a>
     </li>
   </ul>
+</li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/GegznaV/multiROC">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -99,7 +103,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>[!] Carry out multiROC analysis</h1>
+    <h1>[!] Carry out the multiROC analysis</h1>
     </div>
 
     
@@ -107,7 +111,7 @@
 at each wavelength.</p>
     
 
-    <pre class="usage"><span class='co'># S3 method for roc_performance</span>
+    <pre class="usage"><span class='co'># S3 method for multiroc_result</span>
 <span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>cutoff_fmt</span> <span class='kw'>=</span> <span class='st'>"%.4g"</span>)
 
 <span class='fu'>roc_multiroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
@@ -174,8 +178,8 @@ variable (a vector) which defines groups in <code>x</code>.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Object of classes <code>roc_performance</code> and <code>data.frame</code> with
-columns:#'</p><ul>
+    <p>Object of classes <code>multiroc_result</code> and <code>data.frame</code> with
+columns:</p><ul>
 <li><p><code>compared_groups</code> Names of compared groups (separated by
                   <code>gr_sep</code> with default value <code>" vs. "</code>);</p></li>
 <li><p><code>feature</code> names of numeric features used in analysis;</p></li>
@@ -198,10 +202,24 @@ columns:#'</p><ul>
 </ul>
 
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Consider ordering of factor <code>gr</code> levels before the analysis, as the
+first level will always be treated as negative and the last as positive.
+<b>E.g.</b>, if we have factor with 3 levels in this particular order
+"A", "B", "C",  then "A" will always be negative, "C" always positive and
+"B" positive, when compared to "A" and negative, when compared to "C".
+The same principle applies if there are more than 3 levels.
+This is important determining what specificity and sensitivity, etc., means
+in the context of group names: if positive is "A" then <em>sensitivity</em>
+will be related to group "A", but if "A" is negative, then <em>specificity</em>
+will be related to this group, and sensitivity to the other group.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>library</span>(<span class='no'>multiROC</span>)
+
 
 <span class='co'># --- For numeric vectors objects ---</span>
 
@@ -214,6 +232,7 @@ columns:#'</p><ul>
 #&gt; 1 0.64 0.70   0.40  0.40 0.67
 #&gt; 2 0.78 0.75   0.50  0.50 0.75
 #&gt; 3 1.00 0.90   0.80  0.80 0.84</div><div class='input'>
+
 <span class='co'># --- For dataframes objects ---</span>
 
 <span class='fu'>data</span>(<span class='no'>CO2</span>)
@@ -223,6 +242,7 @@ columns:#'</p><ul>
 #&gt;    PPV  NPV  BAC Youden Kappa  AUC
 #&gt; 1 0.50 0.50 0.50   0.00  0.00 0.50
 #&gt; 2 0.76 0.97 0.83   0.67  0.67 0.84</div><div class='input'>
+
 <span class='co'># --- For hyperSpec objects ---</span>
 
 <span class='fu'>library</span>(<span class='no'>hyperSpec</span>)
@@ -234,7 +254,8 @@ columns:#'</p><ul>
 #&gt; data:  (150 rows x 3 columns)
 #&gt;    1. gr:  [factor] B B ... A 
 #&gt;    2. class:  [factor] N l ... S1 
-#&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'><span class='fu'>roc_multiroc</span>(<span class='no'>fluorescence</span>[ , , <span class='fl'>500</span>~<span class='fl'>502</span>], <span class='no'>fluorescence</span>$<span class='no'>gr</span>)</div><div class='output co'>#&gt;   compared_groups feature mean_neg cutoff mean_pos TP FN FP TN sens spec  PPV
+#&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'>
+<span class='fu'>roc_multiroc</span>(<span class='no'>fluorescence</span>[ , , <span class='fl'>500</span>~<span class='fl'>502</span>], <span class='no'>fluorescence</span>$<span class='no'>gr</span>)</div><div class='output co'>#&gt;   compared_groups feature mean_neg cutoff mean_pos TP FN FP TN sens spec  PPV
 #&gt; 1         A vs. B     500    339.9  335.6    330.5 35 20 24 28 0.64 0.54 0.59
 #&gt; 2         A vs. B     501    337.8  327.8    329.3 29 26 19 33 0.53 0.63 0.60
 #&gt; 3         A vs. B     502    336.4  332.6    328.5 36 19 24 28 0.65 0.54 0.60
@@ -253,7 +274,8 @@ columns:#'</p><ul>
 #&gt; 6 0.59 0.54   0.09  0.09 0.51
 #&gt; 7 0.65 0.61   0.22  0.22 0.57
 #&gt; 8 0.65 0.61   0.22  0.22 0.57
-#&gt; 9 0.65 0.61   0.22  0.22 0.56</div></pre>
+#&gt; 9 0.65 0.61   0.22  0.22 0.56</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -261,6 +283,8 @@ columns:#'</p><ul>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

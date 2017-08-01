@@ -36,12 +36,15 @@ R package _**multiROC**_
 
 * * *
 
-Install package:
+Symbol **[!!!]** in documentation means, that the desctription is not finished
+or imprecise and needs special attention.
 
-```{r Install package, eval=FALSE}
-library(devtools)
-install_github("GegznaV/multiROC")
-```
+<!-- Install package: -->
+
+<!-- ```{r Install package, eval=FALSE} -->
+<!-- library(devtools) -->
+<!-- install_github("GegznaV/multiROC") -->
+<!-- ``` -->
 
 
 * * *

@@ -1,8 +1,22 @@
-#' [!] Carry out multiROC analysis
+#' [!] Carry out the multiROC analysis
 #'
 #' For spectroscopic data: compare spectra of each pair of indicated groups
 #' at each wavelength.
+#'
+#' @details
+#' Consider ordering of factor \code{gr} levels before the analysis, as the
+#' first level will always be treated as negative and the last as positive.\cr
+#' \bold{E.g.}, if we have factor with 3 levels in this particular order
+#' "A", "B", "C",  then "A" will always be negative, "C" always positive and
+#' "B" positive, when compared to "A" and negative, when compared to "C".
+#' The same principle applies if there are more than 3 levels.\cr
+#' This is important determining what specificity and sensitivity, etc., means
+#' in the context of group names: if positive is "A" then \emph{sensitivity}
+#' will be related to group "A", but if "A" is negative, then \emph{specificity}
+#' will be related to this group, and sensitivity to the other group.
+#'
 #' @name roc_multiroc
+#'
 #' @param x A numeric matrix, a data frame, a \code{hyperSpec} object or another
 #'           type of object, convertible to a numeric matrix.
 #' @param gr Either a string (scalar, \code{character(1)}) or a \code{factor}
@@ -22,7 +36,8 @@
 #' }
 #'
 #' @return Object of classes \code{multiroc_result} and \code{data.frame} with
-#' columns:#' \itemize{
+#' columns:
+#'  \itemize{
 #'       \item \code{compared_groups} Names of compared groups (separated by
 #'                   \code{gr_sep} with default value \code{" vs. "});
 #'       \item \code{feature} names of numeric features used in analysis;
@@ -44,8 +59,8 @@
 #'       \item \code{AUC} area under the ROC curve;
 #' }
 #'
-#' @export
 #'
+#' @export
 #' @author Vilmantas Gegzna
 #' @family \pkg{multiROC} functions.
 #'
@@ -53,21 +68,26 @@
 #'
 #' library(multiROC)
 #'
+#'
 #' # --- For numeric vectors objects ---
 #'
 #' data(PlantGrowth)
 #' roc_multiroc(PlantGrowth$weight, PlantGrowth$group)
+#'
 #'
 #' # --- For dataframes objects ---
 #'
 #' data(CO2)
 #' roc_multiroc(CO2[, c("conc", "uptake")], CO2$Type)
 #'
+#'
 #' # --- For hyperSpec objects ---
 #'
 #' library(hyperSpec)
 #' fluorescence
+#'
 #' roc_multiroc(fluorescence[ , , 500~502], fluorescence$gr)
+#'
 roc_multiroc <- function(x, gr = NULL, optimize_by = "bac",  ...) {
     UseMethod("roc_multiroc")
 }

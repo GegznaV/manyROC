@@ -5,7 +5,7 @@
 \alias{print.roc_optimal}
 \alias{print.roc_info}
 \alias{roc_analysis}
-\title{[!] Carry the ROC analysis}
+\title{[!] Carry out the ROC analysis}
 \usage{
 \method{print}{roc_results}(x, ...)
 
@@ -46,29 +46,32 @@ section "Values") or just \code{"optimal"}.}
 }
 \value{
 A list (which also inherits from class \code{"roc_result_list"})
-with three fields: \code{$info}, \code{$optimal}, \code{$all_results}.\cr\cr
+with three fields: \code{$info}, \code{$optimal}, \code{$all_results}.
+\itemize{
 
-\bold{\code{$info}} is a data frame with columns
-      \code{var_name} - empty string reserved for variable name,
-      \code{neg_label}, \code{pos_label} labels of negative and positive
-                        groups respectively,
-      \code{n_neg}, \code{n_pos}, \code{n_total} - number of negative
+\item \bold{\code{$info}} is a data frame with columns
+     \code{var_name} - empty string reserved for variable name,
+     \code{neg_label}, \code{pos_label} labels of negative and positive
+                             groups respectively,
+     \code{n_neg}, \code{n_pos}, \code{n_total} - number of negative
 and positive cases as well as number of cases in total.
 
-\bold{\code{$optimal}} one row from \code{$all_results}, which was
+\item \bold{\code{$optimal}} one row from \code{$all_results}, which was
 determined as having optima threshold (cut-off) value. Sometimes it can be
 several rows, if the performance is equally good. \cr\cr
 
-\bold{\code{$all_results}} is a data frame with columns
-       \code{cutoffs} for cutoff values,
-       \code{tp} (number of true positives),
-       \code{fn} (number of false negatives),
-       \code{fp} (number of false positives),
-       \code{tn} (number of true negatives),
-       ... [!!!] \cr\cr
+\item \bold{\code{$all_results}} is a data frame with columns
+      \code{cutoffs} for cutoff values,
+      \code{tp} (number of true positives),
+      \code{fn} (number of false negatives),
+      \code{fp} (number of false positives),
+      \code{tn} (number of true negatives),
+      ... [!!!]
+
+}\cr\cr
 }
 \description{
-DO the ROC (receiver operating characteristic) analysis and calculate
+Do the ROC (receiver operating characteristic) analysis and calculate
 vector of cut-off values and associated number of
 true positives (TP),
 false negatives (FN),
@@ -86,11 +89,14 @@ from \pkg{ROCR} package.
 # Make some data
 set.seed(1)
 (x <- rnorm(10))
+
 (gr <- gl(n = 2, k = 5, length = 10, labels = c("H","S")))
+
 
 # Explore the functions
 
 roc_analysis(x, gr)
+
 roc_analysis(x, gr, pos_label = "H")
 
 }

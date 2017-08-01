@@ -7,7 +7,7 @@
 \alias{roc_multiroc.numeric}
 \alias{roc_multiroc.data.frame}
 \alias{roc_multiroc.hyperSpec}
-\title{[!] Carry out multiROC analysis}
+\title{[!] Carry out the multiROC analysis}
 \usage{
 \method{print}{multiroc_result}(x, ..., digits = 2, cutoff_fmt = "\%.4g")
 
@@ -54,7 +54,8 @@ variable (a vector) which defines groups in \code{x}.}
 }
 \value{
 Object of classes \code{multiroc_result} and \code{data.frame} with
-columns:#' \itemize{
+columns:
+ \itemize{
       \item \code{compared_groups} Names of compared groups (separated by
                   \code{gr_sep} with default value \code{" vs. "});
       \item \code{feature} names of numeric features used in analysis;
@@ -80,25 +81,42 @@ columns:#' \itemize{
 For spectroscopic data: compare spectra of each pair of indicated groups
 at each wavelength.
 }
+\details{
+Consider ordering of factor \code{gr} levels before the analysis, as the
+first level will always be treated as negative and the last as positive.\cr
+\bold{E.g.}, if we have factor with 3 levels in this particular order
+"A", "B", "C",  then "A" will always be negative, "C" always positive and
+"B" positive, when compared to "A" and negative, when compared to "C".
+The same principle applies if there are more than 3 levels.\cr
+This is important determining what specificity and sensitivity, etc., means
+in the context of group names: if positive is "A" then \emph{sensitivity}
+will be related to group "A", but if "A" is negative, then \emph{specificity}
+will be related to this group, and sensitivity to the other group.
+}
 \examples{
 
 library(multiROC)
+
 
 # --- For numeric vectors objects ---
 
 data(PlantGrowth)
 roc_multiroc(PlantGrowth$weight, PlantGrowth$group)
 
+
 # --- For dataframes objects ---
 
 data(CO2)
 roc_multiroc(CO2[, c("conc", "uptake")], CO2$Type)
 
+
 # --- For hyperSpec objects ---
 
 library(hyperSpec)
 fluorescence
+
 roc_multiroc(fluorescence[ , , 500~502], fluorescence$gr)
+
 }
 \author{
 Vilmantas Gegzna

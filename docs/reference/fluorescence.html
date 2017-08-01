@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Datasets of simulated spectroscopic data � fluorescence • multiROC</title>
+<title>Dataset of simulated fluorescence spectra � fluorescence • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -65,28 +65,32 @@
     Functions
   </a>
 </li>
-<li>
-  <a href="../articles/index.html">
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-book fa-lg"></span>
      
     Tutorials and examples
-  </a>
-</li>
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fa fa-github fa-lg"></span>
-     
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/index.html">List of vignettes</a>
+    </li>
+    <li class="divider"></li>
+    <li>
       <a href="../articles/multiROC_1_Introduction.html">Introduction to `multiROC`</a>
     </li>
   </ul>
+</li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/GegznaV/multiROC">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -99,7 +103,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Datasets of simulated spectroscopic data</h1>
+    <h1>Dataset of simulated fluorescence spectra</h1>
     </div>
 
     
@@ -121,6 +125,10 @@ data and additional variables.</p>
 
     <p>Artificially generated in <code>R</code>.</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Artificially generated dataset.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>hyperSpec</span>)
@@ -133,7 +141,7 @@ data and additional variables.</p>
 #&gt; data:  (150 rows x 3 columns)
 #&gt;    1. gr:  [factor] B B ... A 
 #&gt;    2. class:  [factor] N l ... S1 
-#&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/hyperSpec/topics/plot'>plot</a></span>(<span class='no'>fluorescence</span>[<span class='fl'>30</span>:<span class='fl'>60</span>,])</div><div class='img'><img src='fluorescence-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+#&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/hyperSpec/topics/plot'>plot</a></span>(<span class='no'>fluorescence</span>[<span class='fl'>30</span>:<span class='fl'>60</span>,])</div><div class='img'><img src='fluorescence-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -143,6 +151,8 @@ data and additional variables.</p>
       <li><a href="#format">Format</a></li>
 
       <li><a href="#source">Source</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

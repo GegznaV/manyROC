@@ -16,13 +16,15 @@ navbar:
     href: reference/index.html
   - icon: fa-book fa-lg
     text: Tutorials and examples
-    href: articles/index.html
+    menu:
+    - text: List of all vignettes
+      href: articles/index.html
+    - text: ----------------------
+    - text: Introduction to `multiROC`
+      href: articles/multiROC_1_Introduction.html
   right:
   - icon: fa-github fa-lg
     href: https://github.com/GegznaV/multiROC
-    menu:
-    - text: Introduction to `multiROC`
-      href: articles/multiROC_1_Introduction.html
 
 reference:
 - title: ROC analysis
