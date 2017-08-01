@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>[!] Carry out ROC analysis for each feature in pairs of groups � roc_multi_analysis • multiROC</title>
+<title>[!] Carry out ROC analysis for each feature in pairs of groups � print.roc_performance • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -107,7 +107,10 @@
 at each wavelength.</p>
     
 
-    <pre class="usage"><span class='fu'>roc_multi_analysis</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='co'># S3 method for roc_performance</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>cutoff_fmt</span> <span class='kw'>=</span> <span class='st'>"%.4g"</span>)
+
+<span class='fu'>roc_multi_analysis</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for matrix</span>
 <span class='fu'>roc_multi_analysis</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>,
@@ -122,10 +125,7 @@ at each wavelength.</p>
 
 <span class='co'># S3 method for hyperSpec</span>
 <span class='fu'>roc_multi_analysis</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>,
-  <span class='no'>...</span>)
-
-<span class='co'># S3 method for roc_performance</span>
-<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>cutoff_fmt</span> <span class='kw'>=</span> <span class='st'>"%.4g"</span>)</pre>
+  <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -134,6 +134,22 @@ at each wavelength.</p>
       <th>x</th>
       <td><p>A numeric matrix, a data frame, a <code>hyperSpec</code> object or another
 type of object, convertible to a numeric matrix.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Arguments passed for further methods.</p></td>
+    </tr>
+    <tr>
+      <th>digits</th>
+      <td><p>(<code>integer(1)</code>) A number of decimals to display
+for <em>performance measures</em>. Default is 2.</p></td>
+    </tr>
+    <tr>
+      <th>cutoff_fmt</th>
+      <td><p>(<code>character(1)</code>) A string with a number display
+format for <em>cut-off values</em>.
+Will be passed to <code><a href='http://www.rdocumentation.org/packages/base/topics/sprintf'>sprintf</a></code>. Default is
+<code>"%.4g"</code>.</p></td>
     </tr>
     <tr>
       <th>gr</th>
@@ -151,25 +167,9 @@ variable (a vector) which defines groups in <code>x</code>.</p></td>
 </ul></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Arguments passed for further methods.</p></td>
-    </tr>
-    <tr>
       <th>gr_sep</th>
       <td><p>Group separator used to paste the names of groups. Default is
 <code>" vs. "</code>.</p></td>
-    </tr>
-    <tr>
-      <th>digits</th>
-      <td><p>(<code>integer(1)</code>) A number of decimals to display
-for <em>performance measures</em>. Default is 2.</p></td>
-    </tr>
-    <tr>
-      <th>cutoff_fmt</th>
-      <td><p>(<code>character(1)</code>) A string with a number display
-format for <em>cut-off values</em>.
-Will be passed to <code><a href='http://www.rdocumentation.org/packages/base/topics/sprintf'>sprintf</a></code>. Default is
-<code>"%.4g"</code>.</p></td>
     </tr>
     </table>
     

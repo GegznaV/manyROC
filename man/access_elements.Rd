@@ -49,7 +49,7 @@ roc_spec(obj)
 Acces elements of \code{roc_result_list} and \code{roc_results} objects.
 }
 \seealso{
-Other functions for ROC: \code{\link{roc_analysis}},
+Other functions for ROC: \code{\link{print.roc_results}},
   \code{\link{roc_performance_measures}}
 }
 \author{
