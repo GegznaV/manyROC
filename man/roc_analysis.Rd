@@ -81,9 +81,8 @@ specificity, etc.
 \cr[!!!]
 }
 \note{
-This function is based on functions \code{predict} and
-\code{.compute.unnormalized.roc.curve}
-from \pkg{ROCR} package.
+This function is inspired by functions \code{predict} and
+\code{.compute.unnormalized.roc.curve} from \pkg{ROCR} package.
 }
 \examples{
 # Make some data
