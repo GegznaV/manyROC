@@ -28,9 +28,13 @@
 #' cvo <- cvo_create_folds(fluorescence)
 #' cvo
 #'
+#' cvo_get_info(cvo)
+#'
 #' cvo_get_seeds(cvo)
 #'
-#' cvo_get_info(cvo)
+#' cvo_get_sample_size(cvo)
+#'
+#' cvo_count_folds(cvo)
 #'
 #' cvo_get_inds(cvo, 1)
 #'
@@ -59,7 +63,9 @@ cvo_get_inds.cvo_caret <- function(cvo,
     if (type == "asis") {
         type <- as.character(cvo_get_info(cvo)$indices)
     } else {
-        type <- fCap(type)
+        # [!!!]
+        # type <- fCap(type)
+        type <- type
     }
 
     # Select indices
@@ -95,3 +101,4 @@ cvo_get_inds.cvo_mlr <- function(cvo,
            })
     ind
 }
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
