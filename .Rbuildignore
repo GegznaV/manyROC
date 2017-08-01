@@ -6,3 +6,4 @@ README.Rmd
 _pkgdown.yaml
 docs.*
 ^\.travis\.yml$
+^codecov\.yml$

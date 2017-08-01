@@ -3,7 +3,7 @@
 
 ------------------------------------------------------------------------
 
-[![CRAN version](http://www.r-pkg.org/badges/version/multiROC)](http://cran.rstudio.com/web/packages/multiROC/index.html) [![GitHub version](https://img.shields.io/badge/GitHub-v0.0.2-brightgreen.svg)](https://github.com/GegznaV/multiROC) [![Travis-CI Build Status](https://travis-ci.org/GegznaV/multiROC.png?branch=master)](https://travis-ci.org/GegznaV/multiROC) [![codecov.io](https://codecov.io/github/GegznaV/multiROC/coverage.svg?branch=master)](https://codecov.io/github/GegznaV/multiROC?branch=master) [![Last-update](https://img.shields.io/badge/last%20update-2017--08--01-yellowgreen.svg)](/commits/master)
+[![CRAN version](http://www.r-pkg.org/badges/version/multiROC)](http://cran.rstudio.com/web/packages/multiROC/index.html) [![GitHub version](https://img.shields.io/badge/GitHub-v0.0.2-brightgreen.svg)](https://github.com/GegznaV/multiROC) [![Travis-CI Build Status](https://travis-ci.org/GegznaV/multiROC.png?branch=master)](https://travis-ci.org/GegznaV/multiROC) [![codecov](https://codecov.io/gh/GegznaV/multiROC/branch/master/graph/badge.svg)](https://codecov.io/gh/GegznaV/multiROC) [![Last-update](https://img.shields.io/badge/last%20update-2017--08--01-yellowgreen.svg)](/commits/master)
 
 ------------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ R package ***multiROC***
 
 **Package is under construction.**
 
-*MultiROC* algorithm for spectroscopic data analysis.
+*MultiROC* workflow for spectroscopic data analysis.
 
 ------------------------------------------------------------------------
 
