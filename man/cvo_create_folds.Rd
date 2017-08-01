@@ -2,7 +2,7 @@
 % Please edit documentation in R/cvo_create_folds.R
 \name{cvo_create_folds}
 \alias{cvo_create_folds}
-\title{[!] Create indices of folds with blocking and stratification (cvo object)}
+\title{Create a cvo (cross-valitation object)}
 \usage{
 cvo_create_folds(data = NULL, stratify_by = NULL, block_by = NULL,
   k = folds, times = 1, seeds = NULL, kind = "L'Ecuyer-CMRG",
@@ -68,6 +68,9 @@ Default is \dQuote{test}.}
 }
 \description{
 \bold{[DESCRIBTION MUST BE UPDATED]}\cr
+}
+\details{
+[!] Create indices of folds with blocking and stratification (cvo object)
 Create indices of folds with blocking and stratification for (repeated)
 k-fold cross-validation. \cr
 Function \code{cvo_create_folds} randomly divides observations into
@@ -89,15 +92,20 @@ If \code{k} is such big, that some folds have no observations of
       recommended.
 }
 \examples{
-library(spHelper)
+library(multiROC)
 
-# Load data
-     data("DataSet1")
+# [!!!] Load data
+DataSet1 <-data.frame(ID = rep(1:20, each = 2),
+                           gr = gl(4, 10, labels = LETTERS[1:4]),
+                           .row = 1:40)
 
 # Explore data
      str(DataSet1)
+
      table(DataSet1[,c("gr","ID")])
+
      summary(DataSet1)
+
 
 # Explore functions
      nFolds = 5
@@ -107,23 +115,29 @@ library(spHelper)
                               stratify_by = "gr", block_by = "ID",
                                k = nFolds, returnTrain = FALSE)
      # str(Folds1_a)
-     cvo_test_bs(Folds11_a, "gr", "ID", DataSet1)
+     cvo_test_bs(Folds1_a, "gr", "ID", DataSet1)
 
 # If "free" variables are provided:
-     Folds1_b <- cvo_create_folds(gr = DataSet1$gr, ID = DataSet1$ID,
-                                k = nFolds, returnTrain = FALSE)
+     Folds1_b <- cvo_create_folds(stratify_by = DataSet1$gr,
+                                  block_by = DataSet1$ID,
+                                  k = nFolds,
+                                  returnTrain = FALSE)
      # str(Folds1_b)
-     cvo_test_bs(Folds11_b, "gr", "ID", DataSet1)
+     cvo_test_bs(Folds1_b, "gr", "ID", DataSet1)
 
 # Not blocked but stratified
-     Folds1_c <- cvo_create_folds(gr = DataSet1$gr, k=nFolds, returnTrain=FALSE)
+     Folds1_c <- cvo_create_folds(stratify_by = DataSet1$gr,
+                                  k = nFolds,
+                                  returnTrain = FALSE)
      # str(Folds1_c)
-     cvo_test_bs(Folds11_c, "gr", "ID", DataSet1)
+     cvo_test_bs(Folds1_c, "gr", "ID", DataSet1)
 
 # Blocked but not stratified
-     Folds1_d <- cvo_create_folds(block_by = DataSet1$ID, k = nFolds, returnTrain = FALSE)
+     Folds1_d <- cvo_create_folds(block_by = DataSet1$ID,
+                                  k = nFolds,
+                                  returnTrain = FALSE)
      # str(Folds1_d)
-     cvo_test_bs(Folds11_d, "gr", "ID", DataSet1)
+     cvo_test_bs(Folds1_d, "gr", "ID", DataSet1)
 
 
 }
@@ -132,9 +146,7 @@ Function \code{\link[caret]{createFolds}} from package
          \pkg{caret}. \cr
          Function \code{\link[mlr]{makeResampleInstance}} from package
          \pkg{mlr}. \cr
-Test if folds are blocked and stratified \code{\link{test_folds_BS}}
-
-Other \pkg{spHelper} fold creation functions: \code{\link{cvo_test_bs}}
+Test if folds are blocked and stratified \code{\link{cvo_test_bs}}
 }
 \author{
 Vilmantas Gegzna

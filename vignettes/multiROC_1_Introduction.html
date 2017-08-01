@@ -69,7 +69,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Introduction to <code>multiROC</code></h1>
 <h4 class="author"><em>Vilmantas Gegzna</em></h4>
-<h4 class="date"><em>2017-08-01 (v0.0.2)</em></h4>
+<h4 class="date"><em>2017-08-01 (v0.0.3)</em></h4>
 
 
 <div id="TOC">
@@ -94,12 +94,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Explore the functions</span>
 <span class="kw">roc_analysis</span>(x_, gr_)</code></pre></div>
 <pre><code>#&gt; $info
-#&gt;  var_name neg_label n_neg pos_label n_pos n_total
-#&gt;                   H     5         S     5      10
+#&gt;  var_name neg_label pos_label  mean_neg  mean_pos pos_is_larger n_neg
+#&gt;                   H         S 0.1292699 0.1351357          TRUE     5
+#&gt;  n_pos n_total
+#&gt;      5      10
 #&gt; 
 #&gt; $optimal
-#&gt;  cutoff tp fn fp tn sens spec  ppv   npv bac youden kappa auc
-#&gt;   0.487  3  2  1  4  0.6  0.8 0.75 0.667 0.7    0.4   0.4 0.6
+#&gt;  cutoff tp fn fp tn sens spec  ppv   npv bac youden kappa auc mean_neg.H
+#&gt;   0.487  3  2  1  4  0.6  0.8 0.75 0.667 0.7    0.4   0.4 0.6      0.129
+#&gt;  mean_pos.S
+#&gt;       0.135
 #&gt; 
 #&gt; * The optimal cut-off value selected by: max BAC
 #&gt; 

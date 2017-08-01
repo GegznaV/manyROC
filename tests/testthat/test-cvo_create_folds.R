@@ -4,8 +4,7 @@ context("Function `cvo_create_folds()` ")
 
 test_that("`data`, `stratify_by` and `block_by` parameters of `cvo_create_folds()` works", {
     # Load data
-     # data("DataSet1", package = "spHelper")
-     #
+
     DF1 <- data.frame(ID = rep(1:20, each = 2),
                       gr = gl(4, 10, labels = LETTERS[1:4]),
                       .row = 1:40)
@@ -93,7 +92,7 @@ test_that("`data`, `stratify_by` and `block_by` parameters of `cvo_create_folds(
 
 test_that("Blocking in `cvo_create_folds()` works", {
     # Load data
-    # data("DataSet1", package = "spHelper")
+
     DF1 <- data.frame(ID = rep(1:20, each = 2),
                       gr = gl(4, 10, labels = LETTERS[1:4]),
                       .row = 1:40)
@@ -129,7 +128,7 @@ test_that("Blocking in `cvo_create_folds()` works", {
 
 test_that("Stratification in `cvo_create_folds()` works", {
 # Load data
-    # data("DataSet1", package = "spHelper")
+
     DF1 <- data.frame(ID = rep(1:20, each = 2),
                       gr = gl(4, 10, labels = LETTERS[1:4]),
                       .row = 1:40)

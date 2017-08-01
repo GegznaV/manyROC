@@ -147,46 +147,50 @@ be shown. Default is 10.</p></td>
     <p>Print tables that help to evaluate if data is <strong>(a)</strong> stratified,
  <strong>(b)</strong> blocked.</p>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p>Other <span class="pkg">spHelper</span> fold creation functions: <code><a href='cvo_create_folds.html'>cvo_create_folds</a></code></p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>spHelper</span>)</div><div class='output co'>#&gt; <span class='error'>Error: package �multiROC� required by �spHelper� could not be found</span></div><div class='input'>
-<span class='fu'>data</span>(<span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set �DataSet1� not found</span></div><div class='input'><span class='no'>obj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='cvo_create_folds.html'>cvo_create_folds</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>,
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>multiROC</span>)
+
+<span class='co'># [!!!] Load data</span>
+<span class='no'>DataSet1</span> <span class='kw'>&lt;-</span><span class='fu'>data.frame</span>(<span class='kw'>ID</span> <span class='kw'>=</span> <span class='fu'>rep</span>(<span class='fl'>1</span>:<span class='fl'>20</span>, <span class='kw'>each</span> <span class='kw'>=</span> <span class='fl'>2</span>),
+                           <span class='kw'>gr</span> <span class='kw'>=</span> <span class='fu'>gl</span>(<span class='fl'>4</span>, <span class='fl'>10</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>4</span>]),
+                           <span class='kw'>.row</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>40</span>)
+
+<span class='no'>obj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='cvo_create_folds.html'>cvo_create_folds</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>,
                      <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='st'>"gr"</span>,
                      <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='st'>"ID"</span>,
-                     <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in force(data): object 'DataSet1' not found</span></div><div class='input'>
+                     <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
 <span class='fu'>cvo_test_bs</span>(<span class='no'>obj</span>,
             <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='st'>"gr"</span>,
             <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='st'>"ID"</span>,
-            <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in cvo_test_bs(obj, stratify_by = "gr", block_by = "ID", data = DataSet1): object 'DataSet1' not found</span></div><div class='input'>
-#>  ************************************************************
-#>      Test for STRATIFICATION
-#>
-#>        A B C D      <<<     >>>              A    B    C    D
-#>  Fold1 2 2 2 2  <-Counts | Proportions->  0.25 0.25 0.25 0.25
-#>  Fold2 2 2 2 2  <-Counts | Proportions->  0.25 0.25 0.25 0.25
-#>  Fold3 2 2 2 2  <-Counts | Proportions->  0.25 0.25 0.25 0.25
-#>  Fold4 2 2 2 2  <-Counts | Proportions->  0.25 0.25 0.25 0.25
-#>  Fold5 2 2 2 2  <-Counts | Proportions->  0.25 0.25 0.25 0.25
-#>
-#>  If stratified, the proportions of each group in each fold
-#>  (row) should be (approximately) equal and with no zero values.
-#>  ____________________________________________________________
-#>  Test for BLOCKING: BLOCKED
-#>
-#>        1 2 3 4 5 6 7 8 9 10 ..
-#>  Fold1 0 0 0 0 2 0 0 2 0  0 ..
-#>  Fold2 2 0 0 0 0 2 0 0 0  0 ..
-#>  Fold3 0 0 2 0 0 0 0 0 2  0 ..
-#>  Fold4 0 0 0 2 0 0 2 0 0  0 ..
-#>  Fold5 0 2 0 0 0 0 0 0 0  2 ..
-#>
-#>  Number of unique IDs in each fold (first 10 columns).
-#>  If blocked, the same ID appears just in one fold.
-#>  ************************************************************
+            <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
+#&gt; 
+#&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
+#&gt; Rep1_Fold1 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold2 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold3 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold4 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold5 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; 
+#&gt; If stratified, the proportions of each group in each fold
+#&gt; (row) should be (approximately) equal and with no zero values.
+#&gt; Test is not valid if data is blocked and number of cases in 
+#&gt; each block differs significantly.
+#&gt; ____________________________________________________________\n                Test for BLOCKING: BLOCKED
+#&gt; 
+#&gt;       ID
+#&gt;            1 2 3 4 5 6 7 8 9 10 ..
+#&gt; Rep1_Fold1 0 0 2 0 0 0 0 2 0  0 ..
+#&gt; Rep1_Fold2 0 2 0 0 0 2 0 0 0  0 ..
+#&gt; Rep1_Fold3 0 0 0 2 0 0 0 0 0  2 ..
+#&gt; Rep1_Fold4 2 0 0 0 0 0 2 0 0  0 ..
+#&gt; Rep1_Fold5 0 0 0 0 2 0 0 0 2  0 ..
+#&gt; 
+#&gt; Table shows number of observations in each fold.
+#&gt; If blocked, the same ID appears just in one fold.
+#&gt; 10 (of 20) first columns are displayed.
+#&gt; ************************************************************\n</div><div class='input'>
 
 </div></pre>
   </div>
@@ -196,8 +200,6 @@ be shown. Default is 10.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

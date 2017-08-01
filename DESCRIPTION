@@ -23,7 +23,8 @@ Imports:
     dplyr,
     pracma,
     tibble,
-    data.table
+    data.table,
+    mlr
 Suggests:
     knitr,
     rmarkdown,

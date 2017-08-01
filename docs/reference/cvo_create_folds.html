@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>[!] Create indices of folds with blocking and stratification (cvo object) � cvo_create_folds • multiROC</title>
+<title>Create a cvo (cross-valitation object) � cvo_create_folds • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -103,23 +103,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>[!] Create indices of folds with blocking and stratification (cvo object)</h1>
+    <h1>Create a cvo (cross-valitation object)</h1>
     </div>
 
     
-    <p><b>[DESCRIBTION MUST BE UPDATED]</b>
-Create indices of folds with blocking and stratification for (repeated)
-k-fold cross-validation. 
-Function <code>cvo_create_folds</code> randomly divides observations into
-folds that are used for (repeated) k-fold cross-validation. In these
- folds observations are:</p><ol>
-<li><p><b>blocked</b> by values in variable <code>block_by</code>
-     (i.e. observations with the same "ID" or other kind of blocking factor
-     are treated as one unit (a block) and are always in the same fold);</p></li>
-<li><p><b>stratified</b> by levels of factor variable <code>stratify_by</code>
-      (the proportions of these grouped units of observations per each
-      group (level) are kept approximately constant throughout all folds).</p></li>
-</ol>
+    <p><b>[DESCRIBTION MUST BE UPDATED]</b></p>
     
 
     <pre class="usage"><span class='fu'>cvo_create_folds</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -208,6 +196,22 @@ Default is &#8220;test&#8221;.</p></td>
         from <span class="pkg">caret</span> or function
         <code><a href='http://www.rdocumentation.org/packages/mlr/topics/makeResampleInstance'>makeResampleInstance</a>()</code> in <span class="pkg">mlr</span>.</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>[!] Create indices of folds with blocking and stratification (cvo object)
+Create indices of folds with blocking and stratification for (repeated)
+k-fold cross-validation. 
+Function <code>cvo_create_folds</code> randomly divides observations into
+folds that are used for (repeated) k-fold cross-validation. In these
+ folds observations are:</p><ol>
+<li><p><b>blocked</b> by values in variable <code>block_by</code>
+     (i.e. observations with the same "ID" or other kind of blocking factor
+     are treated as one unit (a block) and are always in the same fold);</p></li>
+<li><p><b>stratified</b> by levels of factor variable <code>stratify_by</code>
+      (the proportions of these grouped units of observations per each
+      group (level) are kept approximately constant throughout all folds).</p></li>
+</ol>
+    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>If <code>k</code> is such big, that some folds have no observations of
@@ -221,34 +225,168 @@ Default is &#8220;test&#8221;.</p></td>
          <span class="pkg">caret</span>. 
          Function <code><a href='http://www.rdocumentation.org/packages/mlr/topics/makeResampleInstance'>makeResampleInstance</a></code> from package
          <span class="pkg">mlr</span>. 
-Test if folds are blocked and stratified <code><a href='http://www.rdocumentation.org/packages/spHelper/topics/test_folds_BS'>test_folds_BS</a></code></p>
-<p>Other <span class="pkg">spHelper</span> fold creation functions: <code><a href='cvo_test_bs.html'>cvo_test_bs</a></code></p>
+Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_test_bs</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>spHelper</span>)</div><div class='output co'>#&gt; <span class='error'>Error: package �multiROC� required by �spHelper� could not be found</span></div><div class='input'>
-<span class='co'># Load data</span>
-     <span class='fu'>data</span>(<span class='st'>"DataSet1"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set �DataSet1� not found</span></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>multiROC</span>)
+
+<span class='co'># [!!!] Load data</span>
+<span class='no'>DataSet1</span> <span class='kw'>&lt;-</span><span class='fu'>data.frame</span>(<span class='kw'>ID</span> <span class='kw'>=</span> <span class='fu'>rep</span>(<span class='fl'>1</span>:<span class='fl'>20</span>, <span class='kw'>each</span> <span class='kw'>=</span> <span class='fl'>2</span>),
+                           <span class='kw'>gr</span> <span class='kw'>=</span> <span class='fu'>gl</span>(<span class='fl'>4</span>, <span class='fl'>10</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>4</span>]),
+                           <span class='kw'>.row</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>40</span>)
+
 <span class='co'># Explore data</span>
-     <span class='fu'>str</span>(<span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in str(DataSet1): object 'DataSet1' not found</span></div><div class='input'>     <span class='fu'>table</span>(<span class='no'>DataSet1</span>[,<span class='fu'>c</span>(<span class='st'>"gr"</span>,<span class='st'>"ID"</span>)])</div><div class='output co'>#&gt; <span class='error'>Error in table(DataSet1[, c("gr", "ID")]): object 'DataSet1' not found</span></div><div class='input'>     <span class='fu'>summary</span>(<span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in summary(DataSet1): object 'DataSet1' not found</span></div><div class='input'>
+     <span class='fu'>str</span>(<span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; 'data.frame':	40 obs. of  3 variables:
+#&gt;  $ ID  : int  1 1 2 2 3 3 4 4 5 5 ...
+#&gt;  $ gr  : Factor w/ 4 levels "A","B","C","D": 1 1 1 1 1 1 1 1 1 1 ...
+#&gt;  $ .row: int  1 2 3 4 5 6 7 8 9 10 ...</div><div class='input'>
+     <span class='fu'>table</span>(<span class='no'>DataSet1</span>[,<span class='fu'>c</span>(<span class='st'>"gr"</span>,<span class='st'>"ID"</span>)])</div><div class='output co'>#&gt;    ID
+#&gt; gr  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+#&gt;   A 2 2 2 2 2 0 0 0 0  0  0  0  0  0  0  0  0  0  0  0
+#&gt;   B 0 0 0 0 0 2 2 2 2  2  0  0  0  0  0  0  0  0  0  0
+#&gt;   C 0 0 0 0 0 0 0 0 0  0  2  2  2  2  2  0  0  0  0  0
+#&gt;   D 0 0 0 0 0 0 0 0 0  0  0  0  0  0  0  2  2  2  2  2</div><div class='input'>
+     <span class='fu'>summary</span>(<span class='no'>DataSet1</span>)</div><div class='output co'>#&gt;        ID        gr          .row      
+#&gt;  Min.   : 1.00   A:10   Min.   : 1.00  
+#&gt;  1st Qu.: 5.75   B:10   1st Qu.:10.75  
+#&gt;  Median :10.50   C:10   Median :20.50  
+#&gt;  Mean   :10.50   D:10   Mean   :20.50  
+#&gt;  3rd Qu.:15.25          3rd Qu.:30.25  
+#&gt;  Max.   :20.00          Max.   :40.00  </div><div class='input'>
+
 <span class='co'># Explore functions</span>
      <span class='no'>nFolds</span> <span class='kw'>=</span> <span class='fl'>5</span>
 
 <span class='co'># If variables of data frame are provided:</span>
      <span class='no'>Folds1_a</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>,
                               <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='st'>"gr"</span>, <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='st'>"ID"</span>,
-                               <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>, <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in force(data): object 'DataSet1' not found</span></div><div class='input'>     <span class='co'># str(Folds1_a)</span>
-     <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds11_a</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in inherits(data, "hyperSpec"): object 'DataSet1' not found</span></div><div class='input'>
+                               <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>, <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+     <span class='co'># str(Folds1_a)</span>
+     <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds1_a</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
+#&gt; 
+#&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
+#&gt; Rep1_Fold1 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold2 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold3 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold4 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold5 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; 
+#&gt; If stratified, the proportions of each group in each fold
+#&gt; (row) should be (approximately) equal and with no zero values.
+#&gt; Test is not valid if data is blocked and number of cases in 
+#&gt; each block differs significantly.
+#&gt; ____________________________________________________________\n                Test for BLOCKING: BLOCKED
+#&gt; 
+#&gt;       ID
+#&gt;            1 2 3 4 5 6 7 8 9 10 ..
+#&gt; Rep1_Fold1 2 0 0 0 0 0 0 0 0  2 ..
+#&gt; Rep1_Fold2 0 0 0 0 2 2 0 0 0  0 ..
+#&gt; Rep1_Fold3 0 0 2 0 0 0 0 0 2  0 ..
+#&gt; Rep1_Fold4 0 2 0 0 0 0 0 2 0  0 ..
+#&gt; Rep1_Fold5 0 0 0 2 0 0 2 0 0  0 ..
+#&gt; 
+#&gt; Table shows number of observations in each fold.
+#&gt; If blocked, the same ID appears just in one fold.
+#&gt; 10 (of 20) first columns are displayed.
+#&gt; ************************************************************\n</div><div class='input'>
 <span class='co'># If "free" variables are provided:</span>
-     <span class='no'>Folds1_b</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>gr</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>gr</span>, <span class='kw'>ID</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>ID</span>,
-                                <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>, <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in cvo_create_folds(gr = DataSet1$gr, ID = DataSet1$ID, k = nFolds,     returnTrain = FALSE): unused arguments (gr = DataSet1$gr, ID = DataSet1$ID)</span></div><div class='input'>     <span class='co'># str(Folds1_b)</span>
-     <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds11_b</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in cvo_test_bs(Folds11_b, "gr", "ID", DataSet1): object 'DataSet1' not found</span></div><div class='input'>
+     <span class='no'>Folds1_b</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>gr</span>,
+                                  <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>ID</span>,
+                                  <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>,
+                                  <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+     <span class='co'># str(Folds1_b)</span>
+     <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds1_b</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
+#&gt; 
+#&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
+#&gt; Rep1_Fold1 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold2 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold3 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold4 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold5 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; 
+#&gt; If stratified, the proportions of each group in each fold
+#&gt; (row) should be (approximately) equal and with no zero values.
+#&gt; Test is not valid if data is blocked and number of cases in 
+#&gt; each block differs significantly.
+#&gt; ____________________________________________________________\n                Test for BLOCKING: BLOCKED
+#&gt; 
+#&gt;       ID
+#&gt;            1 2 3 4 5 6 7 8 9 10 ..
+#&gt; Rep1_Fold1 0 0 0 0 2 0 0 0 0  2 ..
+#&gt; Rep1_Fold2 0 0 2 0 0 0 0 2 0  0 ..
+#&gt; Rep1_Fold3 0 0 0 2 0 0 2 0 0  0 ..
+#&gt; Rep1_Fold4 0 2 0 0 0 2 0 0 0  0 ..
+#&gt; Rep1_Fold5 2 0 0 0 0 0 0 0 2  0 ..
+#&gt; 
+#&gt; Table shows number of observations in each fold.
+#&gt; If blocked, the same ID appears just in one fold.
+#&gt; 10 (of 20) first columns are displayed.
+#&gt; ************************************************************\n</div><div class='input'>
 <span class='co'># Not blocked but stratified</span>
-     <span class='no'>Folds1_c</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>gr</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>gr</span>, <span class='kw'>k</span><span class='kw'>=</span><span class='no'>nFolds</span>, <span class='kw'>returnTrain</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in cvo_create_folds(gr = DataSet1$gr, k = nFolds, returnTrain = FALSE): unused argument (gr = DataSet1$gr)</span></div><div class='input'>     <span class='co'># str(Folds1_c)</span>
-     <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds11_c</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in cvo_test_bs(Folds11_c, "gr", "ID", DataSet1): object 'DataSet1' not found</span></div><div class='input'>
+     <span class='no'>Folds1_c</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>gr</span>,
+                                  <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>,
+                                  <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+     <span class='co'># str(Folds1_c)</span>
+     <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds1_c</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
+#&gt; 
+#&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
+#&gt; Rep1_Fold1 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold2 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold3 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold4 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold5 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; 
+#&gt; If stratified, the proportions of each group in each fold
+#&gt; (row) should be (approximately) equal and with no zero values.
+#&gt; Test is not valid if data is blocked and number of cases in 
+#&gt; each block differs significantly.
+#&gt; ____________________________________________________________\n                Test for BLOCKING: NOT BLOCKED
+#&gt; 
+#&gt;       ID
+#&gt;            1 2 3 4 5 6 7 8 9 10 ..
+#&gt; Rep1_Fold1 1 0 1 0 0 0 1 0 0  1 ..
+#&gt; Rep1_Fold2 0 1 0 0 1 0 1 1 0  0 ..
+#&gt; Rep1_Fold3 1 1 0 0 0 1 0 0 1  0 ..
+#&gt; Rep1_Fold4 0 0 1 0 1 1 0 0 1  0 ..
+#&gt; Rep1_Fold5 0 0 0 2 0 0 0 1 0  1 ..
+#&gt; 
+#&gt; Table shows number of observations in each fold.
+#&gt; If blocked, the same ID appears just in one fold.
+#&gt; 10 (of 20) first columns are displayed.
+#&gt; ************************************************************\n</div><div class='input'>
 <span class='co'># Blocked but not stratified</span>
-     <span class='no'>Folds1_d</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>block_by</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>ID</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>, <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in cvo_create_folds(block_by = DataSet1$ID, k = nFolds, returnTrain = FALSE): object 'DataSet1' not found</span></div><div class='input'>     <span class='co'># str(Folds1_d)</span>
-     <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds11_d</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in cvo_test_bs(Folds11_d, "gr", "ID", DataSet1): object 'DataSet1' not found</span></div><div class='input'>
+     <span class='no'>Folds1_d</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>block_by</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>ID</span>,
+                                  <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>,
+                                  <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+     <span class='co'># str(Folds1_d)</span>
+     <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds1_d</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
+#&gt; 
+#&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
+#&gt; Rep1_Fold1 4 2 0 2  &lt;-Counts | Proportions-&gt;  0.50 0.25 0.00 0.25
+#&gt; Rep1_Fold2 2 4 2 0  &lt;-Counts | Proportions-&gt;  0.25 0.50 0.25 0.00
+#&gt; Rep1_Fold3 2 0 2 4  &lt;-Counts | Proportions-&gt;  0.25 0.00 0.25 0.50
+#&gt; Rep1_Fold4 2 4 0 2  &lt;-Counts | Proportions-&gt;  0.25 0.50 0.00 0.25
+#&gt; Rep1_Fold5 0 0 6 2  &lt;-Counts | Proportions-&gt;  0.00 0.00 0.75 0.25
+#&gt; 
+#&gt; If stratified, the proportions of each group in each fold
+#&gt; (row) should be (approximately) equal and with no zero values.
+#&gt; Test is not valid if data is blocked and number of cases in 
+#&gt; each block differs significantly.
+#&gt; ____________________________________________________________\n                Test for BLOCKING: BLOCKED
+#&gt; 
+#&gt;       ID
+#&gt;            1 2 3 4 5 6 7 8 9 10 ..
+#&gt; Rep1_Fold1 0 2 2 0 0 0 0 0 2  0 ..
+#&gt; Rep1_Fold2 2 0 0 0 0 0 2 2 0  0 ..
+#&gt; Rep1_Fold3 0 0 0 0 2 0 0 0 0  0 ..
+#&gt; Rep1_Fold4 0 0 0 2 0 2 0 0 0  2 ..
+#&gt; Rep1_Fold5 0 0 0 0 0 0 0 0 0  0 ..
+#&gt; 
+#&gt; Table shows number of observations in each fold.
+#&gt; If blocked, the same ID appears just in one fold.
+#&gt; 10 (of 20) first columns are displayed.
+#&gt; ************************************************************\n</div><div class='input'>
 
 </div></pre>
   </div>
@@ -258,6 +396,8 @@ Test if folds are blocked and stratified <code><a href='http://www.rdocumentatio
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#note">Note</a></li>
 

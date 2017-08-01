@@ -1,12 +1,11 @@
-# Create folds with blocking and stratification (BS) for (repeated)
-# k-fold cross-validation
+# [!!!] Remove dependency on mlr in parameters sections
 
-#' @name cvo_create_folds
+
+#' Create a cvo (cross-valitation object)
 #'
-#' @title [!] Create indices of folds with blocking and stratification (cvo object)
-#'
-#' @description
 #' \bold{[DESCRIBTION MUST BE UPDATED]}\cr
+#'
+#' [!] Create indices of folds with blocking and stratification (cvo object)
 #' Create indices of folds with blocking and stratification for (repeated)
 #' k-fold cross-validation. \cr
 #' Function \code{cvo_create_folds} randomly divides observations into
@@ -21,6 +20,7 @@
 #'       group (level) are kept approximately constant throughout all folds).
 #'  }
 #'
+#' @name cvo_create_folds
 #' @note If \code{k} is such big, that some folds have no observations of
 #'       a certain group (i.e., level in \code{stratify_by}), an error
 #'       is returned. In that case smaller value of \code{k} may be
@@ -79,15 +79,20 @@
 #'
 #' @export
 #' @examples
-#' library(spHelper)
+#' library(multiROC)
 #'
-#' # Load data
-#'      data("DataSet1")
+#' # [!!!] Load data
+#' DataSet1 <-data.frame(ID = rep(1:20, each = 2),
+#'                            gr = gl(4, 10, labels = LETTERS[1:4]),
+#'                            .row = 1:40)
 #'
 #' # Explore data
 #'      str(DataSet1)
+#'
 #'      table(DataSet1[,c("gr","ID")])
+#'
 #'      summary(DataSet1)
+#'
 #'
 #' # Explore functions
 #'      nFolds = 5
@@ -97,31 +102,36 @@
 #'                               stratify_by = "gr", block_by = "ID",
 #'                                k = nFolds, returnTrain = FALSE)
 #'      # str(Folds1_a)
-#'      cvo_test_bs(Folds11_a, "gr", "ID", DataSet1)
+#'      cvo_test_bs(Folds1_a, "gr", "ID", DataSet1)
 #'
 #' # If "free" variables are provided:
-#'      Folds1_b <- cvo_create_folds(gr = DataSet1$gr, ID = DataSet1$ID,
-#'                                 k = nFolds, returnTrain = FALSE)
+#'      Folds1_b <- cvo_create_folds(stratify_by = DataSet1$gr,
+#'                                   block_by = DataSet1$ID,
+#'                                   k = nFolds,
+#'                                   returnTrain = FALSE)
 #'      # str(Folds1_b)
-#'      cvo_test_bs(Folds11_b, "gr", "ID", DataSet1)
+#'      cvo_test_bs(Folds1_b, "gr", "ID", DataSet1)
 #'
 #' # Not blocked but stratified
-#'      Folds1_c <- cvo_create_folds(gr = DataSet1$gr, k=nFolds, returnTrain=FALSE)
+#'      Folds1_c <- cvo_create_folds(stratify_by = DataSet1$gr,
+#'                                   k = nFolds,
+#'                                   returnTrain = FALSE)
 #'      # str(Folds1_c)
-#'      cvo_test_bs(Folds11_c, "gr", "ID", DataSet1)
+#'      cvo_test_bs(Folds1_c, "gr", "ID", DataSet1)
 #'
 #' # Blocked but not stratified
-#'      Folds1_d <- cvo_create_folds(block_by = DataSet1$ID, k = nFolds, returnTrain = FALSE)
+#'      Folds1_d <- cvo_create_folds(block_by = DataSet1$ID,
+#'                                   k = nFolds,
+#'                                   returnTrain = FALSE)
 #'      # str(Folds1_d)
-#'      cvo_test_bs(Folds11_d, "gr", "ID", DataSet1)
+#'      cvo_test_bs(Folds1_d, "gr", "ID", DataSet1)
 #'
 #'
-#' @family \pkg{spHelper} fold creation functions
 #' @seealso Function \code{\link[caret]{createFolds}} from package
 #'          \pkg{caret}. \cr
 #'          Function \code{\link[mlr]{makeResampleInstance}} from package
 #'          \pkg{mlr}. \cr
-#' Test if folds are blocked and stratified \code{\link{test_folds_BS}}
+#' Test if folds are blocked and stratified \code{\link{cvo_test_bs}}
 #' @author Vilmantas Gegzna
 
 cvo_create_folds <- function(data = NULL,
@@ -152,8 +162,8 @@ cvo_create_folds <- function(data = NULL,
     len_seeds <- length(seeds)
 
     if (!is.null(seeds) & (len_seeds < times) & (len_seeds > 1))
-        warning("Number of provided `seeds` is not sufficient." %.+.%
-                    "Random `seeds` will be added.")
+        warning("Number of provided `seeds` is not sufficient. \n",
+                    "Random `seeds` will be added.\n")
 
     # If just one seed is provided
     if (len_seeds == 1 & (len_seeds < times))
@@ -223,12 +233,12 @@ cvo_create_folds <- function(data = NULL,
 
     # If Number of observatuions in a group is to small
     if (any(n_ByGr < nFolds)) {
-        spMisc::bru("-")
+        bru("-")
         cat('Number of unique cases/blocks in each group:\n')
         print(n_ByGr)
         print(glue::glue('Number of folds = {nFolds}\n\n'))
-        stop("Number of UNIQUE observations in one of the groups" %.+.%
-                 "is smaller than number of folds.")
+        stop("Number of UNIQUE observations in one of the\n",
+             "groups is smaller than number of folds.\n")
     }
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -355,7 +365,7 @@ cvo_create_folds <- function(data = NULL,
                    )
 
                # addClasses(desc, stri_paste(method, "Desc"))
-               desc %<>% spMisc::class_add(c("RepCVDesc", "ResampleDesc"))
+               desc %<>% class_add(c("RepCVDesc", "ResampleDesc"))
 
                # [!!!] The next line must be updated appropriately
                group_ <- factor()
