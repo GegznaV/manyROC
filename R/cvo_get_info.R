@@ -1,5 +1,8 @@
 #' Access information in a cvo object
 #'
+#' Utility functions for \code{cvo} object. More in section "Details."
+#'
+#' @details
 #'
 #' Function \code{cvo_get_info} returns information about the
 #' cross-validation object \code{cvo}.\cr
@@ -34,9 +37,9 @@
 #' @param type (string) one of options, indicating the kind of
 #'             indices you are interested in:
 #' \itemize{
-#'      \item \code{"AsIs"} – indices as they are in the object,
-#'      \item \code{"Train"} – indices of training set,
-#'      \item \code{"Test"} – indices of test set.
+#'      \item \code{"AsIs"} - indices as they are in the object,
+#'      \item \code{"Train"} - indices of training set,
+#'      \item \code{"Test"} - indices of test set.
 #' }
 #'
 #'

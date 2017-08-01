@@ -3,9 +3,9 @@
 
 #' Create a cvo (cross-valitation object)
 #'
-#' \bold{[DESCRIBTION MUST BE UPDATED]}\cr
+#' [!!!] \bold{DESCRIPTION MUST BE UPDATED}\cr
 #'
-#' [!] Create indices of folds with blocking and stratification (cvo object)
+#' Create indices of folds with blocking and stratification (cvo object)
 #' Create indices of folds with blocking and stratification for (repeated)
 #' k-fold cross-validation. \cr
 #' Function \code{cvo_create_folds} randomly divides observations into
@@ -21,9 +21,9 @@
 #'  }
 #'
 #' @name cvo_create_folds
-#' @note If \code{k} is such big, that some folds have no observations of
+#' @note If \code{folds} is such big, that some folds have no observations of
 #'       a certain group (i.e., level in \code{stratify_by}), an error
-#'       is returned. In that case smaller value of \code{k} may be
+#'       is returned. In that case smaller value of \code{folds} may be
 #'       recommended.
 #'
 #' @param data A data frame, that contains variables which names are denoted
@@ -37,7 +37,7 @@
 #'                 contains identification codes/numbers (ID). These codes
 #'                 will be used for blocking.
 #'
-#' @param k,folds (\code{integer})\cr A number of folds, default \code{k = 5}.
+#' @param folds,k (\code{integer})\cr A number of folds, default \code{folds = 5}.
 #'
 #' @param mode (\code{character})\cr Either \pkg{caret}-like or \pkg{mlr}-like
 #'             cvo object. \bold{This option is not implemented yet!}
@@ -62,6 +62,7 @@
 #'
 #'              (See \code{\link[base]{set.seed}} for more information about
 #'              random number generation).
+#'
 #' @param kind (\code{character} | \code{NULL})\cr The kind of (pseudo)random
 #'             number generator. Default is \code{"L'Ecuyer-CMRG"} as it
 #'             provides the basis for the multiple streams used in package
@@ -137,7 +138,7 @@
 cvo_create_folds <- function(data = NULL,
                              stratify_by = NULL,
                              block_by = NULL,
-                             k = folds,
+                             folds = 5,
                              times = 1,
                              seeds = NULL,
                              kind = "L'Ecuyer-CMRG",
@@ -145,7 +146,7 @@ cvo_create_folds <- function(data = NULL,
                              returnTrain = c(TRUE, FALSE, "both")[1],
                              # predict: for compatibility with `mlr``
                              predict = c("test", "train", "both")[1],
-                             folds = 5
+                             k = folds
 
 ) {
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -172,7 +173,7 @@ cvo_create_folds <- function(data = NULL,
     # Generate seeds, if needed
     if (is.null(seeds) | (len_seeds < times)) {
         seeds <- c(seeds,
-                   sample(-9e6:9e6, times - len_seeds)
+                   sample(-9e7:9e7, times - len_seeds)
         )
     }
 

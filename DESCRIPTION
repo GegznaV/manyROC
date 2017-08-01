@@ -1,8 +1,9 @@
 Package: multiROC
 Type: Package
-Title: MultiROC algorithm for spectroscopic data analysis
-Description: [!!!] MultiROC algorithm for spectroscopic data analysis.
-Version: 0.0.3
+Title: Tools for ROC Analyis
+Description: [!!!] MultiROC - tools for ROC (receiver operating 
+             characteristic) analyis.
+Version: 0.0.3.1000
 Date: 2017-08-01
 Authors@R: person("Vilmantas", "Gegzna",
                   role = c("aut", "cre"),
@@ -29,5 +30,6 @@ Suggests:
     knitr,
     rmarkdown,
     testthat,
-    covr
+    covr,
+    caret
 VignetteBuilder: knitr

@@ -39,16 +39,18 @@ function \code{cvo_create_folds}.}
 \item{type}{(string) one of options, indicating the kind of
             indices you are interested in:
 \itemize{
-     \item \code{"AsIs"} – indices as they are in the object,
-     \item \code{"Train"} – indices of training set,
-     \item \code{"Test"} – indices of test set.
+     \item \code{"AsIs"} - indices as they are in the object,
+     \item \code{"Train"} - indices of training set,
+     \item \code{"Test"} - indices of test set.
 }}
 }
 \description{
-Function \code{cvo_get_info} returns information about the
-cross-validation object \code{cvo}.\cr
+Utility functions for \code{cvo} object. More in section "Details"
 }
 \details{
+Function \code{cvo_get_info} returns information about the
+cross-validation object \code{cvo}.\cr
+
 Function \code{cvo_get_sample_size} returns sample
 size of the object used to create the cross-validation
 object \code{cvo}.\cr

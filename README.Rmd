@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 
 ***
 
-[![CRAN version](http://www.r-pkg.org/badges/version/multiROC)](http://cran.rstudio.com/web/packages/multiROC/index.html)
+[![CRAN version](https://www.r-pkg.org/badges/version/multiROC)](https://cran.rstudio.com/web/packages/multiROC/index.html)
 [![GitHub version](https://img.shields.io/badge/GitHub-v`r packageVersion("multiROC")`-brightgreen.svg)](https://github.com/GegznaV/multiROC)
 [![Travis-CI Build Status](https://travis-ci.org/GegznaV/multiROC.png?branch=master)](https://travis-ci.org/GegznaV/multiROC)
 [![codecov](https://codecov.io/gh/GegznaV/multiROC/branch/master/graph/badge.svg)](https://codecov.io/gh/GegznaV/multiROC)

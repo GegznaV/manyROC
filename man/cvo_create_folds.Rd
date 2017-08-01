@@ -5,9 +5,9 @@
 \title{Create a cvo (cross-valitation object)}
 \usage{
 cvo_create_folds(data = NULL, stratify_by = NULL, block_by = NULL,
-  k = folds, times = 1, seeds = NULL, kind = "L'Ecuyer-CMRG",
+  folds = 5, times = 1, seeds = NULL, kind = "L'Ecuyer-CMRG",
   mode = c("caret", "mlr")[1], returnTrain = c(TRUE, FALSE, "both")[1],
-  predict = c("test", "train", "both")[1], folds = 5)
+  predict = c("test", "train", "both")[1], k = folds)
 }
 \arguments{
 \item{data}{A data frame, that contains variables which names are denoted
@@ -21,7 +21,7 @@ a vector with medical groups.}
 contains identification codes/numbers (ID). These codes
 will be used for blocking.}
 
-\item{k, folds}{(\code{integer})\cr A number of folds, default \code{k = 5}.}
+\item{folds, k}{(\code{integer})\cr A number of folds, default \code{folds = 5}.}
 
 \item{times}{(\code{integer})\cr a number of repetitions for
 repeated cross-validation.}
@@ -67,10 +67,10 @@ Default is \dQuote{test}.}
         \code{\link[mlr]{makeResampleInstance}()} in \pkg{mlr}.
 }
 \description{
-\bold{[DESCRIBTION MUST BE UPDATED]}\cr
+[!!!] \bold{DESCRIPTION MUST BE UPDATED}\cr
 }
 \details{
-[!] Create indices of folds with blocking and stratification (cvo object)
+Create indices of folds with blocking and stratification (cvo object)
 Create indices of folds with blocking and stratification for (repeated)
 k-fold cross-validation. \cr
 Function \code{cvo_create_folds} randomly divides observations into
@@ -86,9 +86,9 @@ folds that are used for (repeated) k-fold cross-validation. In these
  }
 }
 \note{
-If \code{k} is such big, that some folds have no observations of
+If \code{folds} is such big, that some folds have no observations of
       a certain group (i.e., level in \code{stratify_by}), an error
-      is returned. In that case smaller value of \code{k} may be
+      is returned. In that case smaller value of \code{folds} may be
       recommended.
 }
 \examples{
