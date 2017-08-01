@@ -45,7 +45,7 @@ function \code{cvo_create_folds}.}
 }}
 }
 \description{
-Utility functions for \code{cvo} object. More in section "Details"
+Utility functions for \code{cvo} object. More in section "Details."
 }
 \details{
 Function \code{cvo_get_info} returns information about the

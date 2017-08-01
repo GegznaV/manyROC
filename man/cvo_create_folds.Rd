@@ -62,9 +62,9 @@ Default is \dQuote{test}.}
 \value{
 (\code{list}) A list of folds. In each fold there are indices
         observations. The structure of outputs is the similar to one
-        created with either function \code{\link[caret]{createFolds}()}
+        created with either function \code{\link[caret]{createFolds}}
         from \pkg{caret} or function
-        \code{\link[mlr]{makeResampleInstance}()} in \pkg{mlr}.
+        \code{\link[mlr]{makeResampleInstance}} in \pkg{mlr}.
 }
 \description{
 [!!!] \bold{DESCRIPTION MUST BE UPDATED}\cr
@@ -77,10 +77,10 @@ Function \code{cvo_create_folds} randomly divides observations into
 folds that are used for (repeated) k-fold cross-validation. In these
  folds observations are:
 \enumerate{
-     \item \bold{blocked} by values in variable \code{block_by}
+ \item \bold{blocked} by values in variable \code{block_by}
      (i.e. observations with the same "ID" or other kind of blocking factor
      are treated as one unit (a block) and are always in the same fold);
-     \item \bold{stratified} by levels of factor variable \code{stratify_by}
+ \item \bold{stratified} by levels of factor variable \code{stratify_by}
       (the proportions of these grouped units of observations per each
       group (level) are kept approximately constant throughout all folds).
  }
