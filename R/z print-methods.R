@@ -2,16 +2,17 @@
 # Print methods
 # =============================================================================
 #' @rdname roc_analysis
-#' @param x (in \code{print} function) An object to print.
-#' @param ... [!!!] Passed to further methods.
 #' @export
+#' @method print roc_results
 print.roc_results <- function(x, ...) {
     # [!!!] reikia tobulinti funkciją ir jos aprašymą
     print(head_tail(x, ...))
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_analysis
+#' @param digits (\code{integer(1)})\cr Number of significant digits to display.
 #' @export
+#' @method print roc_optimal
 print.roc_optimal <- function(x, digits = 3, ...) {
     # [!!!] reikia tobulinti funkciją ir jos aprašymą
     opt_by <-  attr(x, "optimized_by")
@@ -27,14 +28,15 @@ print.roc_optimal <- function(x, digits = 3, ...) {
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_analysis
 #' @export
+#' @method print roc_info
 print.roc_info <- function(x,  ...) {
     # [!!!] reikia tobulinti funkciją ir jos aprašymą
     if (nrow(x) == 1) print.data.frame(x, row.names = FALSE, ...) else print.data.frame(x, ...)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# @param x \code{roc_performance} object for method \code{print}.
 #' @rdname roc_multi_analysis
 #'
-#' @param x \code{roc_performance} object for method \code{print}.
 #'
 #' @param ... Arguments passed for further methods.
 #'
@@ -47,7 +49,7 @@ print.roc_info <- function(x,  ...) {
 #'            \code{"\%.4g"}.
 #'
 #' @export
-#'
+#' @method print roc_performance
 print.roc_performance <- function(x, ..., digits = 2, cutoff_fmt = "%.4g") {
 
     perf_names <- c("sens","spec",

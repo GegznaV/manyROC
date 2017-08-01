@@ -2,3 +2,6 @@
 ^\.Rproj\.user$
 ^data-raw$
 ^D:\Dokumentai\R\multiROC\docs$
+README.Rmd
+_pkgdown.yaml
+docs.*

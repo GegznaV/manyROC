@@ -21,7 +21,7 @@ roc_get(obj, what)
 
 \method{roc_get}{roc_results}(obj, what)
 
-roc_get_all_results(obj, ...)
+roc_get_all_results(obj)
 
 roc_cutoff(obj)
 
@@ -49,7 +49,7 @@ roc_spec(obj)
 Acces elements of \code{roc_result_list} and \code{roc_results} objects.
 }
 \seealso{
-Other functions for ROC: \code{\link{print.roc_results}},
+Other functions for ROC: \code{\link{roc_analysis}},
   \code{\link{roc_performance_measures}}
 }
 \author{

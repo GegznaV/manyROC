@@ -84,7 +84,7 @@ roc_calculate_wkappa(obj)
 }
 \seealso{
 Other functions for ROC: \code{\link{access_elements}},
-  \code{\link{print.roc_results}}
+  \code{\link{roc_analysis}}
 }
 \author{
 Vilmantas Gegzna

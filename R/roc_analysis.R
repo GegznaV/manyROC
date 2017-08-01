@@ -18,7 +18,10 @@
 #' \cr[!!!]
 #'
 #' @name roc_analysis
-#' @param x (\code{numeric}) \cr A numeric vector.
+#' @param x (\code{numeric}) \cr A numeric vector.\cr
+#'          (in \code{print} function) An object to print.
+#' @param ... [!!!] Passed to further methods.
+#'
 #' @param gr (\code{factor}) \cr A factor vector with two levels.
 #' @param pos_label (\code{character(1)}) \cr A string with the name of
 #'                  positive group.

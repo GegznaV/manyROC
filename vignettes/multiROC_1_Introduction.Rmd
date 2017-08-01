@@ -6,7 +6,6 @@ output:
     rmarkdown::html_vignette: 
         toc: yes
         number_sections: yes
-
 vignette: >
   %\VignetteIndexEntry{1 multiROC Introduction}
   %\VignetteEngine{knitr::rmarkdown}
@@ -28,6 +27,19 @@ library(multiROC)
 ```
 
 // Introduction is being prepared... //
+============================================================================= 
+
+...
+
+```{r}
+# Make some data
+set.seed(1)
+(x_ <- rnorm(10))
+(gr_ <- gl(n = 2, k = 5, length = 10, labels = c("H","S")))
+
+# Explore the functions
+roc_analysis(x_, gr_)
+```
 
 <!-- # ```{r session info} -->
 <!-- # devtools::session_info() -->

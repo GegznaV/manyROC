@@ -7,10 +7,10 @@
 #' @docType package
 #' @author Vilmantas Gegzna
 #'
-#'
 #' @importFrom magrittr '%>%'
 #' @importFrom glue glue
 #' @importFrom pracma trapz
+#' @importFrom utils combn head tail
 #' @importFrom checkmate assert_choice assert_class assert_numeric
 #'                       assert_vector
 #'                       assert_factor assert_flag assert_character

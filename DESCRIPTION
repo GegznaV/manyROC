@@ -21,10 +21,10 @@ Imports:
     parallelMap,
     purrr,
     dplyr,
-    tibble,
     pracma,
     tibble
 Suggests:
     knitr,
     rmarkdown,
     testthat
+VignetteBuilder: knitr

@@ -32,7 +32,7 @@ roc_get.roc_results <- function(obj, what) {
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname access_elements
 #' @export
-roc_get_all_results <- function(obj, ...) {
+roc_get_all_results <- function(obj) {
     obj$all_results
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
