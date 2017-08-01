@@ -1,6 +1,5 @@
 favicon: "favicon.png"
 
-
 template:
   params:
     bootswatch: cerulean
@@ -20,23 +19,29 @@ navbar:
     - text: List of all vignettes
       href: articles/index.html
     - text: ----------------------
-    - text: Introduction to `multiROC`
+    - text: Introduction to multiROC
       href: articles/multiROC_1_Introduction.html
   right:
   - icon: fa-github fa-lg
     href: https://github.com/GegznaV/multiROC
 
+
 reference:
-- title: ROC analysis
-  desc: >
-       The main functions for ROC analysis.
+- title: The main functions for ROC analysis
+  desc: ~
   contents:
   - '`roc_analysis`'
   - '`roc_multiroc`'
-- title: Objects management functions
+- title: Management functions for ROC objects
   desc: ~
   contents:
   - '`access_elements`'
+- title: Functions for cross-validation (CVO) ojects
+  desc: ~
+  contents:
+  - '`cvo_create_folds`'
+  - '`cvo_get_info`'
+  - '`cvo_test_bs`'
 - title: Performance measures
   desc: ~
   contents:

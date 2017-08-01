@@ -9,24 +9,22 @@
 
 <img src="https://raw.githubusercontent.com/GegznaV/multiROC/master/docs/logo.png" width="50%" height="50%" style="display: block; margin: auto;" /> <!-- "https://raw.githubusercontent.com/GegznaV/multiROC/master/docs/logo.png" -->
 
-R package ***multiROC***
-========================
+***multiROC*** -- tools for ROC analyis
+=======================================
 
-**Package is under construction.**
+<p align="center">
+<font color="red" size="3" family="sans"> **The package is under construction.** </font>
+</p>
+<!-- *MultiROC* workflow for spectroscopic data analysis. -->
+Notes:
 
-*MultiROC* workflow for spectroscopic data analysis.
-
-------------------------------------------------------------------------
-
-Symbol **\[!!!\]** in documentation means, that the desctription is not finished or imprecise and needs special attention.
+1.  ROC -- receiver operating characteristic.
+2.  In documentation, symbol <font color="red"> **\[!!!\]** </font> means, that the desctription is not finished or imprecise and needs special attention.
 
 <!-- Install package: -->
 <!-- ```{r Install package, eval=FALSE} -->
 <!-- library(devtools) -->
 <!-- install_github("GegznaV/multiROC") -->
 <!-- ``` -->
-
-------------------------------------------------------------------------
-
-<p align="right">
-</p>
+<!-- * * * -->
+<!-- <p align="right"> </p>     -->

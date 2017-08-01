@@ -85,6 +85,7 @@ cvo_get_inds(cvo, 1)
 cvo_get_inds(cvo, 1, "train")
 
 cvo_get_inds(cvo, 1, "test")
+
 }
 \seealso{
 \code{\link{cvo_create_folds}}

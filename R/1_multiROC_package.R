@@ -7,8 +7,12 @@
 #' @docType package
 #' @author Vilmantas Gegzna
 #'
+#'
+#' @import magrittr
+#' @import parallelMap
+#' @import hyperSpec
+#'
 #' @importFrom data.table fread
-#' @importFrom magrittr '%>%'
 #' @importFrom glue glue
 #' @importFrom pracma trapz
 #' @importFrom utils combn head tail
@@ -17,6 +21,4 @@
 #'                       assert_factor assert_flag assert_character
 #'                       assert_set_equal assert_string assert_subset
 #'
-#' @import parallelMap
-#' @import hyperSpec
 NULL

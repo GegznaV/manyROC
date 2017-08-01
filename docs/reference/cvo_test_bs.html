@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Weighted Cohen's kappa � measure_wkappa • multiROC</title>
+<title>[+] Test if data in folds is stratified and blocked � cvo_test_bs • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -103,48 +103,91 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Weighted Cohen's kappa</h1>
+    <h1>[+] Test if data in folds is stratified and blocked</h1>
     </div>
 
     
-    <p>This function is based on function `measureWKAPPA` from `mlr` package.</p>
+    <p>This function run tests, that help to evaluate if data in folds is
+ (a) stratified and (b) blocked.</p>
     
 
-    <pre class="usage"><span class='fu'>measure_wkappa</span>(<span class='kw'>truth</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>response</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>conf_mat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>cvo_test_bs</span>(<span class='no'>obj</span>, <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>n_col_show</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>truth</th>
-      <td><p>a vector with true (reference) values.</p></td>
+      <th>obj</th>
+      <td><p>A list with validation/test set indices in folds.
+<b>Note:</b> If indices are from training set, the result will be
+incorrect.</p></td>
     </tr>
     <tr>
-      <th>response</th>
-      <td><p>a vector with response (predicted) values.</p></td>
+      <th>stratify_by</th>
+      <td><p>A name of variable used for stratification.</p></td>
     </tr>
     <tr>
-      <th>conf_mat</th>
-      <td><p>a table similar to (<code>table(truth, response, useNA = "no")</code>).</p></td>
+      <th>block_by</th>
+      <td><p>A name of variable used for blocking.</p></td>
+    </tr>
+    <tr>
+      <th>data</th>
+      <td><p>A data frame, for which <code>obj</code> was created.</p></td>
+    </tr>
+    <tr>
+      <th>n_col_show</th>
+      <td><p>Number of blocking variable cross-tabulation's columns to
+be shown. Default is 10.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>[!!!]</p>
+    <p>Print tables that help to evaluate if data is <strong>(a)</strong> stratified,
+ <strong>(b)</strong> blocked.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other measures_: <code><a href='measure_kappa.html'>measure_kappa</a></code></p>
+    <p>Other <span class="pkg">spHelper</span> fold creation functions: <code><a href='cvo_create_folds.html'>cvo_create_folds</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>     <span class='no'>truth</span> <span class='kw'>&lt;-</span> <span class='fu'>rep</span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>50</span>)
-<span class='no'>prediction</span> <span class='kw'>&lt;-</span> <span class='fu'>rep</span>(<span class='fl'>3</span>:<span class='fl'>1</span>, <span class='kw'>each</span> <span class='kw'>=</span> <span class='fl'>50</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>spHelper</span>)</div><div class='output co'>#&gt; <span class='error'>Error: package �multiROC� required by �spHelper� could not be found</span></div><div class='input'>
+<span class='fu'>data</span>(<span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set �DataSet1� not found</span></div><div class='input'><span class='no'>obj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='cvo_create_folds.html'>cvo_create_folds</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>,
+                     <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='st'>"gr"</span>,
+                     <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='st'>"ID"</span>,
+                     <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in force(data): object 'DataSet1' not found</span></div><div class='input'>
+<span class='fu'>cvo_test_bs</span>(<span class='no'>obj</span>,
+            <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='st'>"gr"</span>,
+            <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='st'>"ID"</span>,
+            <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in cvo_test_bs(obj, stratify_by = "gr", block_by = "ID", data = DataSet1): object 'DataSet1' not found</span></div><div class='input'>
+#>  ************************************************************
+#>      Test for STRATIFICATION
+#>
+#>        A B C D      <<<     >>>              A    B    C    D
+#>  Fold1 2 2 2 2  <-Counts | Proportions->  0.25 0.25 0.25 0.25
+#>  Fold2 2 2 2 2  <-Counts | Proportions->  0.25 0.25 0.25 0.25
+#>  Fold3 2 2 2 2  <-Counts | Proportions->  0.25 0.25 0.25 0.25
+#>  Fold4 2 2 2 2  <-Counts | Proportions->  0.25 0.25 0.25 0.25
+#>  Fold5 2 2 2 2  <-Counts | Proportions->  0.25 0.25 0.25 0.25
+#>
+#>  If stratified, the proportions of each group in each fold
+#>  (row) should be (approximately) equal and with no zero values.
+#>  ____________________________________________________________
+#>  Test for BLOCKING: BLOCKED
+#>
+#>        1 2 3 4 5 6 7 8 9 10 ..
+#>  Fold1 0 0 0 0 2 0 0 2 0  0 ..
+#>  Fold2 2 0 0 0 0 2 0 0 0  0 ..
+#>  Fold3 0 0 2 0 0 0 0 0 2  0 ..
+#>  Fold4 0 0 0 2 0 0 2 0 0  0 ..
+#>  Fold5 0 2 0 0 0 0 0 0 0  2 ..
+#>
+#>  Number of unique IDs in each fold (first 10 columns).
+#>  If blocked, the same ID appears just in one fold.
+#>  ************************************************************
 
-<span class='fu'>measure_wkappa</span>(<span class='no'>truth</span>, <span class='no'>prediction</span>)</div><div class='output co'>#&gt; [1] -0.02</div><div class='input'>
-<span class='no'>square_matrix</span> <span class='kw'>&lt;-</span> <span class='fu'>table</span>(<span class='no'>truth</span>, <span class='no'>prediction</span>)
-<span class='fu'>measure_wkappa</span>(<span class='kw'>conf_mat</span> <span class='kw'>=</span> <span class='no'>square_matrix</span>)</div><div class='output co'>#&gt; [1] -0.02</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -158,6 +201,10 @@
       
       <li><a href="#examples">Examples</a></li>
     </ul>
+
+    <h2>Author</h2>
+    
+Vilmantas Gegzna
 
   </div>
 </div>

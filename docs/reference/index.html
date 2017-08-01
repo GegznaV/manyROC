@@ -75,11 +75,11 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/index.html">List of vignettes</a>
+      <a href="../articles/index.html">List of all vignettes</a>
     </li>
     <li class="divider"></li>
     <li>
-      <a href="../articles/multiROC_1_Introduction.html">Introduction to `multiROC`</a>
+      <a href="../articles/multiROC_1_Introduction.html">Introduction to multiROC</a>
     </li>
   </ul>
 </li>
@@ -120,8 +120,8 @@
       <tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-roc-analysis" class="hasAnchor"><a href="#section-roc-analysis" class="anchor"></a>ROC analysis</h2>
-            <p class="section-desc"><p>The main functions for ROC analysis.</p></p>
+            <h2 id="section-the-main-functions-for-roc-analysis" class="hasAnchor"><a href="#section-the-main-functions-for-roc-analysis" class="anchor"></a>The main functions for ROC analysis</h2>
+            <p class="section-desc"></p>
           </th>
         </tr>
         <tr>
@@ -140,7 +140,7 @@
       </tbody><tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-objects-management-functions" class="hasAnchor"><a href="#section-objects-management-functions" class="anchor"></a>Objects management functions</h2>
+            <h2 id="section-management-functions-for-roc-objects" class="hasAnchor"><a href="#section-management-functions-for-roc-objects" class="anchor"></a>Management functions for ROC objects</h2>
             <p class="section-desc"></p>
           </th>
         </tr>
@@ -150,6 +150,32 @@
             <p><code><a href="access_elements.html">roc_get</a></code> <code><a href="access_elements.html">roc_get_all_results</a></code> <code><a href="access_elements.html">roc_cutoff</a></code> <code><a href="access_elements.html">roc_tp</a></code> <code><a href="access_elements.html">roc_fn</a></code> <code><a href="access_elements.html">roc_fp</a></code> <code><a href="access_elements.html">roc_tn</a></code> <code><a href="access_elements.html">roc_sens</a></code> <code><a href="access_elements.html">roc_spec</a></code> </p>
           </td>
           <td><p>[!] Access elements of roc_result_list object</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-functions-for-cross-validation-cvo-ojects" class="hasAnchor"><a href="#section-functions-for-cross-validation-cvo-ojects" class="anchor"></a>Functions for cross-validation (CVO) ojects</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="cvo_create_folds.html">cvo_create_folds</a></code> </p>
+          </td>
+          <td><p>[!] Create indices of folds with blocking and stratification (cvo object)</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="cvo_get_info.html">cvo_get_info</a></code> <code><a href="cvo_get_info.html">cvo_get_sample_size</a></code> <code><a href="cvo_get_info.html">cvo_get_seeds</a></code> <code><a href="cvo_get_info.html">cvo_count_folds</a></code> <code><a href="cvo_get_info.html">cvo_get_inds</a></code> </p>
+          </td>
+          <td><p>Access information in a cvo object</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="cvo_test_bs.html">cvo_test_bs</a></code> </p>
+          </td>
+          <td><p>[+] Test if data in folds is stratified and blocked</p></td>
         </tr>
       </tbody><tbody>
         <tr>
@@ -227,8 +253,9 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-roc-analysis">ROC analysis</a></li>
-      <li><a href="#section-objects-management-functions">Objects management functions</a></li>
+      <li><a href="#section-the-main-functions-for-roc-analysis">The main functions for ROC analysis</a></li>
+      <li><a href="#section-management-functions-for-roc-objects">Management functions for ROC objects</a></li>
+      <li><a href="#section-functions-for-cross-validation-cvo-ojects">Functions for cross-validation (CVO) ojects</a></li>
       <li><a href="#section-performance-measures">Performance measures</a></li>
       <li><a href="#section-helper-and-utility-functions">Helper and utility functions</a></li>
       <li><a href="#section-datasets">Datasets</a></li>

@@ -62,6 +62,7 @@
 #' cvo_get_inds(cvo, 1, "train")
 #'
 #' cvo_get_inds(cvo, 1, "test")
+#'
 cvo_get_info <- function(cvo) {
     attr(cvo, "info")
 }

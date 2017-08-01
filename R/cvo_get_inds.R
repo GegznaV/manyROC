@@ -28,7 +28,7 @@ cvo_get_inds.cvo_caret <- function(cvo,
     }
 
     # Select indices
-    if (cvo_get_info(cvo)$indices == type) {
+    if (tolower(cvo_get_info(cvo)$indices) == tolower(type)) {
         ind <- fold_ind
     } else {
         # indices complement to `type`
