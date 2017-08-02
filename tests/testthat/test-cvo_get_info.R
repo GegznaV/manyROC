@@ -21,6 +21,7 @@ test_that("utility function vorks with `cvo_caret` object", {
     expect_length(cvo_get_inds(cvo_caret, 1, "train"), n_rows - n_rows/folds)
     expect_length(cvo_get_inds(cvo_caret, 1, "test"),  n_rows/folds)
 
+    expect_length(cvo_get_fold_names(cvo_caret), folds)
 
 })
 
@@ -39,5 +40,7 @@ test_that("utility function vorks with `cvo_mlr` object", {
 
     expect_length(cvo_get_inds(cvo_mlr, 1, "train"), n_rows - n_rows/folds)
     expect_length(cvo_get_inds(cvo_mlr, 1, "test"),  n_rows/folds)
+
+    expect_length(cvo_get_fold_names(cvo_mlr), folds)
 
 })

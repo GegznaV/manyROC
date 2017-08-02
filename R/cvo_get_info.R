@@ -60,6 +60,8 @@
 #'
 #' cvo_count_folds(cvo)
 #'
+#' cvo_get_fold_names(cvo)
+#'
 #' cvo_get_inds(cvo, 1)
 #'
 #' cvo_get_inds(cvo, 1, "train")
@@ -98,6 +100,25 @@ cvo_count_folds.cvo_caret <- function(cvo) {
 #' @export
 cvo_count_folds.cvo_mlr <- function(cvo) {
     cvo$desc$iters
+}
+# =============================================================================
+# =============================================================================
+#' @rdname cvo_get_info
+#' @export
+cvo_get_fold_names <- function(cvo) {
+    UseMethod("cvo_get_fold_names")
+}
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' @rdname cvo_get_info
+#' @export
+cvo_get_fold_names.cvo_caret <- function(cvo) {
+    names(cvo)
+}
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' @rdname cvo_get_info
+#' @export
+cvo_get_fold_names.cvo_mlr <- function(cvo) {
+    names(cvo$train.inds)
 }
 # =============================================================================
 

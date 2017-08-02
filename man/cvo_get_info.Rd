@@ -10,6 +10,9 @@
 \alias{cvo_count_folds}
 \alias{cvo_count_folds.cvo_caret}
 \alias{cvo_count_folds.cvo_mlr}
+\alias{cvo_get_fold_names}
+\alias{cvo_get_fold_names.cvo_caret}
+\alias{cvo_get_fold_names.cvo_mlr}
 \title{Access information in a cvo object}
 \usage{
 cvo_get_inds(cvo, fold, type = c("asis", "train", "test"))
@@ -29,6 +32,12 @@ cvo_count_folds(cvo)
 \method{cvo_count_folds}{cvo_caret}(cvo)
 
 \method{cvo_count_folds}{cvo_mlr}(cvo)
+
+cvo_get_fold_names(cvo)
+
+\method{cvo_get_fold_names}{cvo_caret}(cvo)
+
+\method{cvo_get_fold_names}{cvo_mlr}(cvo)
 }
 \arguments{
 \item{cvo}{a cross-validation object (\code{cvo}) created with
@@ -81,6 +90,8 @@ cvo_get_seeds(cvo)
 cvo_get_sample_size(cvo)
 
 cvo_count_folds(cvo)
+
+cvo_get_fold_names(cvo)
 
 cvo_get_inds(cvo, 1)
 

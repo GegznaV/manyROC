@@ -80,6 +80,8 @@
 #' data(CO2)
 #' roc_multiroc(CO2[, c("conc", "uptake")], CO2$Type)
 #'
+#' data(OrchardSprays)
+#' roc_multiroc(OrchardSprays$decrease, OrchardSprays$treatment)
 #'
 #' # --- For hyperSpec objects ---
 #'

@@ -9,7 +9,8 @@
 \alias{roc_multiroc.hyperSpec}
 \title{[!] Carry out the multiROC analysis}
 \usage{
-\method{print}{multiroc_result}(x, ..., digits = 2, cutoff_fmt = "\%.4g")
+\method{print}{multiroc_result}(x, ..., show_all = FALSE, perf_digits = 2,
+  fmt = "\%.3g")
 
 roc_multiroc(x, gr = NULL, optimize_by = "bac", ...)
 
@@ -28,14 +29,18 @@ type of object, convertible to a numeric matrix.}
 
 \item{...}{Arguments passed for further methods.}
 
-\item{digits}{(\code{integer(1)})\cr A number of decimals to display
+\item{show_all}{(\code{logical(1)})\cr A flag if whole dataset should be
+printed. If \code{FALSE}, only a few fisrt and last rows
+will be printed.}
+
+\item{perf_digits}{(\code{integer(1)})\cr A number of decimals to display
 for \emph{performance measures}. Default is 2.}
 
-\item{cutoff_fmt}{(\code{character(1)})\cr A string with a number display
+\item{fmt}{(\code{character(1)})\cr A string with a number display other
 format for \emph{cut-off values}, \code{mean_neg}
  and \code{mean_pos}.
 Will be passed to \code{\link[base]{sprintf}}. Default is
-\code{"\%.4g"}.}
+\code{"\%.3g"}.}
 
 \item{gr}{Either a string (scalar, \code{character(1)}) or a \code{factor}
 variable (a vector) which defines groups in \code{x}.}
@@ -109,6 +114,8 @@ roc_multiroc(PlantGrowth$weight, PlantGrowth$group)
 data(CO2)
 roc_multiroc(CO2[, c("conc", "uptake")], CO2$Type)
 
+data(OrchardSprays)
+roc_multiroc(OrchardSprays$decrease, OrchardSprays$treatment)
 
 # --- For hyperSpec objects ---
 
