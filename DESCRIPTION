@@ -3,8 +3,8 @@ Type: Package
 Title: Tools for ROC Analyis
 Description: [!!!] MultiROC - tools for ROC (receiver operating 
              characteristic) analyis.
-Version: 0.0.3.2000
-Date: 2017-08-01
+Version: 0.0.3.3000
+Date: 2017-08-02
 Authors@R: person("Vilmantas", "Gegzna",
                   role = c("aut", "cre"),
                   email = "GegznaV@gmail.com")
@@ -19,6 +19,7 @@ Imports:
     hyperSpec,
     magrittr,
     glue,
+    ggplot2,
     parallelMap,
     purrr,
     dplyr,

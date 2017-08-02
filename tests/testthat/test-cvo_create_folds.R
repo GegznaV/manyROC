@@ -1,6 +1,6 @@
 # library(testthat)
 
-context("Function `cvo_create_folds()` ")
+context("cvo_create_folds")
 
 test_that("`data`, `stratify_by` and `block_by` parameters of `cvo_create_folds()` works", {
     # Load data
@@ -165,7 +165,9 @@ test_that("Stratification in `cvo_create_folds()` works", {
 test_that("`cvo_create_folds()` returns error if one of the groups is too small", {
 
     # Too little cases in each group
-    expect_error(cvo_create_folds(stratify_by = letters[1:6], k = 5))
+    expect_error(capture_output(
+        cvo_create_folds(stratify_by = letters[1:6], k = 5)
+    ))
     # No error expected
     expect_length(cvo_create_folds(stratify_by = letters[rep(1:3,5)], k = 5),5)
 

@@ -7,7 +7,8 @@
 \alias{roc_analysis}
 \title{[!] Carry out the ROC analysis}
 \usage{
-\method{print}{roc_results}(x, ...)
+\method{print}{roc_results}(x, ..., show_all = FALSE, perf_digits = 2,
+  fmt = "\%.3g")
 
 \method{print}{roc_optimal}(x, digits = 3, ...)
 
@@ -21,6 +22,19 @@ roc_analysis(x, gr, pos_label = levels(gr)[2], pos_is_larger = NULL,
 (in \code{print} function) An object to print.}
 
 \item{...}{[!!!] Passed to further methods.}
+
+\item{show_all}{(\code{logical(1)})\cr A flag if whole dataset should be
+printed. If \code{FALSE}, only a few fisrt and last rows
+will be printed.}
+
+\item{perf_digits}{(\code{integer(1)})\cr A number of decimals to display
+for \emph{performance measures}. Default is 2.}
+
+\item{fmt}{(\code{character(1)})\cr A string with a number display other
+format for \emph{cut-off values}, \code{mean_neg}
+ and \code{mean_pos}.
+Will be passed to \code{\link[base]{sprintf}}. Default is
+\code{"\%.3g"}.}
 
 \item{digits}{(\code{integer(1)})\cr Number of significant digits to display.}
 
@@ -85,6 +99,9 @@ This function is inspired by functions \code{predict} and
 \code{.compute.unnormalized.roc.curve} from \pkg{ROCR} package.
 }
 \examples{
+library(multiROC)
+library(ggplot2)
+
 # Make some data
 set.seed(1)
 (x <- rnorm(10))
@@ -98,6 +115,31 @@ roc_analysis(x, gr)
 
 roc_analysis(x, gr, pos_label = "H")
 
+
+set.seed(1)
+x2 = c(rnorm(50, mean = 14), rnorm(50, mean = 20))
+gr2 = gl(2, 50, labels = c("Neg", "Pos"))
+
+(roc_rez<- roc_analysis(x2, gr2))
+
+optimal_cutoff2 <- roc_rez$optimal[1]
+
+qplot(x2, fill = gr2, color = gr2,
+      geom = c("density", "rug"), alpha = I(0.3)) +
+   geom_vline(xintercept = optimal_cutoff2)
+
+
+set.seed(1)
+x3 = c(rnorm(100, mean = 11), rnorm(100, mean = 14))
+gr3 = gl(2, 100, labels = c("Neg", "Pos"))
+
+(roc_rez3 <- roc_analysis(x3, gr3))
+
+optimal_cutoff3 <- roc_rez3$optimal[1]
+
+qplot(x3, fill = gr3, color = gr3,
+     geom = c("density", "rug"), alpha = I(0.3)) +
+    geom_vline(xintercept = roc_rez3$optimal[1])
 }
 \seealso{
 Other functions for ROC: \code{\link{access_elements}},

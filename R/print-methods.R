@@ -2,11 +2,39 @@
 # Print methods
 # =============================================================================
 #' @rdname roc_analysis
+#' @inheritParams roc_multiroc
 #' @export
 #' @method print roc_results
-print.roc_results <- function(x, ...) {
+print.roc_results <- function(x, ..., show_all = FALSE,
+                              perf_digits = 2, fmt = "%.3g") {
     # [!!!] reikia tobulinti funkciją ir jos aprašymą
-    print(head_tail(x, ...))
+    # print(head_tail(x, ...))
+
+    x <- as.data.frame(x)
+
+    perf_names <- intersect(
+        c("sens","spec","ppv","npv","bac","youden","kappa","auc", "acc"),
+        colnames(x))
+
+    # cutoff_names <- intersect(c("cutoff","mean_neg", "mean_pos"), colnames(x))
+
+    x %<>%
+        dplyr::mutate_at(perf_names,
+                         sprintf, fmt = glue::glue("%.{perf_digits}f")) %>%
+        dplyr::mutate_if(is.numeric, sprintf, fmt = fmt)
+
+    # For long dataframes anly a few lines are printed
+    # [!!!] 10 may be converted to a parameter.
+    #
+    if (nrow(x) > 10) {
+        print(head_tail(x, ...))
+    } else {
+        print(x, ...)
+    }
+
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_analysis
