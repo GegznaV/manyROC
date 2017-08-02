@@ -107,13 +107,13 @@
     </div>
 
     
-    <p><b>[DESCRIBTION MUST BE UPDATED]</b></p>
+    <p>[!!!] <b>DESCRIPTION MUST BE UPDATED</b></p>
     
 
     <pre class="usage"><span class='fu'>cvo_create_folds</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>folds</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='st'>"L'Ecuyer-CMRG"</span>,
+  <span class='kw'>folds</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='st'>"L'Ecuyer-CMRG"</span>,
   <span class='kw'>mode</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"caret"</span>, <span class='st'>"mlr"</span>)[<span class='fl'>1</span>], <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>, <span class='st'>"both"</span>)[<span class='fl'>1</span>],
-  <span class='kw'>predict</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"test"</span>, <span class='st'>"train"</span>, <span class='st'>"both"</span>)[<span class='fl'>1</span>], <span class='kw'>folds</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
+  <span class='kw'>predict</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"test"</span>, <span class='st'>"train"</span>, <span class='st'>"both"</span>)[<span class='fl'>1</span>], <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>folds</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -136,8 +136,8 @@ contains identification codes/numbers (ID). These codes
 will be used for blocking.</p></td>
     </tr>
     <tr>
-      <th>k, folds</th>
-      <td><p>(<code>integer</code>) A number of folds, default <code>k = 5</code>.</p></td>
+      <th>folds, k</th>
+      <td><p>(<code>integer</code>) A number of folds, default <code>folds = 5</code>.</p></td>
     </tr>
     <tr>
       <th>times</th>
@@ -192,13 +192,13 @@ Default is &#8220;test&#8221;.</p></td>
 
     <p>(<code>list</code>) A list of folds. In each fold there are indices
         observations. The structure of outputs is the similar to one
-        created with either function <code><a href='http://www.rdocumentation.org/packages/caret/topics/createDataPartition'>createFolds</a>()</code>
+        created with either function <code><a href='http://www.rdocumentation.org/packages/caret/topics/createDataPartition'>createFolds</a></code>
         from <span class="pkg">caret</span> or function
-        <code><a href='http://www.rdocumentation.org/packages/mlr/topics/makeResampleInstance'>makeResampleInstance</a>()</code> in <span class="pkg">mlr</span>.</p>
+        <code><a href='http://www.rdocumentation.org/packages/mlr/topics/makeResampleInstance'>makeResampleInstance</a></code> in <span class="pkg">mlr</span>.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>[!] Create indices of folds with blocking and stratification (cvo object)
+    <p>Create indices of folds with blocking and stratification (cvo object)
 Create indices of folds with blocking and stratification for (repeated)
 k-fold cross-validation. 
 Function <code>cvo_create_folds</code> randomly divides observations into
@@ -214,9 +214,9 @@ folds that are used for (repeated) k-fold cross-validation. In these
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>If <code>k</code> is such big, that some folds have no observations of
+    <p>If <code>folds</code> is such big, that some folds have no observations of
       a certain group (i.e., level in <code>stratify_by</code>), an error
-      is returned. In that case smaller value of <code>k</code> may be
+      is returned. In that case smaller value of <code>folds</code> may be
       recommended.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -280,11 +280,11 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 #&gt; 
 #&gt;       ID
 #&gt;            1 2 3 4 5 6 7 8 9 10 ..
-#&gt; Rep1_Fold1 2 0 0 0 0 0 0 0 0  2 ..
-#&gt; Rep1_Fold2 0 0 0 0 2 2 0 0 0  0 ..
-#&gt; Rep1_Fold3 0 0 2 0 0 0 0 0 2  0 ..
-#&gt; Rep1_Fold4 0 2 0 0 0 0 0 2 0  0 ..
-#&gt; Rep1_Fold5 0 0 0 2 0 0 2 0 0  0 ..
+#&gt; Rep1_Fold1 2 0 0 0 0 0 0 0 2  0 ..
+#&gt; Rep1_Fold2 0 0 0 2 0 2 0 0 0  0 ..
+#&gt; Rep1_Fold3 0 0 0 0 2 0 0 0 0  2 ..
+#&gt; Rep1_Fold4 0 2 0 0 0 0 2 0 0  0 ..
+#&gt; Rep1_Fold5 0 0 2 0 0 0 0 2 0  0 ..
 #&gt; 
 #&gt; Table shows number of observations in each fold.
 #&gt; If blocked, the same ID appears just in one fold.
@@ -313,11 +313,11 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 #&gt; 
 #&gt;       ID
 #&gt;            1 2 3 4 5 6 7 8 9 10 ..
-#&gt; Rep1_Fold1 0 0 0 0 2 0 0 0 0  2 ..
-#&gt; Rep1_Fold2 0 0 2 0 0 0 0 2 0  0 ..
-#&gt; Rep1_Fold3 0 0 0 2 0 0 2 0 0  0 ..
-#&gt; Rep1_Fold4 0 2 0 0 0 2 0 0 0  0 ..
-#&gt; Rep1_Fold5 2 0 0 0 0 0 0 0 2  0 ..
+#&gt; Rep1_Fold1 0 2 0 0 0 0 0 2 0  0 ..
+#&gt; Rep1_Fold2 0 0 0 2 0 0 2 0 0  0 ..
+#&gt; Rep1_Fold3 2 0 0 0 0 0 0 0 0  2 ..
+#&gt; Rep1_Fold4 0 0 2 0 0 0 0 0 2  0 ..
+#&gt; Rep1_Fold5 0 0 0 0 2 2 0 0 0  0 ..
 #&gt; 
 #&gt; Table shows number of observations in each fold.
 #&gt; If blocked, the same ID appears just in one fold.
@@ -345,11 +345,11 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 #&gt; 
 #&gt;       ID
 #&gt;            1 2 3 4 5 6 7 8 9 10 ..
-#&gt; Rep1_Fold1 1 0 1 0 0 0 1 0 0  1 ..
-#&gt; Rep1_Fold2 0 1 0 0 1 0 1 1 0  0 ..
-#&gt; Rep1_Fold3 1 1 0 0 0 1 0 0 1  0 ..
-#&gt; Rep1_Fold4 0 0 1 0 1 1 0 0 1  0 ..
-#&gt; Rep1_Fold5 0 0 0 2 0 0 0 1 0  1 ..
+#&gt; Rep1_Fold1 1 1 0 0 0 0 1 0 0  1 ..
+#&gt; Rep1_Fold2 1 0 0 1 0 0 0 1 1  0 ..
+#&gt; Rep1_Fold3 0 0 1 1 0 1 0 0 1  0 ..
+#&gt; Rep1_Fold4 0 1 0 0 1 0 0 1 0  1 ..
+#&gt; Rep1_Fold5 0 0 1 0 1 1 1 0 0  0 ..
 #&gt; 
 #&gt; Table shows number of observations in each fold.
 #&gt; If blocked, the same ID appears just in one fold.
@@ -363,11 +363,11 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
      <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds1_d</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
 #&gt; 
 #&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
-#&gt; Rep1_Fold1 4 2 0 2  &lt;-Counts | Proportions-&gt;  0.50 0.25 0.00 0.25
-#&gt; Rep1_Fold2 2 4 2 0  &lt;-Counts | Proportions-&gt;  0.25 0.50 0.25 0.00
+#&gt; Rep1_Fold1 0 2 4 2  &lt;-Counts | Proportions-&gt;  0.00 0.25 0.50 0.25
+#&gt; Rep1_Fold2 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
 #&gt; Rep1_Fold3 2 0 2 4  &lt;-Counts | Proportions-&gt;  0.25 0.00 0.25 0.50
-#&gt; Rep1_Fold4 2 4 0 2  &lt;-Counts | Proportions-&gt;  0.25 0.50 0.00 0.25
-#&gt; Rep1_Fold5 0 0 6 2  &lt;-Counts | Proportions-&gt;  0.00 0.00 0.75 0.25
+#&gt; Rep1_Fold4 4 4 0 0  &lt;-Counts | Proportions-&gt;  0.50 0.50 0.00 0.00
+#&gt; Rep1_Fold5 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
 #&gt; 
 #&gt; If stratified, the proportions of each group in each fold
 #&gt; (row) should be (approximately) equal and with no zero values.
@@ -377,11 +377,11 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 #&gt; 
 #&gt;       ID
 #&gt;            1 2 3 4 5 6 7 8 9 10 ..
-#&gt; Rep1_Fold1 0 2 2 0 0 0 0 0 2  0 ..
-#&gt; Rep1_Fold2 2 0 0 0 0 0 2 2 0  0 ..
-#&gt; Rep1_Fold3 0 0 0 0 2 0 0 0 0  0 ..
-#&gt; Rep1_Fold4 0 0 0 2 0 2 0 0 0  2 ..
-#&gt; Rep1_Fold5 0 0 0 0 0 0 0 0 0  0 ..
+#&gt; Rep1_Fold1 0 0 0 0 0 0 0 0 2  0 ..
+#&gt; Rep1_Fold2 2 0 0 0 0 0 0 2 0  0 ..
+#&gt; Rep1_Fold3 0 0 0 2 0 0 0 0 0  0 ..
+#&gt; Rep1_Fold4 0 2 2 0 0 0 2 0 0  2 ..
+#&gt; Rep1_Fold5 0 0 0 0 2 2 0 0 0  0 ..
 #&gt; 
 #&gt; Table shows number of observations in each fold.
 #&gt; If blocked, the same ID appears just in one fold.

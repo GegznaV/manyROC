@@ -112,7 +112,8 @@ at each wavelength.</p>
     
 
     <pre class="usage"><span class='co'># S3 method for multiroc_result</span>
-<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>cutoff_fmt</span> <span class='kw'>=</span> <span class='st'>"%.4g"</span>)
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>show_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>perf_digits</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>fmt</span> <span class='kw'>=</span> <span class='st'>"%.3g"</span>)
 
 <span class='fu'>roc_multiroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
 
@@ -142,17 +143,23 @@ type of object, convertible to a numeric matrix.</p></td>
       <td><p>Arguments passed for further methods.</p></td>
     </tr>
     <tr>
-      <th>digits</th>
+      <th>show_all</th>
+      <td><p>(<code>logical(1)</code>) A flag if whole dataset should be
+printed. If <code>FALSE</code>, only a few fisrt and last rows
+will be printed.</p></td>
+    </tr>
+    <tr>
+      <th>perf_digits</th>
       <td><p>(<code>integer(1)</code>) A number of decimals to display
 for <em>performance measures</em>. Default is 2.</p></td>
     </tr>
     <tr>
-      <th>cutoff_fmt</th>
-      <td><p>(<code>character(1)</code>) A string with a number display
+      <th>fmt</th>
+      <td><p>(<code>character(1)</code>) A string with a number display other
 format for <em>cut-off values</em>, <code>mean_neg</code>
  and <code>mean_pos</code>.
 Will be passed to <code><a href='http://www.rdocumentation.org/packages/base/topics/sprintf'>sprintf</a></code>. Default is
-<code>"%.4g"</code>.</p></td>
+<code>"%.3g"</code>.</p></td>
     </tr>
     <tr>
       <th>gr</th>
@@ -225,9 +232,9 @@ will be related to this group, and sensitivity to the other group.</p>
 
 <span class='fu'>data</span>(<span class='no'>PlantGrowth</span>)
 <span class='fu'>roc_multiroc</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='no'>PlantGrowth</span>$<span class='no'>group</span>)</div><div class='output co'>#&gt;   compared_groups feature mean_neg cutoff mean_pos TP FN FP TN sens spec  PPV
-#&gt; 1   ctrl vs. trt1       1    5.005   4.41    4.624  5  5  1  9 0.50 0.90 0.83
-#&gt; 2   ctrl vs. trt2       1    5.005   5.26    5.504  8  2  3  7 0.80 0.70 0.73
-#&gt; 3   trt1 vs. trt2       1    4.624   4.92    5.504 10  0  2  8 1.00 0.80 0.83
+#&gt; 1   ctrl vs. trt1       1        5   4.37     4.62  5  5  1  9 0.50 0.90 0.83
+#&gt; 2   ctrl vs. trt2       1        5   5.22      5.5  8  2  3  7 0.80 0.70 0.73
+#&gt; 3   trt1 vs. trt2       1     4.62    4.9      5.5 10  0  2  8 1.00 0.80 0.83
 #&gt;    NPV  BAC Youden Kappa  AUC
 #&gt; 1 0.64 0.70   0.40  0.40 0.67
 #&gt; 2 0.78 0.75   0.50  0.50 0.75
@@ -237,12 +244,34 @@ will be related to this group, and sensitivity to the other group.</p>
 
 <span class='fu'>data</span>(<span class='no'>CO2</span>)
 <span class='fu'>roc_multiroc</span>(<span class='no'>CO2</span>[, <span class='fu'>c</span>(<span class='st'>"conc"</span>, <span class='st'>"uptake"</span>)], <span class='no'>CO2</span>$<span class='no'>Type</span>)</div><div class='output co'>#&gt;          compared_groups feature mean_neg cutoff mean_pos TP FN FP TN sens spec
-#&gt; 1 Quebec vs. Mississippi    conc    408.5    250    408.5 18 24 18 24 0.43 0.57
-#&gt; 2 Quebec vs. Mississippi  uptake    34.71   32.4    20.75 41  1 13 29 0.98 0.69
+#&gt; 1 Quebec vs. Mississippi    conc      409    200      409 18 24 18 24 0.43 0.57
+#&gt; 2 Quebec vs. Mississippi  uptake     34.7   32.3     20.8 41  1 13 29 0.98 0.69
 #&gt;    PPV  NPV  BAC Youden Kappa  AUC
 #&gt; 1 0.50 0.50 0.50   0.00  0.00 0.50
 #&gt; 2 0.76 0.97 0.83   0.67  0.67 0.84</div><div class='input'>
-
+<span class='fu'>data</span>(<span class='no'>OrchardSprays</span>)
+<span class='fu'>roc_multiroc</span>(<span class='no'>OrchardSprays</span>$<span class='no'>decrease</span>, <span class='no'>OrchardSprays</span>$<span class='no'>treatment</span>)</div><div class='output co'>#&gt;     compared_groups feature mean_neg cutoff mean_pos  TP  FN  FP  TN sens spec
+#&gt; 1           A vs. B       1     4.62    5.5     7.62   6   2   1   7 0.75 0.88
+#&gt; 2           A vs. C       1     4.62   12.5     25.2   7   1   0   8 0.88 1.00
+#&gt; 3           A vs. D       1     4.62     16       35   8   0   0   8 1.00 1.00
+#&gt; 4           A vs. E       1     4.62   25.5     63.1   8   0   0   8 1.00 1.00
+#&gt; ...             ...     ...      ...    ...      ... ... ... ... ...  ...  ...
+#&gt; 25          E vs. H       1     63.1     65     90.2   8   0   2   6 1.00 0.75
+#&gt; 26          F vs. G       1       69   76.5     68.5   7   1   5   3 0.88 0.38
+#&gt; 27          F vs. H       1       69   71.5     90.2   7   1   3   5 0.88 0.62
+#&gt; 28          G vs. H       1     68.5   80.5     90.2   5   3   1   7 0.62 0.88
+#&gt;                                                                               
+#&gt;      PPV  NPV  BAC Youden Kappa  AUC
+#&gt; 1   0.86 0.78 0.81   0.62  0.62 0.80
+#&gt; 2   1.00 0.89 0.94   0.88  0.88 0.98
+#&gt; 3   1.00 1.00 1.00   1.00  1.00 1.00
+#&gt; 4   1.00 1.00 1.00   1.00  1.00 1.00
+#&gt; ...  ...  ...  ...    ...   ...  ...
+#&gt; 25  0.80 1.00 0.88   0.75  0.75 0.81
+#&gt; 26  0.58 0.75 0.62   0.25  0.25 0.45
+#&gt; 27  0.70 0.83 0.75   0.50  0.50 0.70
+#&gt; 28  0.83 0.70 0.75   0.50  0.50 0.75
+#&gt;                                     </div><div class='input'>
 <span class='co'># --- For hyperSpec objects ---</span>
 
 <span class='fu'>library</span>(<span class='no'>hyperSpec</span>)
@@ -256,15 +285,15 @@ will be related to this group, and sensitivity to the other group.</p>
 #&gt;    2. class:  [factor] N l ... S1 
 #&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'>
 <span class='fu'>roc_multiroc</span>(<span class='no'>fluorescence</span>[ , , <span class='fl'>500</span>~<span class='fl'>502</span>], <span class='no'>fluorescence</span>$<span class='no'>gr</span>)</div><div class='output co'>#&gt;   compared_groups feature mean_neg cutoff mean_pos TP FN FP TN sens spec  PPV
-#&gt; 1         A vs. B     500    339.9  335.6    330.5 35 20 24 28 0.64 0.54 0.59
-#&gt; 2         A vs. B     501    337.8  327.8    329.3 29 26 19 33 0.53 0.63 0.60
-#&gt; 3         A vs. B     502    336.4  332.6    328.5 36 19 24 28 0.65 0.54 0.60
-#&gt; 4         A vs. C     500    339.9  343.3    340.7 21 22 20 32 0.49 0.62 0.51
-#&gt; 5         A vs. C     501    337.8  344.1    339.7 21 22 19 33 0.49 0.63 0.52
-#&gt; 6         A vs. C     502    336.4  340.3    337.4 22 21 22 30 0.51 0.58 0.50
-#&gt; 7         B vs. C     500    330.5  343.3    340.7 21 22 15 40 0.49 0.73 0.58
-#&gt; 8         B vs. C     501    329.3  344.1    339.7 21 22 15 40 0.49 0.73 0.58
-#&gt; 9         B vs. C     502    328.5  340.3    337.4 22 21 16 39 0.51 0.71 0.58
+#&gt; 1         A vs. B     500      340    335      330 35 20 24 28 0.64 0.54 0.59
+#&gt; 2         A vs. B     501      338    328      329 29 26 19 33 0.53 0.63 0.60
+#&gt; 3         A vs. B     502      336    332      328 36 19 24 28 0.65 0.54 0.60
+#&gt; 4         A vs. C     500      340    343      341 21 22 20 32 0.49 0.62 0.51
+#&gt; 5         A vs. C     501      338    343      340 21 22 19 33 0.49 0.63 0.52
+#&gt; 6         A vs. C     502      336    340      337 22 21 22 30 0.51 0.58 0.50
+#&gt; 7         B vs. C     500      330    343      341 21 22 15 40 0.49 0.73 0.58
+#&gt; 8         B vs. C     501      329    344      340 21 22 15 40 0.49 0.73 0.58
+#&gt; 9         B vs. C     502      328    339      337 22 21 16 39 0.51 0.71 0.58
 #&gt;    NPV  BAC Youden Kappa  AUC
 #&gt; 1 0.58 0.59   0.17  0.18 0.57
 #&gt; 2 0.56 0.58   0.16  0.16 0.56
