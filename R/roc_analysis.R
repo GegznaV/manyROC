@@ -167,7 +167,7 @@ roc_analysis <- function(x,
     gr <- gr[finite_bool]
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     ## Reorder levels to get predictabe results:
-    ##  first -  label of negative group ,
+    ##  first -  label of negative group,
     ##  second - label of positive group.
     neg_label <- setdiff(levels(gr), pos_label)
     levels <- c(neg_label, pos_label)

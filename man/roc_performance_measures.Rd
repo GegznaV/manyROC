@@ -85,6 +85,7 @@ Calculate various performance measures for classificatory analysis \cr
 }
 \seealso{
 Other functions for ROC: \code{\link{access_elements}},
+  \code{\link{calculate_two_class_perormance}},
   \code{\link{print.roc_df}}, \code{\link{roc_predict}}
 }
 \author{

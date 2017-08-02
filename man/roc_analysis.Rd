@@ -150,6 +150,7 @@ qplot(x3, fill = gr3, color = gr3,
 }
 \seealso{
 Other functions for ROC: \code{\link{access_elements}},
+  \code{\link{calculate_two_class_perormance}},
   \code{\link{roc_performance_measures}},
   \code{\link{roc_predict}}
 }
