@@ -41,10 +41,10 @@
 #'       \item \code{compared_groups} Names of compared groups (separated by
 #'                   \code{gr_sep} with default value \code{" vs. "});
 #'       \item \code{feature} names of numeric features used in analysis;
-#'       \item \code{mean_neg} 10\% trimmed mean of negatives;
+#'       \item \code{median_neg} median value of negatives group;
 #'       \item \code{cutoff} for optimal threshold/cut-off values and
 #'                   corresponding performance measures;
-#'       \item \code{mean_pos} 10\% trimmed mean of positives;
+#'       \item \code{median_pos} median value positives group;
 #'       \item \code{TP} number of true positives;
 #'       \item \code{FN} number of false negatives;
 #'       \item \code{FP} number of false positives;
@@ -154,7 +154,7 @@ roc_multiroc.matrix <- function(x,
     result_names <- c("cutoff", "TP","FN","FP","TN",
                       "sens","spec","PPV","NPV",
                       "BAC","Youden", "Kappa","AUC",
-                      "mean_neg", "mean_pos")
+                      "median_neg", "median_pos")
 
     # Clean the result
     OBJ <- grouppair_results  %>%
@@ -164,7 +164,7 @@ roc_multiroc.matrix <- function(x,
                        tibble::rownames_to_column(var = "feature")) %>%
         dplyr::bind_rows(.id = "compared_groups")  %>%
         dplyr::select(compared_groups, feature,
-                      mean_neg, cutoff, mean_pos,
+                      median_neg, cutoff, median_pos,
                       dplyr::everything())
 
     # Output

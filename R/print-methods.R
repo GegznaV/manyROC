@@ -16,8 +16,6 @@ print.roc_results <- function(x, ..., show_all = FALSE,
         c("sens","spec","ppv","npv","bac","youden","kappa","auc", "acc"),
         colnames(x))
 
-    # cutoff_names <- intersect(c("cutoff","mean_neg", "mean_pos"), colnames(x))
-
     x %<>%
         dplyr::mutate_at(perf_names,
                          sprintf, fmt = glue::glue("%.{perf_digits}f")) %>%
@@ -79,11 +77,10 @@ print.roc_info <- function(x,  ...) {
 #' @param perf_digits (\code{integer(1)})\cr A number of decimals to display
 #'            for \emph{performance measures}. Default is 2.
 #'
-#' @param fmt (\code{character(1)})\cr A string with a number display other
-#'            format for \emph{cut-off values}, \code{mean_neg}
-#'             and \code{mean_pos}.
-#'            Will be passed to \code{\link[base]{sprintf}}. Default is
-#'            \code{"\%.3g"}.
+#' @param fmt (\code{character(1)})\cr A string indicating number display
+#'            format for other numeric columns excluding performance measures.
+#'            The string will be passed to \code{\link[base]{sprintf}}.
+#'            Default is \code{"\%.3g"}.
 #'
 #' @export
 #' @method print multiroc_result
@@ -93,8 +90,6 @@ print.multiroc_result <- function(x, ..., show_all = FALSE,
     perf_names <- intersect(
         c("sens","spec","PPV","NPV","BAC","Youden","Kappa","AUC"),
         colnames(x))
-
-    # cutoff_names <- intersect(c("cutoff","mean_neg", "mean_pos"), colnames(x))
 
     x %<>%
         dplyr::mutate_at(perf_names,

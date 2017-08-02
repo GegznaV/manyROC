@@ -36,11 +36,10 @@ will be printed.}
 \item{perf_digits}{(\code{integer(1)})\cr A number of decimals to display
 for \emph{performance measures}. Default is 2.}
 
-\item{fmt}{(\code{character(1)})\cr A string with a number display other
-format for \emph{cut-off values}, \code{mean_neg}
- and \code{mean_pos}.
-Will be passed to \code{\link[base]{sprintf}}. Default is
-\code{"\%.3g"}.}
+\item{fmt}{(\code{character(1)})\cr A string indicating number display
+format for other numeric columns excluding performance measures.
+The string will be passed to \code{\link[base]{sprintf}}.
+Default is \code{"\%.3g"}.}
 
 \item{gr}{Either a string (scalar, \code{character(1)}) or a \code{factor}
 variable (a vector) which defines groups in \code{x}.}
@@ -64,10 +63,10 @@ columns:
       \item \code{compared_groups} Names of compared groups (separated by
                   \code{gr_sep} with default value \code{" vs. "});
       \item \code{feature} names of numeric features used in analysis;
-      \item \code{mean_neg} 10\% trimmed mean of negatives;
+      \item \code{median_neg} median value of negatives group;
       \item \code{cutoff} for optimal threshold/cut-off values and
                   corresponding performance measures;
-      \item \code{mean_pos} 10\% trimmed mean of positives;
+      \item \code{median_pos} median value positives group;
       \item \code{TP} number of true positives;
       \item \code{FN} number of false negatives;
       \item \code{FP} number of false positives;

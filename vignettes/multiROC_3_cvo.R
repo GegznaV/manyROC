@@ -1,38 +1,16 @@
----
-title: "Cross-validation object (cvo)"
-author: "Vilmantas Gegzna"
-date: "`r Sys.Date()` (v`r packageVersion('multiROC')`)"
-output:
-    rmarkdown::html_vignette: 
-        toc: yes
-        number_sections: yes
-vignette: >
-  %\VignetteIndexEntry{multiROC_3_cvo}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r options, echo = FALSE, message = FALSE, warning = FALSE}
+## ----options, echo = FALSE, message = FALSE, warning = FALSE-------------
 optDEF <- knitr::opts_chunk$get()
 knitr::opts_chunk$set(collapse = FALSE, comment = "#>")
 
 knitr::opts_chunk$set(fig.width = 6, fig.align = 'center')
-```
 
-Load packages
-
-```{r Load packages, include = FALSE, message = FALSE, warning = FALSE}
+## ----Load packages, include = FALSE, message = FALSE, warning = FALSE----
 library(multiROC)
-```
-```{r}
+
+## ------------------------------------------------------------------------
 library(multiROC)
-```
 
-`cvo_create_folds`
-================================================
-
-
-```{r}
+## ------------------------------------------------------------------------
 # clear()
 
 # Make some data
@@ -48,17 +26,13 @@ str(DataSet1)
 
 # table(DataSet1[,c("gr","ID")])
 # summary(DataSet1)
-```
 
-`createFolds2` and `stratifiedFolds` is the same function with different names
-```{r}
+## ------------------------------------------------------------------------
 
 set.seed(1)
 cvo_create_folds(block_by = DataSet1$ID, k = nFolds)
-```
 
-When variable names from data frame are provided:
-```{r}
+## ------------------------------------------------------------------------
 Folds1_a <- cvo_create_folds(data = DataSet1,
                              stratify_by = "gr",
                              block_by = "ID",
@@ -70,10 +44,8 @@ cvo_test_bs(Folds1_a,
             block_by = "ID",
             data = DataSet1)
 
-```
 
-When "free" variables are provided:
-```{r}
+## ------------------------------------------------------------------------
 Folds1_b <- cvo_create_folds(stratify_by = DataSet1$gr,
                              block_by = DataSet1$ID,
                              k = nFolds,
@@ -84,10 +56,8 @@ cvo_test_bs(Folds1_b,
             block_by = "ID",
             data = DataSet1
 )
-```
 
-Not blocked but stratified:
-```{r}
+## ------------------------------------------------------------------------
 Folds1_c <- cvo_create_folds(stratify_by = DataSet1$gr,
                              k = nFolds,
                              returnTrain = FALSE)
@@ -96,10 +66,8 @@ cvo_test_bs(Folds1_c,
             stratify_by = "gr",
             block_by = "ID",
             data = DataSet1)
-```
 
-Blocked but not stratified:
-```{r}
+## ------------------------------------------------------------------------
 Folds1_d <- cvo_create_folds(block_by = DataSet1$ID,
                              k = nFolds,
                              returnTrain = FALSE)
@@ -108,5 +76,4 @@ cvo_test_bs(Folds1_d,
             stratify_by = "gr",
             block_by = "ID",
             DataSet1)
-```
 

@@ -40,8 +40,8 @@ test_that("roc_analysis() gives correct marginal results (1)", {
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     calculated_res1 <- roc_analysis(x_1, gr_)$optimal %>% as.data.frame()
     expected_res1   <- data.table::fread(data.table = FALSE,
-"cutoff tp fn fp tn sens spec ppv npv bac youden kappa auc mean_neg mean_pos
-    1.5 50  0  0 50    1    1   1   1   1      1     1   1        1        2")
+"cutoff tp fn fp tn sens spec ppv npv bac youden kappa auc median_neg median_pos
+    1.5 50  0  0 50    1    1   1   1   1      1     1   1          1          2")
     expect_equivalent(calculated_res1, expected_res1)
 })
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -54,8 +54,8 @@ test_that("roc_analysis() gives correct marginal results (2)", {
     calculated_res2 <- roc_analysis(x_2, gr_)$optimal %>% as.data.frame()
 
     expected_res2 <- data.table::fread(data.table = FALSE,
-"cutoff tp fn fp tn sens spec ppv npv bac youden kappa auc mean_neg mean_pos
-    0.5 25 25 25 25  0.5  0.5 0.5 0.5 0.5      0     0 0.5      1.5      1.5")
+"cutoff tp fn fp tn sens spec ppv npv bac youden kappa auc median_neg median_pos
+    0.5 25 25 25 25  0.5  0.5 0.5 0.5 0.5      0     0 0.5        1.5        1.5")
     expect_equivalent(calculated_res2, expected_res2)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 })
@@ -70,8 +70,8 @@ test_that("roc_analysis() gives correct marginal results (3)", {
         roc_analysis(x_34, gr_, pos_is_larger = TRUE)$optimal %>% as.data.frame()
 
     expected_res3 <- data.table::fread(data.table = FALSE,
-"cutoff tp fn fp tn sens spec ppv npv bac youden kappa auc mean_neg mean_pos
-    Inf  0 50  0 50    0    1 NaN 0.5 0.5      0     0 0.5        1        1")
+"cutoff tp fn fp tn sens spec ppv npv bac youden kappa auc median_neg median_pos
+    Inf  0 50  0 50    0    1 NaN 0.5 0.5      0     0 0.5          1          1")
     expect_equivalent(calculated_res3, expected_res3)
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 })
@@ -85,8 +85,8 @@ test_that("roc_analysis() gives correct marginal results (4)", {
         roc_analysis(x_34, gr_, pos_is_larger = FALSE)$optimal %>% as.data.frame()
 
     expected_res4 <- data.table::fread(data.table = FALSE,
-"cutoff tp fn fp tn sens spec ppv npv bac youden kappa auc mean_neg mean_pos
-   -Inf  0 50  0 50    0    1 NaN 0.5 0.5      0     0 0.5        1        1")
+"cutoff tp fn fp tn sens spec ppv npv bac youden kappa auc median_neg median_pos
+   -Inf  0 50  0 50    0    1 NaN 0.5 0.5      0     0 0.5          1          1")
     expect_equivalent(calculated_res4, expected_res4)
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 })

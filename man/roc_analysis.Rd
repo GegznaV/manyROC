@@ -30,11 +30,10 @@ will be printed.}
 \item{perf_digits}{(\code{integer(1)})\cr A number of decimals to display
 for \emph{performance measures}. Default is 2.}
 
-\item{fmt}{(\code{character(1)})\cr A string with a number display other
-format for \emph{cut-off values}, \code{mean_neg}
- and \code{mean_pos}.
-Will be passed to \code{\link[base]{sprintf}}. Default is
-\code{"\%.3g"}.}
+\item{fmt}{(\code{character(1)})\cr A string indicating number display
+format for other numeric columns excluding performance measures.
+The string will be passed to \code{\link[base]{sprintf}}.
+Default is \code{"\%.3g"}.}
 
 \item{digits}{(\code{integer(1)})\cr Number of significant digits to display.}
 

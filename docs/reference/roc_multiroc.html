@@ -65,23 +65,12 @@
     Functions
   </a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+<li>
+  <a href="../articles/index.html">
     <span class="fa fa-book fa-lg"></span>
      
     Tutorials and examples
-     
-    <span class="caret"></span>
   </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/index.html">List of all vignettes</a>
-    </li>
-    <li class="divider"></li>
-    <li>
-      <a href="../articles/multiROC_1_Introduction.html">Introduction to multiROC</a>
-    </li>
-  </ul>
 </li>
       </ul>
       
@@ -155,11 +144,10 @@ for <em>performance measures</em>. Default is 2.</p></td>
     </tr>
     <tr>
       <th>fmt</th>
-      <td><p>(<code>character(1)</code>) A string with a number display other
-format for <em>cut-off values</em>, <code>mean_neg</code>
- and <code>mean_pos</code>.
-Will be passed to <code><a href='http://www.rdocumentation.org/packages/base/topics/sprintf'>sprintf</a></code>. Default is
-<code>"%.3g"</code>.</p></td>
+      <td><p>(<code>character(1)</code>) A string indicating number display
+format for other numeric columns excluding performance measures.
+The string will be passed to <code><a href='http://www.rdocumentation.org/packages/base/topics/sprintf'>sprintf</a></code>.
+Default is <code>"%.3g"</code>.</p></td>
     </tr>
     <tr>
       <th>gr</th>
@@ -190,10 +178,10 @@ columns:</p><ul>
 <li><p><code>compared_groups</code> Names of compared groups (separated by
                   <code>gr_sep</code> with default value <code>" vs. "</code>);</p></li>
 <li><p><code>feature</code> names of numeric features used in analysis;</p></li>
-<li><p><code>mean_neg</code> 10% trimmed mean of negatives;</p></li>
+<li><p><code>median_neg</code> median value of negatives group;</p></li>
 <li><p><code>cutoff</code> for optimal threshold/cut-off values and
                   corresponding performance measures;</p></li>
-<li><p><code>mean_pos</code> 10% trimmed mean of positives;</p></li>
+<li><p><code>median_pos</code> median value positives group;</p></li>
 <li><p><code>TP</code> number of true positives;</p></li>
 <li><p><code>FN</code> number of false negatives;</p></li>
 <li><p><code>FP</code> number of false positives;</p></li>
@@ -231,47 +219,47 @@ will be related to this group, and sensitivity to the other group.</p>
 <span class='co'># --- For numeric vectors objects ---</span>
 
 <span class='fu'>data</span>(<span class='no'>PlantGrowth</span>)
-<span class='fu'>roc_multiroc</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='no'>PlantGrowth</span>$<span class='no'>group</span>)</div><div class='output co'>#&gt;   compared_groups feature mean_neg cutoff mean_pos TP FN FP TN sens spec  PPV
-#&gt; 1   ctrl vs. trt1       1        5   4.37     4.62  5  5  1  9 0.50 0.90 0.83
-#&gt; 2   ctrl vs. trt2       1        5   5.22      5.5  8  2  3  7 0.80 0.70 0.73
-#&gt; 3   trt1 vs. trt2       1     4.62    4.9      5.5 10  0  2  8 1.00 0.80 0.83
-#&gt;    NPV  BAC Youden Kappa  AUC
-#&gt; 1 0.64 0.70   0.40  0.40 0.67
-#&gt; 2 0.78 0.75   0.50  0.50 0.75
-#&gt; 3 1.00 0.90   0.80  0.80 0.84</div><div class='input'>
+<span class='fu'>roc_multiroc</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='no'>PlantGrowth</span>$<span class='no'>group</span>)</div><div class='output co'>#&gt;   compared_groups feature median_neg cutoff median_pos TP FN FP TN sens spec
+#&gt; 1   ctrl vs. trt1       1       5.15   4.37       4.55  5  5  1  9 0.50 0.90
+#&gt; 2   ctrl vs. trt2       1       5.15   5.22       5.44  8  2  3  7 0.80 0.70
+#&gt; 3   trt1 vs. trt2       1       4.55    4.9       5.44 10  0  2  8 1.00 0.80
+#&gt;    PPV  NPV  BAC Youden Kappa  AUC
+#&gt; 1 0.83 0.64 0.70   0.40  0.40 0.67
+#&gt; 2 0.73 0.78 0.75   0.50  0.50 0.75
+#&gt; 3 0.83 1.00 0.90   0.80  0.80 0.84</div><div class='input'>
 
 <span class='co'># --- For dataframes objects ---</span>
 
 <span class='fu'>data</span>(<span class='no'>CO2</span>)
-<span class='fu'>roc_multiroc</span>(<span class='no'>CO2</span>[, <span class='fu'>c</span>(<span class='st'>"conc"</span>, <span class='st'>"uptake"</span>)], <span class='no'>CO2</span>$<span class='no'>Type</span>)</div><div class='output co'>#&gt;          compared_groups feature mean_neg cutoff mean_pos TP FN FP TN sens spec
-#&gt; 1 Quebec vs. Mississippi    conc      409    200      409 18 24 18 24 0.43 0.57
-#&gt; 2 Quebec vs. Mississippi  uptake     34.7   32.3     20.8 41  1 13 29 0.98 0.69
-#&gt;    PPV  NPV  BAC Youden Kappa  AUC
-#&gt; 1 0.50 0.50 0.50   0.00  0.00 0.50
-#&gt; 2 0.76 0.97 0.83   0.67  0.67 0.84</div><div class='input'>
+<span class='fu'>roc_multiroc</span>(<span class='no'>CO2</span>[, <span class='fu'>c</span>(<span class='st'>"conc"</span>, <span class='st'>"uptake"</span>)], <span class='no'>CO2</span>$<span class='no'>Type</span>)</div><div class='output co'>#&gt;          compared_groups feature median_neg cutoff median_pos TP FN FP TN sens
+#&gt; 1 Quebec vs. Mississippi    conc        350    200        350 18 24 18 24 0.43
+#&gt; 2 Quebec vs. Mississippi  uptake       37.2   32.3       19.3 41  1 13 29 0.98
+#&gt;   spec  PPV  NPV  BAC Youden Kappa  AUC
+#&gt; 1 0.57 0.50 0.50 0.50   0.00  0.00 0.50
+#&gt; 2 0.69 0.76 0.97 0.83   0.67  0.67 0.84</div><div class='input'>
 <span class='fu'>data</span>(<span class='no'>OrchardSprays</span>)
-<span class='fu'>roc_multiroc</span>(<span class='no'>OrchardSprays</span>$<span class='no'>decrease</span>, <span class='no'>OrchardSprays</span>$<span class='no'>treatment</span>)</div><div class='output co'>#&gt;     compared_groups feature mean_neg cutoff mean_pos  TP  FN  FP  TN sens spec
-#&gt; 1           A vs. B       1     4.62    5.5     7.62   6   2   1   7 0.75 0.88
-#&gt; 2           A vs. C       1     4.62   12.5     25.2   7   1   0   8 0.88 1.00
-#&gt; 3           A vs. D       1     4.62     16       35   8   0   0   8 1.00 1.00
-#&gt; 4           A vs. E       1     4.62   25.5     63.1   8   0   0   8 1.00 1.00
-#&gt; ...             ...     ...      ...    ...      ... ... ... ... ...  ...  ...
-#&gt; 25          E vs. H       1     63.1     65     90.2   8   0   2   6 1.00 0.75
-#&gt; 26          F vs. G       1       69   76.5     68.5   7   1   5   3 0.88 0.38
-#&gt; 27          F vs. H       1       69   71.5     90.2   7   1   3   5 0.88 0.62
-#&gt; 28          G vs. H       1     68.5   80.5     90.2   5   3   1   7 0.62 0.88
-#&gt;                                                                               
-#&gt;      PPV  NPV  BAC Youden Kappa  AUC
-#&gt; 1   0.86 0.78 0.81   0.62  0.62 0.80
-#&gt; 2   1.00 0.89 0.94   0.88  0.88 0.98
-#&gt; 3   1.00 1.00 1.00   1.00  1.00 1.00
-#&gt; 4   1.00 1.00 1.00   1.00  1.00 1.00
-#&gt; ...  ...  ...  ...    ...   ...  ...
-#&gt; 25  0.80 1.00 0.88   0.75  0.75 0.81
-#&gt; 26  0.58 0.75 0.62   0.25  0.25 0.45
-#&gt; 27  0.70 0.83 0.75   0.50  0.50 0.70
-#&gt; 28  0.83 0.70 0.75   0.50  0.50 0.75
-#&gt;                                     </div><div class='input'>
+<span class='fu'>roc_multiroc</span>(<span class='no'>OrchardSprays</span>$<span class='no'>decrease</span>, <span class='no'>OrchardSprays</span>$<span class='no'>treatment</span>)</div><div class='output co'>#&gt;     compared_groups feature median_neg cutoff median_pos  TP  FN  FP  TN sens
+#&gt; 1           A vs. B       1          4    5.5        7.5   6   2   1   7 0.75
+#&gt; 2           A vs. C       1          4   12.5       16.5   7   1   0   8 0.88
+#&gt; 3           A vs. D       1          4     16         32   8   0   0   8 1.00
+#&gt; 4           A vs. E       1          4   25.5         53   8   0   0   8 1.00
+#&gt; ...             ...     ...        ...    ...        ... ... ... ... ...  ...
+#&gt; 25          E vs. H       1         53     65         81   8   0   2   6 1.00
+#&gt; 26          F vs. G       1         70     70         72   6   2   4   4 0.75
+#&gt; 27          F vs. H       1         70   71.5         81   7   1   3   5 0.88
+#&gt; 28          G vs. H       1         72   80.5         81   5   3   1   7 0.62
+#&gt;                                                                              
+#&gt;     spec  PPV  NPV  BAC Youden Kappa  AUC
+#&gt; 1   0.88 0.86 0.78 0.81   0.62  0.62 0.80
+#&gt; 2   1.00 1.00 0.89 0.94   0.88  0.88 0.98
+#&gt; 3   1.00 1.00 1.00 1.00   1.00  1.00 1.00
+#&gt; 4   1.00 1.00 1.00 1.00   1.00  1.00 1.00
+#&gt; ...  ...  ...  ...  ...    ...   ...  ...
+#&gt; 25  0.75 0.80 1.00 0.88   0.75  0.75 0.81
+#&gt; 26  0.50 0.60 0.67 0.62   0.25  0.25 0.55
+#&gt; 27  0.62 0.70 0.83 0.75   0.50  0.50 0.70
+#&gt; 28  0.88 0.83 0.70 0.75   0.50  0.50 0.75
+#&gt;                                          </div><div class='input'>
 <span class='co'># --- For hyperSpec objects ---</span>
 
 <span class='fu'>library</span>(<span class='no'>hyperSpec</span>)
@@ -284,26 +272,26 @@ will be related to this group, and sensitivity to the other group.</p>
 #&gt;    1. gr:  [factor] B B ... A 
 #&gt;    2. class:  [factor] N l ... S1 
 #&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'>
-<span class='fu'>roc_multiroc</span>(<span class='no'>fluorescence</span>[ , , <span class='fl'>500</span>~<span class='fl'>502</span>], <span class='no'>fluorescence</span>$<span class='no'>gr</span>)</div><div class='output co'>#&gt;   compared_groups feature mean_neg cutoff mean_pos TP FN FP TN sens spec  PPV
-#&gt; 1         A vs. B     500      340    335      330 35 20 24 28 0.64 0.54 0.59
-#&gt; 2         A vs. B     501      338    328      329 29 26 19 33 0.53 0.63 0.60
-#&gt; 3         A vs. B     502      336    332      328 36 19 24 28 0.65 0.54 0.60
-#&gt; 4         A vs. C     500      340    343      341 21 22 20 32 0.49 0.62 0.51
-#&gt; 5         A vs. C     501      338    343      340 21 22 19 33 0.49 0.63 0.52
-#&gt; 6         A vs. C     502      336    340      337 22 21 22 30 0.51 0.58 0.50
-#&gt; 7         B vs. C     500      330    343      341 21 22 15 40 0.49 0.73 0.58
-#&gt; 8         B vs. C     501      329    344      340 21 22 15 40 0.49 0.73 0.58
-#&gt; 9         B vs. C     502      328    339      337 22 21 16 39 0.51 0.71 0.58
-#&gt;    NPV  BAC Youden Kappa  AUC
-#&gt; 1 0.58 0.59   0.17  0.18 0.57
-#&gt; 2 0.56 0.58   0.16  0.16 0.56
-#&gt; 3 0.60 0.60   0.19  0.19 0.56
-#&gt; 4 0.59 0.55   0.10  0.10 0.50
-#&gt; 5 0.60 0.56   0.12  0.12 0.51
-#&gt; 6 0.59 0.54   0.09  0.09 0.51
-#&gt; 7 0.65 0.61   0.22  0.22 0.57
-#&gt; 8 0.65 0.61   0.22  0.22 0.57
-#&gt; 9 0.65 0.61   0.22  0.22 0.56</div><div class='input'>
+<span class='fu'>roc_multiroc</span>(<span class='no'>fluorescence</span>[ , , <span class='fl'>500</span>~<span class='fl'>502</span>], <span class='no'>fluorescence</span>$<span class='no'>gr</span>)</div><div class='output co'>#&gt;   compared_groups feature median_neg cutoff median_pos TP FN FP TN sens spec
+#&gt; 1         A vs. B     500        338    335        333 35 20 24 28 0.64 0.54
+#&gt; 2         A vs. B     501        335    328        327 29 26 19 33 0.53 0.63
+#&gt; 3         A vs. B     502        335    332        329 36 19 24 28 0.65 0.54
+#&gt; 4         A vs. C     500        338    329        334 21 22 20 32 0.49 0.62
+#&gt; 5         A vs. C     501        335    329        334 21 22 20 32 0.49 0.62
+#&gt; 6         A vs. C     502        335    340        340 22 21 22 30 0.51 0.58
+#&gt; 7         B vs. C     500        333    343        334 21 22 15 40 0.49 0.73
+#&gt; 8         B vs. C     501        327    344        334 21 22 15 40 0.49 0.73
+#&gt; 9         B vs. C     502        329    339        340 22 21 16 39 0.51 0.71
+#&gt;    PPV  NPV  BAC Youden Kappa  AUC
+#&gt; 1 0.59 0.58 0.59   0.17  0.18 0.57
+#&gt; 2 0.60 0.56 0.58   0.16  0.16 0.56
+#&gt; 3 0.60 0.60 0.60   0.19  0.19 0.56
+#&gt; 4 0.51 0.59 0.55   0.10  0.10 0.50
+#&gt; 5 0.51 0.59 0.55   0.10  0.10 0.49
+#&gt; 6 0.50 0.59 0.54   0.09  0.09 0.51
+#&gt; 7 0.58 0.65 0.61   0.22  0.22 0.57
+#&gt; 8 0.58 0.65 0.61   0.22  0.22 0.57
+#&gt; 9 0.58 0.65 0.61   0.22  0.22 0.56</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

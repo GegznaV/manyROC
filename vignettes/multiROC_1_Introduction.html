@@ -69,7 +69,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Introduction to <code>multiROC</code></h1>
 <h4 class="author"><em>Vilmantas Gegzna</em></h4>
-<h4 class="date"><em>2017-08-01 (v0.0.3)</em></h4>
+<h4 class="date"><em>2017-08-02 (v0.0.3.4000)</em></h4>
 
 
 <div id="TOC">
@@ -94,30 +94,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Explore the functions</span>
 <span class="kw">roc_analysis</span>(x_, gr_)</code></pre></div>
 <pre><code>#&gt; $info
-#&gt;  var_name neg_label pos_label  mean_neg  mean_pos pos_is_larger n_neg
-#&gt;                   H         S 0.1292699 0.1351357          TRUE     5
+#&gt;  var_name neg_label pos_label median_neg median_pos pos_is_larger n_neg
+#&gt;                   H         S  0.1836433  0.4874291          TRUE     5
 #&gt;  n_pos n_total
 #&gt;      5      10
 #&gt; 
 #&gt; $optimal
-#&gt;  cutoff tp fn fp tn sens spec  ppv   npv bac youden kappa auc mean_neg.H
-#&gt;   0.487  3  2  1  4  0.6  0.8 0.75 0.667 0.7    0.4   0.4 0.6      0.129
-#&gt;  mean_pos.S
-#&gt;       0.135
+#&gt;  cutoff tp fn fp tn sens spec  ppv   npv bac youden kappa auc median_neg.H
+#&gt;   0.408  3  2  1  4  0.6  0.8 0.75 0.667 0.7    0.4   0.4 0.6        0.184
+#&gt;  median_pos.S
+#&gt;         0.487
 #&gt; 
 #&gt; * The optimal cut-off value selected by: max BAC
 #&gt; 
 #&gt; $all_results
-#&gt;     cutoff  tp  fn  fp  tn sens spec   ppv   npv bac youden
-#&gt; 1      Inf   0   5   0   5    0    1   NaN   0.5 0.5      0
-#&gt; 2      1.6   0   5   1   4    0  0.8     0 0.444 0.4   -0.2
-#&gt; 3    0.738   1   4   1   4  0.2  0.8   0.5   0.5 0.5      0
-#&gt; 4    0.576   2   3   1   4  0.4  0.8 0.667 0.571 0.6    0.2
-#&gt; ...    ... ... ... ... ...  ...  ...   ...   ... ...    ...
-#&gt; 8   -0.305   4   1   3   2  0.8  0.4 0.571 0.667 0.6    0.2
-#&gt; 9   -0.626   4   1   4   1  0.8  0.2   0.5   0.5 0.5      0
-#&gt; 10   -0.82   5   0   4   1    1  0.2 0.556     1 0.6    0.2
-#&gt; 11  -0.836   5   0   5   0    1    0   0.5   NaN 0.5      0
+#&gt;     cutoff  tp  fn  fp  tn sens spec  ppv  npv  bac youden
+#&gt; 1      Inf   0   5   0   5 0.00 1.00  NaN 0.50 0.50   0.00
+#&gt; 2     1.17   0   5   1   4 0.00 0.80 0.00 0.44 0.40  -0.20
+#&gt; 3    0.657   1   4   1   4 0.20 0.80 0.50 0.50 0.50   0.00
+#&gt; 4    0.532   2   3   1   4 0.40 0.80 0.67 0.57 0.60   0.20
+#&gt; ...    ... ... ... ... ...  ...  ...  ...  ...  ...    ...
+#&gt; 8   -0.466   4   1   3   2 0.80 0.40 0.57 0.67 0.60   0.20
+#&gt; 9   -0.723   4   1   4   1 0.80 0.20 0.50 0.50 0.50   0.00
+#&gt; 10  -0.828   5   0   4   1 1.00 0.20 0.56 1.00 0.60   0.20
+#&gt; 11    -Inf   5   0   5   0 1.00 0.00 0.50  NaN 0.50   0.00
+#&gt;                                                           
 #&gt; 
 #&gt; attr(,&quot;class&quot;)
 #&gt; [1] &quot;roc_result_list&quot; &quot;list&quot;</code></pre>
