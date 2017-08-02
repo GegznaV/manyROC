@@ -4,8 +4,8 @@
 #' @rdname roc_analysis
 #' @inheritParams roc_multiroc
 #' @export
-#' @method print roc_results
-print.roc_results <- function(x, ..., show_all = FALSE,
+#' @method print roc_df
+print.roc_df <- function(x, ..., show_all = FALSE,
                               perf_digits = 2, fmt = "%.3g") {
     # [!!!] reikia tobulinti funkciją ir jos aprašymą
     # print(head_tail(x, ...))
@@ -25,7 +25,7 @@ print.roc_results <- function(x, ..., show_all = FALSE,
     # [!!!] 10 may be converted to a parameter.
     #
     if (nrow(x) > 10) {
-        print(head_tail(x, ...))
+        print(head_tail(x), ...)
     } else {
         print(x, ...)
     }
@@ -38,17 +38,22 @@ print.roc_results <- function(x, ..., show_all = FALSE,
 #' @rdname roc_analysis
 #' @param digits (\code{integer(1)})\cr Number of significant digits to display.
 #' @export
-#' @method print roc_optimal
-print.roc_optimal <- function(x, digits = 3, ...) {
+#' @method print roc_opt_result
+print.roc_opt_result <- function(x, digits = 3, ...) {
     # [!!!] reikia tobulinti funkciją ir jos aprašymą
     opt_by <-  attr(x, "optimized_by")
     x <- signif(x, digits = digits)
     x <- as.data.frame(x)
     rownames(x) <- NULL
 
-    if (nrow(x) == 1) print(x, row.names = FALSE, ...) else print(x, ...)
+
+    if (nrow(x) == 1) {
+        print(x, row.names = FALSE, ...)
+    } else {
+        print(x, ...)
+    }
     if (!is.null(opt_by))
-        cat(paste0("\n* The optimal cut-off value selected by: max ",
+        cat(paste0("\n*The optimal cut-off value selected by: max ",
                    toupper(opt_by),"\n"))
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -100,7 +105,7 @@ print.multiroc_result <- function(x, ..., show_all = FALSE,
     # [!!!] 10 may be converted to a parameter.
     #
     if (nrow(x) > 10) {
-        print(head_tail(x, ...))
+        print(head_tail(x), ...)
     } else {
         print(x, ...)
     }

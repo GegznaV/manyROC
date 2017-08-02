@@ -73,7 +73,7 @@
 </h1>
                         <h4 class="author">Vilmantas Gegzna</h4>
             
-            <h4 class="date">2017-08-02 (v0.0.3.4000)</h4>
+            <h4 class="date">2017-08-03 (v0.0.3.5000)</h4>
           </div>
 
     
@@ -96,18 +96,18 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Explore the functions</span>
 <span class="kw"><a href="../reference/roc_analysis.html">roc_analysis</a></span>(x_, gr_)</code></pre></div>
 <pre><code>#&gt; $info
-#&gt;  var_name neg_label pos_label median_neg median_pos pos_is_larger n_neg
-#&gt;                   H         S  0.1836433  0.4874291          TRUE     5
-#&gt;  n_pos n_total
-#&gt;      5      10
+#&gt;  var_name n_total n_neg n_pos neg_label pos_label median_neg median_pos
+#&gt;                10     5     5         H         S  0.1836433  0.4874291
+#&gt;  below    cutoff above
+#&gt;      H 0.4084684     S
 #&gt; 
 #&gt; $optimal
-#&gt;  cutoff tp fn fp tn sens spec  ppv   npv bac youden kappa auc median_neg.H
-#&gt;   0.408  3  2  1  4  0.6  0.8 0.75 0.667 0.7    0.4   0.4 0.6        0.184
-#&gt;  median_pos.S
-#&gt;         0.487
+#&gt;  cutoff tp fn fp tn sens spec  ppv   npv bac youden kappa auc median_neg
+#&gt;   0.408  3  2  1  4  0.6  0.8 0.75 0.667 0.7    0.4   0.4 0.6      0.184
+#&gt;  median_pos
+#&gt;       0.487
 #&gt; 
-#&gt; * The optimal cut-off value selected by: max BAC
+#&gt; *The optimal cut-off value selected by: max BAC
 #&gt; 
 #&gt; $all_results
 #&gt;     cutoff  tp  fn  fp  tn sens spec  ppv  npv  bac youden

@@ -4,7 +4,6 @@ knitr::opts_chunk$set(collapse = FALSE, comment = "#>")
 
 knitr::opts_chunk$set(fig.width = 6, fig.align = 'center')
 
-
 ## ----Load packages, include = FALSE, message = FALSE, warning = FALSE----
 library(multiROC)
 

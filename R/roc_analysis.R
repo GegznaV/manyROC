@@ -26,9 +26,10 @@
 #' @param pos_label (\code{character(1)}) \cr A string with the name of
 #'                  positive group.
 #' @param pos_is_larger (\code{NULL}|\code{TRUE}|\code{FALSE}) \cr
-#'        A flag indicating, if values of positive group are (on average) larger.
-#'        If \code{NULL}, this option is determined basing on data using 10\%
-#'        trimmed mean.
+#'        A flag indicating, if values of positive group are on avedage
+#'        are expected to be larger than values of negative group.
+#'        If \code{NULL}, this option is determined basing on data using
+#'        group medians.
 #' @param optimize_by (\code{string(1)}) \cr [!!!] Method to determine the
 #'                    optimal cut-off value.
 #'                    Current options: \code{"bac"},
@@ -80,6 +81,7 @@
 #' library(ggplot2)
 #'
 #' # Make some data
+#'
 #' set.seed(1)
 #' (x <- rnorm(10))
 #'
@@ -92,6 +94,8 @@
 #'
 #' roc_analysis(x, gr, pos_label = "H")
 #'
+#'
+#' # --- Example 2 ---
 #'
 #' set.seed(1)
 #' x2 = c(rnorm(50, mean = 14), rnorm(50, mean = 20))
@@ -106,6 +110,8 @@
 #'    geom_vline(xintercept = optimal_cutoff2)
 #'
 #'
+#' # --- Example 3 ---
+#'
 #' set.seed(1)
 #' x3 = c(rnorm(100, mean = 11), rnorm(100, mean = 14))
 #' gr3 = gl(2, 100, labels = c("Neg", "Pos"))
@@ -117,6 +123,8 @@
 #' qplot(x3, fill = gr3, color = gr3,
 #'      geom = c("density", "rug"), alpha = I(0.3)) +
 #'     geom_vline(xintercept = roc_rez3$optimal[1])
+#'
+#'
 
 
 roc_analysis <- function(x,
@@ -191,25 +199,25 @@ roc_analysis <- function(x,
     x_sorted <- x[x_order]
 
     # [!!!] Why is `rev()` called at all? Is it necessary?
-    dups <- rev(duplicated(rev(x_sorted)))
+    dupls <- rev(duplicated(rev(x_sorted)))
 
     ##  --- Original algorithm to determine cutoffs ---
     ## cutofs are values of vector x:
     ##
     # SIGN <- if (decreasing == TRUE) 1 else -1
-    # cutoffs <- c(SIGN * Inf, x_sorted[!dups])
+    # cutoffs <- c(SIGN * Inf, x_sorted[!dupls])
 
     ##  --- Improved algorithm to determine cutoffs ---
     ##  cutoffs are middle values between two adjacent x values
 
-    x_s <- x_sorted[!dups]
+    x_s <- x_sorted[!dupls]
     n <- length(x_s)
     if (decreasing == TRUE) {
-        # cutoffs<-c(max(x_s),  (x_s[1:(n - 1)] + diff(x_s)/2),  min(x_s))
-        cutoffs <- c(+Inf,      (x_s[1:(n - 1)] + diff(x_s)/2),  -Inf)
+        # cutoffs<-c(max(x_s), (x_s[1:(n - 1)] + diff(x_s)/2), min(x_s))
+        cutoffs <- c(+Inf,     (x_s[1:(n - 1)] + diff(x_s)/2), -Inf)
     } else {
-        # cutoffs<-c(min(x_s),  (x_s[1:(n - 1)] - diff(x_s)/2),  max(x_s))
-        cutoffs <- c(-Inf,      (x_s[1:(n - 1)] - diff(x_s)/2),  +Inf)
+        # cutoffs<-c(min(x_s), (x_s[1:(n - 1)] - diff(x_s)/2), max(x_s))
+        cutoffs <- c(-Inf,     (x_s[1:(n - 1)] - diff(x_s)/2), +Inf)
     }
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -217,8 +225,8 @@ roc_analysis <- function(x,
     n_pos <- sum(gr == pos_label)
 
     # Following variables are vectors
-    tp <- c(0, cumsum(gr[x_order] == pos_label)[!dups])
-    fp <- c(0, cumsum(gr[x_order] == neg_label)[!dups])
+    tp <- c(0, cumsum(gr[x_order] == pos_label)[!dupls])
+    fp <- c(0, cumsum(gr[x_order] == neg_label)[!dupls])
 
     fn = n_pos - tp
     tn = n_neg - fp
@@ -248,8 +256,8 @@ roc_analysis <- function(x,
                           # pos = tp + fp,
                           # neg = tn + fn
     )
-    # [!!!] class names must be reviewed, especially  "roc_essentials"
-    all_results <- class_add(all_results, c("roc_essentials","roc_results"))
+    # [!!!] class names must be reviewed, especially  "roc_results"
+    all_results <- class_add(all_results, c("roc_results","roc_df"))
 
     # =========================================================================
     # One row of results, which are considered to be optimal
@@ -283,7 +291,7 @@ roc_analysis <- function(x,
         )
         optimal <- t(as.matrix(optimal))
         attr(optimal, "optimized_by") <- optimize_by
-        optimal <- class_add(optimal, c("roc_optimal","roc_results"))
+        optimal <- class_add(optimal, c("roc_opt_result", "roc_df"))
 
     } else {
         # If optimize_by = NULL
@@ -310,11 +318,13 @@ roc_analysis <- function(x,
         median_pos  = medians[2],
         below = below,
         cutoff = optimal[1],
-        above = above
+        above = above,
         # pos_is_larger = decreasing,
+
+        stringsAsFactors = FALSE
     )
 
-    info <-  class_add(info, "roc_info")
+    info <-  class_add(info, c("roc_info", "roc_df"))
 
       # ==========================================================================
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
