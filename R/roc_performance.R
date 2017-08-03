@@ -1,170 +1,121 @@
-#' @name roc_performance_measures
-#' @title [!!!] Performance measures
+# =============================================================================
+# COMMENTS:
+#
+#  .compute.unnormalized.roc.curve --------------------------------------------
+# prediction     --------------------------------------------------------------
+# in the original function decreasing = TRUE  ---------------------------------
+# =============================================================================
+
+#' Performance measures for two-class classification
 #'
-#' @description Calculate various performance measures for classificatory analysis \cr
-#'   [!!!] (...The description is incomplete...)
 #'
-#' @param obj Either an \code{roc_result_list} or an \code{roc_results} object.
+#' @param truth (\code{factor}) \cr A factor vector with "true"/reference
+#'               classes.
+#' @param prediction A vector with predicted classes.
 #'
-#' @param TP (\code{numeric}) Number of true positives.
-#' @param FN (\code{numeric}) Number of false negatives.
-#' @param FP (\code{numeric}) Number of false positives.
-#' @param TN (\code{numeric}) Number of true negatives.
-#' @param SE (\code{numeric}) Vector of sensitivities.
-#' @param SP (\code{numeric}) Vector of specificities
+#' @param pos_label (\code{character(1)}) \cr A string with the name of
+#'                  positive group. By default, the second level of factor
+#'                  \code{truth} is treated as positive.
+#'
+#'
+#' @return A data frame with the following results:
+#' \itemize{
+#' \item \bold{\code{$all_results}} is a data frame with columns
+#'       \code{neg_label}, \code{pos_label} labels of negative and positive
+#'       groups respectively,
+#'       \code{tp} (number of true positives),
+#'       \code{fn} (number of false negatives),
+#'       \code{fp} (number of false positives),
+#'       \code{tn} (number of true negatives),
+#'       ... [!!!]
+#'
+#' }\cr\cr
+#'
+#'
+#' @export
 #'
 #' @author Vilmantas Gegzna
 #' @family functions for ROC
-#
-# last review: 2017-07-31
+#'
+#' @examples
+#' (truth <- gl(n = 2, k = 3, length = 20, labels = c("H","S")))
+#'
+#' (prediction <- rev(truth))
+#'
+#'
+#' roc_performance(truth, prediction)
+#'
+#' roc_performance(truth, prediction, pos_label = "S")
+#'
+#' roc_performance(truth, prediction, pos_label = "H")
+#'
 
-calculate_acc <- function(TP, FN, FP, TN) {
-    (TP + TN) / (TP + FP + TN + FN)
-}
-# -----------------------------------------------------------------------------
-#' @rdname roc_performance_measures
-#' @export
-roc_calculate_acc <- function(obj) {
-    calculate_acc(roc_tp(obj), roc_fp(obj), roc_fn(obj), roc_tn(obj))
-}
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_performance_measures
-#' @export
-calculate_bac <- function(SE, SP) {
-    (SE + SP) / 2
-}
-# -----------------------------------------------------------------------------
-#' @rdname roc_performance_measures
-#' @export
-roc_calculate_bac <- function(obj) {
-    (roc_sens(obj) + roc_spec(obj)) / 2
-}
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_performance_measures
-#' @export
-calculate_auc <- function(SE, SP) {
-    pracma::trapz(SE, SP)
-}
-# -----------------------------------------------------------------------------
-#' @rdname roc_performance_measures
-#' @export
-roc_calculate_auc <- function(obj) {
-    pracma::trapz(roc_sens(obj), roc_spec(obj))
-}
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_performance_measures
-#' @export
-calculate_npv <- function(TN, FN) {
-    TN / (TN + FN)
-}
-# -----------------------------------------------------------------------------
-#' @rdname roc_performance_measures
-#' @export
-roc_calculate_npv <- function(obj) {
-    TN <- roc_tn(obj)
-    FN <- roc_fn(obj)
-    TN / (TN + FN)
-}
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_performance_measures
-#' @export
-calculate_ppv <- function(TP, FP) {
-    TP / (TP + FP)
-}
-# -----------------------------------------------------------------------------
-#' @rdname roc_performance_measures
-#' @export
-roc_calculate_ppv <- function(obj) {
-    TP <- roc_tp(obj)
-    FP <- roc_fp(obj)
-    TP / (TP + FP)
-}
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_performance_measures
-#' @export
-calculate_sensitivity <- function(TP, FN) {
-    TP / (TP + FN)
-}
-# -----------------------------------------------------------------------------
-#' @rdname roc_performance_measures
-#' @export
-roc_calculate_se <- function(obj) {
-    TP <- roc_tp(obj)
-    FN <- roc_fn(obj)
-    TP / (TP + FN)
-}
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_performance_measures
-#' @export
-calculate_specificity <- function(TN, FP) {
-    TN / (TN + FP)
-}
-# -----------------------------------------------------------------------------
-#' @rdname roc_performance_measures
-#' @export
-roc_calculate_sp <- function(obj) {
-    TN <- roc_tn(obj)
-    FP <- roc_fp(obj)
-    TN / (TN + FP)
-}
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_performance_measures
-#' @export
-calculate_youdens_j <- function(SE, SP) {
-    SE + SP - 1
-}
-# -----------------------------------------------------------------------------
-#' @rdname roc_performance_measures
-#' @export
-roc_youdens_j <- function(obj) {
-    (roc_sens(obj) + roc_spec(obj)) - 1
-}
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_performance_measures
-#' @export
-calculate_kappa <- function(TP, FN, FP, TN) {
-    kappa_calculation_helper(TP, FN, FP, TN, measure_kappa)
-}
-# -----------------------------------------------------------------------------
-#' @rdname roc_performance_measures
-#' @export
-roc_calculate_kappa <- function(obj) {
-    roc_kappa_calculation_helper(obj, measure_kappa)
-}
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_performance_measures
-#' @export
-calculate_wkappa <- function(TP, FN, FP, TN) {
-    kappa_calculation_helper(TP, FN, FP, TN, measure_wkappa)
-}
-# -----------------------------------------------------------------------------
-#' @rdname roc_performance_measures
-#' @export
-roc_calculate_wkappa <- function(obj) {
-    roc_kappa_calculation_helper(obj, measure_wkappa)
-}
+roc_performance <- function(truth,
+                           prediction,
+                           pos_label = levels(truth)[2]
+) {
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-kappa_calculation_helper <- function(TP, FN, FP, TN, FUN_) {
-    # @param FUN_ Function to apply (either \code{\link{measure_kappa}} or
-    #                               \code{\link{measure_wkappa}})
-    #
-    # Helper for Kappa and Wkappa functions.
-    # It creates a square matrix `matrix(c("TP", "FN", "FP", "TN"), 2)`
-    # on which approprite kappa value (indicated in the `FUN`)
-    # is calculated.
-    apply(X = cbind(TP, FN, FP, TN),
-          MARGIN = 1,
-          FUN = function(v) {
-              FUN_(conf_mat = matrix(v, nrow = 2))
-          }
+    # Check the input
+    assert_factor(truth, n.levels = 2)
+
+    assert_subset(levels(prediction), levels(truth))
+    assert_subset(pos_label, levels(truth))
+
+    # Warn if missing values are present
+    if (any(is.infinite(truth)))
+        warning("Variable `truth` has missing values.\n",
+                "The results may be inprecise.\n")
+
+    if (any(is.infinite(prediction)))
+        warning("Variable `prediction` has missing values.\n",
+                "The results may be inprecise.\n")
+
+    # Lengths of inputs must agree
+    if (length(truth) != length(prediction)) {
+        warning("Number of cases in `truth` and `prediction` must agree." )
+    }
+    assert_set_equal(length(truth), length(prediction))
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ## Reorder levels to get predictabe results:
+    ##  first -  label of negative group,
+    ##  second - label of positive group.
+    neg_label  <- setdiff(levels(truth), pos_label)
+    levels     <- c(pos_label, neg_label)
+    truth      <- ordered(truth, levels = levels)
+    prediction <- ordered(prediction, levels = levels)
+    # ==========================================================================
+    # Calculate performance measures
+    conf_mat <- table(truth, prediction)
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    tp <- conf_mat[1, 1]
+    fp <- conf_mat[2, 1]
+    fn <- conf_mat[1, 2]
+    tn <- conf_mat[2, 2]
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    SE <- calculate_sensitivity(tp, fn)
+    SP <- calculate_specificity(tn, fp)
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    performance <- data.frame(pos_label = pos_label,
+                              neg_label = neg_label,
+                              tp = tp,
+                              fn = fn,
+                              fp = fp,
+                              tn = tn,
+                              sens = SE,
+                              spec = SP,
+                              ppv  = calculate_ppv(tp, fp),
+                              npv  = calculate_npv(tn, fn),
+                              bac  = calculate_bac(SE, SP),
+                              youden = calculate_youdens_j(SE, SP),
+                              kappa  = calculate_kappa(tp, fn, fp, tn),
+
+                              stringsAsFactors = FALSE
+
     )
-}
-# -----------------------------------------------------------------------------
-roc_kappa_calculation_helper <- function(obj, FUN_) {
-    kappa_calculation_helper(roc_tp(obj),
-                             roc_fn(obj),
-                             roc_fp(obj),
-                             roc_tn(obj), FUN_ = FUN_)
+    # ==========================================================================
+    # Output
+    class_add(performance, c("two_class_perform","roc_df"))
+    # ==========================================================================
 }
 # =============================================================================

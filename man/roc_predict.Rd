@@ -36,7 +36,7 @@ roc_predict(object, x_new = rnorm(20))
 }
 \seealso{
 Other functions for ROC: \code{\link{access_elements}},
-  \code{\link{calculate_two_class_perormance}},
   \code{\link{print.roc_df}},
-  \code{\link{roc_performance_measures}}
+  \code{\link{roc_performance_measures}},
+  \code{\link{roc_performance}}
 }

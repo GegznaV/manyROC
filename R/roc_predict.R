@@ -38,12 +38,18 @@ roc_predict.roc_result_list <- function(object, x_new, ...) {
     roc_predict(object$info, x_new, ...)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @method roc_predict roc_info
+#' @method roc_predict default
 #' @export
-roc_predict.roc_info <- function(object, x_new, ...) {
+roc_predict.default <- function(object, x_new, ...) {
+
+    object <- as.data.frame(object, stringsAsFactors = FALSE)
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Check the input
-    assert_class(object, "roc_info")
+    # assert_class(object, "roc_info")
+
+    if (sum(names(object)  %in%  c("below", "cutoff", "above")) != 3)
+        stop('The `object` must contain variables ',
+             'called "below", "cutoff", and "above".')
 
     assert_numeric(x_new)
     assert_vector(x_new, strict = TRUE)
