@@ -93,7 +93,8 @@ print.multiroc_result <- function(x, ..., show_all = FALSE,
                                   perf_digits = 2, fmt = "%.3g") {
 
     perf_names <- intersect(
-        c("sens","spec","PPV","NPV","BAC","Youden","Kappa","AUC"),
+        unique(c("sens","spec","PPV","NPV","BAC","Youden","Kappa","AUC", "ACC",
+                 "sens","spec","ppv","npv","bac","youden","kappa","auc", "acc")),
         colnames(x))
 
     x %<>%

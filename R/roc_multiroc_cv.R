@@ -10,7 +10,7 @@
 #'            or similar.
 #'
 #' @inheritParams cvo_create_folds
-#' @inheritParams performance_measures
+#' @inheritParams roc_performance_measures
 #'
 #' @export
 #' @examples
@@ -23,16 +23,10 @@
 #' data(PlantGrowth)
 #' roc_multiroc_cv(PlantGrowth$weight, PlantGrowth$group)
 #'
+#' roc_multiroc_cv(PlantGrowth$weight, gl(2, 1, 30))
 #'
-#'
-#' roc_multiroc_cv(as.matrix(PlantGrowth$weight), gl(2, 1, 30))
-#'
-#' \dontrun{\donttest{
-#' rez <- roc_multiroc_cv(x = Spectra2, gr = "gr")
-#'
-#' rez
-#' }}
-#'
+
+
 # sp_x <- sp
 # x  <- sp_x[[]]
 # gr <- sp_x$gr
@@ -41,9 +35,15 @@
 roc_multiroc_cv <- function(x,
                             gr,
                             optimize_by = "bac",
-                            cvo = cvo_create_folds(x, gr, seeds),
-                            seeds = NULL) {
+                            cvo = cvo_create_folds(x, gr, seeds = seeds, kind = kind),
+                            seeds = NULL,
+                            kind = "L'Ecuyer-CMRG") {
 
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    x <- as.matrix(x)
+    assert_numeric(x)
+
+    assert_factor(gr, min.levels = 2)
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Number of folds in total
     n_repetitions <- cvo_count_folds(cvo)
@@ -57,10 +57,10 @@ roc_multiroc_cv <- function(x,
         # Return indices of training subset:
         training_ind <- cvo_get_inds(cvo, fold = i, type = "train")
 
-        x_train  <- x[ training_ind, ]
+        x_train  <-  x[ training_ind, ]
         gr_train <- gr[ training_ind]
 
-        x_test   <- x[-training_ind, ]
+        x_test   <-  x[-training_ind, ]
         gr_test  <- gr[-training_ind]
 
         rez_train[[i]] <- roc_multiroc(x  = x_train,
@@ -68,46 +68,58 @@ roc_multiroc_cv <- function(x,
                                        optimize_by = optimize_by)
 
         # [!!!] Must fail when there are mere than 2 classes
-        rez_test[[i]] <-
-            roc_extract_info(rez_train[[i]])  %>%
-            split_by_feature()  %>%
-            purrr::map2(mat2list(x_test), roc_predict) %>%
-            purrr::map(~roc_perofmance(gr_test, .x))  %>%
-            dplyr::bind_rows(.id = "feature")
+
+        tmp1 <- roc_extract_info(rez_train[[i]])
+        tmp2 <- split_by_feature(tmp1)
+        tmp3 <- purrr::map2(.x = tmp2,
+                            .y = mat2list(x_test),
+                            .f = roc_predict_performance_by_gr,
+                            gr_new = gr_test)
+
+        rez_test[[i]] <- dplyr::bind_rows(tmp3, .id = "feature")
 
         # rez_test[[i]]  <- predict(roc_object, newdata = x_test, gr_test)
     }
 
-    res2df <- function(res) {
-        res %>%
-            dplyr::bind_rows(.id = "fold")  %>%
-            arrange(feature)  %>%
-            class_add("multiroc_result")
-    }
-
     result <- dplyr::bind_rows(
-        `training set` = res2df(rez_train),
-        `test set` =     res2df(rez_test),
+        `training` = res2df(rez_train),
+        `test`     = res2df(rez_test),
         .id = "set"
     )
 
 
     # output
-    class_add(result, c("multiroc_cv"))
+    add_class_label(result, c("multiroc_cv_result"))
 
 
 } # [END]
-
-
-
-
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Hepler functions:
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res2df <- function(res) {
+    res %>%
+        dplyr::bind_rows(.id = "fold")  %>%
+        dplyr::arrange(feature)  %>%
+        add_class_label("multiroc_result")
+}
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+split_by_feature <- function(obj) {
+    res <- split(obj, obj$feature)
+    purrr::map(res, add_class_label, c("roc_info", "roc_df"))
+}
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mat2list <- function(x) {
+    as.list(as.data.frame(x))
+}
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+roc_multiroc_cv(PlantGrowth$weight, PlantGrowth$group)
 
 # # ===========================================================================
 # # @rdname roc_multiroc
 # # @method print multiROC_cv
 # # @export
-# print.multiROC_cv <- function(x) {
+# print.multiroc_cv_result <- function(x) {
 #
 #     bru("-")
 #     cat("Summary:\n")

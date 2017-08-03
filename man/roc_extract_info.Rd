@@ -3,7 +3,7 @@
 \name{roc_extract_info}
 \alias{roc_extract_info}
 \alias{roc_extract_info.multiroc_result}
-\title{[!!!] roc_create_predictor}
+\title{[!!!] Extract the main information necessary for prediction}
 \usage{
 roc_extract_info(obj, ...)
 
@@ -15,5 +15,5 @@ roc_extract_info(obj, ...)
 \item{...}{pass to further methods}
 }
 \description{
-[!!!] roc_create_predictor
+[!!!] Extract the main information necessary for prediction
 }

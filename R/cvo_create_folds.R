@@ -366,7 +366,7 @@ cvo_create_folds <- function(data = NULL,
                    )
 
                # addClasses(desc, stri_paste(method, "Desc"))
-               desc %<>% class_add(c("RepCVDesc", "ResampleDesc"))
+               desc %<>% add_class_label(c("RepCVDesc", "ResampleDesc"))
 
                # [!!!] The next line must be updated appropriately
                group_ <- factor()

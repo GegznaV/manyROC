@@ -26,7 +26,7 @@ roc_multiroc(x, gr = NULL, optimize_by = "bac", ...)
 \method{roc_multiroc}{hyperSpec}(x, gr = NULL, optimize_by = "bac", ...)
 
 roc_multiroc_cv(x, gr, optimize_by = "bac", cvo = cvo_create_folds(x, gr,
-  seeds), seeds = NULL)
+  seeds = seeds, kind = kind), seeds = NULL, kind = "L'Ecuyer-CMRG")
 }
 \arguments{
 \item{x}{A numeric matrix, a data frame, a \code{hyperSpec} object or another
@@ -77,6 +77,12 @@ or similar.}
 
              (See \code{\link[base]{set.seed}} for more information about
              random number generation).}
+
+\item{kind}{(\code{character} | \code{NULL})\cr The kind of (pseudo)random
+number generator. Default is \code{"L'Ecuyer-CMRG"} as it
+provides the basis for the multiple streams used in package
+\pkg{parallel}.
+More information at \code{\link[base]{set.seed}}.}
 }
 \value{
 Object of classes \code{multiroc_result} and \code{data.frame} with
@@ -148,11 +154,18 @@ fluorescence
 
 roc_multiroc(fluorescence[ , , 500~502], fluorescence$gr)
 
-\dontrun{\donttest{
-rez <- roc_multiroc_cv(x = Spectra2, gr = "gr")
 
-rez
-}}
+library(multiROC)
+
+
+# --- For numeric vectors objects ---
+
+data(PlantGrowth)
+x  <- PlantGrowth$weight
+gr <- PlantGrowth$group
+roc_multiroc_cv(PlantGrowth$weight, PlantGrowth$group)
+
+roc_multiroc_cv(PlantGrowth$weight, gl(2, 1, 30))
 
 }
 \author{

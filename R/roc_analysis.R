@@ -257,7 +257,7 @@ roc_analysis <- function(x,
                           # neg = tn + fn
     )
     # [!!!] class names must be reviewed, especially  "roc_results"
-    all_results <- class_add(all_results, c("roc_results","roc_df"))
+    all_results <- add_class_label(all_results, c("roc_results","roc_df"))
 
     # =========================================================================
     # One row of results, which are considered to be optimal
@@ -291,7 +291,7 @@ roc_analysis <- function(x,
         )
         optimal <- t(as.matrix(optimal))
         attr(optimal, "optimized_by") <- optimize_by
-        optimal <- class_add(optimal, c("roc_opt_result", "roc_df"))
+        optimal <- add_class_label(optimal, c("roc_opt_result", "roc_df"))
 
     } else {
         # If optimize_by = NULL
@@ -324,7 +324,7 @@ roc_analysis <- function(x,
         stringsAsFactors = FALSE
     )
 
-    info <-  class_add(info, c("roc_info", "roc_df"))
+    info <- add_class_label(info, c("roc_info", "roc_df"))
 
       # ==========================================================================
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -336,7 +336,7 @@ roc_analysis <- function(x,
                 all_results = all_results
     )
 
-    class_add(res, c("roc_result_list"))
+    add_class_label(res, c("roc_result_list"))
 
 }
 # =============================================================================

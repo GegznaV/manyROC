@@ -7,10 +7,14 @@
 roc_predict(object, x_new, ...)
 }
 \arguments{
-\item{object}{Object which inherits from one of following classes:
-\code{roc_result_list},
-\code{roc_info},
-\code{roc_info_multi}, ... [!!!]}
+\item{object}{Either an object which inherits from one of following classes:
+ \code{roc_result_list},
+ \code{roc_info},
+ \code{roc_info_multi}, \bold{or} a data frame with exactly
+ one row, which contains columns:
+"cutoff" (numeric),
+"below" (character),
+"above" (character).}
 
 \item{x_new}{A numeric vector with data to predict on.}
 
@@ -36,7 +40,7 @@ roc_predict(object, x_new = rnorm(20))
 }
 \seealso{
 Other functions for ROC: \code{\link{access_elements}},
+  \code{\link{calculate_performance}},
   \code{\link{print.roc_df}},
-  \code{\link{roc_performance_measures}},
-  \code{\link{roc_performance}}
+  \code{\link{roc_performance_measures}}
 }

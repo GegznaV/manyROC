@@ -24,7 +24,7 @@
 #' @param gr_sep Group separator used to paste the names of groups. Default is
 #'              \code{" vs. "}.
 #'
-#' @inheritParams multiroc_result_measures
+#' @inheritParams roc_performance_measures
 #'
 #' @param optimize_by (\code{string(1)})\cr A string with the name of
 #'                 classification performance measure to use. Currently
@@ -151,9 +151,15 @@ roc_multiroc.matrix <- function(x,
 
     ## The names of each row of result produced by the `apply` function
     # in variable `optimal`.
-    result_names <- c("cutoff", "TP","FN","FP","TN",
-                      "sens","spec","PPV","NPV",
-                      "BAC","Youden", "Kappa","AUC",
+
+    # result_names <- c("cutoff", "TP","FN","FP","TN",
+    #                   "sens","spec","PPV","NPV",
+    #                   "BAC","Youden", "Kappa","AUC",
+    #                   "median_neg", "median_pos")
+
+    result_names <- c("cutoff", "tp","fn","fp","tn",
+                      "sens","spec","ppv","npv",
+                      "bac","youden", "kappa","auc",
                       "median_neg", "median_pos")
 
     # Clean the result
@@ -168,7 +174,7 @@ roc_multiroc.matrix <- function(x,
                       dplyr::everything())
 
     # Output
-    class_add(OBJ, "multiroc_result")
+    add_class_label(OBJ, "multiroc_result")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_multiroc

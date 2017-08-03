@@ -1,4 +1,6 @@
-#' [!!!] roc_create_predictor
+#' [!!!] Extract the main information necessary for prediction
+#'
+#'
 #'
 #' @param obj object
 #' @param ... pass to further methods
@@ -37,10 +39,11 @@ roc_extract_info.multiroc_result <- function(obj, ...) {
                       neg_label,
                       pos_label)
 
-    obj2 %$% # list(pos_is_larger, pos, neg)
+      obj2 %$% # list(pos_is_larger, pos, neg)
         purrr::pmap(list(pos_is_larger, pos_label, neg_label),
                     put_smaller_first)  %>%
-        purrr::reduce(rbind)  %>%
+        purrr::reduce(rbind) %>%
+        matrix(ncol = 2)  %>% # prevent failing when only one row is present
         magrittr::set_colnames(c("below", "above")) %>%
         tibble::as.tibble()  %>%
         dplyr::bind_cols(obj2, .)  %>%
@@ -54,5 +57,5 @@ roc_extract_info.multiroc_result <- function(obj, ...) {
                       cutoff,
                       above
         ) %>%
-        class_add(c("multiroc_info", "roc_df"))
+        add_class_label(c("multiroc_info", "roc_df"))
 }

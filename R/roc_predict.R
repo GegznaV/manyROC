@@ -1,11 +1,16 @@
+
 # predict method
 
 #' Predict outcome for new data
 #'
-#' @param object Object which inherits from one of following classes:
+#' @param object Either an object which inherits from one of following classes:
 #'               \code{roc_result_list},
 #'               \code{roc_info},
-#'               \code{roc_info_multi}, ... [!!!]
+#'               \code{roc_info_multi}, \bold{or} a data frame with exactly
+#'               one row, which contains columns:
+#'              "cutoff" (numeric),
+#'              "below" (character),
+#'              "above" (character).
 #'
 #' @param x_new A numeric vector with data to predict on.
 #' @param ... Arguments to further methods.
@@ -46,6 +51,7 @@ roc_predict.default <- function(object, x_new, ...) {
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Check the input
     # assert_class(object, "roc_info")
+    assert_data_frame(object, nrows = 1)
 
     if (sum(names(object)  %in%  c("below", "cutoff", "above")) != 3)
         stop('The `object` must contain variables ',
@@ -66,6 +72,8 @@ roc_predict.default <- function(object, x_new, ...) {
                yes = as.character(object$below),
                # label of group with larger values (above cutoff)
                no  = as.character(object$above))
+
+
     # Output
     prediction
 }

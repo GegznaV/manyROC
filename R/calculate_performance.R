@@ -43,20 +43,21 @@
 #' (prediction <- rev(truth))
 #'
 #'
-#' roc_performance(truth, prediction)
+#' calculate_performance(truth, prediction)
 #'
-#' roc_performance(truth, prediction, pos_label = "S")
+#' calculate_performance(truth, prediction, pos_label = "S")
 #'
-#' roc_performance(truth, prediction, pos_label = "H")
+#' calculate_performance(truth, prediction, pos_label = "H")
 #'
 
-roc_performance <- function(truth,
+calculate_performance <- function(truth,
                            prediction,
                            pos_label = levels(truth)[2]
 ) {
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # Check the input
+    truth <- droplevels(truth)
     assert_factor(truth, n.levels = 2)
 
     assert_subset(levels(prediction), levels(truth))
@@ -115,7 +116,7 @@ roc_performance <- function(truth,
     )
     # ==========================================================================
     # Output
-    class_add(performance, c("two_class_perform","roc_df"))
+    add_class_label(performance, c("two_class_perform","roc_df"))
     # ==========================================================================
 }
 # =============================================================================
