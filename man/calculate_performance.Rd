@@ -17,17 +17,23 @@ positive group. By default, the second level of factor
 \code{truth} is treated as positive.}
 }
 \value{
-A data frame with the following results:
+A matrix with the following columns:
 \itemize{
-\item \bold{\code{$all_results}} is a data frame with columns
-      \code{neg_label}, \code{pos_label} labels of negative and positive
-      groups respectively,
-      \code{tp} (number of true positives),
+\item \code{tp} (number of true positives),
       \code{fn} (number of false negatives),
       \code{fp} (number of false positives),
       \code{tn} (number of true negatives),
-      ... [!!!]
+      \code{sens} (sensitivity),
+      \code{spec} (specificity),
+      \code{ppv} (positive predictive value),
+      \code{npv} (negative predictive value),
+      \code{youden} (Youden's j index),
+      \code{kappa} (Cohen's kappa).
 
+\item
+      attribute \code{labels} contains a named vector with elements
+      \code{pos_label} and \code{neg_label}, which indicate labels of
+       positive and negative groups respectively.
 }\cr\cr
 }
 \description{

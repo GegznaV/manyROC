@@ -15,26 +15,26 @@ test_that("`data`, `stratify_by` and `block_by` parameters of `cvo_create_folds(
      Folds1_a <- cvo_create_folds(data = DF1,
                                   stratify_by = "gr",
                                   block_by    = "ID",
-                                  returnTrain = FALSE)
+                                  returnTrain = FALSE, seeds = 123456)
 
     # If vectors are provided:
      set.seed(123456, "L'Ecuyer-CMRG")
      Folds1_b <- cvo_create_folds(stratify_by = DF1$gr,
                                   block_by    = DF1$ID,
-                                  returnTrain = FALSE)
+                                  returnTrain = FALSE, seeds = 123456)
 
      # If mixed imput
      set.seed(123456, "L'Ecuyer-CMRG")
      Folds1_x <- cvo_create_folds(data = DF1,
                                   stratify_by = "gr",
                                   block_by    = DF1$ID,
-                                  returnTrain = FALSE)
+                                  returnTrain = FALSE, seeds = 123456)
 
      set.seed(123456, "L'Ecuyer-CMRG")
      Folds1_y <- cvo_create_folds(data = DF1,
                                   stratify_by = DF1$gr,
                                   block_by    = "ID",
-                                  returnTrain = FALSE)
+                                  returnTrain = FALSE, seeds = 123456)
 
 
      expect_identical(Folds1_a, Folds1_b)
@@ -55,26 +55,26 @@ test_that("`data`, `stratify_by` and `block_by` parameters of `cvo_create_folds(
      Folds1_a1 <- cvo_create_folds(data = DF1,
                                    stratify_by = "gr",
                                    block_by    = "ID",
-                                   returnTrain = TRUE)
+                                   returnTrain = TRUE, seeds = 123456)
 
      # If vectors are provided:
      set.seed(123456, "L'Ecuyer-CMRG")
      Folds1_b1 <- cvo_create_folds(stratify_by = DF1$gr,
                                    block_by    = DF1$ID,
-                                   returnTrain = TRUE)
+                                   returnTrain = TRUE, seeds = 123456)
 
      # If mixed imput
      set.seed(123456, "L'Ecuyer-CMRG")
      Folds1_x1 <- cvo_create_folds(       data = DF1,
                                    stratify_by = "gr",
                                    block_by    = DF1$ID,
-                                   returnTrain = TRUE)
+                                   returnTrain = TRUE, seeds = 123456)
 
      set.seed(123456, "L'Ecuyer-CMRG")
      Folds1_y1 <- cvo_create_folds(data = DF1,
                                    stratify_by = DF1$gr,
                                    block_by = "ID",
-                                   returnTrain = TRUE)
+                                   returnTrain = TRUE, seeds = 123456)
 
 
      expect_identical(Folds1_a1, Folds1_b1)
@@ -102,17 +102,17 @@ test_that("Blocking in `cvo_create_folds()` works", {
     Folds1_a <- cvo_create_folds(data = DF1,
                                  stratify_by = "gr",
                                  block_by = "ID",
-                                 returnTrain = FALSE)
+                                 returnTrain = FALSE, seeds = 123456)
 
     # If vectors are provided:
      set.seed(123456, "L'Ecuyer-CMRG")
      Folds1_b <- cvo_create_folds(stratify_by = DF1$gr,
                                   block_by = DF1$ID,
-                                  returnTrain = FALSE)
+                                  returnTrain = FALSE, seeds = 123456)
 
      # Not blocked but stratified
      Folds1_c <- cvo_create_folds(stratify_by = DF1$gr,
-                                  returnTrain = FALSE)
+                                  returnTrain = FALSE, seeds = 123456)
 
      # Blocked but not stratified
      Folds1_d <- cvo_create_folds(block_by = DF1$ID, returnTrain = FALSE)
@@ -139,20 +139,21 @@ test_that("Stratification in `cvo_create_folds()` works", {
     Folds1_a <- cvo_create_folds(data = DF1,
                                  stratify_by = "gr",
                                  block_by = "ID",
-                                 returnTrain = FALSE)
+                                 returnTrain = FALSE, seeds = 123456)
 
     # If vectors are provided:
      set.seed(123456, "L'Ecuyer-CMRG")
      Folds1_b <- cvo_create_folds(stratify_by = DF1$gr,
                                   block_by = DF1$ID,
-                                  returnTrain = FALSE)
+                                  returnTrain = FALSE, seeds = 123456)
 
      # Not blocked but stratified
      Folds1_c <- cvo_create_folds(stratify_by = DF1$gr,
-                                  returnTrain = FALSE)
+                                  returnTrain = FALSE, seeds = 123456)
 
      # Blocked but not stratified
-     Folds1_d <- cvo_create_folds(block_by = DF1$ID, returnTrain = FALSE)
+     Folds1_d <- cvo_create_folds(block_by = DF1$ID,
+                                  returnTrain = FALSE, seeds = 123456)
 
 
      expect_true(attributes(Folds1_a)$info$stratified)
@@ -166,33 +167,45 @@ test_that("`cvo_create_folds()` returns error if one of the groups is too small"
 
     # Too little cases in each group
     expect_error(capture_output(
-        cvo_create_folds(stratify_by = letters[1:6], k = 5)
+        cvo_create_folds(stratify_by = letters[1:6], k = 5, seeds = 123456)
     ))
     # No error expected
-    expect_length(cvo_create_folds(stratify_by = letters[rep(1:3,5)], k = 5),5)
+    expect_length(cvo_create_folds(stratify_by = letters[rep(1:3,5)],
+                                   k = 5,
+                                   seeds = 123456),
+                  5)
 
 })
 
 test_that("parameter `k` in `cvo_create_folds()` works.", {
 
     # k is too small
-    expect_error(cvo_create_folds(block_by = 1:25, k = 1))
+    expect_error(cvo_create_folds(block_by = 1:25, k = 1, seeds = 123456))
 
     # No error expected
-    expect_length(cvo_create_folds(block_by = 1:25, k = 2),2)
-    expect_length(cvo_create_folds(block_by = 1:25, k = 5),5)
-    expect_length(cvo_create_folds(block_by = 1:25, k = 10),10)
-    expect_length(cvo_create_folds(block_by = 1:25, k = 25),25)
+    expect_length(cvo_create_folds(block_by = 1:25, k = 2, seeds = 123456),2)
+    expect_length(cvo_create_folds(block_by = 1:25, k = 5, seeds = 123456),5)
+    expect_length(cvo_create_folds(block_by = 1:25, k = 10, seeds = 123456),10)
+    expect_length(cvo_create_folds(block_by = 1:25, k = 25, seeds = 123456),25)
 })
 
 test_that("parameter `returnTrain` in `cvo_create_folds()` divides to training/test folds as expected", {
 
     # Test if divides to training/test folds as expected
     set.seed(123456, "L'Ecuyer-CMRG")
-    TEST_2F  <- cvo_create_folds(block_by = 1:25, k = 2, returnTrain = FALSE)
+    TEST_2F  <- cvo_create_folds(block_by = 1:25,
+                                 k = 2,
+                                 returnTrain = FALSE,
+                                 seeds = 123456)
 
     set.seed(123456, "L'Ecuyer-CMRG")
-    TRAIN_2F <- cvo_create_folds(block_by = 1:25, k = 2, returnTrain = TRUE)
+    TRAIN_2F <-
+        cvo_create_folds(
+            block_by = 1:25,
+            k = 2,
+            returnTrain = TRUE,
+            seeds = 123456
+        )
 
     expect_identical(TEST_2F[[1]], TRAIN_2F[[2]])
 
@@ -203,10 +216,10 @@ test_that("The size of training set is greater than the size of test set.", {
     N = 25
     # Training folds must be greater in size than test folds
     set.seed(123456, "L'Ecuyer-CMRG")
-    TEST_3F  <- cvo_create_folds(block_by = 1:N, k = 3, returnTrain = FALSE)
+    TEST_3F  <- cvo_create_folds(block_by = 1:N, k = 3, returnTrain = FALSE, seeds = 123456)
 
     set.seed(123456, "L'Ecuyer-CMRG")
-    TRAIN_3F <- cvo_create_folds(block_by = 1:N, k = 3, returnTrain = TRUE)
+    TRAIN_3F <- cvo_create_folds(block_by = 1:N, k = 3, returnTrain = TRUE, seeds = 123456)
 
     expect_gt(length(TRAIN_3F[[1]]), length(TEST_3F[[1]]))
     expect_gt(length(TRAIN_3F[[2]]), length(TEST_3F[[2]]))
@@ -218,7 +231,7 @@ test_that("The size of training set in 3-fold CV is approximately 2/3 * N.", {
     N = 25
 
     set.seed(123456, "L'Ecuyer-CMRG")
-    TRAIN_3F <- cvo_create_folds(block_by = 1:N, k = 3, returnTrain = TRUE)
+    TRAIN_3F <- cvo_create_folds(block_by = 1:N, k = 3, returnTrain = TRUE, seeds = 123456)
 
     # Test if the size of training set is approximately 2/3*N
     expect_gte(length(TRAIN_3F[[1]]), 16)

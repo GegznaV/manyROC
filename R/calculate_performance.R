@@ -18,17 +18,23 @@
 #'                  \code{truth} is treated as positive.
 #'
 #'
-#' @return A data frame with the following results:
+#' @return A matrix with the following columns:
 #' \itemize{
-#' \item \bold{\code{$all_results}} is a data frame with columns
-#'       \code{neg_label}, \code{pos_label} labels of negative and positive
-#'       groups respectively,
-#'       \code{tp} (number of true positives),
+#' \item \code{tp} (number of true positives),
 #'       \code{fn} (number of false negatives),
 #'       \code{fp} (number of false positives),
 #'       \code{tn} (number of true negatives),
-#'       ... [!!!]
+#'       \code{sens} (sensitivity),
+#'       \code{spec} (specificity),
+#'       \code{ppv} (positive predictive value),
+#'       \code{npv} (negative predictive value),
+#'       \code{youden} (Youden's j index),
+#'       \code{kappa} (Cohen's kappa).
 #'
+#' \item
+#'       attribute \code{labels} contains a named vector with elements
+#'       \code{pos_label} and \code{neg_label}, which indicate labels of
+#'        positive and negative groups respectively.
 #' }\cr\cr
 #'
 #'
@@ -97,25 +103,25 @@ calculate_performance <- function(truth,
     SE <- calculate_sensitivity(tp, fn)
     SP <- calculate_specificity(tn, fp)
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    performance <- data.frame(pos_label = pos_label,
-                              neg_label = neg_label,
-                              tp = tp,
-                              fn = fn,
-                              fp = fp,
-                              tn = tn,
-                              sens = SE,
-                              spec = SP,
-                              ppv  = calculate_ppv(tp, fp),
-                              npv  = calculate_npv(tn, fn),
-                              bac  = calculate_bac(SE, SP),
-                              youden = calculate_youdens_j(SE, SP),
-                              kappa  = calculate_kappa(tp, fn, fp, tn),
+    performance <- cbind(tp = tp,
+                         fn = fn,
+                         fp = fp,
+                         tn = tn,
+                         sens = SE,
+                         spec = SP,
+                         ppv  = calculate_ppv(tp, fp),
+                         npv  = calculate_npv(tn, fn),
+                         bac  = calculate_bac(SE, SP),
+                         youden = calculate_youdens_j(SE, SP),
+                         kappa  = calculate_kappa(tp, fn, fp, tn)
 
-                              stringsAsFactors = FALSE
+                         # , stringsAsFactors = FALSE
 
     )
     # ==========================================================================
     # Output
+    attr(performance, "labels") <- c(pos_label = pos_label,
+                                     neg_label = neg_label)
     add_class_label(performance, c("two_class_perform","roc_df"))
     # ==========================================================================
 }

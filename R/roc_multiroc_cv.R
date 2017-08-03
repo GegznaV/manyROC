@@ -21,12 +21,13 @@
 #' # --- For numeric vectors objects ---
 #'
 #' data(PlantGrowth)
+#'
 #' roc_multiroc_cv(PlantGrowth$weight, PlantGrowth$group)
 #'
 #' roc_multiroc_cv(PlantGrowth$weight, gl(2, 1, 30))
-#'
 
-
+# x <- PlantGrowth$weight
+# gr <- PlantGrowth$group
 # sp_x <- sp
 # x  <- sp_x[[]]
 # gr <- sp_x$gr
@@ -112,8 +113,6 @@ mat2list <- function(x) {
     as.list(as.data.frame(x))
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-roc_multiroc_cv(PlantGrowth$weight, PlantGrowth$group)
 
 # # ===========================================================================
 # # @rdname roc_multiroc

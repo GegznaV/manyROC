@@ -30,7 +30,8 @@
 #'                 classification performance measure to use. Currently
 #'                 available options:
 #' \itemize{
-#'       \item \code{"bac"} - for balanced accuracy (mean of sensitivity and specificity);\cr
+#'       \item \code{"bac"} - for balanced accuracy (mean of sensitivity and
+#'        specificity);\cr
 #'       \item \code{"kappa"} - for Cohens kappa;\cr
 #'       \item \code{"youden"} - for Youden's index;
 #' }

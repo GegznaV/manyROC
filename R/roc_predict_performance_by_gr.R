@@ -38,10 +38,13 @@ roc_predict_performance_by_gr <- function(object, x_new, gr_new) {
                               new_x = x_new,
                               true_gr = gr_new)
 
-    names(prediction) <- object$compared_groups
+    # names(prediction) <- object$compared_groups
+
+    DF <- as.data.frame(purrr::reduce(prediction, rbind))
 
     # Output
-    dplyr::bind_rows(prediction, .id = "compared_groups")
+    dplyr::bind_cols(compared_groups = object$compared_groups, DF)
+    # dplyr::bind_rows(prediction, .id = "compared_groups")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Helper function
@@ -61,8 +64,7 @@ predict_and_evaluate_performance <-
                    no  = as.character(above)
             )
 
-        calculate_performance(true_gr[ind_ok], pred_gr)  %>%
-            dplyr::mutate(cutoff = cutoff)
+        cbind(cutoff = cutoff, calculate_performance(true_gr[ind_ok], pred_gr))
     }
 
 
