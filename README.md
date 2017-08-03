@@ -12,16 +12,14 @@
 ***multiROC*** -- tools for ROC analyis
 =======================================
 
-\*\*
 <p align="center">
-<font color="red" size="3" family="sans">The package is under construction.</font>
+<font color="red" size="3" family="sans"> <b>The package is under construction.</b></font>
 </p>
-\*\* <!-- *MultiROC* workflow for spectroscopic data analysis. -->
-
+<!-- *MultiROC* workflow for spectroscopic data analysis. -->
 Notes:
 
 1.  ROC -- receiver operating characteristic.
-2.  In documentation, symbol **<font color="red">\[!!!\]</font>** means, that the desctription is not finished or imprecise and needs special attention.
+2.  In documentation, symbol <b><font color="red">\[!!!\]</font></b> means, that the desctription is not finished or imprecise and needs special attention.
 
 Install package:
 

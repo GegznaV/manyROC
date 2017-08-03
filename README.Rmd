@@ -30,16 +30,16 @@ knitr::include_graphics("https://raw.githubusercontent.com/GegznaV/multiROC/mast
 _**multiROC**_ -- tools for ROC analyis
 ============================================================================= 
 
+<p align="center"><font color="red" size="3" family="sans">
+<b>The package is under construction.</b></font>
+</p>
 
- 
-
-**<p align="center"><font color="red" size="3" family="sans">The package is under construction.</font></p>** 
 <!-- *MultiROC* workflow for spectroscopic data analysis. -->
 
 Notes:
 
 1. ROC -- receiver operating characteristic. 
-2. In documentation, symbol **<font color="red">[!!!]</font>** means, 
+2. In documentation, symbol <b><font color="red">[!!!]</font></b> means, 
 that the desctription is not finished or imprecise and needs special 
 attention.
 
