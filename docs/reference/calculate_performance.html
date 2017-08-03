@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Predict outcome for new data � roc_predict • multiROC</title>
+<title>Performance measures for two-class classification � calculate_performance • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -92,62 +92,73 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Predict outcome for new data</h1>
+    <h1>Performance measures for two-class classification</h1>
     </div>
 
     
-    <p>Predict outcome for new data</p>
+    <p>Performance measures for two-class classification</p>
     
 
-    <pre class="usage"><span class='fu'>roc_predict</span>(<span class='no'>object</span>, <span class='no'>x_new</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>calculate_performance</span>(<span class='no'>truth</span>, <span class='no'>prediction</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='fu'>levels</span>(<span class='no'>truth</span>)[<span class='fl'>2</span>])</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>Either an object which inherits from one of following classes:
- <code>roc_result_list</code>,
- <code>roc_info</code>,
- <code>roc_info_multi</code>, <b>or</b> a data frame with exactly
- one row, which contains columns:
-"cutoff" (numeric),
-"below" (character),
-"above" (character).</p></td>
+      <th>truth</th>
+      <td><p>(<code>factor</code>)  A factor vector with "true"/reference
+classes.</p></td>
     </tr>
     <tr>
-      <th>x_new</th>
-      <td><p>A numeric vector with data to predict on.</p></td>
+      <th>prediction</th>
+      <td><p>A vector with predicted classes.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Arguments to further methods.</p></td>
+      <th>pos_label</th>
+      <td><p>(<code>character(1)</code>)  A string with the name of
+positive group. By default, the second level of factor
+<code>truth</code> is treated as positive.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A matrix with the following columns:</p><ul>
+<li><p><code>tp</code> (number of true positives),
+      <code>fn</code> (number of false negatives),
+      <code>fp</code> (number of false positives),
+      <code>tn</code> (number of true negatives),
+      <code>sens</code> (sensitivity),
+      <code>spec</code> (specificity),
+      <code>ppv</code> (positive predictive value),
+      <code>npv</code> (negative predictive value),
+      <code>youden</code> (Youden's j index),
+      <code>kappa</code> (Cohen's kappa).</p></li>
+<li><p>attribute <code>labels</code> contains a named vector with elements
+      <code>pos_label</code> and <code>neg_label</code>, which indicate labels of
+       positive and negative groups respectively.</p></li>
+</ul><p></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other functions for ROC: <code><a href='access_elements.html'>access_elements</a></code>,
-  <code><a href='calculate_performance.html'>calculate_performance</a></code>,
   <code><a href='roc_analysis.html'>print.roc_df</a></code>,
-  <code><a href='roc_performance_measures.html'>roc_performance_measures</a></code></p>
+  <code><a href='roc_performance_measures.html'>roc_performance_measures</a></code>,
+  <code><a href='roc_predict.html'>roc_predict</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>multiROC</span>)
+    <pre class="examples"><div class='input'>(<span class='no'>truth</span> <span class='kw'>&lt;-</span> <span class='fu'>gl</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>length</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"H"</span>,<span class='st'>"S"</span>)))</div><div class='output co'>#&gt;  [1] H H H S S S H H H S S S H H H S S S H H
+#&gt; Levels: H S</div><div class='input'>
+(<span class='no'>prediction</span> <span class='kw'>&lt;-</span> <span class='fu'>rev</span>(<span class='no'>truth</span>))</div><div class='output co'>#&gt;  [1] H H S S S H H H S S S H H H S S S H H H
+#&gt; Levels: H S</div><div class='input'>
 
-<span class='fu'>set.seed</span>(<span class='fl'>1</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>10</span>)
-<span class='no'>gr</span> <span class='kw'>&lt;-</span> <span class='fu'>gl</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>length</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"H"</span>,<span class='st'>"S"</span>))
-<span class='no'>object</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='roc_analysis.html'>roc_analysis</a></span>(<span class='no'>x</span>, <span class='no'>gr</span>)
-
-<span class='fu'>roc_predict</span>(<span class='no'>object</span>, <span class='kw'>x_new</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; Called from: eval(expr, p)
-#&gt; debug at D:\Dokumentai\R\multiROC/R/roc_predict.R#69: prediction &lt;- ifelse(x_new &lt; object$cutoff, yes = as.character(object$below), 
-#&gt;     no = as.character(object$above))
-#&gt; debug at D:\Dokumentai\R\multiROC/R/roc_predict.R#78: prediction</div><div class='output co'>#&gt; [1] "H"</div><div class='input'>
-<span class='fu'>roc_predict</span>(<span class='no'>object</span>, <span class='kw'>x_new</span> <span class='kw'>=</span> -<span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] "S"</div><div class='input'>
-<span class='fu'>roc_predict</span>(<span class='no'>object</span>, <span class='kw'>x_new</span> <span class='kw'>=</span> <span class='fu'>rnorm</span>(<span class='fl'>20</span>))</div><div class='output co'>#&gt;  [1] "H" "S" "H" "S" "H" "S" "H" "S" "H" "H" "H" "H" "H" "S" "H" "H" "H" "H" "S"
-#&gt; [20] "S"</div><div class='input'>
+<span class='fu'>calculate_performance</span>(<span class='no'>truth</span>, <span class='no'>prediction</span>)</div><div class='output co'>#&gt;   tp fn fp tn sens spec  ppv  npv  bac youden kappa
+#&gt; 1  6  3  3  8 0.67 0.73 0.67 0.73 0.70   0.39  0.39</div><div class='input'>
+<span class='fu'>calculate_performance</span>(<span class='no'>truth</span>, <span class='no'>prediction</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='st'>"S"</span>)</div><div class='output co'>#&gt;   tp fn fp tn sens spec  ppv  npv  bac youden kappa
+#&gt; 1  6  3  3  8 0.67 0.73 0.67 0.73 0.70   0.39  0.39</div><div class='input'>
+<span class='fu'>calculate_performance</span>(<span class='no'>truth</span>, <span class='no'>prediction</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='st'>"H"</span>)</div><div class='output co'>#&gt;   tp fn fp tn sens spec  ppv  npv  bac youden kappa
+#&gt; 1  8  3  3  6 0.73 0.67 0.73 0.67 0.70   0.39  0.39</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -155,10 +166,16 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
+
+    <h2>Author</h2>
+    
+Vilmantas Gegzna
 
   </div>
 </div>

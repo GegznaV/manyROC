@@ -1,6 +1,6 @@
 #' [!] Carry out the multiROC analysis
 #'
-#' For spectroscopic data: compare spectra of each pair of indicated groups
+#' [!!!] For spectroscopic data: compare spectra of each pair of indicated groups
 #' at each wavelength.
 #'
 #' @details

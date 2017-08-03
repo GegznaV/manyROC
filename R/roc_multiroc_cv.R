@@ -1,14 +1,14 @@
 # =============================================================================
-#' @rdname roc_multiroc
+#' #' [!] Carry out the multiROC analysis with cross-validation
 #'
 #' @return A data frame with results. The object also inferits from
 #'  class \code{multiroc_cv} (for displaying purposes).
-#'
 #' @param cvo a cross-validation object (cvo), created with function
 #'            \code{\link{cvo_create_folds}},
 #'            \pkg{caret} \code{\link[caret]{createFolds}}
 #'            or similar.
 #'
+#' @inheritParams roc_multiroc
 #' @inheritParams cvo_create_folds
 #' @inheritParams roc_performance_measures
 #'
@@ -25,6 +25,7 @@
 #' roc_multiroc_cv(PlantGrowth$weight, PlantGrowth$group)
 #'
 #' roc_multiroc_cv(PlantGrowth$weight, gl(2, 1, 30))
+#'
 
 # x <- PlantGrowth$weight
 # gr <- PlantGrowth$group

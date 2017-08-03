@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Predict outcome for new data � roc_predict • multiROC</title>
+<title>[!!!] Extract the main information necessary for prediction � roc_extract_info • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -92,73 +92,38 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Predict outcome for new data</h1>
+    <h1>[!!!] Extract the main information necessary for prediction</h1>
     </div>
 
     
-    <p>Predict outcome for new data</p>
+    <p>[!!!] Extract the main information necessary for prediction</p>
     
 
-    <pre class="usage"><span class='fu'>roc_predict</span>(<span class='no'>object</span>, <span class='no'>x_new</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>roc_extract_info</span>(<span class='no'>obj</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for multiroc_result</span>
+<span class='fu'>roc_extract_info</span>(<span class='no'>obj</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>Either an object which inherits from one of following classes:
- <code>roc_result_list</code>,
- <code>roc_info</code>,
- <code>roc_info_multi</code>, <b>or</b> a data frame with exactly
- one row, which contains columns:
-"cutoff" (numeric),
-"below" (character),
-"above" (character).</p></td>
-    </tr>
-    <tr>
-      <th>x_new</th>
-      <td><p>A numeric vector with data to predict on.</p></td>
+      <th>obj</th>
+      <td><p>object</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments to further methods.</p></td>
+      <td><p>pass to further methods</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other functions for ROC: <code><a href='access_elements.html'>access_elements</a></code>,
-  <code><a href='calculate_performance.html'>calculate_performance</a></code>,
-  <code><a href='roc_analysis.html'>print.roc_df</a></code>,
-  <code><a href='roc_performance_measures.html'>roc_performance_measures</a></code></p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>multiROC</span>)
-
-<span class='fu'>set.seed</span>(<span class='fl'>1</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>10</span>)
-<span class='no'>gr</span> <span class='kw'>&lt;-</span> <span class='fu'>gl</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>length</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"H"</span>,<span class='st'>"S"</span>))
-<span class='no'>object</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='roc_analysis.html'>roc_analysis</a></span>(<span class='no'>x</span>, <span class='no'>gr</span>)
-
-<span class='fu'>roc_predict</span>(<span class='no'>object</span>, <span class='kw'>x_new</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; Called from: eval(expr, p)
-#&gt; debug at D:\Dokumentai\R\multiROC/R/roc_predict.R#69: prediction &lt;- ifelse(x_new &lt; object$cutoff, yes = as.character(object$below), 
-#&gt;     no = as.character(object$above))
-#&gt; debug at D:\Dokumentai\R\multiROC/R/roc_predict.R#78: prediction</div><div class='output co'>#&gt; [1] "H"</div><div class='input'>
-<span class='fu'>roc_predict</span>(<span class='no'>object</span>, <span class='kw'>x_new</span> <span class='kw'>=</span> -<span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] "S"</div><div class='input'>
-<span class='fu'>roc_predict</span>(<span class='no'>object</span>, <span class='kw'>x_new</span> <span class='kw'>=</span> <span class='fu'>rnorm</span>(<span class='fl'>20</span>))</div><div class='output co'>#&gt;  [1] "H" "S" "H" "S" "H" "S" "H" "S" "H" "H" "H" "H" "H" "S" "H" "H" "H" "H" "S"
-#&gt; [20] "S"</div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>

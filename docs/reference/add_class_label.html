@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dataset of simulated fluorescence spectra � fluorescence • multiROC</title>
+<title>Manage S3 class labels � add_class_label • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -92,74 +92,52 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Dataset of simulated fluorescence spectra</h1>
+    <h1>Manage S3 class labels</h1>
     </div>
 
     
-    <p><code>fluorescence</code> is a dataset of simulated spectroscopic data.</p>
+    <p>Add or remove S3 cpass labels.</p>
     
 
-    <pre class="usage"><span class='no'>fluorescence</span></pre>
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <pre class="usage"><span class='fu'>add_class_label</span>(<span class='no'>x</span>, <span class='no'>new_class</span>)
 
-    <p><code><a href='http://www.rdocumentation.org/packages/hyperSpec/topics/hyperSpec-class'>hyperSpec</a></code> objects with spectroscopic
-data and additional variables.</p>
-<p>Spectra and these nonspectroscopic variables:</p><dl class='dl-horizontal'>
-  <dt>class</dt><dd><p>A factor variable with 4 classes.</p></dd>
-  <dt>gr</dt><dd><p>A factor variable with 3 classes.</p></dd>
-</dl>
+<span class='fu'>remove_class_label</span>(<span class='no'>x</span>, <span class='no'>drop_class</span>)</pre>
     
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p>Artificially generated in <code>R</code>.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Artificially generated dataset.</p>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>An object to modify.</p></td>
+    </tr>
+    <tr>
+      <th>new_class</th>
+      <td><p>(<code>character</code>) A name of a new class.
+May be a vector of names.</p></td>
+    </tr>
+    <tr>
+      <th>drop_class</th>
+      <td><p>(<code>character</code>) A name of a class to remove.
+May be a vector of names.</p></td>
+    </tr>
+    </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>hyperSpec</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: lattice</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: grid</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='output co'>#&gt; <span class='message'>Package hyperSpec, version 0.98-20161118</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>To get started, try</span>
-#&gt; <span class='message'>   vignette ("introduction", package = "hyperSpec")</span>
-#&gt; <span class='message'>   package?hyperSpec </span>
-#&gt; <span class='message'>   vignette (package = "hyperSpec")</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>If you use this package please cite it appropriately.</span>
-#&gt; <span class='message'>   citation("hyperSpec")</span>
-#&gt; <span class='message'>will give you the correct reference.</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>The project homepage is http://hyperspec.r-forge.r-project.org</span>
-#&gt; <span class='message'></span></div><div class='input'>
-<span class='no'>fluorescence</span></div><div class='output co'>#&gt; hyperSpec object
-#&gt;    150 spectra
-#&gt;    3 data columns
-#&gt;    501 data points / spectrum
-#&gt; wavelength: lambda/nm [integer] 300 301 ... 800 
-#&gt; data:  (150 rows x 3 columns)
-#&gt;    1. gr:  [factor] B B ... A 
-#&gt;    2. class:  [factor] N l ... S1 
-#&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/hyperSpec/topics/plot'>plot</a></span>(<span class='no'>fluorescence</span>[<span class='fl'>30</span>:<span class='fl'>60</span>,])</div><div class='img'><img src='fluorescence-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>add_class_label</span>(<span class='fu'>list</span>(<span class='st'>"ok"</span>), <span class='st'>"ok_list"</span>)</div><div class='output co'>#&gt; [[1]]
+#&gt; [1] "ok"
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "ok_list" "list"   </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#source">Source</a></li>
-
-      <li><a href="#details">Details</a></li>
-      
+      <li><a href="#arguments">Arguments</a></li>
+            
       <li><a href="#examples">Examples</a></li>
     </ul>
-
-    <h2>Author</h2>
-    
-Vilmantas Gegzna
 
   </div>
 </div>

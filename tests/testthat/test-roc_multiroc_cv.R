@@ -1,4 +1,5 @@
 context("roc_multiroc_cv")
+# [!!!] more tests are needed that check if results are correct
 
 test_that("roc_multiroc_cv works", {
     data(PlantGrowth)
@@ -11,7 +12,6 @@ test_that("roc_multiroc_cv works", {
     r3 <- roc_multiroc_cv(fluorescence[[,,500~502]],
                           fluorescence$class,
                           seeds = 1234567)
-
 
 
     expect_is(r1, "data.frame")

@@ -94,7 +94,7 @@
     <div class="page-header">
       <h1>
         Reference
-        <small>version&nbsp;0.0.3.5000</small>
+        <small>version&nbsp;0.0.4</small>
       </h1>
     </div>
 
@@ -125,6 +125,24 @@
             <p><code><a href="roc_multiroc.html">print</a></code> <code><a href="roc_multiroc.html">roc_multiroc</a></code> </p>
           </td>
           <td><p>[!] Carry out the multiROC analysis</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="roc_multiroc_cv.html">roc_multiroc_cv</a></code> </p>
+          </td>
+          <td><p>#' [!] Carry out the multiROC analysis with cross-validation</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="roc_predict.html">roc_predict</a></code> </p>
+          </td>
+          <td><p>Predict outcome for new data</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="roc_predict_performance_by_gr.html">roc_predict_performance_by_gr</a></code> </p>
+          </td>
+          <td><p>Calculate perfornamce for each pair of groups</p></td>
         </tr>
       </tbody><tbody>
         <tr>
@@ -169,11 +187,23 @@
       </tbody><tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-performance-measures" class="hasAnchor"><a href="#section-performance-measures" class="anchor"></a>Performance measures</h2>
+            <h2 id="section-functions-for-classification-performance" class="hasAnchor"><a href="#section-functions-for-classification-performance" class="anchor"></a>Functions for classification performance</h2>
             <p class="section-desc"></p>
           </th>
         </tr>
         <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="calculate_performance.html">calculate_performance</a></code> </p>
+          </td>
+          <td><p>Performance measures for two-class classification</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="roc_extract_info.html">roc_extract_info</a></code> </p>
+          </td>
+          <td><p>[!!!] Extract the main information necessary for prediction</p></td>
+        </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="roc_performance_measures.html">calculate_acc</a></code> <code><a href="roc_performance_measures.html">roc_calculate_acc</a></code> <code><a href="roc_performance_measures.html">calculate_bac</a></code> <code><a href="roc_performance_measures.html">roc_calculate_bac</a></code> <code><a href="roc_performance_measures.html">calculate_auc</a></code> <code><a href="roc_performance_measures.html">roc_calculate_auc</a></code> <code><a href="roc_performance_measures.html">calculate_npv</a></code> <code><a href="roc_performance_measures.html">roc_calculate_npv</a></code> <code><a href="roc_performance_measures.html">calculate_ppv</a></code> <code><a href="roc_performance_measures.html">roc_calculate_ppv</a></code> <code><a href="roc_performance_measures.html">calculate_sensitivity</a></code> <code><a href="roc_performance_measures.html">roc_calculate_se</a></code> <code><a href="roc_performance_measures.html">calculate_specificity</a></code> <code><a href="roc_performance_measures.html">roc_calculate_sp</a></code> <code><a href="roc_performance_measures.html">calculate_youdens_j</a></code> <code><a href="roc_performance_measures.html">roc_youdens_j</a></code> <code><a href="roc_performance_measures.html">calculate_kappa</a></code> <code><a href="roc_performance_measures.html">roc_calculate_kappa</a></code> <code><a href="roc_performance_measures.html">calculate_wkappa</a></code> <code><a href="roc_performance_measures.html">roc_calculate_wkappa</a></code> </p>
@@ -202,7 +232,7 @@
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="class_add.html">class_add</a></code> <code><a href="class_add.html">class_remove</a></code> </p>
+            <p><code><a href="add_class_label.html">add_class_label</a></code> <code><a href="add_class_label.html">remove_class_label</a></code> </p>
           </td>
           <td><p>Manage S3 class labels</p></td>
         </tr>
@@ -245,7 +275,7 @@
       <li><a href="#section-the-main-functions-for-roc-analysis">The main functions for ROC analysis</a></li>
       <li><a href="#section-management-functions-for-roc-objects">Management functions for ROC objects</a></li>
       <li><a href="#section-functions-for-cross-validation-cvo-ojects">Functions for cross-validation (CVO) ojects</a></li>
-      <li><a href="#section-performance-measures">Performance measures</a></li>
+      <li><a href="#section-functions-for-classification-performance">Functions for classification performance</a></li>
       <li><a href="#section-helper-and-utility-functions">Helper and utility functions</a></li>
       <li><a href="#section-datasets">Datasets</a></li>
       <li><a href="#section-other-functions">Other functions</a></li>

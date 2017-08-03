@@ -96,7 +96,7 @@
     </div>
 
     
-    <p>For spectroscopic data: compare spectra of each pair of indicated groups
+    <p>[!!!] For spectroscopic data: compare spectra of each pair of indicated groups
 at each wavelength.</p>
     
 
@@ -159,7 +159,8 @@ variable (a vector) which defines groups in <code>x</code>.</p></td>
       <td><p>(<code>string(1)</code>) A string with the name of
                 classification performance measure to use. Currently
                 available options:</p><ul>
-<li><p><code>"bac"</code> - for balanced accuracy (mean of sensitivity and specificity);</p></li>
+<li><p><code>"bac"</code> - for balanced accuracy (mean of sensitivity and
+       specificity);</p></li>
 <li><p><code>"kappa"</code> - for Cohens kappa;</p></li>
 <li><p><code>"youden"</code> - for Youden's index;</p></li>
 </ul></td>
@@ -219,11 +220,11 @@ will be related to this group, and sensitivity to the other group.</p>
 <span class='co'># --- For numeric vectors objects ---</span>
 
 <span class='fu'>data</span>(<span class='no'>PlantGrowth</span>)
-<span class='fu'>roc_multiroc</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='no'>PlantGrowth</span>$<span class='no'>group</span>)</div><div class='output co'>#&gt;   compared_groups feature median_neg cutoff median_pos TP FN FP TN sens spec
+<span class='fu'>roc_multiroc</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='no'>PlantGrowth</span>$<span class='no'>group</span>)</div><div class='output co'>#&gt;   compared_groups feature median_neg cutoff median_pos tp fn fp tn sens spec
 #&gt; 1   ctrl vs. trt1       1       5.15   4.37       4.55  5  5  1  9 0.50 0.90
 #&gt; 2   ctrl vs. trt2       1       5.15   5.22       5.44  8  2  3  7 0.80 0.70
 #&gt; 3   trt1 vs. trt2       1       4.55    4.9       5.44 10  0  2  8 1.00 0.80
-#&gt;    PPV  NPV  BAC Youden Kappa  AUC
+#&gt;    ppv  npv  bac youden kappa  auc
 #&gt; 1 0.83 0.64 0.70   0.40  0.40 0.67
 #&gt; 2 0.73 0.78 0.75   0.50  0.50 0.75
 #&gt; 3 0.83 1.00 0.90   0.80  0.80 0.84</div><div class='input'>
@@ -231,14 +232,14 @@ will be related to this group, and sensitivity to the other group.</p>
 <span class='co'># --- For dataframes objects ---</span>
 
 <span class='fu'>data</span>(<span class='no'>CO2</span>)
-<span class='fu'>roc_multiroc</span>(<span class='no'>CO2</span>[, <span class='fu'>c</span>(<span class='st'>"conc"</span>, <span class='st'>"uptake"</span>)], <span class='no'>CO2</span>$<span class='no'>Type</span>)</div><div class='output co'>#&gt;          compared_groups feature median_neg cutoff median_pos TP FN FP TN sens
+<span class='fu'>roc_multiroc</span>(<span class='no'>CO2</span>[, <span class='fu'>c</span>(<span class='st'>"conc"</span>, <span class='st'>"uptake"</span>)], <span class='no'>CO2</span>$<span class='no'>Type</span>)</div><div class='output co'>#&gt;          compared_groups feature median_neg cutoff median_pos tp fn fp tn sens
 #&gt; 1 Quebec vs. Mississippi    conc        350    200        350 18 24 18 24 0.43
 #&gt; 2 Quebec vs. Mississippi  uptake       37.2   32.3       19.3 41  1 13 29 0.98
-#&gt;   spec  PPV  NPV  BAC Youden Kappa  AUC
+#&gt;   spec  ppv  npv  bac youden kappa  auc
 #&gt; 1 0.57 0.50 0.50 0.50   0.00  0.00 0.50
 #&gt; 2 0.69 0.76 0.97 0.83   0.67  0.67 0.84</div><div class='input'>
 <span class='fu'>data</span>(<span class='no'>OrchardSprays</span>)
-<span class='fu'>roc_multiroc</span>(<span class='no'>OrchardSprays</span>$<span class='no'>decrease</span>, <span class='no'>OrchardSprays</span>$<span class='no'>treatment</span>)</div><div class='output co'>#&gt;     compared_groups feature median_neg cutoff median_pos  TP  FN  FP  TN sens
+<span class='fu'>roc_multiroc</span>(<span class='no'>OrchardSprays</span>$<span class='no'>decrease</span>, <span class='no'>OrchardSprays</span>$<span class='no'>treatment</span>)</div><div class='output co'>#&gt;     compared_groups feature median_neg cutoff median_pos  tp  fn  fp  tn sens
 #&gt; 1           A vs. B       1          4    5.5        7.5   6   2   1   7 0.75
 #&gt; 2           A vs. C       1          4   12.5       16.5   7   1   0   8 0.88
 #&gt; 3           A vs. D       1          4     16         32   8   0   0   8 1.00
@@ -249,7 +250,7 @@ will be related to this group, and sensitivity to the other group.</p>
 #&gt; 27          F vs. H       1         70   71.5         81   7   1   3   5 0.88
 #&gt; 28          G vs. H       1         72   80.5         81   5   3   1   7 0.62
 #&gt;                                                                              
-#&gt;     spec  PPV  NPV  BAC Youden Kappa  AUC
+#&gt;     spec  ppv  npv  bac youden kappa  auc
 #&gt; 1   0.88 0.86 0.78 0.81   0.62  0.62 0.80
 #&gt; 2   1.00 1.00 0.89 0.94   0.88  0.88 0.98
 #&gt; 3   1.00 1.00 1.00 1.00   1.00  1.00 1.00
@@ -272,7 +273,7 @@ will be related to this group, and sensitivity to the other group.</p>
 #&gt;    1. gr:  [factor] B B ... A 
 #&gt;    2. class:  [factor] N l ... S1 
 #&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'>
-<span class='fu'>roc_multiroc</span>(<span class='no'>fluorescence</span>[ , , <span class='fl'>500</span>~<span class='fl'>502</span>], <span class='no'>fluorescence</span>$<span class='no'>gr</span>)</div><div class='output co'>#&gt;   compared_groups feature median_neg cutoff median_pos TP FN FP TN sens spec
+<span class='fu'>roc_multiroc</span>(<span class='no'>fluorescence</span>[ , , <span class='fl'>500</span>~<span class='fl'>502</span>], <span class='no'>fluorescence</span>$<span class='no'>gr</span>)</div><div class='output co'>#&gt;   compared_groups feature median_neg cutoff median_pos tp fn fp tn sens spec
 #&gt; 1         A vs. B     500        338    335        333 35 20 24 28 0.64 0.54
 #&gt; 2         A vs. B     501        335    328        327 29 26 19 33 0.53 0.63
 #&gt; 3         A vs. B     502        335    332        329 36 19 24 28 0.65 0.54
@@ -282,7 +283,7 @@ will be related to this group, and sensitivity to the other group.</p>
 #&gt; 7         B vs. C     500        333    343        334 21 22 15 40 0.49 0.73
 #&gt; 8         B vs. C     501        327    344        334 21 22 15 40 0.49 0.73
 #&gt; 9         B vs. C     502        329    339        340 22 21 16 39 0.51 0.71
-#&gt;    PPV  NPV  BAC Youden Kappa  AUC
+#&gt;    ppv  npv  bac youden kappa  auc
 #&gt; 1 0.59 0.58 0.59   0.17  0.18 0.57
 #&gt; 2 0.60 0.56 0.58   0.16  0.16 0.56
 #&gt; 3 0.60 0.60 0.60   0.19  0.19 0.56

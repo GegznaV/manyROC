@@ -27,6 +27,9 @@ reference:
   contents:
   - '`roc_analysis`'
   - '`roc_multiroc`'
+  - '`roc_multiroc_cv`'
+  - '`roc_predict`'
+  - '`roc_predict_performance_by_gr`'
 - title: Management functions for ROC objects
   desc: ~
   contents:
@@ -37,16 +40,18 @@ reference:
   - '`cvo_create_folds`'
   - '`cvo_get_info`'
   - '`cvo_test_bs`'
-- title: Performance measures
+- title: Functions for classification performance
   desc: ~
   contents:
+  - '`calculate_performance`'
+  - '`roc_extract_info`'
   - '`roc_performance_measures`'
   - '`measure_kappa`'
   - '`measure_wkappa`'
 - title: Helper and utility functions
   desc: ~
   contents:
-  - '`class_add`'
+  - '`add_class_label`'
 - title: Datasets
   desc: ~
   contents:
