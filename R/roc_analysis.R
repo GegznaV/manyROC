@@ -1,12 +1,11 @@
-# =============================================================================
-# COMMENTS:
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# To Do:
+#   [!!!] Remove dependency on mlr in parameters sections.
 #
-#  .compute.unnormalized.roc.curve --------------------------------------------
-# prediction     --------------------------------------------------------------
-# in the original function decreasing = TRUE  ---------------------------------
-# =============================================================================
+#   [!!!] DESCRIPTION MUST BE UPDATED
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#' [!] Carry out the ROC analysis
+#' Carry out the ROC analysis
 #'
 #' Do the ROC (receiver operating characteristic) analysis and calculate
 #' vector of cut-off values and associated number of
@@ -15,7 +14,6 @@
 #' false positives (FP), and
 #' true negatives (TN) as well as performance measures such as sensitivity,
 #' specificity, etc.
-#' \cr[!!!]
 #'
 #' @name roc_analysis
 #' @param x (\code{numeric}) \cr A numeric vector.\cr

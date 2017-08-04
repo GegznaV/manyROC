@@ -2,12 +2,15 @@
 % Please edit documentation in R/cvo_create_folds.R
 \name{cvo_create_folds}
 \alias{cvo_create_folds}
+\alias{print.cvo}
 \title{Create a cvo (cross-valitation object)}
 \usage{
 cvo_create_folds(data = NULL, stratify_by = NULL, block_by = NULL,
   folds = 5, times = 1, seeds = NA_real_, kind = NULL,
   mode = c("caret", "mlr")[1], returnTrain = c(TRUE, FALSE, "both")[1],
   predict = c("test", "train", "both")[1], k = folds)
+
+\method{print}{cvo}(x, ...)
 }
 \arguments{
 \item{data}{A data frame, that contains variables which names are denoted
@@ -73,6 +76,21 @@ in both training and test sets (\pkg{mlr} style).}
 \item{predict}{[\code{character(1)}]\cr
 What to predict during resampling: \dQuote{train}, \dQuote{test} or \dQuote{both} sets.
 Default is \dQuote{test}.}
+
+\item{x}{A \code{cvo} object.}
+
+\item{...}{[any]\cr
+Further parameters for strategies.\cr
+\describe{
+\item{iters [\code{integer(1)}]}{Number of iterations, for \dQuote{CV}, \dQuote{Subsample}
+  and \dQuote{Boostrap}.}
+\item{split [\code{numeric(1)}]}{Proportion of training cases for \dQuote{Holdout} and
+  \dQuote{Subsample} between 0 and 1. Default is 2/3.}
+\item{reps [\code{integer(1)}]}{Repeats for \dQuote{RepCV}. Here \code{iters = folds * reps}.
+  Default is 10.}
+\item{folds [\code{integer(1)]}}{Folds in the repeated CV for \code{RepCV}.
+  Here \code{iters = folds * reps}. Default is 10.}
+}}
 }
 \value{
 (\code{list}) A list of folds. In each fold there are indices
@@ -128,9 +146,12 @@ DataSet1 <-data.frame(ID = rep(1:20, each = 2),
 
 # If variables of data frame are provided:
      Folds1_a <- cvo_create_folds(data = DataSet1,
-                              stratify_by = "gr", block_by = "ID",
-                               k = nFolds, returnTrain = FALSE)
-     # str(Folds1_a)
+                                 stratify_by = "gr", block_by = "ID",
+                                  k = nFolds, returnTrain = FALSE)
+     Folds1_a
+
+     str(Folds1_a)
+
      cvo_test_bs(Folds1_a, "gr", "ID", DataSet1)
 
 # If "free" variables are provided:

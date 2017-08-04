@@ -3,7 +3,7 @@ Type: Package
 Title: Tools for ROC Analyis
 Description: MultiROC - tools for ROC (receiver operating 
              characteristic) analyis.
-Version: 0.0.4.1000
+Version: 0.0.4.2000
 Date: 2017-08-04
 Authors@R: person("Vilmantas", "Gegzna",
                   role = c("aut", "cre"),

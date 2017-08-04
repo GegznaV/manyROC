@@ -5,7 +5,7 @@
 \alias{print.roc_opt_result}
 \alias{print.roc_info}
 \alias{roc_analysis}
-\title{[!] Carry out the ROC analysis}
+\title{Carry out the ROC analysis}
 \usage{
 \method{print}{roc_df}(x, ..., show_all = FALSE, perf_digits = 2,
   fmt = "\%.3g")
@@ -92,7 +92,6 @@ false negatives (FN),
 false positives (FP), and
 true negatives (TN) as well as performance measures such as sensitivity,
 specificity, etc.
-\cr[!!!]
 }
 \note{
 This function is inspired by functions \code{predict} and

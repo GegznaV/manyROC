@@ -5,6 +5,7 @@
 #   [!!!] DESCRIPTION MUST BE UPDATED
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+# =============================================================================
 #' Create a cvo (cross-valitation object)
 #'
 #' Create indices of folds with blocking and stratification (cvo object)
@@ -124,9 +125,12 @@
 #'
 #' # If variables of data frame are provided:
 #'      Folds1_a <- cvo_create_folds(data = DataSet1,
-#'                               stratify_by = "gr", block_by = "ID",
-#'                                k = nFolds, returnTrain = FALSE)
-#'      # str(Folds1_a)
+#'                                  stratify_by = "gr", block_by = "ID",
+#'                                   k = nFolds, returnTrain = FALSE)
+#'      Folds1_a
+#'
+#'      str(Folds1_a)
+#'
 #'      cvo_test_bs(Folds1_a, "gr", "ID", DataSet1)
 #'
 #' # If "free" variables are provided:
@@ -216,6 +220,7 @@ cvo_create_folds <- function(data = NULL,
 
     } else {
         seeds <- NULL
+        kind  <- NULL
     }
 
     # Force default values, if needed ===================================
@@ -444,3 +449,30 @@ cvo_create_folds <- function(data = NULL,
     return_ind
 }
 # [END]
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' @rdname cvo_create_folds
+#' @param x A \code{cvo} object.
+#' @method print cvo
+#' @export
+#'
+print.cvo <- function(x, ...) {
+    cat("--- A cvo object: ---------------------------------------------\n")
+    attrs <- attributes(x)
+
+    # attributes(x) <- NULL
+    # dplyr::glimpse(x)
+
+    print(attrs$info, row.names = FALSE)
+    if (!is.null(attrs$seeds$generator)) {
+        cat(paste("Random number generator:", attrs$seeds$generator), "\n")
+    }
+    if (!is.null(attrs$seeds$seeds)) {
+        cat(paste("Seeds: ", paste(attrs$seeds$seeds, collapse = ', ')), "\n")
+    }
+
+
+
+    cat("---------------------------------------------------------------\n")
+}
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

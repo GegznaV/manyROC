@@ -148,11 +148,38 @@ be shown. Default is 10.</p></td>
 <span class='no'>obj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='cvo_create_folds.html'>cvo_create_folds</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>,
                      <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='st'>"gr"</span>,
                      <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='st'>"ID"</span>,
-                     <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in set.seed(seeds[i], kind = kind): supplied seed is not a valid integer</span></div><div class='input'>
+                     <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
 <span class='fu'>cvo_test_bs</span>(<span class='no'>obj</span>,
             <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='st'>"gr"</span>,
             <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='st'>"ID"</span>,
-            <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in lapply(obj, make_table, By): object 'obj' not found</span></div><div class='input'>
+            <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
+#&gt; 
+#&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
+#&gt; Rep1_Fold1 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold2 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold3 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold4 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold5 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; 
+#&gt; If stratified, the proportions of each group in each fold
+#&gt; (row) should be (approximately) equal and with no zero values.
+#&gt; Test is not valid if data is blocked and number of cases in 
+#&gt; each block differs significantly.
+#&gt; ____________________________________________________________\n                Test for BLOCKING: BLOCKED
+#&gt; 
+#&gt;       ID
+#&gt;            1 2 3 4 5 6 7 8 9 10 ..
+#&gt; Rep1_Fold1 2 0 0 0 0 2 0 0 0  0 ..
+#&gt; Rep1_Fold2 0 0 2 0 0 0 2 0 0  0 ..
+#&gt; Rep1_Fold3 0 0 0 0 2 0 0 2 0  0 ..
+#&gt; Rep1_Fold4 0 0 0 2 0 0 0 0 0  2 ..
+#&gt; Rep1_Fold5 0 2 0 0 0 0 0 0 2  0 ..
+#&gt; 
+#&gt; Table shows number of observations in each fold.
+#&gt; If blocked, the same ID appears just in one fold.
+#&gt; 10 (of 20) first columns are displayed.
+#&gt; ************************************************************\n</div><div class='input'>
 
 </div></pre>
   </div>

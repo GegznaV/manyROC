@@ -105,7 +105,10 @@ Options of blocking and stratification are available. See more in "Details".</p>
     <pre class="usage"><span class='fu'>cvo_create_folds</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>folds</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='fl'>NA_real_</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>mode</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"caret"</span>, <span class='st'>"mlr"</span>)[<span class='fl'>1</span>], <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>, <span class='st'>"both"</span>)[<span class='fl'>1</span>],
-  <span class='kw'>predict</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"test"</span>, <span class='st'>"train"</span>, <span class='st'>"both"</span>)[<span class='fl'>1</span>], <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>folds</span>)</pre>
+  <span class='kw'>predict</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"test"</span>, <span class='st'>"train"</span>, <span class='st'>"both"</span>)[<span class='fl'>1</span>], <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>folds</span>)
+
+<span class='co'># S3 method for cvo</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -190,6 +193,24 @@ in both training and test sets (<span class="pkg">mlr</span> style).</p></td>
 What to predict during resampling: &#8220;train&#8221;, &#8220;test&#8221; or &#8220;both&#8221; sets.
 Default is &#8220;test&#8221;.</p></td>
     </tr>
+    <tr>
+      <th>x</th>
+      <td><p>A <code>cvo</code> object.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>[any]
+Further parameters for strategies.</p><dl class='dl-horizontal'>
+<dt>iters [<code>integer(1)</code>]</dt><dd><p>Number of iterations, for &#8220;CV&#8221;, &#8220;Subsample&#8221;
+  and &#8220;Boostrap&#8221;.</p></dd>
+<dt>split [<code>numeric(1)</code>]</dt><dd><p>Proportion of training cases for &#8220;Holdout&#8221; and
+  &#8220;Subsample&#8221; between 0 and 1. Default is 2/3.</p></dd>
+<dt>reps [<code>integer(1)</code>]</dt><dd><p>Repeats for &#8220;RepCV&#8221;. Here <code>iters = folds * reps</code>.
+  Default is 10.</p></dd>
+<dt>folds [<code>integer(1)]</code></dt><dd><p>Folds in the repeated CV for <code>RepCV</code>.
+  Here <code>iters = folds * reps</code>. Default is 10.</p></dd>
+</dl></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -262,8 +283,30 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 
 <span class='co'># If variables of data frame are provided:</span>
      <span class='no'>Folds1_a</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>,
-                              <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='st'>"gr"</span>, <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='st'>"ID"</span>,
-                               <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>, <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in set.seed(seeds[i], kind = kind): supplied seed is not a valid integer</span></div><div class='input'>     <span class='co'># str(Folds1_a)</span>
+                                 <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='st'>"gr"</span>, <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='st'>"ID"</span>,
+                                  <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>, <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+     <span class='no'>Folds1_a</span></div><div class='output co'>#&gt; --- A cvo object: ---------------------------------------------
+#&gt;  indices stratified blocked cv_type k repetitions sample_size
+#&gt;     Test       TRUE    TRUE  k-fold 5           1          40
+#&gt; ---------------------------------------------------------------</div><div class='input'>
+     <span class='fu'>str</span>(<span class='no'>Folds1_a</span>)</div><div class='output co'>#&gt; List of 5
+#&gt;  $ Rep1_Fold1: int [1:8] 7 8 13 14 23 24 35 36
+#&gt;  $ Rep1_Fold2: int [1:8] 3 4 17 18 27 28 33 34
+#&gt;  $ Rep1_Fold3: int [1:8] 5 6 15 16 21 22 31 32
+#&gt;  $ Rep1_Fold4: int [1:8] 1 2 19 20 29 30 39 40
+#&gt;  $ Rep1_Fold5: int [1:8] 9 10 11 12 25 26 37 38
+#&gt;  - attr(*, "class")= chr [1:2] "cvo_caret" "cvo"
+#&gt;  - attr(*, "info")='data.frame':	1 obs. of  7 variables:
+#&gt;   ..$ indices    : chr "Test"
+#&gt;   ..$ stratified : logi TRUE
+#&gt;   ..$ blocked    : logi TRUE
+#&gt;   ..$ cv_type    : chr "k-fold"
+#&gt;   ..$ k          : num 5
+#&gt;   ..$ repetitions: num 1
+#&gt;   ..$ sample_size: int 40
+#&gt;  - attr(*, "seeds")=List of 2
+#&gt;   ..$ generator: NULL
+#&gt;   ..$ seeds    : NULL</div><div class='input'>
      <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds1_a</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
 #&gt; 
 #&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
@@ -295,7 +338,8 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
      <span class='no'>Folds1_b</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>gr</span>,
                                   <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>ID</span>,
                                   <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>,
-                                  <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in set.seed(seeds[i], kind = kind): supplied seed is not a valid integer</span></div><div class='input'>     <span class='co'># str(Folds1_b)</span>
+                                  <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+     <span class='co'># str(Folds1_b)</span>
      <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds1_b</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
 #&gt; 
 #&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
@@ -313,11 +357,11 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 #&gt; 
 #&gt;       ID
 #&gt;            1 2 3 4 5 6 7 8 9 10 ..
-#&gt; Rep1_Fold1 0 0 0 2 0 0 2 0 0  0 ..
-#&gt; Rep1_Fold2 0 2 0 0 0 0 0 0 2  0 ..
-#&gt; Rep1_Fold3 0 0 2 0 0 0 0 2 0  0 ..
-#&gt; Rep1_Fold4 2 0 0 0 0 0 0 0 0  2 ..
-#&gt; Rep1_Fold5 0 0 0 0 2 2 0 0 0  0 ..
+#&gt; Rep1_Fold1 2 0 0 0 0 0 2 0 0  0 ..
+#&gt; Rep1_Fold2 0 0 0 2 0 0 0 2 0  0 ..
+#&gt; Rep1_Fold3 0 0 0 0 2 0 0 0 2  0 ..
+#&gt; Rep1_Fold4 0 2 0 0 0 0 0 0 0  2 ..
+#&gt; Rep1_Fold5 0 0 2 0 0 2 0 0 0  0 ..
 #&gt; 
 #&gt; Table shows number of observations in each fold.
 #&gt; If blocked, the same ID appears just in one fold.
@@ -326,7 +370,8 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 <span class='co'># Not blocked but stratified</span>
      <span class='no'>Folds1_c</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>gr</span>,
                                   <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>,
-                                  <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in set.seed(seeds[i], kind = kind): supplied seed is not a valid integer</span></div><div class='input'>     <span class='co'># str(Folds1_c)</span>
+                                  <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+     <span class='co'># str(Folds1_c)</span>
      <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds1_c</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
 #&gt; 
 #&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
@@ -344,11 +389,11 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 #&gt; 
 #&gt;       ID
 #&gt;            1 2 3 4 5 6 7 8 9 10 ..
-#&gt; Rep1_Fold1 0 0 0 1 1 1 0 0 1  0 ..
-#&gt; Rep1_Fold2 1 1 0 0 0 0 1 0 0  1 ..
-#&gt; Rep1_Fold3 0 0 0 1 1 0 1 0 1  0 ..
-#&gt; Rep1_Fold4 1 0 1 0 0 0 0 1 0  1 ..
-#&gt; Rep1_Fold5 0 1 1 0 0 1 0 1 0  0 ..
+#&gt; Rep1_Fold1 1 0 0 0 1 1 0 1 0  0 ..
+#&gt; Rep1_Fold2 1 0 1 0 0 0 0 0 1  1 ..
+#&gt; Rep1_Fold3 0 1 0 1 0 1 0 0 1  0 ..
+#&gt; Rep1_Fold4 0 1 0 0 1 0 1 1 0  0 ..
+#&gt; Rep1_Fold5 0 0 1 1 0 0 1 0 0  1 ..
 #&gt; 
 #&gt; Table shows number of observations in each fold.
 #&gt; If blocked, the same ID appears just in one fold.
@@ -357,8 +402,35 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 <span class='co'># Blocked but not stratified</span>
      <span class='no'>Folds1_d</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>block_by</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>ID</span>,
                                   <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>,
-                                  <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in set.seed(seeds[i], kind = kind): supplied seed is not a valid integer</span></div><div class='input'>     <span class='co'># str(Folds1_d)</span>
-     <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds1_d</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in lapply(obj, make_table, By): object 'Folds1_d' not found</span></div><div class='input'>
+                                  <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+     <span class='co'># str(Folds1_d)</span>
+     <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds1_d</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
+#&gt; 
+#&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
+#&gt; Rep1_Fold1 0 6 0 2  &lt;-Counts | Proportions-&gt;  0.00 0.75 0.00 0.25
+#&gt; Rep1_Fold2 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
+#&gt; Rep1_Fold3 4 0 2 2  &lt;-Counts | Proportions-&gt;  0.50 0.00 0.25 0.25
+#&gt; Rep1_Fold4 2 2 4 0  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.50 0.00
+#&gt; Rep1_Fold5 2 0 2 4  &lt;-Counts | Proportions-&gt;  0.25 0.00 0.25 0.50
+#&gt; 
+#&gt; If stratified, the proportions of each group in each fold
+#&gt; (row) should be (approximately) equal and with no zero values.
+#&gt; Test is not valid if data is blocked and number of cases in 
+#&gt; each block differs significantly.
+#&gt; ____________________________________________________________\n                Test for BLOCKING: BLOCKED
+#&gt; 
+#&gt;       ID
+#&gt;            1 2 3 4 5 6 7 8 9 10 ..
+#&gt; Rep1_Fold1 0 0 0 0 0 0 0 2 2  2 ..
+#&gt; Rep1_Fold2 0 0 0 2 0 2 0 0 0  0 ..
+#&gt; Rep1_Fold3 0 2 0 0 2 0 0 0 0  0 ..
+#&gt; Rep1_Fold4 2 0 0 0 0 0 2 0 0  0 ..
+#&gt; Rep1_Fold5 0 0 2 0 0 0 0 0 0  0 ..
+#&gt; 
+#&gt; Table shows number of observations in each fold.
+#&gt; If blocked, the same ID appears just in one fold.
+#&gt; 10 (of 20) first columns are displayed.
+#&gt; ************************************************************\n</div><div class='input'>
 
 </div></pre>
   </div>
