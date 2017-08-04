@@ -9,18 +9,21 @@ test_that("`data`, `stratify_by` and `block_by` parameters of `cvo_create_folds(
                       gr = gl(4, 10, labels = LETTERS[1:4]),
                       .row = 1:40)
 
+    folds <- 5
 
     # If variable names and a data frame are provided:
      set.seed(123456, "L'Ecuyer-CMRG")
      Folds1_a <- cvo_create_folds(data = DF1,
                                   stratify_by = "gr",
                                   block_by    = "ID",
+                                  folds = folds,
                                   returnTrain = FALSE, seeds = 123456)
 
     # If vectors are provided:
      set.seed(123456, "L'Ecuyer-CMRG")
      Folds1_b <- cvo_create_folds(stratify_by = DF1$gr,
                                   block_by    = DF1$ID,
+                                  folds = folds,
                                   returnTrain = FALSE, seeds = 123456)
 
      # If mixed imput
@@ -28,12 +31,14 @@ test_that("`data`, `stratify_by` and `block_by` parameters of `cvo_create_folds(
      Folds1_x <- cvo_create_folds(data = DF1,
                                   stratify_by = "gr",
                                   block_by    = DF1$ID,
+                                  folds = folds,
                                   returnTrain = FALSE, seeds = 123456)
 
      set.seed(123456, "L'Ecuyer-CMRG")
      Folds1_y <- cvo_create_folds(data = DF1,
                                   stratify_by = DF1$gr,
                                   block_by    = "ID",
+                                  folds = folds,
                                   returnTrain = FALSE, seeds = 123456)
 
 
@@ -43,10 +48,10 @@ test_that("`data`, `stratify_by` and `block_by` parameters of `cvo_create_folds(
 
 
      expect_is(Folds1_a, "cvo")
-     expect_length(Folds1_a, 5)
+     expect_length(Folds1_a, folds)
 
      expect_is(Folds1_b, "cvo")
-     expect_length(Folds1_b, 5)
+     expect_length(Folds1_b, folds)
 
 
      # -----------------------------------------------
@@ -55,12 +60,14 @@ test_that("`data`, `stratify_by` and `block_by` parameters of `cvo_create_folds(
      Folds1_a1 <- cvo_create_folds(data = DF1,
                                    stratify_by = "gr",
                                    block_by    = "ID",
+                                   folds = folds,
                                    returnTrain = TRUE, seeds = 123456)
 
      # If vectors are provided:
      set.seed(123456, "L'Ecuyer-CMRG")
      Folds1_b1 <- cvo_create_folds(stratify_by = DF1$gr,
                                    block_by    = DF1$ID,
+                                   folds = folds,
                                    returnTrain = TRUE, seeds = 123456)
 
      # If mixed imput
@@ -68,12 +75,14 @@ test_that("`data`, `stratify_by` and `block_by` parameters of `cvo_create_folds(
      Folds1_x1 <- cvo_create_folds(       data = DF1,
                                    stratify_by = "gr",
                                    block_by    = DF1$ID,
+                                   folds = folds,
                                    returnTrain = TRUE, seeds = 123456)
 
      set.seed(123456, "L'Ecuyer-CMRG")
      Folds1_y1 <- cvo_create_folds(data = DF1,
                                    stratify_by = DF1$gr,
                                    block_by = "ID",
+                                   folds = folds,
                                    returnTrain = TRUE, seeds = 123456)
 
 
@@ -83,83 +92,10 @@ test_that("`data`, `stratify_by` and `block_by` parameters of `cvo_create_folds(
 
 
      expect_is(Folds1_a1, "cvo")
-     expect_length(Folds1_a1, 5)
+     expect_length(Folds1_a1, folds)
 
      expect_is(Folds1_b1, "cvo")
-     expect_length(Folds1_b1, 5)
-
-})
-
-test_that("Blocking in `cvo_create_folds()` works", {
-    # Load data
-
-    DF1 <- data.frame(ID = rep(1:20, each = 2),
-                      gr = gl(4, 10, labels = LETTERS[1:4]),
-                      .row = 1:40)
-
-    # If variable names and a data frame are provided:
-    set.seed(123456, "L'Ecuyer-CMRG")
-    Folds1_a <- cvo_create_folds(data = DF1,
-                                 stratify_by = "gr",
-                                 block_by = "ID",
-                                 returnTrain = FALSE, seeds = 123456)
-
-    # If vectors are provided:
-     set.seed(123456, "L'Ecuyer-CMRG")
-     Folds1_b <- cvo_create_folds(stratify_by = DF1$gr,
-                                  block_by = DF1$ID,
-                                  returnTrain = FALSE, seeds = 123456)
-
-     # Not blocked but stratified
-     Folds1_c <- cvo_create_folds(stratify_by = DF1$gr,
-                                  returnTrain = FALSE, seeds = 123456)
-
-     # Blocked but not stratified
-     Folds1_d <- cvo_create_folds(block_by = DF1$ID, returnTrain = FALSE)
-
-
-     expect_true(attributes(Folds1_a)$info$blocked)
-     expect_true(attributes(Folds1_b)$info$blocked)
-     expect_false(attributes(Folds1_c)$info$blocked)
-     expect_true(attributes(Folds1_d)$info$blocked)
-
-
-})
-
-test_that("Stratification in `cvo_create_folds()` works", {
-# Load data
-
-    DF1 <- data.frame(ID = rep(1:20, each = 2),
-                      gr = gl(4, 10, labels = LETTERS[1:4]),
-                      .row = 1:40)
-
-
-# If variable names and a data frame are provided:
-    set.seed(123456, "L'Ecuyer-CMRG")
-    Folds1_a <- cvo_create_folds(data = DF1,
-                                 stratify_by = "gr",
-                                 block_by = "ID",
-                                 returnTrain = FALSE, seeds = 123456)
-
-    # If vectors are provided:
-     set.seed(123456, "L'Ecuyer-CMRG")
-     Folds1_b <- cvo_create_folds(stratify_by = DF1$gr,
-                                  block_by = DF1$ID,
-                                  returnTrain = FALSE, seeds = 123456)
-
-     # Not blocked but stratified
-     Folds1_c <- cvo_create_folds(stratify_by = DF1$gr,
-                                  returnTrain = FALSE, seeds = 123456)
-
-     # Blocked but not stratified
-     Folds1_d <- cvo_create_folds(block_by = DF1$ID,
-                                  returnTrain = FALSE, seeds = 123456)
-
-
-     expect_true(attributes(Folds1_a)$info$stratified)
-     expect_true(attributes(Folds1_b)$info$stratified)
-     expect_true(attributes(Folds1_c)$info$stratified)
-     expect_false(attributes(Folds1_d)$info$stratified)
+     expect_length(Folds1_b1, folds)
 
 })
 
@@ -238,3 +174,90 @@ test_that("The size of training set in 3-fold CV is approximately 2/3 * N.", {
     expect_gte(length(TRAIN_3F[[2]]), 16)
     expect_gte(length(TRAIN_3F[[3]]), 16)
 })
+
+
+# =============================================================================
+context("blocking in cvo_create_folds")
+
+test_that("Blocking in `cvo_create_folds()` works", {
+    # Load data
+
+    DF1 <- data.frame(ID = rep(1:20, each = 2),
+                      gr = gl(4, 10, labels = LETTERS[1:4]),
+                      .row = 1:40)
+
+    # If variable names and a data frame are provided:
+    set.seed(123456, "L'Ecuyer-CMRG")
+    Folds1_a <- cvo_create_folds(data = DF1,
+                                 stratify_by = "gr",
+                                 block_by = "ID",
+                                 folds = 5,
+                                 returnTrain = FALSE, seeds = 123456)
+
+    # If vectors are provided:
+     set.seed(123456, "L'Ecuyer-CMRG")
+     Folds1_b <- cvo_create_folds(stratify_by = DF1$gr,
+                                  block_by = DF1$ID,
+                                  folds = 5,
+                                  returnTrain = FALSE, seeds = 123456)
+
+     # Not blocked but stratified
+     Folds1_c <- cvo_create_folds(stratify_by = DF1$gr,
+                                  folds = 5,
+                                  returnTrain = FALSE, seeds = 123456)
+
+     # Blocked but not stratified
+     Folds1_d <- cvo_create_folds(block_by = DF1$ID,
+                                  folds = 5,
+                                  # seeds = 123456
+                                  returnTrain = FALSE)
+
+
+     expect_true(attributes(Folds1_a)$info$blocked)
+     expect_true(attributes(Folds1_b)$info$blocked)
+     expect_false(attributes(Folds1_c)$info$blocked)
+     expect_true(attributes(Folds1_d)$info$blocked)
+
+
+})
+
+# =============================================================================
+context("Stratification in cvo_create_folds")
+
+test_that("Stratification in `cvo_create_folds()` works", {
+# Load data
+
+    DF1 <- data.frame(ID = rep(1:20, each = 2),
+                      gr = gl(4, 10, labels = LETTERS[1:4]),
+                      .row = 1:40)
+
+
+# If variable names and a data frame are provided:
+    set.seed(123456, "L'Ecuyer-CMRG")
+    Folds1_a <- cvo_create_folds(data = DF1,
+                                 stratify_by = "gr",
+                                 block_by = "ID",
+                                 returnTrain = FALSE, seeds = 123456)
+
+    # If vectors are provided:
+     set.seed(123456, "L'Ecuyer-CMRG")
+     Folds1_b <- cvo_create_folds(stratify_by = DF1$gr,
+                                  block_by = DF1$ID,
+                                  returnTrain = FALSE, seeds = 123456)
+
+     # Not blocked but stratified
+     Folds1_c <- cvo_create_folds(stratify_by = DF1$gr,
+                                  returnTrain = FALSE, seeds = 123456)
+
+     # Blocked but not stratified
+     Folds1_d <- cvo_create_folds(block_by = DF1$ID,
+                                  returnTrain = FALSE, seeds = 123456)
+
+
+     expect_true(attributes(Folds1_a)$info$stratified)
+     expect_true(attributes(Folds1_b)$info$stratified)
+     expect_true(attributes(Folds1_c)$info$stratified)
+     expect_false(attributes(Folds1_d)$info$stratified)
+
+})
+

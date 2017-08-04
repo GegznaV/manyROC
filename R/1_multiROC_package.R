@@ -23,6 +23,7 @@
 #'                       assert_data_frame
 #'                       assert_factor
 #'                       assert_flag
+#'                       assert_int
 #'                       assert_number
 #'                       assert_numeric
 #'                       assert_set_equal
