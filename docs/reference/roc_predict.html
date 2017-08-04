@@ -141,10 +141,7 @@
 <span class='no'>gr</span> <span class='kw'>&lt;-</span> <span class='fu'>gl</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>length</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"H"</span>,<span class='st'>"S"</span>))
 <span class='no'>object</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='roc_analysis.html'>roc_analysis</a></span>(<span class='no'>x</span>, <span class='no'>gr</span>)
 
-<span class='fu'>roc_predict</span>(<span class='no'>object</span>, <span class='kw'>x_new</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; Called from: eval(expr, p)
-#&gt; debug at D:\Dokumentai\R\multiROC/R/roc_predict.R#69: prediction &lt;- ifelse(x_new &lt; object$cutoff, yes = as.character(object$below), 
-#&gt;     no = as.character(object$above))
-#&gt; debug at D:\Dokumentai\R\multiROC/R/roc_predict.R#78: prediction</div><div class='output co'>#&gt; [1] "H"</div><div class='input'>
+<span class='fu'>roc_predict</span>(<span class='no'>object</span>, <span class='kw'>x_new</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] "H"</div><div class='input'>
 <span class='fu'>roc_predict</span>(<span class='no'>object</span>, <span class='kw'>x_new</span> <span class='kw'>=</span> -<span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] "S"</div><div class='input'>
 <span class='fu'>roc_predict</span>(<span class='no'>object</span>, <span class='kw'>x_new</span> <span class='kw'>=</span> <span class='fu'>rnorm</span>(<span class='fl'>20</span>))</div><div class='output co'>#&gt;  [1] "H" "S" "H" "S" "H" "S" "H" "S" "H" "H" "H" "H" "H" "S" "H" "H" "H" "H" "S"
 #&gt; [20] "S"</div><div class='input'>

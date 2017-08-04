@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>#' [!] Carry out the multiROC analysis with cross-validation � roc_multiroc_cv • multiROC</title>
+<title>Carry out the multiROC analysis with cross-validation � roc_multiroc_cv • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -92,11 +92,12 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>#' [!] Carry out the multiROC analysis with cross-validation</h1>
+    <h1>Carry out the multiROC analysis with cross-validation</h1>
     </div>
 
     
-    <p>#' [!] Carry out the multiROC analysis with cross-validation</p>
+    <p>Do the ROC analysis (<code><a href='roc_analysis.html'>roc_analysis</a></code>) with cross-validation
+for each column of <code>x</code> (<code><a href='roc_multiroc.html'>roc_multiroc</a></code>).</p>
     
 
     <pre class="usage"><span class='fu'>roc_multiroc_cv</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='kw'>cvo</span> <span class='kw'>=</span> <span class='fu'><a href='cvo_create_folds.html'>cvo_create_folds</a></span>(<span class='no'>x</span>, <span class='no'>gr</span>,
@@ -135,24 +136,36 @@ or similar.</p></td>
     </tr>
     <tr>
       <th>seeds</th>
-      <td><p>(vector of integers | <code>NULL</code>) Seeds for random number
-            generator for each repetition.
-            If <code>seeds = NULL</code> random seeds are generated.
-            If number of repetitions is
-            greater than number of provided seeds, random seeds are
-            generated and added to the provided ones. The first seed will
-            be used to ensure reproducibility of the randomly generated
-            seeds.</p>
-<p>(See <code><a href='http://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></code> for more information about
-             random number generation).</p></td>
+      <td><p>(<code>NA_real_</code> | <code>NULL</code> | vector of integers)
+             Seeds for random number generator for each repetition.</p><ul>
+<li><p>If <code>seeds = NA_real_</code> (default), no seeds are set,
+             parameter <code>kind</code> is also ignored.</p></li>
+<li><p>If <code>seeds = NULL</code> random seeds are generated
+            automatically and registered in attribute <code>"seeds"</code>.</p></li>
+<li><p>If numeric vector, then these seeds will be used for each
+            repetition of cross-validation.
+            If the number of repetitions is greater than the number of
+            provided seeds, additional seeds are generated and added to
+            the vector. The first seed will be used to ensure
+            reproducibility of the randomly generated seeds.</p></li>
+</ul>
+
+<p>For more information about random number generation see
+             <code><a href='http://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></code>.</p></td>
     </tr>
     <tr>
       <th>kind</th>
-      <td><p>(<code>character</code> | <code>NULL</code>) The kind of (pseudo)random
-number generator. Default is <code>"L'Ecuyer-CMRG"</code> as it
-provides the basis for the multiple streams used in package
-<span class="pkg">parallel</span>.
-More information at <code><a href='http://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></code>.</p></td>
+      <td><p>(<code>NULL</code> | <code>character</code>)
+            The kind of (pseudo)random number generator. Default is
+            <code>NULL</code>, which selects the currently-used generator
+            (including that used in the previous session if the
+            workspace has been restored): if no generator has been
+            used it selects <code>"default"</code>.</p>
+<p>Generator <code>"L'Ecuyer-CMRG"</code> is recommended if package
+            <span class="pkg">parallel</span> is used for for parallel computing.
+            In this case each seed should have 6 elements neither the first
+            three nor the last three should be all zero.
+            More information at <code><a href='http://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></code>.</p></td>
     </tr>
     </table>
     
@@ -171,50 +184,8 @@ More information at <code><a href='http://www.rdocumentation.org/packages/base/t
 
 <span class='fu'>data</span>(<span class='no'>PlantGrowth</span>)
 
-<span class='fu'>roc_multiroc_cv</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='no'>PlantGrowth</span>$<span class='no'>group</span>)</div><div class='output co'>#&gt;          set       fold compared_groups feature median_neg cutoff median_pos
-#&gt; 1   training Rep1_Fold1   ctrl vs. trt1       1       4.88   4.23       4.75
-#&gt; 2   training Rep1_Fold1   ctrl vs. trt2       1       4.88   5.22       5.33
-#&gt; 3   training Rep1_Fold1   trt1 vs. trt2       1       4.75    4.9       5.33
-#&gt; 4   training Rep1_Fold2   ctrl vs. trt1       1       5.15   4.37       4.55
-#&gt; ...      ...        ...             ...     ...        ...    ...        ...
-#&gt; 27      test Rep1_Fold4   trt1 vs. trt2       1         NA    4.9         NA
-#&gt; 28      test Rep1_Fold5   ctrl vs. trt1       1         NA   4.35         NA
-#&gt; 29      test Rep1_Fold5   ctrl vs. trt2       1         NA   5.22         NA
-#&gt; 30      test Rep1_Fold5   trt1 vs. trt2       1         NA   4.87         NA
-#&gt;                                                                             
-#&gt;      tp  fn  fp  tn sens spec  ppv  npv  bac youden kappa  auc
-#&gt; 1     3   5   1   7 0.38 0.88 0.75 0.58 0.62   0.25  0.25 0.57
-#&gt; 2     6   2   2   6 0.75 0.75 0.75 0.75 0.75   0.50  0.50 0.77
-#&gt; 3     8   0   2   6 1.00 0.75 0.80 1.00 0.88   0.75  0.75 0.78
-#&gt; 4     4   4   0   8 0.50 1.00 1.00 0.67 0.75   0.50  0.50 0.69
-#&gt; ... ... ... ... ...  ...  ...  ...  ...  ...    ...   ...  ...
-#&gt; 27    2   0   0   2 1.00 1.00 1.00 1.00 1.00   1.00  1.00   NA
-#&gt; 28    0   2   0   2 0.00 1.00  NaN 0.50 0.50   0.00  0.00   NA
-#&gt; 29    2   0   1   1 1.00 0.50 0.67 1.00 0.75   0.50  0.50   NA
-#&gt; 30    2   0   2   0 1.00 0.00 0.50  NaN 0.50   0.00  0.00   NA
-#&gt;                                                               </div><div class='input'>
-<span class='fu'>roc_multiroc_cv</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='fu'>gl</span>(<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>30</span>))</div><div class='output co'>#&gt;         set       fold compared_groups feature median_neg cutoff median_pos tp
-#&gt; 1  training Rep1_Fold1         1 vs. 2       1       5.25   5.27       5.13  9
-#&gt; 2  training Rep1_Fold2         1 vs. 2       1       5.25   4.09        5.2  2
-#&gt; 3  training Rep1_Fold3         1 vs. 2       1       5.17   5.25          5 10
-#&gt; 4  training Rep1_Fold4         1 vs. 2       1       5.25   4.88       4.79  7
-#&gt; 5  training Rep1_Fold5         1 vs. 2       1       5.17   3.66       5.13  2
-#&gt; 6      test Rep1_Fold1         1 vs. 2       1         NA   5.27         NA  2
-#&gt; 7      test Rep1_Fold2         1 vs. 2       1         NA   4.09         NA  1
-#&gt; 8      test Rep1_Fold3         1 vs. 2       1         NA   5.25         NA  1
-#&gt; 9      test Rep1_Fold4         1 vs. 2       1         NA   4.88         NA  0
-#&gt; 10     test Rep1_Fold5         1 vs. 2       1         NA   3.66         NA  0
-#&gt;    fn fp tn sens spec  ppv  npv  bac youden kappa  auc
-#&gt; 1   3  6  6 0.75 0.50 0.60 0.67 0.62   0.25  0.25 0.55
-#&gt; 2  10  0 12 0.17 1.00 1.00 0.55 0.58   0.17  0.17 0.55
-#&gt; 3   2  7  5 0.83 0.42 0.59 0.71 0.62   0.25  0.25 0.62
-#&gt; 4   5  4  8 0.58 0.67 0.64 0.62 0.62   0.25  0.25 0.61
-#&gt; 5  10  0 12 0.17 1.00 1.00 0.55 0.58   0.17  0.17 0.55
-#&gt; 6   1  2  1 0.67 0.33 0.50 0.50 0.50   0.00  0.00   NA
-#&gt; 7   2  0  3 0.33 1.00 1.00 0.60 0.67   0.33  0.33   NA
-#&gt; 8   2  1  2 0.33 0.67 0.50 0.50 0.50   0.00  0.00   NA
-#&gt; 9   3  1  2 0.00 0.67 0.00 0.40 0.33  -0.33 -0.33   NA
-#&gt; 10  3  0  3 0.00 1.00  NaN 0.50 0.50   0.00  0.00   NA</div><div class='input'>
+<span class='fu'>roc_multiroc_cv</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='no'>PlantGrowth</span>$<span class='no'>group</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: is.na() applied to non-(list or vector) of type 'NULL'</span></div><div class='output co'>#&gt; <span class='error'>Error in if (!is.na(seeds)) {    len_seeds &lt;- length(seeds)    if (!is.null(seeds) &amp; (len_seeds &lt; times) &amp; (len_seeds &gt;         1))         warning("Number of provided `seeds` is not sufficient. \n",             "Random `seeds` will be added.\n")    if (len_seeds == 1 &amp; (len_seeds &lt; times))         set.seed(seed = seeds, kind = kind)    if (is.null(seeds) | (len_seeds &lt; times)) {        seeds &lt;- c(seeds, sample(-9e+07:9e+07, times - len_seeds))    }    seeds &lt;- rep_len(seeds, times)} else {    seeds &lt;- NULL}: argument is of length zero</span></div><div class='input'>
+<span class='fu'>roc_multiroc_cv</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='fu'>gl</span>(<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>30</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: is.na() applied to non-(list or vector) of type 'NULL'</span></div><div class='output co'>#&gt; <span class='error'>Error in if (!is.na(seeds)) {    len_seeds &lt;- length(seeds)    if (!is.null(seeds) &amp; (len_seeds &lt; times) &amp; (len_seeds &gt;         1))         warning("Number of provided `seeds` is not sufficient. \n",             "Random `seeds` will be added.\n")    if (len_seeds == 1 &amp; (len_seeds &lt; times))         set.seed(seed = seeds, kind = kind)    if (is.null(seeds) | (len_seeds &lt; times)) {        seeds &lt;- c(seeds, sample(-9e+07:9e+07, times - len_seeds))    }    seeds &lt;- rep_len(seeds, times)} else {    seeds &lt;- NULL}: argument is of length zero</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -226,6 +197,10 @@ More information at <code><a href='http://www.rdocumentation.org/packages/base/t
       
       <li><a href="#examples">Examples</a></li>
     </ul>
+
+    <h2>Author</h2>
+    
+Vilmantas Gegzna
 
   </div>
 </div>

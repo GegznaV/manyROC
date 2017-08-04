@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>[!] Carry out the multiROC analysis � print.multiroc_result • multiROC</title>
+<title>Carry out the multiROC analysis � print.multiroc_result • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -92,12 +92,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>[!] Carry out the multiROC analysis</h1>
+    <h1>Carry out the multiROC analysis</h1>
     </div>
 
     
-    <p>[!!!] For spectroscopic data: compare spectra of each pair of indicated groups
-at each wavelength.</p>
+    <p>Do the ROC analysis (<code><a href='roc_analysis.html'>roc_analysis</a></code>) for each column of <code>x</code>.</p>
     
 
     <pre class="usage"><span class='co'># S3 method for multiroc_result</span>
@@ -200,7 +199,8 @@ columns:</p><ul>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Consider ordering of factor <code>gr</code> levels before the analysis, as the
+    <ol>
+<li><p>Consider ordering of factor <code>gr</code> levels before the analysis, as the
 first level will always be treated as negative and the last as positive.
 <b>E.g.</b>, if we have factor with 3 levels in this particular order
 "A", "B", "C",  then "A" will always be negative, "C" always positive and
@@ -209,7 +209,10 @@ The same principle applies if there are more than 3 levels.
 This is important determining what specificity and sensitivity, etc., means
 in the context of group names: if positive is "A" then <em>sensitivity</em>
 will be related to group "A", but if "A" is negative, then <em>specificity</em>
-will be related to this group, and sensitivity to the other group.</p>
+will be related to this group, and sensitivity to the other group.</p></li>
+<li><p>For spectroscopic data: compare spectra of each pair of indicated groups
+at each wavelength.</p></li>
+</ol>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
