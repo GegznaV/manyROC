@@ -5,7 +5,7 @@
 \title{Carry out the multiROC analysis with cross-validation}
 \usage{
 roc_multiroc_cv(x, gr, optimize_by = "bac", cvo = cvo_create_folds(x, gr,
-  seeds = seeds, kind = kind), seeds = NULL, kind = "L'Ecuyer-CMRG")
+  seeds = seeds, kind = kind), seeds = NA_real_, kind = NULL)
 }
 \arguments{
 \item{x}{A numeric matrix, a data frame, a \code{hyperSpec} object or another
@@ -68,7 +68,7 @@ A data frame with results. The object also inferits from
 }
 \description{
 Do the ROC analysis (\code{\link{roc_analysis}}) with cross-validation
-for each column of \code{x} (\code{\link{roc_multiroc}}).
+for each column of \code{x} (see also: \code{\link{roc_multiroc}}).
 }
 \examples{
 
@@ -78,6 +78,8 @@ library(multiROC)
 # --- For numeric vectors objects ---
 
 data(PlantGrowth)
+
+set.seed(123456)
 
 roc_multiroc_cv(PlantGrowth$weight, PlantGrowth$group)
 

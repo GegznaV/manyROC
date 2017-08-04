@@ -2,14 +2,30 @@
 # To do
 # [!!!] the desctription needs revision
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# [!!!] To do: in
+#
+#     roc_multiroc_cv(PlantGrowth$weight, PlantGrowth$group)
+#     roc_multiroc_cv(PlantGrowth[,"weight", drop = FALSE], PlantGrowth$group)
+#
+# culumn `feature` should have named elements, not just all 1
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+# x <- PlantGrowth$weight
+# gr <- PlantGrowth$group
+# sp_x <- sp
+# x  <- sp_x[[]]
+# gr <- sp_x$gr
+# gr <- gl(3, 5, length = length(sp_x$gr), LETTERS[1:3])
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 #' Carry out the multiROC analysis with cross-validation
 #'
 #' Do the ROC analysis (\code{\link{roc_analysis}}) with cross-validation
-#' for each column of \code{x} (\code{\link{roc_multiroc}}).
+#' for each column of \code{x} (see also: \code{\link{roc_multiroc}}).
 #'
-#' @return A data frame with results. The object also inferits from
-#'  class \code{multiroc_cv} (for displaying purposes).
+#'
 #' @param cvo a cross-validation object (cvo), created with function
 #'            \code{\link{cvo_create_folds}},
 #'            \pkg{caret} \code{\link[caret]{createFolds}}
@@ -18,6 +34,11 @@
 #' @inheritParams roc_multiroc
 #' @inheritParams cvo_create_folds
 #' @inheritParams roc_performance_measures
+#'
+#'
+#' @return A data frame with results. The object also inferits from
+#'  class \code{multiroc_cv} (for displaying purposes).
+#'
 #'
 #' @export
 #'
@@ -32,33 +53,19 @@
 #'
 #' data(PlantGrowth)
 #'
+#' set.seed(123456)
+#'
 #' roc_multiroc_cv(PlantGrowth$weight, PlantGrowth$group)
 #'
 #' roc_multiroc_cv(PlantGrowth$weight, gl(2, 1, 30))
 #'
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# [!!!] To do: in
-#
-#     roc_multiroc_cv(PlantGrowth$weight, PlantGrowth$group)
-#     roc_multiroc_cv(PlantGrowth[,"weight", drop = FALSE], PlantGrowth$group)
-#
-# culumn `feature` should have named elements, not just all 1
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-# x <- PlantGrowth$weight
-# gr <- PlantGrowth$group
-# sp_x <- sp
-# x  <- sp_x[[]]
-# gr <- sp_x$gr
-# gr <- gl(3, 5, length = length(sp_x$gr), LETTERS[1:3])
-#
 roc_multiroc_cv <- function(x,
                             gr,
                             optimize_by = "bac",
                             cvo = cvo_create_folds(x, gr, seeds = seeds, kind = kind),
-                            seeds = NULL,
-                            kind = "L'Ecuyer-CMRG") {
+                            seeds = NA_real_,
+                            kind = NULL) {
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     x <- as.matrix(x)

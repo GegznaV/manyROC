@@ -189,7 +189,7 @@ cvo_create_folds <- function(data = NULL,
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Choose seeds for random number generation -------------------------
     assert_numeric(seeds, null.ok = TRUE)
-    assert_string(kind, null.ok = TRUE)
+    assert_string(kind,   null.ok = TRUE)
 
     # The code in this `if` converts seeds either numeric vector or NULL
     if (!is.na(seeds)) {
