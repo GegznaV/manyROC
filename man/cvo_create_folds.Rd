@@ -5,7 +5,7 @@
 \title{Create a cvo (cross-valitation object)}
 \usage{
 cvo_create_folds(data = NULL, stratify_by = NULL, block_by = NULL,
-  folds = 5, times = 1, seeds = NULL, kind = "L'Ecuyer-CMRG",
+  folds = 5, times = 1, seeds = NA_real_, kind = NULL,
   mode = c("caret", "mlr")[1], returnTrain = c(TRUE, FALSE, "both")[1],
   predict = c("test", "train", "both")[1], k = folds)
 }
@@ -23,26 +23,41 @@ will be used for blocking.}
 
 \item{folds, k}{(\code{integer})\cr A number of folds, default \code{folds = 5}.}
 
-\item{times}{(\code{integer})\cr a number of repetitions for
-repeated cross-validation.}
+\item{times}{(\code{integer})\cr
+A number of repetitions for repeated cross-validation.}
 
-\item{seeds}{(vector of integers | \code{NULL})\cr Seeds for random number
-            generator for each repetition.\cr
-            If \code{seeds = NULL} random seeds are generated.\cr
-            If number of repetitions is
-            greater than number of provided seeds, random seeds are
-            generated and added to the provided ones. The first seed will
-            be used to ensure reproducibility of the randomly generated
-            seeds.\cr
+\item{seeds}{(\code{NA_real_} | \code{NULL} | vector of integers)\cr
+             Seeds for random number generator for each repetition.
+  \itemize{
+      \item If \code{seeds = NA_real_} (default), no seeds are set,
+             parameter \code{kind} is also ignored.
 
-             (See \code{\link[base]{set.seed}} for more information about
-             random number generation).}
+      \item If \code{seeds = NULL} random seeds are generated
+            automatically and registered in attribute \code{"seeds"}.
 
-\item{kind}{(\code{character} | \code{NULL})\cr The kind of (pseudo)random
-number generator. Default is \code{"L'Ecuyer-CMRG"} as it
-provides the basis for the multiple streams used in package
-\pkg{parallel}.
-More information at \code{\link[base]{set.seed}}.}
+      \item If numeric vector, then these seeds will be used for each
+            repetition of cross-validation.
+            If the number of repetitions is greater than the number of
+            provided seeds, additional seeds are generated and added to
+            the vector. The first seed will be used to ensure
+            reproducibility of the randomly generated seeds.
+            }
+
+             For more information about random number generation see
+             \code{\link[base]{set.seed}}.}
+
+\item{kind}{(\code{NULL} | \code{character})\cr
+            The kind of (pseudo)random number generator. Default is
+            \code{NULL}, which selects the currently-used generator
+            (including that used in the previous session if the
+            workspace has been restored): if no generator has been
+            used it selects \code{"default"}.\cr
+
+            Generator \code{"L'Ecuyer-CMRG"} is recommended if package
+            \pkg{parallel} is used for for parallel computing.
+            In this case each seed should have 6 elements neither the first
+            three nor the last three should be all zero.
+            More information at \code{\link[base]{set.seed}}.}
 
 \item{mode}{(\code{character})\cr Either \pkg{caret}-like or \pkg{mlr}-like
 cvo object. \bold{This option is not implemented yet!}}
@@ -52,8 +67,8 @@ If \code{TRUE}, returns indices of variables in
 a training set (\pkg{caret} style).
 If \code{FALSE}, returns indices of variables in
 a test set (\pkg{caret} style).
-If \code{"both"}, returns indices of
-variables in both training and test sets (\pkg{mlr} style).}
+If \code{"both"}, returns indices of variables
+in both training and test sets (\pkg{mlr} style).}
 
 \item{predict}{[\code{character(1)}]\cr
 What to predict during resampling: \dQuote{train}, \dQuote{test} or \dQuote{both} sets.
@@ -67,15 +82,15 @@ Default is \dQuote{test}.}
         \code{\link[mlr]{makeResampleInstance}} in \pkg{mlr}.
 }
 \description{
-[!!!] \bold{DESCRIPTION MUST BE UPDATED}\cr
+Create indices of folds with blocking and stratification (cvo object)
+Create a cross-validation object (cvo), which contain a list of indices
+for each fold of (repeated) k-fold cross-validation.
+Options of blocking and stratification are available. See more in "Details".
 }
 \details{
-Create indices of folds with blocking and stratification (cvo object)
-Create indices of folds with blocking and stratification for (repeated)
-k-fold cross-validation. \cr
 Function \code{cvo_create_folds} randomly divides observations into
 folds that are used for (repeated) k-fold cross-validation. In these
- folds observations are:
+folds observations are:
 \enumerate{
  \item \bold{blocked} by values in variable \code{block_by}
      (i.e. observations with the same "ID" or other kind of blocking factor
@@ -86,15 +101,16 @@ folds that are used for (repeated) k-fold cross-validation. In these
  }
 }
 \note{
-If \code{folds} is such big, that some folds have no observations of
-      a certain group (i.e., level in \code{stratify_by}), an error
-      is returned. In that case smaller value of \code{folds} may be
+If \code{folds} is too big and cases of at least one group (i.e.,
+      level in \code{stratify_by}) are not included in at least one fold,
+      an error is returned. In that case smaller value of \code{folds} is
       recommended.
 }
 \examples{
 library(multiROC)
+set.seed(123456)
 
-# [!!!] Load data
+# Data
 DataSet1 <-data.frame(ID = rep(1:20, each = 2),
                            gr = gl(4, 10, labels = LETTERS[1:4]),
                            .row = 1:40)

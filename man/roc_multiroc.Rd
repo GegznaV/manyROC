@@ -7,7 +7,7 @@
 \alias{roc_multiroc.numeric}
 \alias{roc_multiroc.data.frame}
 \alias{roc_multiroc.hyperSpec}
-\title{[!] Carry out the multiROC analysis}
+\title{Carry out the multiROC analysis}
 \usage{
 \method{print}{multiroc_result}(x, ..., show_all = FALSE, perf_digits = 2,
   fmt = "\%.3g")
@@ -83,12 +83,12 @@ columns:
 }
 }
 \description{
-[!!!] For spectroscopic data: compare spectra of each pair of indicated groups
-at each wavelength.
+Do the ROC analysis (\code{\link{roc_analysis}}) for each column of \code{x}.
 }
 \details{
-Consider ordering of factor \code{gr} levels before the analysis, as the
-first level will always be treated as negative and the last as positive.\cr
+\enumerate{
+\item Consider ordering of factor \code{gr} levels before the analysis, as the
+first level will always be treated as negative and the last as positive.
 \bold{E.g.}, if we have factor with 3 levels in this particular order
 "A", "B", "C",  then "A" will always be negative, "C" always positive and
 "B" positive, when compared to "A" and negative, when compared to "C".
@@ -97,6 +97,10 @@ This is important determining what specificity and sensitivity, etc., means
 in the context of group names: if positive is "A" then \emph{sensitivity}
 will be related to group "A", but if "A" is negative, then \emph{specificity}
 will be related to this group, and sensitivity to the other group.
+
+\item For spectroscopic data: compare spectra of each pair of indicated groups
+at each wavelength.
+}
 }
 \examples{
 

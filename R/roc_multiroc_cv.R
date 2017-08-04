@@ -1,5 +1,12 @@
 # =============================================================================
-#' #' [!] Carry out the multiROC analysis with cross-validation
+# To do
+# [!!!] the desctription needs revision
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#' Carry out the multiROC analysis with cross-validation
+#'
+#' Do the ROC analysis (\code{\link{roc_analysis}}) with cross-validation
+#' for each column of \code{x} (\code{\link{roc_multiroc}}).
 #'
 #' @return A data frame with results. The object also inferits from
 #'  class \code{multiroc_cv} (for displaying purposes).
@@ -13,6 +20,9 @@
 #' @inheritParams roc_performance_measures
 #'
 #' @export
+#'
+#' @author Vilmantas Gegzna
+#'
 #' @examples
 #'
 #' library(multiROC)
@@ -26,6 +36,15 @@
 #'
 #' roc_multiroc_cv(PlantGrowth$weight, gl(2, 1, 30))
 #'
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# [!!!] To do: in
+#
+#     roc_multiroc_cv(PlantGrowth$weight, PlantGrowth$group)
+#     roc_multiroc_cv(PlantGrowth[,"weight", drop = FALSE], PlantGrowth$group)
+#
+# culumn `feature` should have named elements, not just all 1
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # x <- PlantGrowth$weight
 # gr <- PlantGrowth$group
@@ -41,12 +60,12 @@ roc_multiroc_cv <- function(x,
                             seeds = NULL,
                             kind = "L'Ecuyer-CMRG") {
 
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     x <- as.matrix(x)
     assert_numeric(x)
 
     assert_factor(gr, min.levels = 2)
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Number of folds in total
     n_repetitions <- cvo_count_folds(cvo)
 
@@ -95,6 +114,7 @@ roc_multiroc_cv <- function(x,
 
 
 } # [END]
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Hepler functions:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -106,6 +126,8 @@ res2df <- function(res) {
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 split_by_feature <- function(obj) {
+
+    # [!!!] TO do: cvo mut be in the output too
     res <- split(obj, obj$feature)
     purrr::map(res, add_class_label, c("roc_info", "roc_df"))
 }

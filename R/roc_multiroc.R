@@ -1,11 +1,17 @@
-#' [!] Carry out the multiROC analysis
+# =============================================================================
+# To do
+# [!!!] the desctription needs revision
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#' Carry out the multiROC analysis
 #'
-#' [!!!] For spectroscopic data: compare spectra of each pair of indicated groups
-#' at each wavelength.
+#' Do the ROC analysis (\code{\link{roc_analysis}}) for each column of \code{x}.
+#'
 #'
 #' @details
-#' Consider ordering of factor \code{gr} levels before the analysis, as the
-#' first level will always be treated as negative and the last as positive.\cr
+#' \enumerate{
+#' \item Consider ordering of factor \code{gr} levels before the analysis, as the
+#' first level will always be treated as negative and the last as positive.
 #' \bold{E.g.}, if we have factor with 3 levels in this particular order
 #' "A", "B", "C",  then "A" will always be negative, "C" always positive and
 #' "B" positive, when compared to "A" and negative, when compared to "C".
@@ -15,7 +21,9 @@
 #' will be related to group "A", but if "A" is negative, then \emph{specificity}
 #' will be related to this group, and sensitivity to the other group.
 #'
-#' @name roc_multiroc
+#' \item For spectroscopic data: compare spectra of each pair of indicated groups
+#' at each wavelength.
+#' }
 #'
 #' @param x A numeric matrix, a data frame, a \code{hyperSpec} object or another
 #'           type of object, convertible to a numeric matrix.
@@ -62,6 +70,7 @@
 #'
 #'
 #' @export
+#'
 #' @author Vilmantas Gegzna
 #' @family \pkg{multiROC} functions.
 #'
@@ -91,6 +100,8 @@
 #'
 #' roc_multiroc(fluorescence[ , , 500~502], fluorescence$gr)
 #'
+#' @name roc_multiroc
+
 roc_multiroc <- function(x, gr = NULL, optimize_by = "bac",  ...) {
     UseMethod("roc_multiroc")
 }

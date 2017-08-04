@@ -2,7 +2,7 @@
 % Please edit documentation in R/roc_multiroc_cv.R
 \name{roc_multiroc_cv}
 \alias{roc_multiroc_cv}
-\title{#' [!] Carry out the multiROC analysis with cross-validation}
+\title{Carry out the multiROC analysis with cross-validation}
 \usage{
 roc_multiroc_cv(x, gr, optimize_by = "bac", cvo = cvo_create_folds(x, gr,
   seeds = seeds, kind = kind), seeds = NULL, kind = "L'Ecuyer-CMRG")
@@ -29,30 +29,46 @@ variable (a vector) which defines groups in \code{x}.}
 \pkg{caret} \code{\link[caret]{createFolds}}
 or similar.}
 
-\item{seeds}{(vector of integers | \code{NULL})\cr Seeds for random number
-            generator for each repetition.\cr
-            If \code{seeds = NULL} random seeds are generated.\cr
-            If number of repetitions is
-            greater than number of provided seeds, random seeds are
-            generated and added to the provided ones. The first seed will
-            be used to ensure reproducibility of the randomly generated
-            seeds.\cr
+\item{seeds}{(\code{NA_real_} | \code{NULL} | vector of integers)\cr
+             Seeds for random number generator for each repetition.
+  \itemize{
+      \item If \code{seeds = NA_real_} (default), no seeds are set,
+             parameter \code{kind} is also ignored.
 
-             (See \code{\link[base]{set.seed}} for more information about
-             random number generation).}
+      \item If \code{seeds = NULL} random seeds are generated
+            automatically and registered in attribute \code{"seeds"}.
 
-\item{kind}{(\code{character} | \code{NULL})\cr The kind of (pseudo)random
-number generator. Default is \code{"L'Ecuyer-CMRG"} as it
-provides the basis for the multiple streams used in package
-\pkg{parallel}.
-More information at \code{\link[base]{set.seed}}.}
+      \item If numeric vector, then these seeds will be used for each
+            repetition of cross-validation.
+            If the number of repetitions is greater than the number of
+            provided seeds, additional seeds are generated and added to
+            the vector. The first seed will be used to ensure
+            reproducibility of the randomly generated seeds.
+            }
+
+             For more information about random number generation see
+             \code{\link[base]{set.seed}}.}
+
+\item{kind}{(\code{NULL} | \code{character})\cr
+            The kind of (pseudo)random number generator. Default is
+            \code{NULL}, which selects the currently-used generator
+            (including that used in the previous session if the
+            workspace has been restored): if no generator has been
+            used it selects \code{"default"}.\cr
+
+            Generator \code{"L'Ecuyer-CMRG"} is recommended if package
+            \pkg{parallel} is used for for parallel computing.
+            In this case each seed should have 6 elements neither the first
+            three nor the last three should be all zero.
+            More information at \code{\link[base]{set.seed}}.}
 }
 \value{
 A data frame with results. The object also inferits from
  class \code{multiroc_cv} (for displaying purposes).
 }
 \description{
-#' [!] Carry out the multiROC analysis with cross-validation
+Do the ROC analysis (\code{\link{roc_analysis}}) with cross-validation
+for each column of \code{x} (\code{\link{roc_multiroc}}).
 }
 \examples{
 
@@ -67,4 +83,7 @@ roc_multiroc_cv(PlantGrowth$weight, PlantGrowth$group)
 
 roc_multiroc_cv(PlantGrowth$weight, gl(2, 1, 30))
 
+}
+\author{
+Vilmantas Gegzna
 }
