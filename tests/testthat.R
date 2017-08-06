@@ -1,6 +1,6 @@
 library(testthat)
-library(multiROC)
+library(manyROC)
 library(magrittr)
 library(hyperSpec)
 
-test_check("multiROC")
+test_check("manyROC")

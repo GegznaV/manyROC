@@ -11,7 +11,7 @@ test_that("print methos do not throw error", {
     expect_is(out_1, "character")
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     data(fluorescence)
-    res_list_2 <- roc_multiroc(fluorescence[ , , 500~502], fluorescence$gr)
+    res_list_2 <- roc_manyroc(fluorescence[ , , 500~502], fluorescence$gr)
     out_2 <- capture_output(print(res_list_2))
     expect_is(out_2, "character")
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

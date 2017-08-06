@@ -11,9 +11,9 @@ roc_extract_info <- function(obj, ...) {
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_extract_info
-#' @method roc_extract_info multiroc_result
+#' @method roc_extract_info manyroc_result
 #' @export
-roc_extract_info.multiroc_result <- function(obj, ...) {
+roc_extract_info.manyroc_result <- function(obj, ...) {
 
     put_smaller_first <- function(pos_is_larger, pos, neg) {
         if (pos_is_larger)
@@ -57,5 +57,5 @@ roc_extract_info.multiroc_result <- function(obj, ...) {
                       cutoff,
                       above
         ) %>%
-        add_class_label(c("multiroc_info", "roc_df"))
+        add_class_label(c("manyroc_info", "roc_df"))
 }

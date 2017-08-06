@@ -3,7 +3,7 @@
 # [!!!] the desctription needs revision
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#' Carry out the multiROC analysis
+#' Carry out the manyROC analysis
 #'
 #' Do the ROC analysis (\code{\link{roc_analysis}}) for each column of \code{x}.
 #'
@@ -44,7 +44,7 @@
 #'       \item \code{"youden"} - for Youden's index;
 #' }
 #'
-#' @return Object of classes \code{multiroc_result} and \code{data.frame} with
+#' @return Object of classes \code{manyroc_result} and \code{data.frame} with
 #' columns:
 #'  \itemize{
 #'       \item \code{compared_groups} Names of compared groups (separated by
@@ -72,45 +72,45 @@
 #' @export
 #'
 #' @author Vilmantas Gegzna
-#' @family \pkg{multiROC} functions.
+#' @family \pkg{manyROC} functions.
 #'
 #' @examples
 #'
-#' library(multiROC)
+#' library(manyROC)
 #'
 #'
 #' # --- For numeric vectors objects ---
 #'
 #' data(PlantGrowth)
-#' roc_multiroc(PlantGrowth$weight, PlantGrowth$group)
+#' roc_manyroc(PlantGrowth$weight, PlantGrowth$group)
 #'
 #'
 #' # --- For dataframes objects ---
 #'
 #' data(CO2)
-#' roc_multiroc(CO2[, c("conc", "uptake")], CO2$Type)
+#' roc_manyroc(CO2[, c("conc", "uptake")], CO2$Type)
 #'
 #' data(OrchardSprays)
-#' roc_multiroc(OrchardSprays$decrease, OrchardSprays$treatment)
+#' roc_manyroc(OrchardSprays$decrease, OrchardSprays$treatment)
 #'
 #' # --- For hyperSpec objects ---
 #'
 #' library(hyperSpec)
 #' fluorescence
 #'
-#' roc_multiroc(fluorescence[ , , 500~502], fluorescence$gr)
+#' roc_manyroc(fluorescence[ , , 500~502], fluorescence$gr)
 #'
-#' @name roc_multiroc
+#' @name roc_manyroc
 
-roc_multiroc <- function(x, gr = NULL, optimize_by = "bac",  ...) {
-    UseMethod("roc_multiroc")
+roc_manyroc <- function(x, gr = NULL, optimize_by = "bac",  ...) {
+    UseMethod("roc_manyroc")
 }
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~ The default method, that does the job ~~~
-#' @rdname roc_multiroc
+#' @rdname roc_manyroc
 #' @export
-roc_multiroc.matrix <- function(x,
+roc_manyroc.matrix <- function(x,
                                gr = NULL,
                                optimize_by = "bac",
                                ...,
@@ -186,26 +186,26 @@ roc_multiroc.matrix <- function(x,
                       dplyr::everything())
 
     # Output
-    add_class_label(OBJ, "multiroc_result")
+    add_class_label(OBJ, "manyroc_result")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_multiroc
+#' @rdname roc_manyroc
 #' @export
-roc_multiroc.numeric <- function(x, gr = NULL, optimize_by = "bac",  ...) {
-    roc_multiroc(as.matrix(x), gr, optimize_by, ...)
+roc_manyroc.numeric <- function(x, gr = NULL, optimize_by = "bac",  ...) {
+    roc_manyroc(as.matrix(x), gr, optimize_by, ...)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_multiroc
+#' @rdname roc_manyroc
 #' @export
-roc_multiroc.data.frame <- function(x, gr = NULL, optimize_by = "bac",  ...) {
-    roc_multiroc(as.matrix(x), gr, optimize_by, ...)
+roc_manyroc.data.frame <- function(x, gr = NULL, optimize_by = "bac",  ...) {
+    roc_manyroc(as.matrix(x), gr, optimize_by, ...)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' @rdname roc_multiroc
+#' @rdname roc_manyroc
 #' @export
-roc_multiroc.hyperSpec <- function(x, gr = NULL, optimize_by = "bac",  ...) {
+roc_manyroc.hyperSpec <- function(x, gr = NULL, optimize_by = "bac",  ...) {
     assert_class(x, "hyperSpec")
-    roc_multiroc(x[[]], gr, optimize_by, ...)
+    roc_manyroc(x[[]], gr, optimize_by, ...)
 }
 # =============================================================================
 

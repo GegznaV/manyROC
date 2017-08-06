@@ -9,7 +9,7 @@ print.as_str <- function(x, ...) {
 }
 
 #' @rdname roc_analysis
-#' @inheritParams roc_multiroc
+#' @inheritParams roc_manyroc
 #' @export
 #' @method print roc_df
 print.roc_df <- function(x, ..., show_all = FALSE,
@@ -76,8 +76,8 @@ print.roc_info <- function(x,  ...) {
     }
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# @param x \code{multiroc_result} object for method \code{print}.
-#' @rdname roc_multiroc
+# @param x \code{manyroc_result} object for method \code{print}.
+#' @rdname roc_manyroc
 #'
 #'
 #' @param ... Arguments passed for further methods.
@@ -95,8 +95,8 @@ print.roc_info <- function(x,  ...) {
 #'            Default is \code{"\%.3g"}.
 #'
 #' @export
-#' @method print multiroc_result
-print.multiroc_result <- function(x, ..., show_all = FALSE,
+#' @method print manyroc_result
+print.manyroc_result <- function(x, ..., show_all = FALSE,
                                   perf_digits = 2, fmt = "%.3g") {
 
     perf_names <- intersect(

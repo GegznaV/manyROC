@@ -113,7 +113,7 @@ This function is inspired by functions \code{predict} and
 \code{.compute.unnormalized.roc.curve} from \pkg{ROCR} package.
 }
 \examples{
-library(multiROC)
+library(manyROC)
 library(ggplot2)
 
 # Make some data

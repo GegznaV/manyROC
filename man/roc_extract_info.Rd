@@ -2,12 +2,12 @@
 % Please edit documentation in R/roc_extract_info.R
 \name{roc_extract_info}
 \alias{roc_extract_info}
-\alias{roc_extract_info.multiroc_result}
+\alias{roc_extract_info.manyroc_result}
 \title{[!!!] Extract the main information necessary for prediction}
 \usage{
 roc_extract_info(obj, ...)
 
-\method{roc_extract_info}{multiroc_result}(obj, ...)
+\method{roc_extract_info}{manyroc_result}(obj, ...)
 }
 \arguments{
 \item{obj}{object}

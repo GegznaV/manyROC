@@ -3,7 +3,7 @@
 #' MultiROC algorithm for spectroscopic data analysis.
 #'
 #'
-#' @name multiROC
+#' @name manyROC
 #' @docType package
 #' @author Vilmantas Gegzna
 #'

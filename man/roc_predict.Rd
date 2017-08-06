@@ -24,7 +24,7 @@ roc_predict(object, x_new, ...)
 Predict outcome for new data
 }
 \examples{
-library(multiROC)
+library(manyROC)
 
 set.seed(1)
 x <- rnorm(10)

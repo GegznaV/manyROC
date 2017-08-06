@@ -1,7 +1,7 @@
-Package: multiROC
+Package: manyROC
 Type: Package
 Title: Tools for ROC Analyis
-Description: MultiROC - tools for ROC (receiver operating 
+Description: Package `manyROC` provides with tools for ROC (receiver operating 
              characteristic) analyis.
 Version: 0.0.4.4000
 Date: 2017-08-06

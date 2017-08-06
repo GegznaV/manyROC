@@ -6,7 +6,7 @@ knitr::opts_chunk$set(collapse = FALSE,
 optDEF <- knitr::opts_chunk$get()
 
 ## ----Load main package, message = FALSE, warning = FALSE-----------------
-library(multiROC)
+library(manyROC)
 
 ## ------------------------------------------------------------------------
 # Make some data

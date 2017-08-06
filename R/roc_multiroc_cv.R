@@ -4,8 +4,8 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # [!!!] To do: in
 #
-#     roc_multiroc_cv(PlantGrowth$weight, PlantGrowth$group)
-#     roc_multiroc_cv(PlantGrowth[,"weight", drop = FALSE], PlantGrowth$group)
+#     roc_manyroc_cv(PlantGrowth$weight, PlantGrowth$group)
+#     roc_manyroc_cv(PlantGrowth[,"weight", drop = FALSE], PlantGrowth$group)
 #
 # culumn `feature` should have named elements, not just all 1
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -20,10 +20,10 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-#' Carry out the multiROC analysis with cross-validation
+#' Carry out the manyROC analysis with cross-validation
 #'
 #' Do the ROC analysis (\code{\link{roc_analysis}}) with cross-validation
-#' for each column of \code{x} (see also: \code{\link{roc_multiroc}}).
+#' for each column of \code{x} (see also: \code{\link{roc_manyroc}}).
 #'
 #'
 #' @param cvo a cross-validation object (cvo), created with function
@@ -31,13 +31,13 @@
 #'            \pkg{caret} \code{\link[caret]{createFolds}}
 #'            or similar.
 #'
-#' @inheritParams roc_multiroc
+#' @inheritParams roc_manyroc
 #' @inheritParams cvo_create_folds
 #' @inheritParams roc_performance_measures
 #'
 #'
 #' @return A data frame with results. The object also inferits from
-#'  class \code{multiroc_cv} (for displaying purposes).
+#'  class \code{manyroc_cv} (for displaying purposes).
 #'
 #'
 #' @export
@@ -46,7 +46,7 @@
 #'
 #' @examples
 #'
-#' library(multiROC)
+#' library(manyROC)
 #'
 #'
 #' # --- For numeric vectors objects ---
@@ -55,12 +55,12 @@
 #'
 #' set.seed(123456)
 #'
-#' roc_multiroc_cv(PlantGrowth$weight, PlantGrowth$group)
+#' roc_manyroc_cv(PlantGrowth$weight, PlantGrowth$group)
 #'
-#' roc_multiroc_cv(PlantGrowth$weight, gl(2, 1, 30))
+#' roc_manyroc_cv(PlantGrowth$weight, gl(2, 1, 30))
 #'
 
-roc_multiroc_cv <- function(x,
+roc_manyroc_cv <- function(x,
                             gr,
                             optimize_by = "bac",
                             cvo = cvo_create_folds(x, gr, seeds = seeds, kind = kind),
@@ -91,7 +91,7 @@ roc_multiroc_cv <- function(x,
         x_test   <-  x[-training_ind, ]
         gr_test  <- gr[-training_ind]
 
-        rez_train[[i]] <- roc_multiroc(x  = x_train,
+        rez_train[[i]] <- roc_manyroc(x  = x_train,
                                        gr = gr_train,
                                        optimize_by = optimize_by)
 
@@ -117,7 +117,7 @@ roc_multiroc_cv <- function(x,
 
 
     # output
-    add_class_label(result, c("multiroc_cv_result", "roc_df"))
+    add_class_label(result, c("manyroc_cv_result", "roc_df"))
 
 
 } # [END]
@@ -129,7 +129,7 @@ res2df <- function(res) {
     res %>%
         dplyr::bind_rows(.id = "fold")  %>%
         dplyr::arrange(feature)  %>%
-        add_class_label("multiroc_result")
+        add_class_label("manyroc_result")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 split_by_feature <- function(obj) {
@@ -145,10 +145,10 @@ mat2list <- function(x) {
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # # ===========================================================================
-# # @rdname roc_multiroc
-# # @method print multiROC_cv
+# # @rdname roc_manyroc
+# # @method print manyROC_cv
 # # @export
-# print.multiroc_cv_result <- function(x) {
+# print.manyroc_cv_result <- function(x) {
 #
 #     bru("-")
 #     cat("Summary:\n")

@@ -5,7 +5,7 @@ template:
     bootswatch: cerulean
 
 navbar:
-  title: "multiROC | R package"
+  title: "manyROC | R package"
   type: default
   left:
   - icon: fa-home fa-lg
@@ -18,7 +18,7 @@ navbar:
     href: articles/index.html
   right:
   - icon: fa-github fa-lg
-    href: https://github.com/GegznaV/multiROC
+    href: https://github.com/GegznaV/manyROC
 
 
 reference:
@@ -26,8 +26,8 @@ reference:
   desc: ~
   contents:
   - '`roc_analysis`'
-  - '`roc_multiroc`'
-  - '`roc_multiroc_cv`'
+  - '`roc_manyROC`'
+  - '`roc_manyROC_cv`'
   - '`roc_predict`'
   - '`roc_predict_performance_by_gr`'
 - title: Management functions for ROC objects
@@ -59,6 +59,6 @@ reference:
 - title: Other functions
   desc: ~
   contents:
-  - '`multiROC`'
+  - '`manyROC`'
 
 

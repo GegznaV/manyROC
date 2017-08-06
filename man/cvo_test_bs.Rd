@@ -30,7 +30,7 @@ This function run tests, that help to evaluate if data in folds is
  (a) stratified and (b) blocked.
 }
 \examples{
-library(multiROC)
+library(manyROC)
 
 # [!!!] Load data
 DataSet1 <-data.frame(ID = rep(1:20, each = 2),

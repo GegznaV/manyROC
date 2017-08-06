@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples
-#' library(multiROC)
+#' library(manyROC)
 #' dataset <- head(PlantGrowth)
 #'
 #' get_var_values(x = "group", data = dataset)

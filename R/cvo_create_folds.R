@@ -104,7 +104,7 @@
 #'
 #' @export
 #' @examples
-#' library(multiROC)
+#' library(manyROC)
 #' set.seed(123456)
 #'
 #' # Data

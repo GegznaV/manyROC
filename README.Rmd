@@ -13,28 +13,28 @@ knitr::opts_chunk$set(
 
 ***
 
-[![CRAN version](https://www.r-pkg.org/badges/version/multiROC)](https://cran.rstudio.com/web/packages/multiROC/index.html)
-[![GitHub version](https://img.shields.io/badge/GitHub-v`r packageVersion("multiROC")`-brightgreen.svg)](https://github.com/GegznaV/multiROC)
-[![Travis-CI Build Status](https://travis-ci.org/GegznaV/multiROC.png?branch=master)](https://travis-ci.org/GegznaV/multiROC)
-[![codecov](https://codecov.io/gh/GegznaV/multiROC/branch/master/graph/badge.svg)](https://codecov.io/gh/GegznaV/multiROC)
+[![CRAN version](https://www.r-pkg.org/badges/version/manyROC)](https://cran.rstudio.com/web/packages/manyROC/index.html)
+[![GitHub version](https://img.shields.io/badge/GitHub-v`r packageVersion("manyROC")`-brightgreen.svg)](https://github.com/GegznaV/manyROC)
+[![Travis-CI Build Status](https://travis-ci.org/GegznaV/manyROC.png?branch=master)](https://travis-ci.org/GegznaV/manyROC)
+[![codecov](https://codecov.io/gh/GegznaV/manyROC/branch/master/graph/badge.svg)](https://codecov.io/gh/GegznaV/manyROC)
 [![Last-update](https://img.shields.io/badge/last%20update-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](/commits/master)
 
 ***
 
  
 ```{r, fig.align='center', out.height='50%', out.width='50%',echo=FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/GegznaV/multiROC/master/docs/logo.png")
+knitr::include_graphics("https://raw.githubusercontent.com/GegznaV/manyROC/master/docs/logo.png")
 ```
-<!-- "https://raw.githubusercontent.com/GegznaV/multiROC/master/docs/logo.png" -->
+<!-- "https://raw.githubusercontent.com/GegznaV/manyROC/master/docs/logo.png" -->
 
-_**multiROC**_ -- tools for ROC analyis
+_**manyROC**_ -- tools for ROC analyis
 ============================================================================= 
 
 <p align="center"><font color="red" size="3" family="sans">
 <b>The package is under construction.</b></font>
 </p>
 
-<!-- *MultiROC* workflow for spectroscopic data analysis. -->
+<!-- *manyROC* workflow for spectroscopic data analysis. -->
 
 Notes:
 
@@ -49,7 +49,7 @@ Install package:
 
 ```{r Install package, eval=FALSE}
 library(devtools)
-install_github("GegznaV/multiROC")
+install_github("GegznaV/manyROC")
 ```
 
 

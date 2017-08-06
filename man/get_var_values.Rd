@@ -25,7 +25,7 @@ position of variable in \code{data} or a vector.}
 Get vector of variable values
 }
 \examples{
-library(multiROC)
+library(manyROC)
 dataset <- head(PlantGrowth)
 
 get_var_values(x = "group", data = dataset)

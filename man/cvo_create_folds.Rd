@@ -125,7 +125,7 @@ If \code{folds} is too big and cases of at least one group (i.e.,
       recommended.
 }
 \examples{
-library(multiROC)
+library(manyROC)
 set.seed(123456)
 
 # Data

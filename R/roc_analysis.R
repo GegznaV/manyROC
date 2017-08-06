@@ -75,7 +75,7 @@
 #' @family functions for ROC
 #'
 #' @examples
-#' library(multiROC)
+#' library(manyROC)
 #' library(ggplot2)
 #'
 #' # Make some data

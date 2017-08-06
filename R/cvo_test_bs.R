@@ -18,7 +18,7 @@
 #'
 #' @author Vilmantas Gegzna
 #' @examples
-#' library(multiROC)
+#' library(manyROC)
 #'
 #' # [!!!] Load data
 #' DataSet1 <-data.frame(ID = rep(1:20, each = 2),
