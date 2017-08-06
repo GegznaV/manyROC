@@ -1,6 +1,6 @@
-#' MultiROC algorithm for spectroscopic data analysis
+#' ManyROC -- tools for ROC analysis
 #'
-#' MultiROC algorithm for spectroscopic data analysis.
+#' ManyROC -- tools for ROC analysis.
 #'
 #'
 #' @name manyROC

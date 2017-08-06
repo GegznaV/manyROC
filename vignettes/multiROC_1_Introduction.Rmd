@@ -1,13 +1,13 @@
 ---
-title: "Introduction to `multiROC`"
+title: "Introduction to `manyROC`"
 author: "Vilmantas Gegzna"
-date: "`r Sys.Date()` (v`r packageVersion('multiROC')`)"
+date: "`r Sys.Date()` (v`r packageVersion('manyROC')`)"
 output:
     rmarkdown::html_vignette: 
         toc: yes
         number_sections: yes
 vignette: >
-  %\VignetteIndexEntry{1 multiROC Introduction}
+  %\VignetteIndexEntry{1 manyROC Introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteDepends{glue}
   %\VignetteEncoding{UTF-8}
@@ -23,7 +23,7 @@ optDEF <- knitr::opts_chunk$get()
 Load package
 
 ```{r Load main package, message = FALSE, warning = FALSE}
-library(multiROC)
+library(manyROC)
 ```
 
 // Introduction is being prepared... //

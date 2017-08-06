@@ -69,7 +69,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Cross-validation object (cvo)</h1>
 <h4 class="author"><em>Vilmantas Gegzna</em></h4>
-<h4 class="date"><em>2017-08-02 (v0.0.3.4000)</em></h4>
+<h4 class="date"><em>2017-08-06 (v0.0.4.4000)</em></h4>
 
 
 <div id="TOC">
@@ -79,7 +79,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 
 <p>Load packages</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(multiROC)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(manyROC)</code></pre></div>
 <div id="cvo_create_folds" class="section level1">
 <h1><span class="header-section-number">1</span> <code>cvo_create_folds</code></h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># clear()</span>
@@ -103,37 +103,10 @@ nFolds =<span class="st"> </span><span class="dv">5</span>
 <p><code>createFolds2</code> and <code>stratifiedFolds</code> is the same function with different names</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
 <span class="kw">cvo_create_folds</span>(<span class="dt">block_by =</span> DataSet1$ID, <span class="dt">k =</span> nFolds)</code></pre></div>
-<pre><code>#&gt; $Rep1_Fold1
-#&gt;  [1]  1  2  3  4  7  8  9 10 11 12 13 14 15 16 19 20 23 24 25 26 27 28 29
-#&gt; [24] 30 33 34 35 36 37 38 39 40
-#&gt; 
-#&gt; $Rep1_Fold2
-#&gt;  [1]  1  2  3  4  5  6  7  8 11 12 13 14 17 18 19 20 21 22 23 24 25 26 27
-#&gt; [24] 28 29 30 31 32 35 36 39 40
-#&gt; 
-#&gt; $Rep1_Fold3
-#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 21 22 25 26 27
-#&gt; [24] 28 29 30 31 32 33 34 37 38
-#&gt; 
-#&gt; $Rep1_Fold4
-#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 15 16 17 18 19 20 21 22 23 24 27 28 31
-#&gt; [24] 32 33 34 35 36 37 38 39 40
-#&gt; 
-#&gt; $Rep1_Fold5
-#&gt;  [1]  5  6  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 29 30 31
-#&gt; [24] 32 33 34 35 36 37 38 39 40
-#&gt; 
-#&gt; attr(,&quot;class&quot;)
-#&gt; [1] &quot;cvo_caret&quot; &quot;cvo&quot;      
-#&gt; attr(,&quot;info&quot;)
-#&gt;   indices stratified blocked cv_type k repetitions sample_size
-#&gt; 1   Train      FALSE    TRUE  k-fold 5           1          40
-#&gt; attr(,&quot;seeds&quot;)
-#&gt; attr(,&quot;seeds&quot;)$generator
-#&gt; [1] &quot;L'Ecuyer-CMRG&quot;
-#&gt; 
-#&gt; attr(,&quot;seeds&quot;)$seeds
-#&gt; [1] -42208441</code></pre>
+<pre><code>#&gt; --- A cvo object: ----------------------------------------------------
+#&gt;  indices stratified blocked cv_type k repetitions sample_size
+#&gt;    Train      FALSE    TRUE  k-fold 5           1          40
+#&gt; ----------------------------------------------------------------------</code></pre>
 <p>When variable names from data frame are provided:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Folds1_a &lt;-<span class="st"> </span><span class="kw">cvo_create_folds</span>(<span class="dt">data =</span> DataSet1,
                              <span class="dt">stratify_by =</span> <span class="st">&quot;gr&quot;</span>,
@@ -162,11 +135,11 @@ nFolds =<span class="st"> </span><span class="dv">5</span>
 #&gt; 
 #&gt;       ID
 #&gt;            1 2 3 4 5 6 7 8 9 10 ..
-#&gt; Rep1_Fold1 0 0 2 0 0 0 0 2 0  0 ..
-#&gt; Rep1_Fold2 0 2 0 0 0 0 0 0 2  0 ..
-#&gt; Rep1_Fold3 0 0 0 0 2 0 0 0 0  2 ..
-#&gt; Rep1_Fold4 0 0 0 2 0 0 2 0 0  0 ..
-#&gt; Rep1_Fold5 2 0 0 0 0 2 0 0 0  0 ..
+#&gt; Rep1_Fold1 0 2 0 0 0 0 2 0 0  0 ..
+#&gt; Rep1_Fold2 0 0 2 0 0 2 0 0 0  0 ..
+#&gt; Rep1_Fold3 0 0 0 0 2 0 0 0 2  0 ..
+#&gt; Rep1_Fold4 0 0 0 2 0 0 0 0 0  2 ..
+#&gt; Rep1_Fold5 2 0 0 0 0 0 0 2 0  0 ..
 #&gt; 
 #&gt; Table shows number of observations in each fold.
 #&gt; If blocked, the same ID appears just in one fold.
@@ -200,11 +173,11 @@ nFolds =<span class="st"> </span><span class="dv">5</span>
 #&gt; 
 #&gt;       ID
 #&gt;            1 2 3 4 5 6 7 8 9 10 ..
-#&gt; Rep1_Fold1 0 0 2 0 0 2 0 0 0  0 ..
-#&gt; Rep1_Fold2 2 0 0 0 0 0 0 2 0  0 ..
-#&gt; Rep1_Fold3 0 0 0 0 2 0 0 0 2  0 ..
-#&gt; Rep1_Fold4 0 0 0 2 0 0 2 0 0  0 ..
-#&gt; Rep1_Fold5 0 2 0 0 0 0 0 0 0  2 ..
+#&gt; Rep1_Fold1 0 0 0 0 2 0 2 0 0  0 ..
+#&gt; Rep1_Fold2 0 0 0 2 0 0 0 2 0  0 ..
+#&gt; Rep1_Fold3 0 2 0 0 0 0 0 0 2  0 ..
+#&gt; Rep1_Fold4 0 0 2 0 0 2 0 0 0  0 ..
+#&gt; Rep1_Fold5 2 0 0 0 0 0 0 0 0  2 ..
 #&gt; 
 #&gt; Table shows number of observations in each fold.
 #&gt; If blocked, the same ID appears just in one fold.
@@ -236,11 +209,11 @@ nFolds =<span class="st"> </span><span class="dv">5</span>
 #&gt; 
 #&gt;       ID
 #&gt;            1 2 3 4 5 6 7 8 9 10 ..
-#&gt; Rep1_Fold1 1 0 0 1 0 0 0 1 1  0 ..
-#&gt; Rep1_Fold2 0 0 2 0 0 0 0 0 0  2 ..
-#&gt; Rep1_Fold3 0 1 0 0 1 1 0 1 0  0 ..
-#&gt; Rep1_Fold4 0 0 0 1 1 0 1 0 1  0 ..
-#&gt; Rep1_Fold5 1 1 0 0 0 1 1 0 0  0 ..
+#&gt; Rep1_Fold1 0 0 0 0 2 0 0 0 0  2 ..
+#&gt; Rep1_Fold2 0 0 1 1 0 0 0 1 1  0 ..
+#&gt; Rep1_Fold3 1 0 1 0 0 1 1 0 0  0 ..
+#&gt; Rep1_Fold4 0 2 0 0 0 1 1 0 0  0 ..
+#&gt; Rep1_Fold5 1 0 0 1 0 0 0 1 1  0 ..
 #&gt; 
 #&gt; Table shows number of observations in each fold.
 #&gt; If blocked, the same ID appears just in one fold.
@@ -258,11 +231,11 @@ nFolds =<span class="st"> </span><span class="dv">5</span>
 <pre><code>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
 #&gt; 
 #&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
-#&gt; Rep1_Fold1 4 2 0 2  &lt;-Counts | Proportions-&gt;  0.50 0.25 0.00 0.25
-#&gt; Rep1_Fold2 0 2 2 4  &lt;-Counts | Proportions-&gt;  0.00 0.25 0.25 0.50
-#&gt; Rep1_Fold3 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
-#&gt; Rep1_Fold4 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
-#&gt; Rep1_Fold5 2 2 4 0  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.50 0.00
+#&gt; Rep1_Fold1 2 0 4 2  &lt;-Counts | Proportions-&gt;  0.25 0.00 0.50 0.25
+#&gt; Rep1_Fold2 4 4 0 0  &lt;-Counts | Proportions-&gt;  0.50 0.50 0.00 0.00
+#&gt; Rep1_Fold3 0 2 2 4  &lt;-Counts | Proportions-&gt;  0.00 0.25 0.25 0.50
+#&gt; Rep1_Fold4 2 4 0 2  &lt;-Counts | Proportions-&gt;  0.25 0.50 0.00 0.25
+#&gt; Rep1_Fold5 2 0 4 2  &lt;-Counts | Proportions-&gt;  0.25 0.00 0.50 0.25
 #&gt; 
 #&gt; If stratified, the proportions of each group in each fold
 #&gt; (row) should be (approximately) equal and with no zero values.
@@ -272,11 +245,11 @@ nFolds =<span class="st"> </span><span class="dv">5</span>
 #&gt; 
 #&gt;       ID
 #&gt;            1 2 3 4 5 6 7 8 9 10 ..
-#&gt; Rep1_Fold1 2 0 2 0 0 0 0 0 2  0 ..
-#&gt; Rep1_Fold2 0 0 0 0 0 0 0 2 0  0 ..
-#&gt; Rep1_Fold3 0 2 0 0 0 0 0 0 0  2 ..
-#&gt; Rep1_Fold4 0 0 0 0 2 0 2 0 0  0 ..
-#&gt; Rep1_Fold5 0 0 0 2 0 2 0 0 0  0 ..
+#&gt; Rep1_Fold1 0 0 0 0 2 0 0 0 0  0 ..
+#&gt; Rep1_Fold2 0 2 0 2 0 0 2 0 2  0 ..
+#&gt; Rep1_Fold3 0 0 0 0 0 0 0 0 0  2 ..
+#&gt; Rep1_Fold4 2 0 0 0 0 2 0 2 0  0 ..
+#&gt; Rep1_Fold5 0 0 2 0 0 0 0 0 0  0 ..
 #&gt; 
 #&gt; Table shows number of observations in each fold.
 #&gt; If blocked, the same ID appears just in one fold.

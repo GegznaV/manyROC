@@ -62,7 +62,7 @@ Folds1_c <- cvo_create_folds(stratify_by = DataSet1$gr,
                              k = nFolds,
                              returnTrain = FALSE)
 # str(Folds1_c)
-cvo_test_bs(Folds1_c,
+cvo_test_bs(Folds1_c, 
             stratify_by = "gr",
             block_by = "ID",
             data = DataSet1)

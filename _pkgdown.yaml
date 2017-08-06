@@ -26,8 +26,8 @@ reference:
   desc: ~
   contents:
   - '`roc_analysis`'
-  - '`roc_manyROC`'
-  - '`roc_manyROC_cv`'
+  - '`roc_manyroc`'
+  - '`roc_manyroc_cv`'
   - '`roc_predict`'
   - '`roc_predict_performance_by_gr`'
 - title: Management functions for ROC objects

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Carry out the multiROC analysis � print.multiroc_result • multiROC</title>
+<title>Carry out the manyROC analysis � print.manyroc_result • manyROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -48,7 +48,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">multiROC | R package</a>
+      <a class="navbar-brand" href="../index.html">manyROC | R package</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -76,7 +76,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/GegznaV/multiROC">
+  <a href="https://github.com/GegznaV/manyROC">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -92,31 +92,31 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Carry out the multiROC analysis</h1>
+    <h1>Carry out the manyROC analysis</h1>
     </div>
 
     
     <p>Do the ROC analysis (<code><a href='roc_analysis.html'>roc_analysis</a></code>) for each column of <code>x</code>.</p>
     
 
-    <pre class="usage"><span class='co'># S3 method for multiroc_result</span>
+    <pre class="usage"><span class='co'># S3 method for manyroc_result</span>
 <span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>show_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>perf_digits</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>fmt</span> <span class='kw'>=</span> <span class='st'>"%.3g"</span>)
 
-<span class='fu'>roc_multiroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
+<span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for matrix</span>
-<span class='fu'>roc_multiroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>,
+<span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>,
   <span class='kw'>gr_sep</span> <span class='kw'>=</span> <span class='st'>" vs. "</span>)
 
 <span class='co'># S3 method for numeric</span>
-<span class='fu'>roc_multiroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
+<span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>roc_multiroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
+<span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for hyperSpec</span>
-<span class='fu'>roc_multiroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -173,7 +173,7 @@ variable (a vector) which defines groups in <code>x</code>.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Object of classes <code>multiroc_result</code> and <code>data.frame</code> with
+    <p>Object of classes <code>manyroc_result</code> and <code>data.frame</code> with
 columns:</p><ul>
 <li><p><code>compared_groups</code> Names of compared groups (separated by
                   <code>gr_sep</code> with default value <code>" vs. "</code>);</p></li>
@@ -217,13 +217,13 @@ at each wavelength.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>library</span>(<span class='no'>multiROC</span>)
+<span class='fu'>library</span>(<span class='no'>manyROC</span>)
 
 
 <span class='co'># --- For numeric vectors objects ---</span>
 
 <span class='fu'>data</span>(<span class='no'>PlantGrowth</span>)
-<span class='fu'>roc_multiroc</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='no'>PlantGrowth</span>$<span class='no'>group</span>)</div><div class='output co'>#&gt;   compared_groups feature median_neg cutoff median_pos tp fn fp tn sens spec
+<span class='fu'>roc_manyroc</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='no'>PlantGrowth</span>$<span class='no'>group</span>)</div><div class='output co'>#&gt;   compared_groups feature median_neg cutoff median_pos tp fn fp tn sens spec
 #&gt; 1   ctrl vs. trt1       1       5.15   4.37       4.55  5  5  1  9 0.50 0.90
 #&gt; 2   ctrl vs. trt2       1       5.15   5.22       5.44  8  2  3  7 0.80 0.70
 #&gt; 3   trt1 vs. trt2       1       4.55    4.9       5.44 10  0  2  8 1.00 0.80
@@ -235,14 +235,14 @@ at each wavelength.</p></li>
 <span class='co'># --- For dataframes objects ---</span>
 
 <span class='fu'>data</span>(<span class='no'>CO2</span>)
-<span class='fu'>roc_multiroc</span>(<span class='no'>CO2</span>[, <span class='fu'>c</span>(<span class='st'>"conc"</span>, <span class='st'>"uptake"</span>)], <span class='no'>CO2</span>$<span class='no'>Type</span>)</div><div class='output co'>#&gt;          compared_groups feature median_neg cutoff median_pos tp fn fp tn sens
+<span class='fu'>roc_manyroc</span>(<span class='no'>CO2</span>[, <span class='fu'>c</span>(<span class='st'>"conc"</span>, <span class='st'>"uptake"</span>)], <span class='no'>CO2</span>$<span class='no'>Type</span>)</div><div class='output co'>#&gt;          compared_groups feature median_neg cutoff median_pos tp fn fp tn sens
 #&gt; 1 Quebec vs. Mississippi    conc        350    200        350 18 24 18 24 0.43
 #&gt; 2 Quebec vs. Mississippi  uptake       37.2   32.3       19.3 41  1 13 29 0.98
 #&gt;   spec  ppv  npv  bac youden kappa  auc
 #&gt; 1 0.57 0.50 0.50 0.50   0.00  0.00 0.50
 #&gt; 2 0.69 0.76 0.97 0.83   0.67  0.67 0.84</div><div class='input'>
 <span class='fu'>data</span>(<span class='no'>OrchardSprays</span>)
-<span class='fu'>roc_multiroc</span>(<span class='no'>OrchardSprays</span>$<span class='no'>decrease</span>, <span class='no'>OrchardSprays</span>$<span class='no'>treatment</span>)</div><div class='output co'>#&gt;     compared_groups feature median_neg cutoff median_pos  tp  fn  fp  tn sens
+<span class='fu'>roc_manyroc</span>(<span class='no'>OrchardSprays</span>$<span class='no'>decrease</span>, <span class='no'>OrchardSprays</span>$<span class='no'>treatment</span>)</div><div class='output co'>#&gt;     compared_groups feature median_neg cutoff median_pos  tp  fn  fp  tn sens
 #&gt; 1           A vs. B       1          4    5.5        7.5   6   2   1   7 0.75
 #&gt; 2           A vs. C       1          4   12.5       16.5   7   1   0   8 0.88
 #&gt; 3           A vs. D       1          4     16         32   8   0   0   8 1.00
@@ -276,7 +276,7 @@ at each wavelength.</p></li>
 #&gt;    1. gr:  [factor] B B ... A 
 #&gt;    2. class:  [factor] N l ... S1 
 #&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'>
-<span class='fu'>roc_multiroc</span>(<span class='no'>fluorescence</span>[ , , <span class='fl'>500</span>~<span class='fl'>502</span>], <span class='no'>fluorescence</span>$<span class='no'>gr</span>)</div><div class='output co'>#&gt;   compared_groups feature median_neg cutoff median_pos tp fn fp tn sens spec
+<span class='fu'>roc_manyroc</span>(<span class='no'>fluorescence</span>[ , , <span class='fl'>500</span>~<span class='fl'>502</span>], <span class='no'>fluorescence</span>$<span class='no'>gr</span>)</div><div class='output co'>#&gt;   compared_groups feature median_neg cutoff median_pos tp fn fp tn sens spec
 #&gt; 1         A vs. B     500        338    335        333 35 20 24 28 0.64 0.54
 #&gt; 2         A vs. B     501        335    328        327 29 26 19 33 0.53 0.63
 #&gt; 3         A vs. B     502        335    332        329 36 19 24 28 0.65 0.54
