@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Carry out the ROC analysis � print.roc_df • multiROC</title>
+<title>Carry out the ROC analysis � print.as_str • multiROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -105,7 +105,10 @@ true negatives (TN) as well as performance measures such as sensitivity,
 specificity, etc.</p>
     
 
-    <pre class="usage"><span class='co'># S3 method for roc_df</span>
+    <pre class="usage"><span class='co'># S3 method for as_str</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for roc_df</span>
 <span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>show_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>perf_digits</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>fmt</span> <span class='kw'>=</span> <span class='st'>"%.3g"</span>)
 
@@ -116,7 +119,19 @@ specificity, etc.</p>
 <span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='fu'>levels</span>(<span class='no'>gr</span>)[<span class='fl'>2</span>], <span class='kw'>pos_is_larger</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='st'>"all"</span>)</pre>
+  <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='fu'>levels</span>(<span class='no'>gr</span>)[<span class='fl'>2</span>],
+  <span class='kw'>pos_is_larger</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for data.frame</span>
+<span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='fu'>levels</span>(<span class='no'>gr</span>)[<span class='fl'>2</span>],
+  <span class='kw'>pos_is_larger</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for matrix</span>
+<span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='fu'>levels</span>(<span class='no'>gr</span>)[<span class='fl'>2</span>],
+  <span class='kw'>pos_is_larger</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">

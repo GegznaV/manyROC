@@ -117,7 +117,7 @@ roc_multiroc_cv <- function(x,
 
 
     # output
-    add_class_label(result, c("multiroc_cv_result"))
+    add_class_label(result, c("multiroc_cv_result", "roc_df"))
 
 
 } # [END]

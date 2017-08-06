@@ -72,7 +72,7 @@
       <h1>Cross-validation object (cvo)</h1>
                         <h4 class="author">Vilmantas Gegzna</h4>
             
-            <h4 class="date">2017-08-04 (v0.0.4.2000)</h4>
+            <h4 class="date">2017-08-06 (v0.0.4.4000)</h4>
           </div>
 
     
@@ -105,10 +105,10 @@ nFolds =<span class="st"> </span><span class="dv">5</span>
 <p><code>createFolds2</code> and <code>stratifiedFolds</code> is the same function with different names</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
 <span class="kw"><a href="../reference/cvo_create_folds.html">cvo_create_folds</a></span>(<span class="dt">block_by =</span> DataSet1$ID, <span class="dt">k =</span> nFolds)</code></pre></div>
-<pre><code>#&gt; --- A cvo object: ---------------------------------------------
+<pre><code>#&gt; --- A cvo object: ----------------------------------------------------
 #&gt;  indices stratified blocked cv_type k repetitions sample_size
 #&gt;    Train      FALSE    TRUE  k-fold 5           1          40
-#&gt; ---------------------------------------------------------------</code></pre>
+#&gt; ----------------------------------------------------------------------</code></pre>
 <p>When variable names from data frame are provided:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Folds1_a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cvo_create_folds.html">cvo_create_folds</a></span>(<span class="dt">data =</span> DataSet1,
                              <span class="dt">stratify_by =</span> <span class="st">"gr"</span>,

@@ -179,10 +179,10 @@ splitting to folds.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>cvo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='cvo_create_folds.html'>cvo_create_folds</a></span>(<span class='no'>fluorescence</span>, <span class='kw'>folds</span> <span class='kw'>=</span> <span class='fl'>10</span>)
-<span class='no'>cvo</span></div><div class='output co'>#&gt; --- A cvo object: ---------------------------------------------
+<span class='no'>cvo</span></div><div class='output co'>#&gt; --- A cvo object: ----------------------------------------------------
 #&gt;  indices stratified blocked cv_type  k repetitions sample_size
 #&gt;    Train      FALSE   FALSE  k-fold 10           1         150
-#&gt; ---------------------------------------------------------------</div><div class='input'>
+#&gt; ----------------------------------------------------------------------</div><div class='input'>
 <span class='fu'>cvo_get_info</span>(<span class='no'>cvo</span>)</div><div class='output co'>#&gt;   indices stratified blocked cv_type  k repetitions sample_size
 #&gt; 1   Train      FALSE   FALSE  k-fold 10           1         150</div><div class='input'>
 <span class='fu'>cvo_get_seeds</span>(<span class='no'>cvo</span>)</div><div class='output co'>#&gt; $generator

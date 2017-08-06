@@ -124,13 +124,23 @@
 #'
 #'
 
-
 roc_analysis <- function(x,
                          gr,
                          pos_label  = levels(gr)[2],
                          pos_is_larger = NULL,
                          optimize_by = "bac",
-                         results = "all") {
+                         results = "all", ...) {
+    UseMethod("roc_analysis")
+}
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' @rdname roc_analysis
+#' @export
+roc_analysis.default <- function(x,
+                         gr,
+                         pos_label  = levels(gr)[2],
+                         pos_is_larger = NULL,
+                         optimize_by = "bac",
+                         results = "all", ...) {
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Check the input
@@ -159,6 +169,9 @@ roc_analysis <- function(x,
     assert_choice(results, c("all", "optimal"))
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # Capture data to return later
+    # data <- list(x = x, gr = gr)
+
     # Remove missing and infinite values
     finite_bool <- is.finite(x) & is.finite(gr)
     x  <-  x[finite_bool]
@@ -306,17 +319,17 @@ roc_analysis <- function(x,
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Information about the analysis
     info <- data.frame(
-        var_name  = "",
-        n_total   = n_neg + n_pos,
-        n_neg     = n_neg,
-        n_pos     = n_pos,
-        neg_label = neg_label,
-        pos_label = pos_label,
+        var_name    = "",
+        n_total     = n_neg + n_pos,
+        n_neg       = n_neg,
+        n_pos       = n_pos,
+        neg_label   = neg_label,
+        pos_label   = pos_label,
         median_neg  = medians[1],
         median_pos  = medians[2],
-        below = below,
+        below  = below,
         cutoff = optimal[1],
-        above = above,
+        above  = above,
         # pos_is_larger = decreasing,
 
         stringsAsFactors = FALSE
@@ -332,9 +345,46 @@ roc_analysis <- function(x,
     res <- list(info = info,
                 optimal = optimal,
                 all_results = all_results
+                # , data = data
     )
 
     add_class_label(res, c("roc_result_list"))
 
 }
 # =============================================================================
+#' @rdname roc_analysis
+#' @export
+roc_analysis.data.frame <- function(x,
+                                    gr,
+                                    pos_label  = levels(gr)[2],
+                                    pos_is_larger = NULL,
+                                    optimize_by = "bac",
+                                    results = "all", ...) {
+    assert_data_frame(x, types = "numeric", ncols = 1)
+    roc_analysis(as.vector(x),
+                 gr,
+                 pos_label = pos_label,
+                 pos_is_larger = pos_is_larger,
+                 optimize_by = optimize_by,
+                 results = results,
+                 ...)
+}
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' @rdname roc_analysis
+#' @export
+roc_analysis.matrix <- function(x,
+                                gr,
+                                pos_label  = levels(gr)[2],
+                                pos_is_larger = NULL,
+                                optimize_by = "bac",
+                                results = "all", ...) {
+    assert_matrix(x, ncols = 1)
+    roc_analysis(as.vector(x),
+                 gr,
+                 pos_label = pos_label,
+                 pos_is_larger = pos_is_larger,
+                 optimize_by = optimize_by,
+                 results = results,
+                 ...)
+}
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

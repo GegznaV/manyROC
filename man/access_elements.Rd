@@ -50,7 +50,7 @@ Acces elements of \code{roc_result_list} and \code{roc_results} objects.
 }
 \seealso{
 Other functions for ROC: \code{\link{calculate_performance}},
-  \code{\link{print.roc_df}},
+  \code{\link{print.as_str}},
   \code{\link{roc_performance_measures}},
   \code{\link{roc_predict}}
 }

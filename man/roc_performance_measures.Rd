@@ -86,7 +86,7 @@ Calculate various performance measures for classificatory analysis \cr
 \seealso{
 Other functions for ROC: \code{\link{access_elements}},
   \code{\link{calculate_performance}},
-  \code{\link{print.roc_df}}, \code{\link{roc_predict}}
+  \code{\link{print.as_str}}, \code{\link{roc_predict}}
 }
 \author{
 Vilmantas Gegzna

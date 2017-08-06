@@ -196,7 +196,7 @@ cvo_create_folds <- function(data = NULL,
     assert_string(kind,   null.ok = TRUE)
 
     # The code in this `if` converts seeds either numeric vector or NULL
-    if (!is.na(seeds)) {
+    if (!any(is.na(seeds))) {
         # If too few seeds are provided
         len_seeds <- length(seeds)
 
@@ -457,22 +457,25 @@ cvo_create_folds <- function(data = NULL,
 #' @export
 #'
 print.cvo <- function(x, ...) {
-    cat("--- A cvo object: ---------------------------------------------\n")
+    cat("--- A cvo object: ----------------------------------------------------\n")
     attrs <- attributes(x)
 
     # attributes(x) <- NULL
     # dplyr::glimpse(x)
 
     print(attrs$info, row.names = FALSE)
+
+    if (!is.null(attrs$seeds$generator) || !is.null(attrs$seeds$seeds)) {
+        cat("\n")
+    }
     if (!is.null(attrs$seeds$generator)) {
         cat(paste("Random number generator:", attrs$seeds$generator), "\n")
     }
     if (!is.null(attrs$seeds$seeds)) {
-        cat(paste("Seeds: ", paste(attrs$seeds$seeds, collapse = ', ')), "\n")
+        paste("Seeds: ", paste(attrs$seeds$seeds, collapse = ', '))  %>%
+            stringr::str_trunc(70)  %>%
+            cat(sep = "\n")
     }
-
-
-
-    cat("---------------------------------------------------------------\n")
+    cat("----------------------------------------------------------------------\n")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -2,6 +2,13 @@
 # Print methods
 # =============================================================================
 #' @rdname roc_analysis
+#' @export
+#' @method print as_str
+print.as_str <- function(x, ...) {
+    tibble::glimpse(x, ...)
+}
+
+#' @rdname roc_analysis
 #' @inheritParams roc_multiroc
 #' @export
 #' @method print roc_df
