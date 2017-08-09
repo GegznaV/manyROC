@@ -1,3 +1,83 @@
+# # # ======================================================================
+# # q025 <- purrr::partial(quantile, probs = 0.025, na.rm = TRUE)
+# # q975 <- purrr::partial(quantile, probs = 0.975, na.rm = TRUE)
+# #
+# # _q025 <- purrr::partial(quantile, probs = 0.025, na.rm = TRUE)
+# # _q975 <- purrr::partial(quantile, probs = 0.975, na.rm = TRUE)
+# # _mean <- purrr::partial(mean,  na.rm = TRUE)
+# #
+# #
+# # roc_rez  %>%
+# #     group_by(compared_groups, set, .wavelength)  %>%
+# #     summarize_at(
+# #         vars(
+# #             # sens,
+# #             # spec,
+# #             ppv,
+# #             npv,
+# #             # bac,
+# #             # youden,
+# #             # kappa,
+# #             auc),
+# #         funs("mean"))  %>%
+# #
+# #     gather(key = "Measure",
+# #            value = "value",
+# #            # sens,
+# #            # spec,
+# #            ppv,
+# #            npv,
+# #            # bac,
+# #            # youden,
+# #            # kappa,
+# #            auc) %>%
+# #
+# #     ggplot(aes(.wavelength, value, color = Measure)) +
+# #     geom_hline(yintercept = 0.75, lty = 2, color = "grey20") +
+# #     geom_hline(yintercept = c(0, 0.5), lty = 2, color = "red4") +
+# #     geom_point() +
+# #     geom_line(size = 1) +
+# #     facet_grid(compared_groups ~ set) +
+# #     ylim(c(-0.15, 1))
+# #
+# # # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# # ggplotly( roc_rez  %>%
+# #               group_by(compared_groups, set, .wavelength)  %>%
+# #               summarize_at(
+# #                   vars(median_neg, cutoff, median_pos),
+# #                   funs(q025, mean, q975))  %>%
+# #               as.data.frame()  %>%
+# #
+# #               gather(key = "Measures",
+# #                      value = "value",
+# #                      -compared_groups, -set, -.wavelength) %>%
+# #               separate(col = "Measures",
+# #                        into = c("Measure", "stat"),
+# #                        sep = "_(?=[^np])") %>%
+# #               spread(key = "stat", value = "value")  %>%
+# #
+# #               add_class_label("roc_df")  %>%
+# #
+# #               ggplot(aes(.wavelength, color = Measure, fill = Measure)) +
+# #               # geom_hline(yintercept = 0.75, lty = 2, color = "grey20") +
+# #               # geom_hline(yintercept = c(0, 0.5), lty = 2, color = "red4") +
+# #               geom_ribbon(aes(ymin = q025, ymax = q975), alpha = 0.3) +
+# #               geom_line(aes(y = mean), size = 1) +
+# #               facet_grid(compared_groups ~ set))
+#
+#
+# # +
+# #     ylim(c(-0.15, 1))
+#
+# # %>%
+# # summarize_at(vars(sens, spec,  ppv,  npv,  bac, youden, kappa,  auc),
+# #              funs(q025, mean, q975))
+#
+
+
+
+
+
 #' Do manyROC analysis with cross-validation for hyperSpec object for each variable
 #'
 #' [!!!] // No description yet //
@@ -38,8 +118,6 @@
 #' sp_manyroc_with_cv_by_variable(fluorescence[,,500~501], c("gr", "class"),
 #'                           k_folds = 3, times = 2)
 #'
-
-
 sp_manyroc_with_cv_by_variable <-
     # -----------------------------------------------------------------------------
     function(Spectra,

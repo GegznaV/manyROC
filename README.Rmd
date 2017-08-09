@@ -13,6 +13,7 @@ knitr::opts_chunk$set(
 
 ***
 
+[![DOI](https://zenodo.org/badge/98945258.svg)](https://zenodo.org/badge/latestdoi/98945258)
 [![CRAN version](https://www.r-pkg.org/badges/version/manyROC)](https://cran.rstudio.com/web/packages/manyROC/index.html)
 [![GitHub version](https://img.shields.io/badge/GitHub-v`r packageVersion("manyROC")`-brightgreen.svg)](https://github.com/GegznaV/manyROC)
 [![Travis-CI Build Status](https://travis-ci.org/GegznaV/manyROC.svg?branch=master)](https://travis-ci.org/GegznaV/manyROC)

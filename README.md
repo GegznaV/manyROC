@@ -3,7 +3,7 @@
 
 ------------------------------------------------------------------------
 
-[![CRAN version](https://www.r-pkg.org/badges/version/manyROC)](https://cran.rstudio.com/web/packages/manyROC/index.html) [![GitHub version](https://img.shields.io/badge/GitHub-v0.0.4.5000-brightgreen.svg)](https://github.com/GegznaV/manyROC) [![Travis-CI Build Status](https://travis-ci.org/GegznaV/manyROC.svg?branch=master)](https://travis-ci.org/GegznaV/manyROC) [![codecov](https://codecov.io/gh/GegznaV/manyROC/branch/master/graph/badge.svg)](https://codecov.io/gh/GegznaV/manyROC) [![Last-update](https://img.shields.io/badge/last%20update-2017--08--09-yellowgreen.svg)](/commits/master)
+[![DOI](https://zenodo.org/badge/98945258.svg)](https://zenodo.org/badge/latestdoi/98945258) [![CRAN version](https://www.r-pkg.org/badges/version/manyROC)](https://cran.rstudio.com/web/packages/manyROC/index.html) [![GitHub version](https://img.shields.io/badge/GitHub-v0.0.4.5000-brightgreen.svg)](https://github.com/GegznaV/manyROC) [![Travis-CI Build Status](https://travis-ci.org/GegznaV/manyROC.svg?branch=master)](https://travis-ci.org/GegznaV/manyROC) [![codecov](https://codecov.io/gh/GegznaV/manyROC/branch/master/graph/badge.svg)](https://codecov.io/gh/GegznaV/manyROC) [![Last-update](https://img.shields.io/badge/last%20update-2017--08--09-yellowgreen.svg)](/commits/master)
 
 ------------------------------------------------------------------------
 
