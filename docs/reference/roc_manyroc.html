@@ -269,13 +269,14 @@ at each wavelength.</p></li>
 <span class='fu'>library</span>(<span class='no'>hyperSpec</span>)
 <span class='no'>fluorescence</span></div><div class='output co'>#&gt; hyperSpec object
 #&gt;    150 spectra
-#&gt;    3 data columns
+#&gt;    4 data columns
 #&gt;    501 data points / spectrum
 #&gt; wavelength: lambda/nm [integer] 300 301 ... 800 
-#&gt; data:  (150 rows x 3 columns)
+#&gt; data:  (150 rows x 4 columns)
 #&gt;    1. gr:  [factor] B B ... A 
 #&gt;    2. class:  [factor] N l ... S1 
-#&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'>
+#&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 
+#&gt;    4. ID: ID [integer] 1 2 ... 150 </div><div class='input'>
 <span class='fu'>roc_manyroc</span>(<span class='no'>fluorescence</span>[ , , <span class='fl'>500</span>~<span class='fl'>502</span>], <span class='no'>fluorescence</span>$<span class='no'>gr</span>)</div><div class='output co'>#&gt;   compared_groups feature median_neg cutoff median_pos tp fn fp tn sens spec
 #&gt; 1         A vs. B     500        338    335        333 35 20 24 28 0.64 0.54
 #&gt; 2         A vs. B     501        335    328        327 29 26 19 33 0.53 0.63

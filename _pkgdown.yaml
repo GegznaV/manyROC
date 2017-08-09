@@ -30,6 +30,8 @@ reference:
   - '`roc_manyroc_cv`'
   - '`roc_predict`'
   - '`roc_predict_performance_by_gr`'
+  - '`sp_manyroc_with_cv`'
+  - '`sp_manyroc_with_cv_by_variable`'
 - title: Management functions for ROC objects
   desc: ~
   contents:
@@ -39,6 +41,7 @@ reference:
   contents:
   - '`cvo_create_folds`'
   - '`cvo_get_info`'
+  - '`cvo_get_inds`'
   - '`cvo_test_bs`'
 - title: Functions for classification performance
   desc: ~
@@ -52,6 +55,7 @@ reference:
   desc: ~
   contents:
   - '`add_class_label`'
+  - '`get_var_values`'
 - title: Datasets
   desc: ~
   contents:

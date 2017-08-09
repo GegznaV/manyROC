@@ -1,4 +1,4 @@
-#' Do manyROC anamysis with cross-validation for hyperSpec object
+#' Do manyROC analysis with cross-validation for hyperSpec object for each variable
 #'
 #' [!!!] // No description yet //
 #'
@@ -28,6 +28,8 @@
 #'
 #' @export
 #'
+#' @seealso \code{\link{sp_manyroc_with_cv}}
+#'
 #' @examples
 #'
 #' library(manyROC)
@@ -36,12 +38,7 @@
 #' sp_manyroc_with_cv_by_variable(fluorescence[,,500~501], c("gr", "class"),
 #'                           k_folds = 3, times = 2)
 #'
-#' # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#'
-#' \dontrun{
-#' \donttest{
-#'  sp_manyroc_with_cv_by_variable(fluorescence, c("gr")
-#'  }}
+
 
 sp_manyroc_with_cv_by_variable <-
     # -----------------------------------------------------------------------------

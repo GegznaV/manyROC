@@ -1,6 +1,12 @@
 # =============================================================================
 # Spectra <- Spectra
 # Var <- "CitoGr"
+
+
+#' Do manyROC analysis with cross-validation for hyperSpec object
+#'
+#' [!!!] // No description yet //
+#'
 #' @param Var (\code{character(1)}\ \code{factor}) \cr
 #'             \bold{Either} the name of variable in \code{Spectra} which
 #'             contains the grouping variable
@@ -11,11 +17,14 @@
 #'             minimum acceptable number of unique samples per group.
 #'             Must be at least \code{k_folds} or bigger.
 #'
+#' @inheritParams sp_manyroc_with_cv_by_variable
+#'
 #' @details
 #' Function \code{sp_manyroc_with_cv} will be \bold{renamed} in the future.
 #'
-#' @rdname sp_manyroc_with_cv_by_variable
 #' @export
+#'
+#' @seealso \code{\link{sp_manyroc_with_cv_by_variable}}
 #'
 #' @examples
 #' library(manyROC)
