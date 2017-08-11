@@ -5,7 +5,7 @@
 \title{Do manyROC analysis with cross-validation for hyperSpec object for each variable}
 \usage{
 sp_manyroc_with_cv_by_variable(Spectra, variables_to_analyze, k_folds = 3,
-  times = 10, seeds = 2222222)
+  times = 10, seeds = NULL, kind = NULL)
 }
 \arguments{
 \item{Spectra}{\code{hyperSpec} object, that contains colum \code{ID} for
@@ -20,29 +20,55 @@ variables to use in analysis.}
 The number of folds in k-fold cross-validation.}
 
 \item{times}{(positive \code{integer})  \cr
-The number of repetitions in repeated k-fold cross-validation.}
+The number of repetitions in repeated k-fold
+cross-validation.}
 
 \item{seeds}{(\code{NULL} | \code{integer}) \cr
-Either a vector of integers of length \code{times} to set
-seed for each repetition of k-fold cross-validation.
-The seeds nust be at least of length 6 and meet other
-requirements for \code{"L'Ecuyer-CMRG"} random number
-generator.}
+             Either a vector of integers of length \code{times} to set
+             seed for each repetition of k-fold cross-validation.
+             For more about seeds see \code{\link[base]{set.seed}()}.
+
+             Each seed will be passed to \code{\link{cvo_create_folds}}.()}
+
+\item{kind}{character or \code{NULL}.  If \code{kind} is a character
+    string, set \R's RNG to the kind desired.  Use \code{"default"} to
+    return to the \R default.  See \sQuote{Details} for the
+    interpretation of \code{NULL}.}
 }
 \value{
 A list with results \cr
        [!!!] Description needs more specification.
 }
 \description{
-[!!!] // No description yet //
+[!!!] // No description yet //\cr\cr
+ For reproducible results in parallel computing, set seed with
+\code{parallel::\link[parallel]{clusterSetRNGStream}(iseed = x)}(where \code{x}
+is your seed) (and not with \code{set.seed}) as package
+\pkg{parallelMap} is used for paralellization.\cr
+}
+\details{
+[!!!] The seeds nust be at least of length 6 and meet other
+             requirements for \code{"L'Ecuyer-CMRG"} random number
+             generator.\cr\cr
+             [!!!] At the moment Seeding section needs revision if
+             it is necessary to use
+             \code{"L'Ecuyer-CMRG"} (pseudo)random number generator as
+             \code{\link[base]{set.seed}()} does not work with
+             \pkg{parallelMap} package.
+             Instead \code{parallel::clusterSetRNGStream(iseed = x)}
+             (where \code{x} is your seed) should be used with
+             \pkg{parallelMap} to get reproducible results.
 }
 \examples{
 
 library(manyROC)
 
 fluorescence$ID  <- 1:nrow(fluorescence)
-sp_manyroc_with_cv_by_variable(fluorescence[,,500~501], c("gr", "class"),
-                          k_folds = 3, times = 2)
+sp_manyroc_with_cv_by_variable(
+        fluorescence[,,500~501],
+         c("gr", "class"),
+         k_folds = 3,
+         times = 2)
 
 }
 \seealso{

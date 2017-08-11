@@ -3,8 +3,8 @@ Type: Package
 Title: Tools for ROC Analyis
 Description: Package `manyROC` provides with tools for ROC (receiver operating 
              characteristic) analyis.
-Version: 0.0.4.5000
-Date: 2017-08-09
+Version: 0.0.4.6000
+Date: 2017-08-10
 Authors@R: person("Vilmantas", "Gegzna",
                   role = c("aut", "cre"),
                   email = "GegznaV@gmail.com")
@@ -24,6 +24,7 @@ Imports:
     magrittr,
     glue,
     ggplot2,
+    parallel,
     parallelMap,
     purrr,
     dplyr,

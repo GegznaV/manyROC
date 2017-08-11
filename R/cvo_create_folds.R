@@ -3,6 +3,9 @@
 #   [!!!] Remove dependency on mlr in parameters sections.
 #
 #   [!!!] DESCRIPTION MUST BE UPDATED
+#
+#   [!!!] use RNGkind() and .Random.seed or others to capture information
+#         about random seeds.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # =============================================================================
@@ -196,7 +199,7 @@ cvo_create_folds <- function(data = NULL,
     assert_string(kind,   null.ok = TRUE)
 
     # The code in this `if` converts seeds either numeric vector or NULL
-    if (!any(is.na(seeds))) {
+    if (!is.null(seeds) && !any(is.na(seeds))) {
         # If too few seeds are provided
         len_seeds <- length(seeds)
 

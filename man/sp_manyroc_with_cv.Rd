@@ -5,7 +5,7 @@
 \title{Do manyROC analysis with cross-validation for hyperSpec object}
 \usage{
 sp_manyroc_with_cv(Var, Spectra, k_folds = 5, times = 10, seeds = 2222222,
-  n_min = k_folds)
+  kind = "L'Ecuyer-CMRG", n_min = k_folds)
 }
 \arguments{
 \item{Var}{(\code{character(1)}\ \code{factor}) \cr
@@ -22,14 +22,20 @@ as spectroscopic information.}
 The number of folds in k-fold cross-validation.}
 
 \item{times}{(positive \code{integer})  \cr
-The number of repetitions in repeated k-fold cross-validation.}
+The number of repetitions in repeated k-fold
+cross-validation.}
 
 \item{seeds}{(\code{NULL} | \code{integer}) \cr
-Either a vector of integers of length \code{times} to set
-seed for each repetition of k-fold cross-validation.
-The seeds nust be at least of length 6 and meet other
-requirements for \code{"L'Ecuyer-CMRG"} random number
-generator.}
+             Either a vector of integers of length \code{times} to set
+             seed for each repetition of k-fold cross-validation.
+             For more about seeds see \code{\link[base]{set.seed}()}.
+
+             Each seed will be passed to \code{\link{cvo_create_folds}}.()}
+
+\item{kind}{character or \code{NULL}.  If \code{kind} is a character
+    string, set \R's RNG to the kind desired.  Use \code{"default"} to
+    return to the \R default.  See \sQuote{Details} for the
+    interpretation of \code{NULL}.}
 
 \item{n_min}{\code{integer(1)} \cr
 minimum acceptable number of unique samples per group.

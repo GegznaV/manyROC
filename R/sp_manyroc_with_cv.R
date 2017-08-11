@@ -38,6 +38,7 @@ sp_manyroc_with_cv <-
              k_folds = 5,
              times = 10,
              seeds = 2222222,
+             kind = "L'Ecuyer-CMRG",
              # reikia įdėti seed generatoriaus pavadinimą
              n_min = k_folds
     ) {
@@ -67,7 +68,7 @@ sp_manyroc_with_cv <-
                                 k = k_folds,
                                 times = times,
                                 seeds = seeds,
-                                kind = "L'Ecuyer-CMRG")
+                                kind = kind)
 
         x  <- Spectra[[]]
         gr <- Spectra[[,Var, drop = TRUE]]

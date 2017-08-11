@@ -73,14 +73,39 @@
 # # summarize_at(vars(sens, spec,  ppv,  npv,  bac, youden, kappa,  auc),
 # #              funs(q025, mean, q975))
 #
+# =============================================================================
 
 
-
+# =============================================================================
+# NOTES for future developement of the paackage:
+#
+# [!!!] CVO objects can be different, if paralellization is done in different
+# levels, and not in the top level as it is done now.
+#
+# =============================================================================
 
 
 #' Do manyROC analysis with cross-validation for hyperSpec object for each variable
 #'
-#' [!!!] // No description yet //
+#' [!!!] // No description yet //\cr\cr
+#'  For reproducible results in parallel computing, set seed with
+#' \code{parallel::\link[parallel]{clusterSetRNGStream}(iseed = x)}(where \code{x}
+#' is your seed) (and not with \code{set.seed}) as package
+#' \pkg{parallelMap} is used for paralellization.\cr
+#'
+#'
+#'              [!!!] The seeds nust be at least of length 6 and meet other
+#'              requirements for \code{"L'Ecuyer-CMRG"} random number
+#'              generator.\cr\cr
+#'              [!!!] At the moment Seeding section needs revision if
+#'              it is necessary to use
+#'              \code{"L'Ecuyer-CMRG"} (pseudo)random number generator as
+#'              \code{\link[base]{set.seed}()} does not work with
+#'              \pkg{parallelMap} package.
+#'              Instead \code{parallel::clusterSetRNGStream(iseed = x)}
+#'              (where \code{x} is your seed) should be used with
+#'              \pkg{parallelMap} to get reproducible results.
+#'
 #'
 #' @param Spectra \code{hyperSpec} object, that contains colum \code{ID} for
 #'                spectra blocking, columns with grouping variables as well
@@ -94,14 +119,18 @@
 #'                The number of folds in k-fold cross-validation.
 #'
 #' @param times (positive \code{integer})  \cr
-#'              The number of repetitions in repeated k-fold cross-validation.
+#'              The number of repetitions in repeated k-fold
+#'              cross-validation.
 #'
 #' @param seeds (\code{NULL} | \code{integer}) \cr
 #'              Either a vector of integers of length \code{times} to set
 #'              seed for each repetition of k-fold cross-validation.
-#'              The seeds nust be at least of length 6 and meet other
-#'              requirements for \code{"L'Ecuyer-CMRG"} random number
-#'              generator.
+#'              For more about seeds see \code{\link[base]{set.seed}()}.
+#'
+#'              Each seed will be passed to \code{\link{cvo_create_folds}}.()
+#'
+#'
+#' @inheritParams base::set.seed
 #'
 #' @return A list with results \cr
 #'        [!!!] Description needs more specification.
@@ -115,8 +144,11 @@
 #' library(manyROC)
 #'
 #' fluorescence$ID  <- 1:nrow(fluorescence)
-#' sp_manyroc_with_cv_by_variable(fluorescence[,,500~501], c("gr", "class"),
-#'                           k_folds = 3, times = 2)
+#' sp_manyroc_with_cv_by_variable(
+#'         fluorescence[,,500~501],
+#'          c("gr", "class"),
+#'          k_folds = 3,
+#'          times = 2)
 #'
 sp_manyroc_with_cv_by_variable <-
     # -----------------------------------------------------------------------------
@@ -124,17 +156,32 @@ sp_manyroc_with_cv_by_variable <-
              variables_to_analyze,
              k_folds = 3,
              times = 10,
-             seeds = 2222222) {
+             seeds = NULL, #2222222,
+             kind  = NULL) {
     # -----------------------------------------------------------------------------
     if (!checkmate::test_named(variables_to_analyze))
         names(variables_to_analyze) <- variables_to_analyze
+    # -----------------------------------------------------------------------------
+    # Prepare for paralellization
+    # [!!!] Check if these parallel export functions are really necessary
+    # parallelMap::parallelLibrary("manyROC", "purrr",
+    #                              level = "manyROC.grouping_variables",
+    #                              show.info = FALSE)
+
+    parallelMap::parallelExport("variables_to_analyze",
+                                "Spectra", "k_folds", "times", "seeds", "kind",
+                                 level = "manyROC.grouping_variables",
+                                 show.info = FALSE)
     # -----------------------------------------------------------------------------
     res_tmp <- parallelMap::parallelLapply(variables_to_analyze,
                                            purrr::safely(sp_manyroc_with_cv),
                                            Spectra = Spectra,
                                            k = k_folds,
                                            times = times,
-                                           seeds = seeds)
+                                           seeds = seeds,
+                                           kind = kind,
+
+                                           level = "manyROC.grouping_variables")
     # -----------------------------------------------------------------------------
     not_error <- purrr::map_lgl(res_tmp, ~is.null(.x$error))
     t_tez <- purrr::transpose(res_tmp)
