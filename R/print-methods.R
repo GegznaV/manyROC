@@ -121,7 +121,9 @@ print.manyroc_result <- function(x, ..., show_all = FALSE,
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # -----------------------------------------------------------------------------
-#' @rdname sp_manyroc_cv_by_variable
+#' @inheritParams base::print
+#'
+#' @rdname sp_manyroc_with_cv_by_variable
 #' @export
 #' @method print hide_it
 print.hide_it <- function(x, ...) {

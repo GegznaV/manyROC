@@ -3,12 +3,8 @@
 \docType{package}
 \name{manyROC}
 \alias{manyROC}
-\alias{.onAttach}
 \alias{manyROC-package}
 \title{ManyROC -- tools for ROC analysis}
-\usage{
-.onAttach(libname, pkgname)
-}
 \description{
 ManyROC -- tools for ROC analysis.
 }

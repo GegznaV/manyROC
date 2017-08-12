@@ -100,7 +100,7 @@
     
 
     <pre class="usage"><span class='fu'>sp_manyroc_with_cv</span>(<span class='no'>Var</span>, <span class='no'>Spectra</span>, <span class='kw'>k_folds</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='fl'>2222222</span>,
-  <span class='kw'>n_min</span> <span class='kw'>=</span> <span class='no'>k_folds</span>)</pre>
+  <span class='kw'>kind</span> <span class='kw'>=</span> <span class='st'>"L'Ecuyer-CMRG"</span>, <span class='kw'>n_min</span> <span class='kw'>=</span> <span class='no'>k_folds</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -127,16 +127,23 @@ The number of folds in k-fold cross-validation.</p></td>
     <tr>
       <th>times</th>
       <td><p>(positive <code>integer</code>)  
-The number of repetitions in repeated k-fold cross-validation.</p></td>
+The number of repetitions in repeated k-fold
+cross-validation.</p></td>
     </tr>
     <tr>
       <th>seeds</th>
       <td><p>(<code>NULL</code> | <code>integer</code>) 
-Either a vector of integers of length <code>times</code> to set
-seed for each repetition of k-fold cross-validation.
-The seeds nust be at least of length 6 and meet other
-requirements for <code>"L'Ecuyer-CMRG"</code> random number
-generator.</p></td>
+             Either a vector of integers of length <code>times</code> to set
+             seed for each repetition of k-fold cross-validation.
+             For more about seeds see <code><a href='http://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a>()</code>.</p>
+<p>Each seed will be passed to <code><a href='cvo_create_folds.html'>cvo_create_folds</a></code>.()</p></td>
+    </tr>
+    <tr>
+      <th>kind</th>
+      <td><p>character or <code>NULL</code>.  If <code>kind</code> is a character
+    string, set <span style="R">R</span>'s RNG to the kind desired.  Use <code>"default"</code> to
+    return to the <span style="R">R</span> default.  See &#8216;Details&#8217; for the
+    interpretation of <code>NULL</code>.</p></td>
     </tr>
     <tr>
       <th>n_min</th>

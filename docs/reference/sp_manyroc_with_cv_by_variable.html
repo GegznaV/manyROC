@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Do manyROC analysis with cross-validation for hyperSpec object for each variable � sp_manyroc_with_cv_by_variable • manyROC</title>
+<title>Do manyROC analysis with cross-validation for hyperSpec object for each variable � print.hide_it • manyROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -96,11 +96,18 @@
     </div>
 
     
-    <p>[!!!] // No description yet //</p>
+    <p>[!!!] // No description yet //
+ For reproducible results in parallel computing, set seed with
+<code>parallel::<a href='http://www.rdocumentation.org/packages/parallel/topics/RngStream'>clusterSetRNGStream</a>(iseed = x)</code>(where <code>x</code>
+is your seed) (and not with <code>set.seed</code>) as package
+<span class="pkg">parallelMap</span> is used for paralellization.</p>
     
 
-    <pre class="usage"><span class='fu'>sp_manyroc_with_cv_by_variable</span>(<span class='no'>Spectra</span>, <span class='no'>variables_to_analyze</span>, <span class='kw'>k_folds</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='fl'>2222222</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for hide_it</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>sp_manyroc_with_cv_by_variable</span>(<span class='no'>Spectra</span>, <span class='no'>variables_to_analyze</span>, <span class='kw'>k_folds</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -125,16 +132,23 @@ The number of folds in k-fold cross-validation.</p></td>
     <tr>
       <th>times</th>
       <td><p>(positive <code>integer</code>)  
-The number of repetitions in repeated k-fold cross-validation.</p></td>
+The number of repetitions in repeated k-fold
+cross-validation.</p></td>
     </tr>
     <tr>
       <th>seeds</th>
       <td><p>(<code>NULL</code> | <code>integer</code>) 
-Either a vector of integers of length <code>times</code> to set
-seed for each repetition of k-fold cross-validation.
-The seeds nust be at least of length 6 and meet other
-requirements for <code>"L'Ecuyer-CMRG"</code> random number
-generator.</p></td>
+             Either a vector of integers of length <code>times</code> to set
+             seed for each repetition of k-fold cross-validation.
+             For more about seeds see <code><a href='http://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a>()</code>.</p>
+<p>Each seed will be passed to <code><a href='cvo_create_folds.html'>cvo_create_folds</a></code>.()</p></td>
+    </tr>
+    <tr>
+      <th>kind</th>
+      <td><p>character or <code>NULL</code>.  If <code>kind</code> is a character
+    string, set <span style="R">R</span>'s RNG to the kind desired.  Use <code>"default"</code> to
+    return to the <span style="R">R</span> default.  See &#8216;Details&#8217; for the
+    interpretation of <code>NULL</code>.</p></td>
     </tr>
     </table>
     
@@ -142,6 +156,20 @@ generator.</p></td>
 
     <p>A list with results 
        [!!!] Description needs more specification.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>[!!!] The seeds nust be at least of length 6 and meet other
+             requirements for <code>"L'Ecuyer-CMRG"</code> random number
+             generator.
+             [!!!] At the moment Seeding section needs revision if
+             it is necessary to use
+             <code>"L'Ecuyer-CMRG"</code> (pseudo)random number generator as
+             <code><a href='http://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a>()</code> does not work with
+             <span class="pkg">parallelMap</span> package.
+             Instead <code><a href='http://www.rdocumentation.org/packages/parallel/topics/RngStream'>parallel::clusterSetRNGStream(iseed = x)</a></code>
+             (where <code>x</code> is your seed) should be used with
+             <span class="pkg">parallelMap</span> to get reproducible results.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -153,8 +181,11 @@ generator.</p></td>
 <span class='fu'>library</span>(<span class='no'>manyROC</span>)
 
 <span class='no'>fluorescence</span>$<span class='no'>ID</span>  <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fu'>nrow</span>(<span class='no'>fluorescence</span>)
-<span class='fu'>sp_manyroc_with_cv_by_variable</span>(<span class='no'>fluorescence</span>[,,<span class='fl'>500</span>~<span class='fl'>501</span>], <span class='fu'>c</span>(<span class='st'>"gr"</span>, <span class='st'>"class"</span>),
-                          <span class='kw'>k_folds</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; $n_included
+<span class='fu'>sp_manyroc_with_cv_by_variable</span>(
+        <span class='no'>fluorescence</span>[,,<span class='fl'>500</span>~<span class='fl'>501</span>],
+         <span class='fu'>c</span>(<span class='st'>"gr"</span>, <span class='st'>"class"</span>),
+         <span class='kw'>k_folds</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+         <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='message'>Exporting objects to package env on master for mode: local</span></div><div class='output co'>#&gt; $n_included
 #&gt;    gr class
 #&gt; 1 150   150
 #&gt; 
@@ -176,9 +207,6 @@ generator.</p></td>
 #&gt; --- A cvo object: ----------------------------------------------------
 #&gt;  indices stratified blocked         cv_type k repetitions sample_size
 #&gt;    Train       TRUE   FALSE Repeated k-fold 3           2         150
-#&gt; 
-#&gt; Random number generator: L'Ecuyer-CMRG 
-#&gt; Seeds:  2222222, 24997039
 #&gt; ----------------------------------------------------------------------
 #&gt; 
 #&gt; *** Other elements are not shown ***
@@ -186,26 +214,26 @@ generator.</p></td>
 #&gt; 
 #&gt; $results
 #&gt;     grouping      set       fold compared_groups feature median_neg cutoff
-#&gt; 1         gr training Rep1_Fold1         A vs. B     500        336    369
-#&gt; 2         gr training Rep1_Fold1         A vs. C     500        336    343
-#&gt; 3         gr training Rep1_Fold1         B vs. C     500        333    343
-#&gt; 4         gr training Rep1_Fold2         A vs. B     500        339    348
+#&gt; 1         gr training Rep1_Fold1         A vs. B     500        338    301
+#&gt; 2         gr training Rep1_Fold1         A vs. C     500        338    329
+#&gt; 3         gr training Rep1_Fold1         B vs. C     500        334    328
+#&gt; 4         gr training Rep1_Fold2         A vs. B     500        338    334
 #&gt; ...      ...      ...        ...             ...     ...        ...    ...
-#&gt; 213    class     test Rep2_Fold3        K vs. S1     501         NA    327
+#&gt; 213    class     test Rep2_Fold3        K vs. S1     501         NA    329
 #&gt; 214    class     test Rep2_Fold3         l vs. N     501         NA    348
 #&gt; 215    class     test Rep2_Fold3        l vs. S1     501         NA    346
 #&gt; 216    class     test Rep2_Fold3        N vs. S1     501         NA    328
 #&gt;                                                                           
 #&gt;     median_pos  tp  fn  fp  tn sens spec  ppv  npv  bac youden kappa  auc
-#&gt; 1          333  33   3  26   8 0.92 0.24 0.56 0.73 0.58   0.15  0.15 0.54
-#&gt; 2          343  15  14  11  23 0.52 0.68 0.58 0.62 0.60   0.19  0.20 0.54
-#&gt; 3          343  15  14  10  26 0.52 0.72 0.60 0.65 0.62   0.24  0.24 0.58
-#&gt; 4          333  31   6  21  14 0.84 0.40 0.60 0.70 0.62   0.24  0.24 0.60
+#&gt; 1          334   8  29   2  33 0.22 0.94 0.80 0.53 0.58   0.16  0.16 0.56
+#&gt; 2          327  16  12  13  22 0.57 0.63 0.55 0.65 0.60   0.20  0.20 0.55
+#&gt; 3          327  16  12  16  21 0.57 0.57 0.50 0.64 0.57   0.14  0.14 0.49
+#&gt; 4          331  25  11  16  19 0.69 0.54 0.61 0.63 0.62   0.24  0.24 0.58
 #&gt; ...        ... ... ... ... ...  ...  ...  ...  ...  ...    ...   ...  ...
-#&gt; 213         NA   8   9   9   8 0.47 0.47 0.47 0.47 0.47  -0.06 -0.06   NA
-#&gt; 214         NA   4   3   7   3 0.57 0.30 0.36 0.50 0.44  -0.13 -0.12   NA
-#&gt; 215         NA  11   6   7   3 0.65 0.30 0.61 0.33 0.47  -0.05 -0.05   NA
-#&gt; 216         NA   8   9   2   5 0.47 0.71 0.80 0.36 0.59   0.18  0.14   NA
+#&gt; 213         NA  10   7  10   7 0.59 0.41 0.50 0.50 0.50   0.00  0.00   NA
+#&gt; 214         NA   3   3   6   4 0.50 0.40 0.33 0.57 0.45  -0.10 -0.09   NA
+#&gt; 215         NA  12   5   6   4 0.71 0.40 0.67 0.44 0.55   0.11  0.11   NA
+#&gt; 216         NA   9   8   2   4 0.53 0.67 0.82 0.33 0.60   0.20  0.15   NA
 #&gt;                                                                          
 #&gt; 
 #&gt; $variables_included
@@ -229,6 +257,8 @@ generator.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

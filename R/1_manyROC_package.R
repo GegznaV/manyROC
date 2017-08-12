@@ -3,6 +3,7 @@
 #' ManyROC -- tools for ROC analysis.
 #'
 #'
+#'
 #' @name manyROC
 #' @docType package
 #' @author Vilmantas Gegzna
@@ -32,6 +33,15 @@
 #'                       assert_subset
 #'                       assert_vector
 #'
+NULL
+
+
+#' Internal functions
+#'
+#' @param libname Library name
+#' @param pkgname Package name
+#'
+#' @keywords internal
 
 .onAttach = function(libname, pkgname) {
     # Registration of levels for paralell computing
