@@ -92,13 +92,23 @@ roc_manyroc_cv <- function(x,
         gr_test  <- gr[-training_ind]
 
         rez_train[[i]] <- roc_manyroc(x  = x_train,
-                                       gr = gr_train,
-                                       optimize_by = optimize_by)
+                                      gr = gr_train,
+                                      optimize_by = optimize_by)
 
-        # [!!!] Must fail when there are mere than 2 classes
+        # [!!!] The function must fail when there are more than 2 classes
+        # assertion is needed.
+
+
+        ## The order of names must be identical:
+        #
+        # tmp1 <- roc_extract_info(rez_train[[i]])
+        # tmp2 <- split_by_feature(tmp1, levels = colnames(x_test))
+        #
+        # identical(tmp1$feature, names(tmp2))
+        # identical(names(tmp2),  names(mat2list(x_test)))
 
         tmp1 <- roc_extract_info(rez_train[[i]])
-        tmp2 <- split_by_feature(tmp1)
+        tmp2 <- split_by_feature(tmp1, levels = colnames(x_test))
         tmp3 <- purrr::map2(.x = tmp2,
                             .y = mat2list(x_test),
                             .f = roc_predict_performance_by_gr,
@@ -132,15 +142,26 @@ res2df <- function(res) {
         add_class_label("manyroc_result")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-split_by_feature <- function(obj) {
+split_by_feature <- function(obj, levels) {
+    # It is crucial to use forcats::as_factor as the levels of factors must
+    # be sorted in order of first appearance of the value.
+    # Othervise incorrect results will apear.
+    factor_var <- factor(obj$feature, levels = levels)
 
-    # [!!!] TO do: cvo mut be in the output too
-    res <- split(obj, obj$feature)
+    res <- split(obj, f = factor_var)
     purrr::map(res, add_class_label, c("roc_info", "roc_df"))
 }
+# if (is.null(levels)) {
+#     factor_var <-
+#         (obj$feature)  %>%
+#         forcats::as_factor() %>%
+#         forcats::fct_inorder()
+# } else {
+#     factor_var <- factor(obj$feature, levels = levels)
+# }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mat2list <- function(x) {
-    as.list(as.data.frame(x))
+    as.list(as.data.frame(x, stringsAsFactors = FALSE))
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
