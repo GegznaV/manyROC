@@ -95,8 +95,8 @@ roc_manyroc_cv <- function(x,
                                       gr = gr_train,
                                       optimize_by = optimize_by)
 
-        # [!!!] The function must fail when there are more than 2 classes
-        # assertion is needed.
+        # [!!!] The function must fail when there are more than 2 classes.
+        # An assertion / a test is needed.
 
 
         ## The order of names must be identical:
