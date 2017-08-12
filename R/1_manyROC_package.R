@@ -36,12 +36,12 @@
 NULL
 
 
-#' Internal functions
-#'
-#' @param libname Library name
-#' @param pkgname Package name
-#'
-#' @keywords internal
+# Internal functions
+#
+# @param libname Library name
+# @param pkgname Package name
+#
+# @keywords internal
 
 .onAttach = function(libname, pkgname) {
     # Registration of levels for paralell computing

@@ -69,7 +69,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Cross-validation object (cvo)</h1>
 <h4 class="author"><em>Vilmantas Gegzna</em></h4>
-<h4 class="date"><em>2017-08-06 (v0.0.4.4000)</em></h4>
+<h4 class="date"><em>2017-08-12 (v0.0.4.7001)</em></h4>
 
 
 <div id="TOC">
@@ -85,9 +85,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># clear()</span>
 
 <span class="co"># Make some data</span>
-DataSet1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ID =</span> <span class="kw">rep</span>(<span class="dv">1</span>:<span class="dv">20</span>, <span class="dt">each =</span> <span class="dv">2</span>),
-                       <span class="dt">gr =</span> <span class="kw">gl</span>(<span class="dv">4</span>, <span class="dv">10</span>, <span class="dt">labels =</span> LETTERS[<span class="dv">1</span>:<span class="dv">4</span>]),
-                       <span class="dt">.row =</span> <span class="dv">1</span>:<span class="dv">40</span>)
+DataSet1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ID =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">each =</span> <span class="dv">2</span>),
+                       <span class="dt">gr =</span> <span class="kw">gl</span>(<span class="dv">4</span>, <span class="dv">10</span>, <span class="dt">labels =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]),
+                       <span class="dt">.row =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>)
 
 <span class="co"># Set parameters</span>
 nFolds =<span class="st"> </span><span class="dv">5</span>
@@ -100,9 +100,8 @@ nFolds =<span class="st"> </span><span class="dv">5</span>
 #&gt;  $ .row: int  1 2 3 4 5 6 7 8 9 10 ...</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># table(DataSet1[,c(&quot;gr&quot;,&quot;ID&quot;)])</span>
 <span class="co"># summary(DataSet1)</span></code></pre></div>
-<p><code>createFolds2</code> and <code>stratifiedFolds</code> is the same function with different names</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
-<span class="kw">cvo_create_folds</span>(<span class="dt">block_by =</span> DataSet1$ID, <span class="dt">k =</span> nFolds)</code></pre></div>
+<span class="kw">cvo_create_folds</span>(<span class="dt">block_by =</span> DataSet1<span class="op">$</span>ID, <span class="dt">k =</span> nFolds)</code></pre></div>
 <pre><code>#&gt; --- A cvo object: ----------------------------------------------------
 #&gt;  indices stratified blocked cv_type k repetitions sample_size
 #&gt;    Train      FALSE    TRUE  k-fold 5           1          40
@@ -146,8 +145,8 @@ nFolds =<span class="st"> </span><span class="dv">5</span>
 #&gt; 10 (of 20) first columns are displayed.
 #&gt; ************************************************************\n</code></pre>
 <p>When “free” variables are provided:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Folds1_b &lt;-<span class="st"> </span><span class="kw">cvo_create_folds</span>(<span class="dt">stratify_by =</span> DataSet1$gr,
-                             <span class="dt">block_by =</span> DataSet1$ID,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Folds1_b &lt;-<span class="st"> </span><span class="kw">cvo_create_folds</span>(<span class="dt">stratify_by =</span> DataSet1<span class="op">$</span>gr,
+                             <span class="dt">block_by =</span> DataSet1<span class="op">$</span>ID,
                              <span class="dt">k =</span> nFolds,
                              <span class="dt">returnTrain =</span> <span class="ot">FALSE</span>)
 <span class="co"># str(Folds1_b)</span>
@@ -184,7 +183,7 @@ nFolds =<span class="st"> </span><span class="dv">5</span>
 #&gt; 10 (of 20) first columns are displayed.
 #&gt; ************************************************************\n</code></pre>
 <p>Not blocked but stratified:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Folds1_c &lt;-<span class="st"> </span><span class="kw">cvo_create_folds</span>(<span class="dt">stratify_by =</span> DataSet1$gr,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Folds1_c &lt;-<span class="st"> </span><span class="kw">cvo_create_folds</span>(<span class="dt">stratify_by =</span> DataSet1<span class="op">$</span>gr,
                              <span class="dt">k =</span> nFolds,
                              <span class="dt">returnTrain =</span> <span class="ot">FALSE</span>)
 <span class="co"># str(Folds1_c)</span>
@@ -220,7 +219,7 @@ nFolds =<span class="st"> </span><span class="dv">5</span>
 #&gt; 10 (of 20) first columns are displayed.
 #&gt; ************************************************************\n</code></pre>
 <p>Blocked but not stratified:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Folds1_d &lt;-<span class="st"> </span><span class="kw">cvo_create_folds</span>(<span class="dt">block_by =</span> DataSet1$ID,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Folds1_d &lt;-<span class="st"> </span><span class="kw">cvo_create_folds</span>(<span class="dt">block_by =</span> DataSet1<span class="op">$</span>ID,
                              <span class="dt">k =</span> nFolds,
                              <span class="dt">returnTrain =</span> <span class="ot">FALSE</span>)
 <span class="co"># str(Folds1_d)</span>

@@ -50,7 +50,6 @@ str(DataSet1)
 # summary(DataSet1)
 ```
 
-`createFolds2` and `stratifiedFolds` is the same function with different names
 ```{r}
 
 set.seed(1)
