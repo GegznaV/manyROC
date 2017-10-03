@@ -28,22 +28,20 @@ knitr::include_graphics("https://raw.githubusercontent.com/GegznaV/manyROC/maste
 ```
 <!-- "https://raw.githubusercontent.com/GegznaV/manyROC/master/docs/logo.png" -->
 
-_**manyROC**_ -- tools for ROC analyis
+_**manyROC**_ – tools for ROC analyis
 ============================================================================= 
 
 <p align="center"><font color="red" size="3" family="sans">
-<b>The package is under construction.</b></font>
+<b>The developement version of the package.</b></font>
 </p>
 
 <!-- *manyROC* workflow for spectroscopic data analysis. -->
 
 Notes:
 
-1. ROC -- receiver operating characteristic. 
+1. ROC – receiver operating characteristic. 
 2. In documentation, symbol <b><font color="red">[!!!]</font></b> means, 
-that the desctription is not finished or imprecise and needs special 
-attention.
-
+that the desctription is not finished or imprecise and still needs to be reviewed.
 
 
 Install package:
@@ -56,7 +54,7 @@ install_github("GegznaV/manyROC")
 
 <!-- * * * -->
 
- <!-- <p align="right"> </p>     -->
+<!-- <p align="right"> </p>     -->
 
 
  
