@@ -98,10 +98,18 @@ has_too_few_IDs <- function(OBJ,
                             n_min = 5,
                             na.rm = TRUE){
 
-    gr_ <- count_spectra(OBJ, Var = Var, ID = ID, na.rm = na.rm)$n_ID
+    DF <- OBJ[, c(ID, Var)]$..
+    if (na.rm) DF <- tidyr::drop_na(DF)
+    DF <- distinct(DF, .keep_all = TRUE)
+    gr_ <- table(DF[,2], useNA = "ifany")
     names(gr_[gr_ < n_min])
+
+    # gr_ <- count_spectra(OBJ, Var = Var, ID = ID, na.rm = na.rm)$n_ID
+    # names(gr_[gr_ < n_min])
 }
 # =============================================================================
+# TODO:
+# [!!!] Bug: na.rm = TRUE does not work
 count_spectra <- function(OBJ,
                           Var = NULL, # colnames(OBJ)[1],
                           ID = "ID",

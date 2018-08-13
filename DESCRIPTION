@@ -3,8 +3,8 @@ Type: Package
 Title: Tools for ROC Analyis
 Description: Package `manyROC` provides with tools for ROC (receiver operating 
              characteristic) analyis.
-Version: 0.0.4.7002
-Date: 2017-08-13
+Version: 0.0.5
+Date: 2018-08-13
 Authors@R: person("Vilmantas", "Gegzna",
                   role = c("aut", "cre"),
                   email = "GegznaV@gmail.com")
