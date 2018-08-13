@@ -73,23 +73,39 @@ a test set (\pkg{caret} style).
 If \code{"both"}, returns indices of variables
 in both training and test sets (\pkg{mlr} style).}
 
-\item{predict}{[\code{character(1)}]\cr
+\item{predict}{(\code{character(1)})\cr
 What to predict during resampling: \dQuote{train}, \dQuote{test} or \dQuote{both} sets.
 Default is \dQuote{test}.}
 
 \item{x}{A \code{cvo} object.}
 
-\item{...}{[any]\cr
+\item{...}{(any)\cr
 Further parameters for strategies.\cr
 \describe{
-\item{iters [\code{integer(1)}]}{Number of iterations, for \dQuote{CV}, \dQuote{Subsample}
-  and \dQuote{Boostrap}.}
-\item{split [\code{numeric(1)}]}{Proportion of training cases for \dQuote{Holdout} and
-  \dQuote{Subsample} between 0 and 1. Default is 2/3.}
-\item{reps [\code{integer(1)}]}{Repeats for \dQuote{RepCV}. Here \code{iters = folds * reps}.
-  Default is 10.}
-\item{folds [\code{integer(1)]}}{Folds in the repeated CV for \code{RepCV}.
-  Here \code{iters = folds * reps}. Default is 10.}
+\item{iters (\code{integer(1)})}{Number of iterations, for \dQuote{CV}, \dQuote{Subsample}
+and \dQuote{Bootstrap}.}
+\item{split (\code{numeric(1)})}{Proportion of training cases for \dQuote{Holdout} and
+\dQuote{Subsample} between 0 and 1. Default is 2 / 3.}
+\item{reps (\code{integer(1)})}{Repeats for \dQuote{RepCV}. Here \code{iters = folds * reps}.
+Default is 10.}
+\item{folds (\code{integer(1)})}{Folds in the repeated CV for \code{RepCV}.
+Here \code{iters = folds * reps}. Default is 10.}
+\item{horizon (\code{numeric(1)})}{Number of observations in the forecast test set for \dQuote{GrowingWindowCV}
+and \dQuote{FixedWindowCV}. When \code{horizon > 1} this will be treated as the number of
+observations to forecast, else it will be a fraction of the initial window. IE,
+for 100 observations, initial window of .5, and horizon of .2, the test set will have
+10 observations. Default is 1.}
+\item{initial.window (\code{numeric(1)})}{Fraction of observations to start with
+in the training set for \dQuote{GrowingWindowCV} and \dQuote{FixedWindowCV}.
+When \code{initial.window > 1} this will be treated as the number of
+observations in the initial window, else it will be treated as the fraction
+of observations to have in the initial window. Default is 0.5.}
+\item{skip (\code{numeric(1)})}{ How many resamples to skip to thin the total amount
+for \dQuote{GrowingWindowCV} and \dQuote{FixedWindowCV}. This is passed through as the \dQuote{by} argument
+in \code{seq()}. When \code{skip > 1} this will be treated as the increment of the sequence of resampling indices,
+else it will be a fraction of the total training indices. IE for 100 training sets and a value of .2, the increment
+of the resampling indices will be 20. Default is \dQuote{horizon} which gives mutually exclusive chunks
+of test indices.}
 }}
 }
 \value{
