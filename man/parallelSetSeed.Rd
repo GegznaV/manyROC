@@ -14,10 +14,9 @@ parallelSetSeed(iseed = NULL, seed = iseed, cl = NULL, ...)
     \code{.Random.seed} when the \samp{"L'Ecuyer-CMRG"} RNG is in use.
     See \code{\link{RNG}} for the valid values.}
 
-\item{cl}{A cluster from this package or package \href{{https://CRAN.R-project.org/package=snow}{\pkg{snow}}}, or (if
-    \code{NULL}) the registered cluster.}
+\item{cl}{A cluster from this package or package \pkg{snow},or (if \code{NULL}) the registered cluster.}
 
-\item{...}{Arguments to be passed to `set.seed()`.}
+\item{...}{Arguments to be passed to \code{set.seed()}.}
 }
 \description{
 A wrapper for \pkg{parallel}::\code{\link[parallel]{clusterSetRNGStream}}.
