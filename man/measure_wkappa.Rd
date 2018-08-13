@@ -32,3 +32,4 @@ measure_wkappa(conf_mat = square_matrix)
 \seealso{
 Other measures_: \code{\link{measure_kappa}}
 }
+\concept{measures_}

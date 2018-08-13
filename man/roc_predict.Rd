@@ -44,3 +44,4 @@ Other functions for ROC: \code{\link{access_elements}},
   \code{\link{print.as_str}},
   \code{\link{roc_performance_measures}}
 }
+\concept{functions for ROC}

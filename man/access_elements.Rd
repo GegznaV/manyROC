@@ -57,3 +57,4 @@ Other functions for ROC: \code{\link{calculate_performance}},
 \author{
 Vilmantas Gegzna
 }
+\concept{functions for ROC}

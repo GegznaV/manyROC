@@ -61,3 +61,4 @@ Other functions for ROC: \code{\link{access_elements}},
 \author{
 Vilmantas Gegzna
 }
+\concept{functions for ROC}

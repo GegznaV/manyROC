@@ -8,8 +8,8 @@
 \usage{
 \method{print}{hide_it}(x, ...)
 
-sp_manyroc_with_cv_by_variable(Spectra, variables_to_analyze, k_folds = 3,
-  times = 10, seeds = NULL, kind = NULL)
+sp_manyroc_with_cv_by_variable(Spectra, variables_to_analyze,
+  k_folds = 3, times = 10, seeds = NULL, kind = NULL)
 }
 \arguments{
 \item{x}{an object used to select a method.}

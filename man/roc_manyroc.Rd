@@ -9,8 +9,8 @@
 \alias{roc_manyroc.hyperSpec}
 \title{Carry out the manyROC analysis}
 \usage{
-\method{print}{manyroc_result}(x, ..., show_all = FALSE, perf_digits = 2,
-  fmt = "\%.3g")
+\method{print}{manyroc_result}(x, ..., show_all = FALSE,
+  perf_digits = 2, fmt = "\%.3g")
 
 roc_manyroc(x, gr = NULL, optimize_by = "bac", ...)
 
@@ -19,7 +19,8 @@ roc_manyroc(x, gr = NULL, optimize_by = "bac", ...)
 
 \method{roc_manyroc}{numeric}(x, gr = NULL, optimize_by = "bac", ...)
 
-\method{roc_manyroc}{data.frame}(x, gr = NULL, optimize_by = "bac", ...)
+\method{roc_manyroc}{data.frame}(x, gr = NULL, optimize_by = "bac",
+  ...)
 
 \method{roc_manyroc}{hyperSpec}(x, gr = NULL, optimize_by = "bac", ...)
 }
@@ -132,3 +133,4 @@ roc_manyroc(fluorescence[ , , 500~502], fluorescence$gr)
 \author{
 Vilmantas Gegzna
 }
+\concept{\pkg{manyROC} functions.}

@@ -4,8 +4,8 @@
 \alias{sp_manyroc_with_cv}
 \title{Do manyROC analysis with cross-validation for hyperSpec object}
 \usage{
-sp_manyroc_with_cv(Var, Spectra, k_folds = 5, times = 10, seeds = 2222222,
-  kind = "L'Ecuyer-CMRG", n_min = k_folds)
+sp_manyroc_with_cv(Var, Spectra, k_folds = 5, times = 10,
+  seeds = 2222222, kind = "L'Ecuyer-CMRG", n_min = k_folds)
 }
 \arguments{
 \item{Var}{(\code{character(1)}\ \code{factor}) \cr
