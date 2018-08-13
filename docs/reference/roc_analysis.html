@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Carry out the ROC analysis � print.as_str • manyROC</title>
+<title>Carry out the ROC analysis — print.as_str • manyROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,31 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Carry out the ROC analysis — print.as_str" />
+
+<meta property="og:description" content="Do the ROC (receiver operating characteristic) analysis and calculate
+vector of cut-off values and associated number of
+true positives (TP),
+false negatives (FN),
+false positives (FP), and
+true negatives (TN) as well as performance measures such as sensitivity,
+specificity, etc." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -34,8 +52,7 @@
 <![endif]-->
 
 
-  	<link rel="icon" href="../favicon.png" />
-</head>
+  </head>
 
   <body>
     <div class="container template-reference-topic">
@@ -48,8 +65,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">manyROC | R package</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">manyROC</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.5</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -82,6 +103,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -89,12 +111,15 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Carry out the ROC analysis</h1>
+    
+    <div class="hidden name"><code>roc_analysis.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Do the ROC (receiver operating characteristic) analysis and calculate
 vector of cut-off values and associated number of
@@ -104,6 +129,7 @@ false positives (FP), and
 true negatives (TN) as well as performance measures such as sensitivity,
 specificity, etc.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for as_str</span>
 <span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)
@@ -133,12 +159,12 @@ specificity, etc.</p>
 <span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='fu'>levels</span>(<span class='no'>gr</span>)[<span class='fl'>2</span>],
   <span class='kw'>pos_is_larger</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='kw'>results</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>(<code>numeric</code>)  A numeric vector.
+      <td><p>(<code>numeric</code>) <br /> A numeric vector.<br />
 (in <code>print</code> function) An object to print.</p></td>
     </tr>
     <tr>
@@ -147,38 +173,38 @@ specificity, etc.</p>
     </tr>
     <tr>
       <th>show_all</th>
-      <td><p>(<code>logical(1)</code>) A flag if whole dataset should be
+      <td><p>(<code>logical(1)</code>)<br /> A flag if whole dataset should be
 printed. If <code>FALSE</code>, only a few fisrt and last rows
 will be printed.</p></td>
     </tr>
     <tr>
       <th>perf_digits</th>
-      <td><p>(<code>integer(1)</code>) A number of decimals to display
+      <td><p>(<code>integer(1)</code>)<br /> A number of decimals to display
 for <em>performance measures</em>. Default is 2.</p></td>
     </tr>
     <tr>
       <th>fmt</th>
-      <td><p>(<code>character(1)</code>) A string indicating number display
+      <td><p>(<code>character(1)</code>)<br /> A string indicating number display
 format for other numeric columns excluding performance measures.
 The string will be passed to <code><a href='http://www.rdocumentation.org/packages/base/topics/sprintf'>sprintf</a></code>.
 Default is <code>"%.3g"</code>.</p></td>
     </tr>
     <tr>
       <th>digits</th>
-      <td><p>(<code>integer(1)</code>) Number of significant digits to display.</p></td>
+      <td><p>(<code>integer(1)</code>)<br /> Number of significant digits to display.</p></td>
     </tr>
     <tr>
       <th>gr</th>
-      <td><p>(<code>factor</code>)  A factor vector with two levels.</p></td>
+      <td><p>(<code>factor</code>) <br /> A factor vector with two levels.</p></td>
     </tr>
     <tr>
       <th>pos_label</th>
-      <td><p>(<code>character(1)</code>)  A string with the name of
+      <td><p>(<code>character(1)</code>) <br /> A string with the name of
 positive group.</p></td>
     </tr>
     <tr>
       <th>pos_is_larger</th>
-      <td><p>(<code>NULL</code>|<code>TRUE</code>|<code>FALSE</code>) 
+      <td><p>(<code>NULL</code>|<code>TRUE</code>|<code>FALSE</code>) <br />
 A flag indicating, if values of positive group are on avedage
 are expected to be larger than values of negative group.
 If <code>NULL</code>, this option is determined basing on data using
@@ -186,7 +212,7 @@ group medians.</p></td>
     </tr>
     <tr>
       <th>optimize_by</th>
-      <td><p>(<code>string(1)</code>)  [!!!] Method to determine the
+      <td><p>(<code>string(1)</code>) <br /> [!!!] Method to determine the
 optimal cut-off value.
 Current options: <code>"bac"</code>,
                 <code>"youden"</code>,
@@ -194,7 +220,7 @@ Current options: <code>"bac"</code>,
     </tr>
     <tr>
       <th>results</th>
-      <td><p>(<code>character(1)</code>)  A string indicating which results
+      <td><p>(<code>character(1)</code>) <br /> A string indicating which results
 should be returned: either <code>"all"</code> (as described in
 section "Values") or just <code>"optimal"</code>.</p></td>
     </tr>
@@ -212,7 +238,7 @@ with three fields: <code>$info</code>, <code>$optimal</code>, <code>$all_results
 and positive cases as well as number of cases in total.</p></li>
 <li><p><b><code>$optimal</code></b> one row from <code>$all_results</code>, which was
 determined as having optima threshold (cut-off) value. Sometimes it can be
-several rows, if the performance is equally good.</p></li>
+several rows, if the performance is equally good. <br /><br /></p></li>
 <li><p><b><code>$all_results</code></b> is a data frame with columns
       <code>cutoffs</code> for cutoff values,
       <code>tp</code> (number of true positives),
@@ -220,7 +246,7 @@ several rows, if the performance is equally good.</p></li>
       <code>fp</code> (number of false positives),
       <code>tn</code> (number of true negatives),
       ... [!!!]</p></li>
-</ul><p></p>
+</ul><p><br /><br /></p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
@@ -229,10 +255,10 @@ several rows, if the performance is equally good.</p></li>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other functions for ROC: <code><a href='access_elements.html'>access_elements</a></code>,
+    <div class='dont-index'><p>Other functions for ROC: <code><a href='access_elements.html'>access_elements</a></code>,
   <code><a href='calculate_performance.html'>calculate_performance</a></code>,
   <code><a href='roc_performance_measures.html'>roc_performance_measures</a></code>,
-  <code><a href='roc_predict.html'>roc_predict</a></code></p>
+  <code><a href='roc_predict.html'>roc_predict</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -242,8 +268,8 @@ several rows, if the performance is equally good.</p></li>
 <span class='co'># Make some data</span>
 
 <span class='fu'>set.seed</span>(<span class='fl'>1</span>)
-(<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>10</span>))</div><div class='output co'>#&gt;  [1]  0.4608108  1.3431021  0.9971683 -0.3676242 -0.1319827  1.7770993
-#&gt;  [7] -0.4642686 -0.1738468 -0.4040140  1.4148149</div><div class='input'>
+(<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>10</span>))</div><div class='output co'>#&gt;  [1] -0.6264538  0.1836433 -0.8356286  1.5952808  0.3295078 -0.8204684
+#&gt;  [7]  0.4874291  0.7383247  0.5757814 -0.3053884</div><div class='input'>
 (<span class='no'>gr</span> <span class='kw'>&lt;-</span> <span class='fu'>gl</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>length</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"H"</span>,<span class='st'>"S"</span>)))</div><div class='output co'>#&gt;  [1] H H H H H S S S S S
 #&gt; Levels: H S</div><div class='input'>
 
@@ -251,58 +277,58 @@ several rows, if the performance is equally good.</p></li>
 
 <span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>)</div><div class='output co'>#&gt; $info
 #&gt;  var_name n_total n_neg n_pos neg_label pos_label median_neg median_pos below
-#&gt;                10     5     5         H         S  0.4608108 -0.1738468     S
-#&gt;      cutoff above
-#&gt;  -0.4222089     H
+#&gt;                10     5     5         H         S  0.1836433  0.4874291     H
+#&gt;     cutoff above
+#&gt;  0.4084684     S
 #&gt; 
 #&gt; $optimal
-#&gt;  cutoff tp fn fp tn sens spec ppv   npv bac youden kappa  auc median_neg
-#&gt;  -0.422  2  3  0  5  0.4    1   1 0.625 0.7    0.4   0.4 0.56      0.461
+#&gt;  cutoff tp fn fp tn sens spec  ppv   npv bac youden kappa auc median_neg
+#&gt;   0.408  3  2  1  4  0.6  0.8 0.75 0.667 0.7    0.4   0.4 0.6      0.184
 #&gt;  median_pos
-#&gt;      -0.174
-#&gt; 
-#&gt; *The optimal cut-off value selected by: max BAC
-#&gt; 
-#&gt; $all_results
-#&gt;     cutoff  tp  fn  fp  tn sens spec  ppv  npv  bac youden
-#&gt; 1     -Inf   0   5   0   5 0.00 1.00  NaN 0.50 0.50   0.00
-#&gt; 2   -0.494   1   4   0   5 0.20 1.00 1.00 0.56 0.60   0.20
-#&gt; 3   -0.422   2   3   0   5 0.40 1.00 1.00 0.62 0.70   0.40
-#&gt; 4   -0.465   2   3   1   4 0.40 0.80 0.67 0.57 0.60   0.20
-#&gt; ...    ... ... ... ... ...  ...  ...  ...  ...  ...    ...
-#&gt; 8    0.824   3   2   4   1 0.60 0.20 0.43 0.33 0.40  -0.20
-#&gt; 9     1.31   3   2   5   0 0.60 0.00 0.38 0.00 0.30  -0.40
-#&gt; 10    1.23   4   1   5   0 0.80 0.00 0.44 0.00 0.40  -0.20
-#&gt; 11     Inf   5   0   5   0 1.00 0.00 0.50  NaN 0.50   0.00
-#&gt;                                                           
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "roc_result_list" "list"           </div><div class='input'>
-<span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='st'>"H"</span>)</div><div class='output co'>#&gt; $info
-#&gt;  var_name n_total n_neg n_pos neg_label pos_label median_neg median_pos below
-#&gt;                10     5     5         S         H -0.1738468  0.4608108     S
-#&gt;      cutoff above
-#&gt;  -0.1529148     H
-#&gt; 
-#&gt; $optimal
-#&gt;  cutoff tp fn fp tn sens spec   ppv  npv bac youden kappa  auc median_neg
-#&gt;  -0.153  4  1  2  3  0.8  0.6 0.667 0.75 0.7    0.4   0.4 0.56     -0.174
-#&gt;  median_pos
-#&gt;       0.461
+#&gt;       0.487
 #&gt; 
 #&gt; *The optimal cut-off value selected by: max BAC
 #&gt; 
 #&gt; $all_results
 #&gt;     cutoff  tp  fn  fp  tn sens spec  ppv  npv  bac youden
 #&gt; 1      Inf   0   5   0   5 0.00 1.00  NaN 0.50 0.50   0.00
-#&gt; 2      1.6   0   5   1   4 0.00 0.80 0.00 0.44 0.40  -0.20
-#&gt; 3     1.38   0   5   2   3 0.00 0.60 0.00 0.38 0.30  -0.40
-#&gt; 4     1.17   1   4   2   3 0.20 0.60 0.33 0.43 0.40  -0.20
+#&gt; 2     1.17   0   5   1   4 0.00 0.80 0.00 0.44 0.40  -0.20
+#&gt; 3    0.657   1   4   1   4 0.20 0.80 0.50 0.50 0.50   0.00
+#&gt; 4    0.532   2   3   1   4 0.40 0.80 0.67 0.57 0.60   0.20
 #&gt; ...    ... ... ... ... ...  ...  ...  ...  ...  ...    ...
-#&gt; 8   -0.271   4   1   3   2 0.80 0.40 0.57 0.67 0.60   0.20
-#&gt; 9   -0.386   5   0   3   2 1.00 0.40 0.62 1.00 0.70   0.40
-#&gt; 10  -0.434   5   0   4   1 1.00 0.20 0.56 1.00 0.60   0.20
+#&gt; 8   -0.466   4   1   3   2 0.80 0.40 0.57 0.67 0.60   0.20
+#&gt; 9   -0.723   4   1   4   1 0.80 0.20 0.50 0.50 0.50   0.00
+#&gt; 10  -0.828   5   0   4   1 1.00 0.20 0.56 1.00 0.60   0.20
 #&gt; 11    -Inf   5   0   5   0 1.00 0.00 0.50  NaN 0.50   0.00
+#&gt;                                                           
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "roc_result_list" "list"           </div><div class='input'>
+<span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='st'>"H"</span>)</div><div class='output co'>#&gt; $info
+#&gt;  var_name n_total n_neg n_pos neg_label pos_label median_neg median_pos below
+#&gt;                10     5     5         S         H  0.4874291  0.1836433     H
+#&gt;     cutoff above
+#&gt;  0.2505471     S
+#&gt; 
+#&gt; $optimal
+#&gt;  cutoff tp fn fp tn sens spec   ppv  npv bac youden kappa auc median_neg
+#&gt;   0.251  4  1  2  3  0.8  0.6 0.667 0.75 0.7    0.4   0.4 0.6      0.487
+#&gt;  median_pos
+#&gt;       0.184
+#&gt; 
+#&gt; *The optimal cut-off value selected by: max BAC
+#&gt; 
+#&gt; $all_results
+#&gt;     cutoff  tp  fn  fp  tn sens spec  ppv  npv  bac youden
+#&gt; 1     -Inf   0   5   0   5 0.00 1.00  NaN 0.50 0.50   0.00
+#&gt; 2   -0.843   1   4   0   5 0.20 1.00 1.00 0.56 0.60   0.20
+#&gt; 3   -0.917   1   4   1   4 0.20 0.80 0.50 0.50 0.50   0.00
+#&gt; 4   -0.787   2   3   1   4 0.40 0.80 0.67 0.57 0.60   0.20
+#&gt; ...    ... ... ... ... ...  ...  ...  ...  ...  ...    ...
+#&gt; 8    0.443   4   1   3   2 0.80 0.40 0.57 0.67 0.60   0.20
+#&gt; 9    0.495   4   1   4   1 0.80 0.20 0.50 0.50 0.50   0.00
+#&gt; 10    0.31   4   1   5   0 0.80 0.00 0.44 0.00 0.40  -0.20
+#&gt; 11     Inf   5   0   5   0 1.00 0.00 0.50  NaN 0.50   0.00
 #&gt;                                                           
 #&gt; 
 #&gt; attr(,"class")
@@ -316,28 +342,28 @@ several rows, if the performance is equally good.</p></li>
 
 (<span class='no'>roc_rez</span><span class='kw'>&lt;-</span> <span class='fu'>roc_analysis</span>(<span class='no'>x2</span>, <span class='no'>gr2</span>))</div><div class='output co'>#&gt; $info
 #&gt;  var_name n_total n_neg n_pos neg_label pos_label median_neg median_pos below
-#&gt;               100    50    50       Neg       Pos     13.936   19.80967   Neg
+#&gt;               100    50    50       Neg       Pos    14.1291    20.1138   Neg
 #&gt;    cutoff above
-#&gt;  17.01451   Pos
+#&gt;  16.89516   Pos
 #&gt; 
 #&gt; $optimal
 #&gt;  cutoff tp fn fp tn sens spec ppv npv bac youden kappa auc median_neg
-#&gt;      17 50  0  0 50    1    1   1   1   1      1     1   1       13.9
+#&gt;    16.9 50  0  0 50    1    1   1   1   1      1     1   1       14.1
 #&gt;  median_pos
-#&gt;        19.8
+#&gt;        20.1
 #&gt; 
 #&gt; *The optimal cut-off value selected by: max BAC
 #&gt; 
 #&gt; $all_results
 #&gt;     cutoff  tp  fn  fp  tn sens spec  ppv  npv  bac youden
 #&gt; 1      Inf   0  50   0  50 0.00 1.00  NaN 0.50 0.50   0.00
-#&gt; 2     21.9   1  49   0  50 0.02 1.00 1.00 0.51 0.51   0.02
-#&gt; 3     21.4   2  48   0  50 0.04 1.00 1.00 0.51 0.52   0.04
-#&gt; 4     21.2   3  47   0  50 0.06 1.00 1.00 0.52 0.53   0.06
+#&gt; 2     22.3   1  49   0  50 0.02 1.00 1.00 0.51 0.51   0.02
+#&gt; 3     22.1   2  48   0  50 0.04 1.00 1.00 0.51 0.52   0.04
+#&gt; 4     21.8   3  47   0  50 0.06 1.00 1.00 0.52 0.53   0.06
 #&gt; ...    ... ... ... ... ...  ...  ...  ...  ...  ...    ...
-#&gt; 98    12.4  50   0  47   3 1.00 0.06 0.52 1.00 0.53   0.06
-#&gt; 99      12  50   0  48   2 1.00 0.04 0.51 1.00 0.52   0.04
-#&gt; 100   11.3  50   0  49   1 1.00 0.02 0.51 1.00 0.51   0.02
+#&gt; 98    12.6  50   0  47   3 1.00 0.06 0.52 1.00 0.53   0.06
+#&gt; 99    12.3  50   0  48   2 1.00 0.04 0.51 1.00 0.52   0.04
+#&gt; 100   11.9  50   0  49   1 1.00 0.02 0.51 1.00 0.51   0.02
 #&gt; 101   -Inf  50   0  50   0 1.00 0.00 0.50  NaN 0.50   0.00
 #&gt;                                                           
 #&gt; 
@@ -347,7 +373,7 @@ several rows, if the performance is equally good.</p></li>
 
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>x2</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>gr2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>gr2</span>,
       <span class='kw'>geom</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"density"</span>, <span class='st'>"rug"</span>), <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'>I</span>(<span class='fl'>0.3</span>)) +
-   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='no'>optimal_cutoff2</span>)</div><div class='img'><img src='roc_analysis-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='no'>optimal_cutoff2</span>)</div><div class='img'><img src='roc_analysis-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'># --- Example 3 ---</span>
 
@@ -357,13 +383,13 @@ several rows, if the performance is equally good.</p></li>
 
 (<span class='no'>roc_rez3</span> <span class='kw'>&lt;-</span> <span class='fu'>roc_analysis</span>(<span class='no'>x3</span>, <span class='no'>gr3</span>))</div><div class='output co'>#&gt; $info
 #&gt;  var_name n_total n_neg n_pos neg_label pos_label median_neg median_pos below
-#&gt;               200   100   100       Neg       Pos   10.87121   13.79319   Neg
+#&gt;               200   100   100       Neg       Pos   11.11391   13.82278   Neg
 #&gt;    cutoff above
-#&gt;  12.42245   Pos
+#&gt;  12.47358   Pos
 #&gt; 
 #&gt; $optimal
-#&gt;  cutoff tp fn fp tn sens spec  ppv  npv   bac youden kappa   auc median_neg
-#&gt;    12.4 96  4  5 95 0.96 0.95 0.95 0.96 0.955   0.91  0.91 0.987       10.9
+#&gt;  cutoff tp fn fp tn sens spec   ppv   npv  bac youden kappa  auc median_neg
+#&gt;    12.5 96  4  6 94 0.96 0.94 0.941 0.959 0.95    0.9   0.9 0.99       11.1
 #&gt;  median_pos
 #&gt;        13.8
 #&gt; 
@@ -372,13 +398,13 @@ several rows, if the performance is equally good.</p></li>
 #&gt; $all_results
 #&gt;     cutoff  tp  fn  fp  tn sens spec  ppv  npv  bac youden
 #&gt; 1      Inf   0 100   0 100 0.00 1.00  NaN 0.50 0.50   0.00
-#&gt; 2     15.8   1  99   0 100 0.01 1.00 1.00 0.50 0.50   0.01
-#&gt; 3     15.8   2  98   0 100 0.02 1.00 1.00 0.51 0.51   0.02
-#&gt; 4     15.6   3  97   0 100 0.03 1.00 1.00 0.51 0.52   0.03
+#&gt; 2     16.3   1  99   0 100 0.01 1.00 1.00 0.50 0.50   0.01
+#&gt; 3     16.1   2  98   0 100 0.02 1.00 1.00 0.51 0.51   0.02
+#&gt; 4     16.1   3  97   0 100 0.03 1.00 1.00 0.51 0.52   0.03
 #&gt; ...    ... ... ... ... ...  ...  ...  ...  ...  ...    ...
-#&gt; 198   9.19 100   0  97   3 1.00 0.03 0.51 1.00 0.52   0.03
-#&gt; 199   9.03 100   0  98   2 1.00 0.02 0.51 1.00 0.51   0.02
-#&gt; 200   8.34 100   0  99   1 1.00 0.01 0.50 1.00 0.50   0.01
+#&gt; 198   9.34 100   0  97   3 1.00 0.03 0.51 1.00 0.52   0.03
+#&gt; 199    9.1 100   0  98   2 1.00 0.02 0.51 1.00 0.51   0.02
+#&gt; 200    8.9 100   0  99   1 1.00 0.01 0.50 1.00 0.50   0.01
 #&gt; 201   -Inf 100   0 100   0 1.00 0.00 0.50  NaN 0.50   0.00
 #&gt;                                                           
 #&gt; 
@@ -388,7 +414,7 @@ several rows, if the performance is equally good.</p></li>
 
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/qplot'>qplot</a></span>(<span class='no'>x3</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>gr3</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>gr3</span>,
      <span class='kw'>geom</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"density"</span>, <span class='st'>"rug"</span>), <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'>I</span>(<span class='fl'>0.3</span>)) +
-    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='no'>roc_rez3</span>$<span class='no'>optimal</span>[<span class='fl'>1</span>])</div><div class='img'><img src='roc_analysis-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='no'>roc_rez3</span>$<span class='no'>optimal</span>[<span class='fl'>1</span>])</div><div class='img'><img src='roc_analysis-2.png' alt='' width='700' height='433' /></div><div class='input'>
 
 </div></pre>
   </div>
@@ -419,11 +445,14 @@ Vilmantas Gegzna
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

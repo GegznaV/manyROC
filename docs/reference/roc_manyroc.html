@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Carry out the manyROC analysis � print.manyroc_result • manyROC</title>
+<title>Carry out the manyROC analysis — print.manyroc_result • manyROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Carry out the manyROC analysis — print.manyroc_result" />
+
+<meta property="og:description" content="Do the ROC analysis (roc_analysis) for each column of x." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -34,8 +46,7 @@
 <![endif]-->
 
 
-  	<link rel="icon" href="../favicon.png" />
-</head>
+  </head>
 
   <body>
     <div class="container template-reference-topic">
@@ -48,8 +59,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">manyROC | R package</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">manyROC</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.5</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -82,6 +97,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -89,19 +105,23 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Carry out the manyROC analysis</h1>
+    
+    <div class="hidden name"><code>roc_manyroc.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Do the ROC analysis (<code><a href='roc_analysis.html'>roc_analysis</a></code>) for each column of <code>x</code>.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for manyroc_result</span>
-<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>show_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>perf_digits</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>fmt</span> <span class='kw'>=</span> <span class='st'>"%.3g"</span>)
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>show_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>perf_digits</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>fmt</span> <span class='kw'>=</span> <span class='st'>"%.3g"</span>)
 
 <span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
 
@@ -113,12 +133,13 @@
 <span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
+<span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>,
+  <span class='no'>...</span>)
 
 <span class='co'># S3 method for hyperSpec</span>
 <span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -132,18 +153,18 @@ type of object, convertible to a numeric matrix.</p></td>
     </tr>
     <tr>
       <th>show_all</th>
-      <td><p>(<code>logical(1)</code>) A flag if whole dataset should be
+      <td><p>(<code>logical(1)</code>)<br /> A flag if whole dataset should be
 printed. If <code>FALSE</code>, only a few fisrt and last rows
 will be printed.</p></td>
     </tr>
     <tr>
       <th>perf_digits</th>
-      <td><p>(<code>integer(1)</code>) A number of decimals to display
+      <td><p>(<code>integer(1)</code>)<br /> A number of decimals to display
 for <em>performance measures</em>. Default is 2.</p></td>
     </tr>
     <tr>
       <th>fmt</th>
-      <td><p>(<code>character(1)</code>) A string indicating number display
+      <td><p>(<code>character(1)</code>)<br /> A string indicating number display
 format for other numeric columns excluding performance measures.
 The string will be passed to <code><a href='http://www.rdocumentation.org/packages/base/topics/sprintf'>sprintf</a></code>.
 Default is <code>"%.3g"</code>.</p></td>
@@ -155,12 +176,12 @@ variable (a vector) which defines groups in <code>x</code>.</p></td>
     </tr>
     <tr>
       <th>optimize_by</th>
-      <td><p>(<code>string(1)</code>) A string with the name of
+      <td><p>(<code>string(1)</code>)<br /> A string with the name of
                 classification performance measure to use. Currently
                 available options:</p><ul>
 <li><p><code>"bac"</code> - for balanced accuracy (mean of sensitivity and
-       specificity);</p></li>
-<li><p><code>"kappa"</code> - for Cohens kappa;</p></li>
+       specificity);<br /></p></li>
+<li><p><code>"kappa"</code> - for Cohens kappa;<br /></p></li>
 <li><p><code>"youden"</code> - for Youden's index;</p></li>
 </ul></td>
     </tr>
@@ -191,7 +212,7 @@ columns:</p><ul>
 <li><p><code>PPV</code> positive predictive value (precision);</p></li>
 <li><p><code>NPV</code> negative predictive value;</p></li>
 <li><p><code>BAC</code> balanced accuracy;</p></li>
-<li><p><code>Youden</code> Youden�s J index;</p></li>
+<li><p><code>Youden</code> Youden’s J index;</p></li>
 <li><p><code>Kappa</code> Cohen's kappa;</p></li>
 <li><p><code>AUC</code> area under the ROC curve;</p></li>
 </ul>
@@ -205,7 +226,7 @@ first level will always be treated as negative and the last as positive.
 <b>E.g.</b>, if we have factor with 3 levels in this particular order
 "A", "B", "C",  then "A" will always be negative, "C" always positive and
 "B" positive, when compared to "A" and negative, when compared to "C".
-The same principle applies if there are more than 3 levels.
+The same principle applies if there are more than 3 levels.<br />
 This is important determining what specificity and sensitivity, etc., means
 in the context of group names: if positive is "A" then <em>sensitivity</em>
 will be related to group "A", but if "A" is negative, then <em>specificity</em>
@@ -269,14 +290,13 @@ at each wavelength.</p></li>
 <span class='fu'>library</span>(<span class='no'>hyperSpec</span>)
 <span class='no'>fluorescence</span></div><div class='output co'>#&gt; hyperSpec object
 #&gt;    150 spectra
-#&gt;    4 data columns
+#&gt;    3 data columns
 #&gt;    501 data points / spectrum
 #&gt; wavelength: lambda/nm [integer] 300 301 ... 800 
-#&gt; data:  (150 rows x 4 columns)
+#&gt; data:  (150 rows x 3 columns)
 #&gt;    1. gr:  [factor] B B ... A 
 #&gt;    2. class:  [factor] N l ... S1 
-#&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 
-#&gt;    4. ID: ID [integer] 1 2 ... 150 </div><div class='input'>
+#&gt;    3. spc: I / a.u. [matrix501] 159.8996 139.9296 ... 12.11558 </div><div class='input'>
 <span class='fu'>roc_manyroc</span>(<span class='no'>fluorescence</span>[ , , <span class='fl'>500</span>~<span class='fl'>502</span>], <span class='no'>fluorescence</span>$<span class='no'>gr</span>)</div><div class='output co'>#&gt;   compared_groups feature median_neg cutoff median_pos tp fn fp tn sens spec
 #&gt; 1         A vs. B     500        338    335        333 35 20 24 28 0.64 0.54
 #&gt; 2         A vs. B     501        335    328        327 29 26 19 33 0.53 0.63
@@ -324,11 +344,14 @@ Vilmantas Gegzna
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

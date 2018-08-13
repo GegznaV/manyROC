@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Do manyROC analysis with cross-validation for hyperSpec object � sp_manyroc_with_cv • manyROC</title>
+<title>Do manyROC analysis with cross-validation for hyperSpec object — sp_manyroc_with_cv • manyROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Do manyROC analysis with cross-validation for hyperSpec object — sp_manyroc_with_cv" />
+
+<meta property="og:description" content="[!!!] // No description yet //" />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -34,8 +46,7 @@
 <![endif]-->
 
 
-  	<link rel="icon" href="../favicon.png" />
-</head>
+  </head>
 
   <body>
     <div class="container template-reference-topic">
@@ -48,8 +59,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">manyROC | R package</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">manyROC</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.5</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -82,6 +97,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -89,25 +105,29 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Do manyROC analysis with cross-validation for hyperSpec object</h1>
+    
+    <div class="hidden name"><code>sp_manyroc_with_cv.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>[!!!] // No description yet //</p>
     
+    </div>
 
-    <pre class="usage"><span class='fu'>sp_manyroc_with_cv</span>(<span class='no'>Var</span>, <span class='no'>Spectra</span>, <span class='kw'>k_folds</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='fl'>2222222</span>,
-  <span class='kw'>kind</span> <span class='kw'>=</span> <span class='st'>"L'Ecuyer-CMRG"</span>, <span class='kw'>n_min</span> <span class='kw'>=</span> <span class='no'>k_folds</span>)</pre>
+    <pre class="usage"><span class='fu'>sp_manyroc_with_cv</span>(<span class='no'>Var</span>, <span class='no'>Spectra</span>, <span class='kw'>k_folds</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='fl'>2222222</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='st'>"L'Ecuyer-CMRG"</span>, <span class='kw'>n_min</span> <span class='kw'>=</span> <span class='no'>k_folds</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>Var</th>
-      <td><p>(<code>character(1)</code>\ <code>factor</code>) 
+      <td><p>(<code>character(1)</code>\ <code>factor</code>) <br />
 <b>Either</b> the name of variable in <code>Spectra</code> which
 contains the grouping variable
 <b>or</b> a factor vector (or convertible to factor) with
@@ -121,18 +141,18 @@ as spectroscopic information.</p></td>
     </tr>
     <tr>
       <th>k_folds</th>
-      <td><p>(positive <code>integer</code>)  
+      <td><p>(positive <code>integer</code>)  <br />
 The number of folds in k-fold cross-validation.</p></td>
     </tr>
     <tr>
       <th>times</th>
-      <td><p>(positive <code>integer</code>)  
+      <td><p>(positive <code>integer</code>)  <br />
 The number of repetitions in repeated k-fold
 cross-validation.</p></td>
     </tr>
     <tr>
       <th>seeds</th>
-      <td><p>(<code>NULL</code> | <code>integer</code>) 
+      <td><p>(<code>NULL</code> | <code>integer</code>) <br />
              Either a vector of integers of length <code>times</code> to set
              seed for each repetition of k-fold cross-validation.
              For more about seeds see <code><a href='http://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a>()</code>.</p>
@@ -147,7 +167,7 @@ cross-validation.</p></td>
     </tr>
     <tr>
       <th>n_min</th>
-      <td><p><code>integer(1)</code> 
+      <td><p><code>integer(1)</code> <br />
 minimum acceptable number of unique samples per group.
 Must be at least <code>k_folds</code> or bigger.</p></td>
     </tr>
@@ -159,55 +179,14 @@ Must be at least <code>k_folds</code> or bigger.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='sp_manyroc_with_cv_by_variable.html'>sp_manyroc_with_cv_by_variable</a></code></p>
+    <div class='dont-index'><p><code><a href='sp_manyroc_with_cv_by_variable.html'>sp_manyroc_with_cv_by_variable</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>manyROC</span>)
 
 <span class='no'>fluorescence</span>$<span class='no'>ID</span>  <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fu'>nrow</span>(<span class='no'>fluorescence</span>)
-<span class='fu'>sp_manyroc_with_cv</span>(<span class='st'>"gr"</span>, <span class='no'>fluorescence</span>[,,<span class='fl'>500</span>~<span class='fl'>502</span>], <span class='kw'>k_folds</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; $variable
-#&gt; [1] "gr"
-#&gt; 
-#&gt; $n_included
-#&gt; [1] 150
-#&gt; 
-#&gt; $ind_included_rows
-#&gt; Classes 'as_str', 'logical'  logi [1:150] TRUE TRUE TRUE TRUE TRUE TRUE ...
-#&gt; 
-#&gt; $cvo
-#&gt; --- A cvo object: ----------------------------------------------------
-#&gt;  indices stratified blocked         cv_type k repetitions sample_size
-#&gt;    Train       TRUE   FALSE Repeated k-fold 3           2         150
-#&gt; 
-#&gt; Random number generator: L'Ecuyer-CMRG 
-#&gt; Seeds:  2222222, 24997039
-#&gt; ----------------------------------------------------------------------
-#&gt; 
-#&gt; $results
-#&gt;          set       fold compared_groups feature median_neg cutoff median_pos
-#&gt; 1   training Rep1_Fold1         A vs. B     500        336    369        333
-#&gt; 2   training Rep1_Fold1         A vs. C     500        336    343        343
-#&gt; 3   training Rep1_Fold1         B vs. C     500        333    343        343
-#&gt; 4   training Rep1_Fold2         A vs. B     500        339    348        333
-#&gt; ...      ...        ...             ...     ...        ...    ...        ...
-#&gt; 105     test Rep2_Fold2         B vs. C     502         NA    340         NA
-#&gt; 106     test Rep2_Fold3         A vs. B     502         NA    350         NA
-#&gt; 107     test Rep2_Fold3         A vs. C     502         NA    319         NA
-#&gt; 108     test Rep2_Fold3         B vs. C     502         NA    339         NA
-#&gt;                                                                             
-#&gt;      tp  fn  fp  tn sens spec  ppv  npv  bac youden kappa  auc
-#&gt; 1    33   3  26   8 0.92 0.24 0.56 0.73 0.58   0.15  0.15 0.54
-#&gt; 2    15  14  11  23 0.52 0.68 0.58 0.62 0.60   0.19  0.20 0.54
-#&gt; 3    15  14  10  26 0.52 0.72 0.60 0.65 0.62   0.24  0.24 0.58
-#&gt; 4    31   6  21  14 0.84 0.40 0.60 0.70 0.62   0.24  0.24 0.60
-#&gt; ... ... ... ... ...  ...  ...  ...  ...  ...    ...   ...  ...
-#&gt; 105   8   6   5  14 0.57 0.74 0.62 0.70 0.65   0.31  0.31   NA
-#&gt; 106  13   5  13   4 0.72 0.24 0.50 0.44 0.48  -0.04 -0.04   NA
-#&gt; 107   3  11   8   9 0.21 0.53 0.27 0.45 0.37  -0.26 -0.26   NA
-#&gt; 108   8   6   5  13 0.57 0.72 0.62 0.68 0.65   0.29  0.30   NA
-#&gt;                                                               
-#&gt; </div><div class='input'>
+<span class='fu'>sp_manyroc_with_cv</span>(<span class='st'>"gr"</span>, <span class='no'>fluorescence</span>[,,<span class='fl'>500</span>~<span class='fl'>502</span>], <span class='kw'>k_folds</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='error'>Error in distinct(DF, .keep_all = TRUE): could not find function "distinct"</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -231,11 +210,14 @@ Must be at least <code>k_folds</code> or bigger.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

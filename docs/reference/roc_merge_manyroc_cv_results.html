@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>[!] Access elements of roc_result_list object — access_elements • manyROC</title>
+<title>Merge 2 lists with manyROC CV results — roc_merge_manyroc_cv_results • manyROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="[!] Access elements of roc_result_list object — access_elements" />
+<meta property="og:title" content="Merge 2 lists with manyROC CV results — roc_merge_manyroc_cv_results" />
 
-<meta property="og:description" content="[!!!] not tested yet." />
+<meta property="og:description" content="Merge 2 lists with manyROC CV results" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,80 +108,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>[!] Access elements of roc_result_list object</h1>
+    <h1>Merge 2 lists with manyROC CV results</h1>
     
-    <div class="hidden name"><code>access_elements.Rd</code></div>
+    <div class="hidden name"><code>roc_merge_manyroc_cv_results.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>[!!!] not tested yet.</p>
+    <p>Merge 2 lists with manyROC CV results</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>roc_get</span>(<span class='no'>obj</span>, <span class='no'>what</span>)
-
-<span class='co'># S3 method for roc_result_list</span>
-<span class='fu'>roc_get</span>(<span class='no'>obj</span>, <span class='no'>what</span>)
-
-<span class='co'># S3 method for roc_results</span>
-<span class='fu'>roc_get</span>(<span class='no'>obj</span>, <span class='no'>what</span>)
-
-<span class='fu'>roc_get_all_results</span>(<span class='no'>obj</span>)
-
-<span class='fu'>roc_cutoff</span>(<span class='no'>obj</span>)
-
-<span class='fu'>roc_tp</span>(<span class='no'>obj</span>)
-
-<span class='fu'>roc_fn</span>(<span class='no'>obj</span>)
-
-<span class='fu'>roc_fp</span>(<span class='no'>obj</span>)
-
-<span class='fu'>roc_tn</span>(<span class='no'>obj</span>)
-
-<span class='fu'>roc_sens</span>(<span class='no'>obj</span>)
-
-<span class='fu'>roc_spec</span>(<span class='no'>obj</span>)</pre>
+    <pre class="usage"><span class='fu'>roc_merge_manyroc_cv_results</span>(<span class='no'>x</span>, <span class='no'>y</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>obj</th>
-      <td><p>Either an <code>roc_result_list</code> or an <code>roc_results</code> object.</p></td>
-    </tr>
-    <tr>
-      <th>what</th>
-      <td><p>(<code>string(1)</code>)<br /> Name of element.</p></td>
+      <th>x, y</th>
+      <td><p>lists to merge</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Acces elements of <code>roc_result_list</code> and <code>roc_results</code> objects.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other functions for ROC: <code><a href='calculate_performance.html'>calculate_performance</a></code>,
-  <code><a href='roc_analysis.html'>print.as_str</a></code>,
-  <code><a href='roc_performance_measures.html'>roc_performance_measures</a></code>,
-  <code><a href='roc_predict.html'>roc_predict</a></code></p></div>
+    <p>A list wil results from <code>x</code> and <code>y</code></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+# x <- readr::read_rds(path = "rez_366_a.RDS")
+# y <- readr::read_rds(path = "rez_366_b.RDS")
+#
+# roc_merge_manyroc_cv_results(x, y)
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
-
-    <h2>Author</h2>
-    
-Vilmantas Gegzna
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

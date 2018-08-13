@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Carry out the manyROC analysis with cross-validation � roc_manyroc_cv • manyROC</title>
+<title>Carry out the manyROC analysis with cross-validation — roc_manyroc_cv • manyROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,26 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Carry out the manyROC analysis with cross-validation — roc_manyroc_cv" />
+
+<meta property="og:description" content="Do the ROC analysis (roc_analysis) with cross-validation
+for each column of x (see also: roc_manyroc)." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -34,8 +47,7 @@
 <![endif]-->
 
 
-  	<link rel="icon" href="../favicon.png" />
-</head>
+  </head>
 
   <body>
     <div class="container template-reference-topic">
@@ -48,8 +60,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">manyROC | R package</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">manyROC</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.5</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -82,6 +98,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -89,21 +106,25 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Carry out the manyROC analysis with cross-validation</h1>
+    
+    <div class="hidden name"><code>roc_manyroc_cv.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Do the ROC analysis (<code><a href='roc_analysis.html'>roc_analysis</a></code>) with cross-validation
 for each column of <code>x</code> (see also: <code><a href='roc_manyroc.html'>roc_manyroc</a></code>).</p>
     
+    </div>
 
-    <pre class="usage"><span class='fu'>roc_manyroc_cv</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='kw'>cvo</span> <span class='kw'>=</span> <span class='fu'><a href='cvo_create_folds.html'>cvo_create_folds</a></span>(<span class='no'>x</span>, <span class='no'>gr</span>,
-  <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='no'>seeds</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='no'>kind</span>), <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='fl'>NA_real_</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>roc_manyroc_cv</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='kw'>cvo</span> <span class='kw'>=</span> <span class='fu'><a href='cvo_create_folds.html'>cvo_create_folds</a></span>(<span class='no'>x</span>,
+  <span class='no'>gr</span>, <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='no'>seeds</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='no'>kind</span>), <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='fl'>NA_real_</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -118,12 +139,12 @@ variable (a vector) which defines groups in <code>x</code>.</p></td>
     </tr>
     <tr>
       <th>optimize_by</th>
-      <td><p>(<code>string(1)</code>) A string with the name of
+      <td><p>(<code>string(1)</code>)<br /> A string with the name of
                 classification performance measure to use. Currently
                 available options:</p><ul>
 <li><p><code>"bac"</code> - for balanced accuracy (mean of sensitivity and
-       specificity);</p></li>
-<li><p><code>"kappa"</code> - for Cohens kappa;</p></li>
+       specificity);<br /></p></li>
+<li><p><code>"kappa"</code> - for Cohens kappa;<br /></p></li>
 <li><p><code>"youden"</code> - for Youden's index;</p></li>
 </ul></td>
     </tr>
@@ -136,7 +157,7 @@ or similar.</p></td>
     </tr>
     <tr>
       <th>seeds</th>
-      <td><p>(<code>NA_real_</code> | <code>NULL</code> | vector of integers)
+      <td><p>(<code>NA_real_</code> | <code>NULL</code> | vector of integers)<br />
              Seeds for random number generator for each repetition.</p><ul>
 <li><p>If <code>seeds = NA_real_</code> (default), no seeds are set,
              parameter <code>kind</code> is also ignored.</p></li>
@@ -155,12 +176,12 @@ or similar.</p></td>
     </tr>
     <tr>
       <th>kind</th>
-      <td><p>(<code>NULL</code> | <code>character</code>)
+      <td><p>(<code>NULL</code> | <code>character</code>)<br />
             The kind of (pseudo)random number generator. Default is
             <code>NULL</code>, which selects the currently-used generator
             (including that used in the previous session if the
             workspace has been restored): if no generator has been
-            used it selects <code>"default"</code>.</p>
+            used it selects <code>"default"</code>.<br /></p>
 <p>Generator <code>"L'Ecuyer-CMRG"</code> is recommended if package
             <span class="pkg">parallel</span> is used for for parallel computing.
             In this case each seed should have 6 elements neither the first
@@ -187,39 +208,39 @@ or similar.</p></td>
 <span class='fu'>set.seed</span>(<span class='fl'>123456</span>)
 
 <span class='fu'>roc_manyroc_cv</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='no'>PlantGrowth</span>$<span class='no'>group</span>)</div><div class='output co'>#&gt;          set       fold compared_groups feature median_neg cutoff median_pos
-#&gt; 1   training Rep1_Fold1   ctrl vs. trt1       1       4.88   4.37       4.55
-#&gt; 2   training Rep1_Fold1   ctrl vs. trt2       1       4.88   5.21       5.52
-#&gt; 3   training Rep1_Fold1   trt1 vs. trt2       1       4.55      5       5.52
-#&gt; 4   training Rep1_Fold2   ctrl vs. trt1       1       5.15   4.23       4.51
+#&gt; 1   training Rep1_Fold1   ctrl vs. trt1       1       5.16   4.37       4.55
+#&gt; 2   training Rep1_Fold1   ctrl vs. trt2       1       5.16   5.22       5.44
+#&gt; 3   training Rep1_Fold1   trt1 vs. trt2       1       4.55   4.87       5.44
+#&gt; 4   training Rep1_Fold2   ctrl vs. trt1       1       4.88   4.37       4.61
 #&gt; ...      ...        ...             ...     ...        ...    ...        ...
-#&gt; 12  training Rep1_Fold4   trt1 vs. trt2       1       4.37   4.87       5.52
-#&gt; 13  training Rep1_Fold5   ctrl vs. trt1       1       5.17   4.76       4.55
-#&gt; 14  training Rep1_Fold5   ctrl vs. trt2       1       5.17   5.35       5.44
-#&gt; 15  training Rep1_Fold5   trt1 vs. trt2       1       4.55    4.9       5.44
+#&gt; 12  training Rep1_Fold4   trt1 vs. trt2       1       4.37    4.9       5.52
+#&gt; 13  training Rep1_Fold5   ctrl vs. trt1       1       5.17   4.75       4.75
+#&gt; 14  training Rep1_Fold5   ctrl vs. trt2       1       5.17   5.22       5.44
+#&gt; 15  training Rep1_Fold5   trt1 vs. trt2       1       4.75      5       5.44
 #&gt;                                                                             
 #&gt;      tp  fn  fp  tn sens spec  ppv  npv  bac youden kappa  auc
-#&gt; 1     4   4   1   7 0.50 0.88 0.80 0.64 0.69   0.38  0.38 0.67
-#&gt; 2     7   1   3   5 0.88 0.62 0.70 0.83 0.75   0.50  0.50 0.78
-#&gt; 3     8   0   1   7 1.00 0.88 0.89 1.00 0.94   0.88  0.88 0.91
-#&gt; 4     4   4   0   8 0.50 1.00 1.00 0.67 0.75   0.50  0.50 0.75
+#&gt; 1     4   4   1   7 0.50 0.88 0.80 0.64 0.69   0.38  0.38 0.66
+#&gt; 2     7   1   3   5 0.88 0.62 0.70 0.83 0.75   0.50  0.50 0.72
+#&gt; 3     8   0   2   6 1.00 0.75 0.80 1.00 0.88   0.75  0.75 0.78
+#&gt; 4     4   4   1   7 0.50 0.88 0.80 0.64 0.69   0.38  0.38 0.62
 #&gt; ... ... ... ... ...  ...  ...  ...  ...  ...    ...   ...  ...
-#&gt; 12    8   0   2   6 1.00 0.75 0.80 1.00 0.88   0.75  0.75 0.81
-#&gt; 13    6   2   2   6 0.75 0.75 0.75 0.75 0.75   0.50  0.50 0.70
-#&gt; 14    5   3   2   6 0.62 0.75 0.71 0.67 0.69   0.38  0.38 0.69
+#&gt; 12    8   0   0   8 1.00 1.00 1.00 1.00 1.00   1.00  1.00 1.00
+#&gt; 13    6   2   3   5 0.75 0.62 0.67 0.71 0.69   0.38  0.38 0.62
+#&gt; 14    7   1   3   5 0.88 0.62 0.70 0.83 0.75   0.50  0.50 0.75
 #&gt; 15    8   0   2   6 1.00 0.75 0.80 1.00 0.88   0.75  0.75 0.81
 #&gt;                                                               </div><div class='input'>
 <span class='fu'>roc_manyroc_cv</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='fu'>gl</span>(<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>30</span>))</div><div class='output co'>#&gt;        set       fold compared_groups feature median_neg cutoff median_pos tp
-#&gt; 1 training Rep1_Fold1         1 vs. 2       1       5.17   5.12       5.13  7
-#&gt; 2 training Rep1_Fold2         1 vs. 2       1       5.05   4.88       4.79  7
-#&gt; 3 training Rep1_Fold3         1 vs. 2       1       5.25   5.27          5 10
-#&gt; 4 training Rep1_Fold4         1 vs. 2       1       5.25   5.12       5.13  7
-#&gt; 5 training Rep1_Fold5         1 vs. 2       1       5.25   4.09       5.19  2
+#&gt; 1 training Rep1_Fold1         1 vs. 2       1       5.25   5.27       5.01  9
+#&gt; 2 training Rep1_Fold2         1 vs. 2       1       5.05   3.66       4.91  2
+#&gt; 3 training Rep1_Fold3         1 vs. 2       1       5.25   5.12          5  8
+#&gt; 4 training Rep1_Fold4         1 vs. 2       1       5.35    5.1          5  7
+#&gt; 5 training Rep1_Fold5         1 vs. 2       1       5.04   4.52        5.2 11
 #&gt;   fn fp tn sens spec  ppv  npv  bac youden kappa  auc
-#&gt; 1  5  5  7 0.58 0.58 0.58 0.58 0.58   0.17  0.17 0.55
-#&gt; 2  5  5  7 0.58 0.58 0.58 0.58 0.58   0.17  0.17 0.59
-#&gt; 3  2  6  6 0.83 0.50 0.62 0.75 0.67   0.33  0.33 0.62
-#&gt; 4  5  4  8 0.58 0.67 0.64 0.62 0.62   0.25  0.25 0.60
-#&gt; 5 10  0 12 0.17 1.00 1.00 0.55 0.58   0.17  0.17 0.55</div><div class='input'>
+#&gt; 1  3  6  6 0.75 0.50 0.60 0.67 0.62   0.25  0.25 0.60
+#&gt; 2 10  0 12 0.17 1.00 1.00 0.55 0.58   0.17  0.17 0.55
+#&gt; 3  4  5  7 0.67 0.58 0.62 0.64 0.62   0.25  0.25 0.61
+#&gt; 4  5  3  9 0.58 0.75 0.70 0.64 0.67   0.33  0.33 0.70
+#&gt; 5  1  8  4 0.92 0.33 0.58 0.80 0.62   0.25  0.25 0.57</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -245,11 +266,14 @@ Vilmantas Gegzna
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

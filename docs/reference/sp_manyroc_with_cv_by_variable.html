@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Do manyROC analysis with cross-validation for hyperSpec object for each variable � print.hide_it • manyROC</title>
+<title>Do manyROC analysis with cross-validation for hyperSpec object for each variable — print.hide_it • manyROC</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,29 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Do manyROC analysis with cross-validation for hyperSpec object for each variable — print.hide_it" />
+
+<meta property="og:description" content="[!!!] // No description yet //
+ For reproducible results in parallel computing, set seed with
+parallel::clusterSetRNGStream(iseed = x)(where x
+is your seed) (and not with set.seed) as package
+parallelMap is used for paralellization." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -34,8 +50,7 @@
 <![endif]-->
 
 
-  	<link rel="icon" href="../favicon.png" />
-</head>
+  </head>
 
   <body>
     <div class="container template-reference-topic">
@@ -48,8 +63,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">manyROC | R package</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">manyROC</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.5</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -82,6 +101,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -89,29 +109,41 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Do manyROC analysis with cross-validation for hyperSpec object for each variable</h1>
+    
+    <div class="hidden name"><code>sp_manyroc_with_cv_by_variable.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
-    <p>[!!!] // No description yet //
+    <p>[!!!] // No description yet //<br /><br />
  For reproducible results in parallel computing, set seed with
 <code>parallel::<a href='http://www.rdocumentation.org/packages/parallel/topics/RngStream'>clusterSetRNGStream</a>(iseed = x)</code>(where <code>x</code>
 is your seed) (and not with <code>set.seed</code>) as package
-<span class="pkg">parallelMap</span> is used for paralellization.</p>
+<span class="pkg">parallelMap</span> is used for paralellization.<br /></p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S3 method for hide_it</span>
 <span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
-<span class='fu'>sp_manyroc_with_cv_by_variable</span>(<span class='no'>Spectra</span>, <span class='no'>variables_to_analyze</span>, <span class='kw'>k_folds</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>sp_manyroc_with_cv_by_variable</span>(<span class='no'>Spectra</span>, <span class='no'>variables_to_analyze</span>,
+  <span class='kw'>k_folds</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>an object used to select a method.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>further arguments passed to or from other methods.</p></td>
+    </tr>
     <tr>
       <th>Spectra</th>
       <td><p><code>hyperSpec</code> object, that contains colum <code>ID</code> for
@@ -120,24 +152,24 @@ as spectroscopic information.</p></td>
     </tr>
     <tr>
       <th>variables_to_analyze</th>
-      <td><p>(<code>character</code>) 
+      <td><p>(<code>character</code>) <br />
 A character vector with names of grouping
 variables to use in analysis.</p></td>
     </tr>
     <tr>
       <th>k_folds</th>
-      <td><p>(positive <code>integer</code>)  
+      <td><p>(positive <code>integer</code>)  <br />
 The number of folds in k-fold cross-validation.</p></td>
     </tr>
     <tr>
       <th>times</th>
-      <td><p>(positive <code>integer</code>)  
+      <td><p>(positive <code>integer</code>)  <br />
 The number of repetitions in repeated k-fold
 cross-validation.</p></td>
     </tr>
     <tr>
       <th>seeds</th>
-      <td><p>(<code>NULL</code> | <code>integer</code>) 
+      <td><p>(<code>NULL</code> | <code>integer</code>) <br />
              Either a vector of integers of length <code>times</code> to set
              seed for each repetition of k-fold cross-validation.
              For more about seeds see <code><a href='http://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a>()</code>.</p>
@@ -154,14 +186,14 @@ cross-validation.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list with results 
+    <p>A list with results <br />
        [!!!] Description needs more specification.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>[!!!] The seeds nust be at least of length 6 and meet other
              requirements for <code>"L'Ecuyer-CMRG"</code> random number
-             generator.
+             generator.<br /><br />
              [!!!] At the moment Seeding section needs revision if
              it is necessary to use
              <code>"L'Ecuyer-CMRG"</code> (pseudo)random number generator as
@@ -173,7 +205,7 @@ cross-validation.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='sp_manyroc_with_cv.html'>sp_manyroc_with_cv</a></code></p>
+    <div class='dont-index'><p><code><a href='sp_manyroc_with_cv.html'>sp_manyroc_with_cv</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -185,70 +217,7 @@ cross-validation.</p></td>
         <span class='no'>fluorescence</span>[,,<span class='fl'>500</span>~<span class='fl'>501</span>],
          <span class='fu'>c</span>(<span class='st'>"gr"</span>, <span class='st'>"class"</span>),
          <span class='kw'>k_folds</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-         <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='message'>Exporting objects to package env on master for mode: local</span></div><div class='output co'>#&gt; $n_included
-#&gt;    gr class
-#&gt; 1 150   150
-#&gt; 
-#&gt; $ind_included_rows
-#&gt;       gr class
-#&gt; 1   TRUE  TRUE
-#&gt; 2   TRUE  TRUE
-#&gt; 3   TRUE  TRUE
-#&gt; 4   TRUE  TRUE
-#&gt; ...  ...   ...
-#&gt; 147 TRUE  TRUE
-#&gt; 148 TRUE  TRUE
-#&gt; 149 TRUE  TRUE
-#&gt; 150 TRUE  TRUE
-#&gt;               
-#&gt; 
-#&gt; $cvo
-#&gt; *** First non-empty element: ***
-#&gt; --- A cvo object: ----------------------------------------------------
-#&gt;  indices stratified blocked         cv_type k repetitions sample_size
-#&gt;    Train       TRUE   FALSE Repeated k-fold 3           2         150
-#&gt; ----------------------------------------------------------------------
-#&gt; 
-#&gt; *** Other elements are not shown ***
-#&gt; 
-#&gt; 
-#&gt; $results
-#&gt;     grouping      set       fold compared_groups feature median_neg cutoff
-#&gt; 1         gr training Rep1_Fold1         A vs. B     500        338    301
-#&gt; 2         gr training Rep1_Fold1         A vs. C     500        338    329
-#&gt; 3         gr training Rep1_Fold1         B vs. C     500        334    328
-#&gt; 4         gr training Rep1_Fold2         A vs. B     500        338    334
-#&gt; ...      ...      ...        ...             ...     ...        ...    ...
-#&gt; 213    class     test Rep2_Fold3        K vs. S1     501         NA    329
-#&gt; 214    class     test Rep2_Fold3         l vs. N     501         NA    348
-#&gt; 215    class     test Rep2_Fold3        l vs. S1     501         NA    346
-#&gt; 216    class     test Rep2_Fold3        N vs. S1     501         NA    328
-#&gt;                                                                           
-#&gt;     median_pos  tp  fn  fp  tn sens spec  ppv  npv  bac youden kappa  auc
-#&gt; 1          334   8  29   2  33 0.22 0.94 0.80 0.53 0.58   0.16  0.16 0.56
-#&gt; 2          327  16  12  13  22 0.57 0.63 0.55 0.65 0.60   0.20  0.20 0.55
-#&gt; 3          327  16  12  16  21 0.57 0.57 0.50 0.64 0.57   0.14  0.14 0.49
-#&gt; 4          331  25  11  16  19 0.69 0.54 0.61 0.63 0.62   0.24  0.24 0.58
-#&gt; ...        ... ... ... ... ...  ...  ...  ...  ...  ...    ...   ...  ...
-#&gt; 213         NA  10   7  10   7 0.59 0.41 0.50 0.50 0.50   0.00  0.00   NA
-#&gt; 214         NA   3   3   6   4 0.50 0.40 0.33 0.57 0.45  -0.10 -0.09   NA
-#&gt; 215         NA  12   5   6   4 0.71 0.40 0.67 0.44 0.55   0.11  0.11   NA
-#&gt; 216         NA   9   8   2   4 0.53 0.67 0.82 0.33 0.60   0.20  0.15   NA
-#&gt;                                                                          
-#&gt; 
-#&gt; $variables_included
-#&gt; [1] "gr"    "class"
-#&gt; 
-#&gt; $variables_errored
-#&gt; character(0)
-#&gt; 
-#&gt; $error_messages
-#&gt; *** First non-empty element: ***
-#&gt; NULL
-#&gt; 
-#&gt; *** Other elements are not shown ***
-#&gt; 
-#&gt; </div><div class='input'>
+         <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='message'>Exporting objects to package env on master for mode: local</span></div><div class='output co'>#&gt; <span class='error'>Error in class(x) &lt;- union(c(new_class, class(x)), class(x)): attempt to set an attribute on NULL</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -274,11 +243,14 @@ cross-validation.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
