@@ -1,5 +1,5 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# To Do:
+# TODO:
 #   [!!!] Remove dependency on mlr in parameters sections.
 #
 #   [!!!] DESCRIPTION MUST BE UPDATED
@@ -111,9 +111,9 @@
 #' set.seed(123456)
 #'
 #' # Data
-#' DataSet1 <-data.frame(ID = rep(1:20, each = 2),
-#'                            gr = gl(4, 10, labels = LETTERS[1:4]),
-#'                            .row = 1:40)
+#' DataSet1 <- data.frame(ID = rep(1:20, each = 2),
+#'                        gr = gl(4, 10, labels = LETTERS[1:4]),
+#'                        .row = 1:40)
 #'
 #' # Explore data
 #'      str(DataSet1)
@@ -405,10 +405,10 @@ cvo_create_folds <- function(data = NULL,
                    reps     = times,
                    id       = "repeated cross-validation",
                    iters    = nFolds * times,
-                   # [!!!] Next libe should be pdated approriately:
+                   # [!!!] Next line should be updated approriately:
                    predict  = predict, # c("train", "test", "both")
                    stratify = nGr > 1,
-                   # [!!!] Next libe should be pdated approriately:
+                   # [!!!] Next line should be updated approriately:
                    stratify.cols = NULL
                    )
 
