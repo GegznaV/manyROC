@@ -108,8 +108,7 @@ has_too_few_IDs <- function(OBJ,
     # names(gr_[gr_ < n_min])
 }
 # =============================================================================
-# TODO:
-# [!!!] Bug: na.rm = TRUE does not work
+# TODO: ...
 count_spectra <- function(OBJ,
                           Var = NULL, # colnames(OBJ)[1],
                           ID = "ID",
