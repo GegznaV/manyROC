@@ -4,7 +4,7 @@
 \alias{parallelSetSeed}
 \title{Set seeds for reproducible parallel computing with 'parallelMap' package}
 \usage{
-parallelSetSeed(iseed = NULL, seed = iseed)
+parallelSetSeed(iseed = NULL, seed = iseed, cl = NULL, ...)
 }
 \arguments{
 \item{iseed}{An integer to be supplied to \code{\link{set.seed}}, or
@@ -13,6 +13,11 @@ parallelSetSeed(iseed = NULL, seed = iseed)
 \item{seed}{An integer vector of length 7 as given by
     \code{.Random.seed} when the \samp{"L'Ecuyer-CMRG"} RNG is in use.
     See \code{\link{RNG}} for the valid values.}
+
+\item{cl}{A cluster from this package or package \href{{https://CRAN.R-project.org/package=snow}{\pkg{snow}}}, or (if
+    \code{NULL}) the registered cluster.}
+
+\item{...}{Arguments to be passed to `set.seed()`.}
 }
 \description{
 A wrapper for \pkg{parallel}::\code{\link[parallel]{clusterSetRNGStream}}.
