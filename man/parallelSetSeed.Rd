@@ -4,11 +4,15 @@
 \alias{parallelSetSeed}
 \title{Set seeds for reproducible parallel computing with 'parallelMap' package}
 \usage{
-parallelSetSeed(iseed)
+parallelSetSeed(iseed = NULL, seed = iseed)
 }
 \arguments{
 \item{iseed}{An integer to be supplied to \code{\link{set.seed}}, or
     \code{NULL} not to set reproducible seeds.}
+
+\item{seed}{An integer vector of length 7 as given by
+    \code{.Random.seed} when the \samp{"L'Ecuyer-CMRG"} RNG is in use.
+    See \code{\link{RNG}} for the valid values.}
 }
 \description{
 A wrapper for \pkg{parallel}::\code{\link[parallel]{clusterSetRNGStream}}.
