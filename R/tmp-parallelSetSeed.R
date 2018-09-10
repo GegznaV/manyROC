@@ -5,8 +5,8 @@
 #' @param ... Arguments to be passed to \code{set.seed()}.
 #' @param cl A cluster from either \pkg{parallel}  or package \pkg{snow},
 #'           or (if \code{NULL}) the registered cluster.
-#' @inheritParams parallel::clusterSetRNGStream
 #' @inheritParams set.seed
+#' @inheritParams parallel::clusterSetRNGStream
 #' @export
 parallelSetSeed <- function(iseed = NULL, seed = iseed, cl = NULL, ...) {
     set.seed(seed = seed, ...)
