@@ -1,7 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
-^D:\Dokumentai\R\manyROC\docs$
 README.Rmd
 _pkgdown.yaml
 docs.*
