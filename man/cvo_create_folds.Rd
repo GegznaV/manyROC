@@ -5,10 +5,19 @@
 \alias{print.cvo}
 \title{Create a cvo (cross-valitation object)}
 \usage{
-cvo_create_folds(data = NULL, stratify_by = NULL, block_by = NULL,
-  folds = 5, times = 1, seeds = NA_real_, kind = NULL,
-  mode = c("caret", "mlr")[1], returnTrain = c(TRUE, FALSE, "both")[1],
-  predict = c("test", "train", "both")[1], k = folds)
+cvo_create_folds(
+  data = NULL,
+  stratify_by = NULL,
+  block_by = NULL,
+  folds = 5,
+  times = 1,
+  seeds = NA_real_,
+  kind = NULL,
+  mode = c("caret", "mlr")[1],
+  returnTrain = c(TRUE, FALSE, "both")[1],
+  predict = c("test", "train", "both")[1],
+  k = folds
+)
 
 \method{print}{cvo}(x, ...)
 }

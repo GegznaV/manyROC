@@ -13,24 +13,51 @@
 \usage{
 \method{print}{as_str}(x, ...)
 
-\method{print}{roc_df}(x, ..., show_all = FALSE, perf_digits = 2,
-  fmt = "\%.3g")
+\method{print}{roc_df}(x, ..., show_all = FALSE, perf_digits = 2, fmt = "\%.3g")
 
 \method{print}{roc_opt_result}(x, digits = 3, ...)
 
 \method{print}{roc_info}(x, ...)
 
-roc_analysis(x, gr, pos_label = levels(gr)[2], pos_is_larger = NULL,
-  optimize_by = "bac", results = "all", ...)
+roc_analysis(
+  x,
+  gr,
+  pos_label = levels(gr)[2],
+  pos_is_larger = NULL,
+  optimize_by = "bac",
+  results = "all",
+  ...
+)
 
-\method{roc_analysis}{default}(x, gr, pos_label = levels(gr)[2],
-  pos_is_larger = NULL, optimize_by = "bac", results = "all", ...)
+\method{roc_analysis}{default}(
+  x,
+  gr,
+  pos_label = levels(gr)[2],
+  pos_is_larger = NULL,
+  optimize_by = "bac",
+  results = "all",
+  ...
+)
 
-\method{roc_analysis}{data.frame}(x, gr, pos_label = levels(gr)[2],
-  pos_is_larger = NULL, optimize_by = "bac", results = "all", ...)
+\method{roc_analysis}{data.frame}(
+  x,
+  gr,
+  pos_label = levels(gr)[2],
+  pos_is_larger = NULL,
+  optimize_by = "bac",
+  results = "all",
+  ...
+)
 
-\method{roc_analysis}{matrix}(x, gr, pos_label = levels(gr)[2],
-  pos_is_larger = NULL, optimize_by = "bac", results = "all", ...)
+\method{roc_analysis}{matrix}(
+  x,
+  gr,
+  pos_label = levels(gr)[2],
+  pos_is_larger = NULL,
+  optimize_by = "bac",
+  results = "all",
+  ...
+)
 }
 \arguments{
 \item{x}{(\code{numeric}) \cr A numeric vector.\cr
@@ -163,10 +190,11 @@ qplot(x3, fill = gr3, color = gr3,
 
 }
 \seealso{
-Other functions for ROC: \code{\link{access_elements}},
-  \code{\link{calculate_performance}},
-  \code{\link{roc_performance_measures}},
-  \code{\link{roc_predict}}
+Other functions for ROC: 
+\code{\link{access_elements}},
+\code{\link{calculate_performance}()},
+\code{\link{roc_performance_measures}},
+\code{\link{roc_predict}()}
 }
 \author{
 Vilmantas Gegzna

@@ -49,10 +49,11 @@ roc_spec(obj)
 Acces elements of \code{roc_result_list} and \code{roc_results} objects.
 }
 \seealso{
-Other functions for ROC: \code{\link{calculate_performance}},
-  \code{\link{print.as_str}},
-  \code{\link{roc_performance_measures}},
-  \code{\link{roc_predict}}
+Other functions for ROC: 
+\code{\link{calculate_performance}()},
+\code{\link{print.as_str}()},
+\code{\link{roc_performance_measures}},
+\code{\link{roc_predict}()}
 }
 \author{
 Vilmantas Gegzna

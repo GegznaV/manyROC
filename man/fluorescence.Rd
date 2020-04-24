@@ -4,7 +4,8 @@
 \name{fluorescence}
 \alias{fluorescence}
 \title{Dataset of simulated fluorescence spectra}
-\format{\code{\link[=hyperSpec-class]{hyperSpec}} objects with spectroscopic
+\format{
+\code{\link[=hyperSpec-class]{hyperSpec}} objects with spectroscopic
 data and additional variables.
 
 Spectra and these nonspectroscopic variables:
@@ -12,7 +13,8 @@ Spectra and these nonspectroscopic variables:
 \describe{
   \item{class}{A factor variable with 4 classes.}
   \item{gr}{A factor variable with 3 classes.}
-}}
+}
+}
 \source{
 Artificially generated in \code{R}.
 }

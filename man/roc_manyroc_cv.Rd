@@ -4,8 +4,14 @@
 \alias{roc_manyroc_cv}
 \title{Carry out the manyROC analysis with cross-validation}
 \usage{
-roc_manyroc_cv(x, gr, optimize_by = "bac", cvo = cvo_create_folds(x,
-  gr, seeds = seeds, kind = kind), seeds = NA_real_, kind = NULL)
+roc_manyroc_cv(
+  x,
+  gr,
+  optimize_by = "bac",
+  cvo = cvo_create_folds(x, gr, seeds = seeds, kind = kind),
+  seeds = NA_real_,
+  kind = NULL
+)
 }
 \arguments{
 \item{x}{A numeric matrix, a data frame, a \code{hyperSpec} object or another

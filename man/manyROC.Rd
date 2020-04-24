@@ -3,7 +3,6 @@
 \docType{package}
 \name{manyROC}
 \alias{manyROC}
-\alias{manyROC-package}
 \title{ManyROC -- tools for ROC analysis}
 \description{
 ManyROC -- tools for ROC analysis.

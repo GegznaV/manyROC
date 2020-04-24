@@ -17,11 +17,9 @@
 \usage{
 cvo_get_inds(cvo, fold, type = c("asis", "train", "test"))
 
-\method{cvo_get_inds}{cvo_caret}(cvo, fold, type = c("asis", "train",
-  "test"))
+\method{cvo_get_inds}{cvo_caret}(cvo, fold, type = c("asis", "train", "test"))
 
-\method{cvo_get_inds}{cvo_mlr}(cvo, fold, type = c("asis", "train",
-  "test"))
+\method{cvo_get_inds}{cvo_mlr}(cvo, fold, type = c("asis", "train", "test"))
 
 cvo_get_info(cvo)
 

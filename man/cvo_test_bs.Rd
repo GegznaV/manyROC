@@ -4,8 +4,13 @@
 \alias{cvo_test_bs}
 \title{[+] Test if data in folds is stratified and blocked}
 \usage{
-cvo_test_bs(obj, stratify_by = NULL, block_by = NULL, data = NULL,
-  n_col_show = 10)
+cvo_test_bs(
+  obj,
+  stratify_by = NULL,
+  block_by = NULL,
+  data = NULL,
+  n_col_show = 10
+)
 }
 \arguments{
 \item{obj}{A list with validation/test set indices in folds.
