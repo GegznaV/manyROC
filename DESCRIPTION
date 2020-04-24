@@ -5,15 +5,13 @@ Description: Package `manyROC` provides with tools for ROC (receiver operating
              characteristic) analyis.
 Version: 0.0.5
 Date: 2018-08-13
-Authors@R: person("Vilmantas", "Gegzna",
-                  role = c("aut", "cre"),
-                  email = "GegznaV@gmail.com")
+Authors@R: person("Vilmantas", "Gegzna", role = c("aut", "cre"), email = "GegznaV@gmail.com")
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
 VignetteBuilder: knitr
-RoxygenNote: 6.1.0
+RoxygenNote: 7.1.0
 Depends:
     R (>= 3.2)
 Imports:
