@@ -108,7 +108,7 @@ library(manyROC)
 # --- For numeric vectors objects ---
 
 data(PlantGrowth)
-roc_manyroc(PlantGrowth$weight, PlantGrowth$group)
+roc_manyroc(x = PlantGrowth$weight, gr = PlantGrowth$group)
 
 
 # --- For dataframes objects ---

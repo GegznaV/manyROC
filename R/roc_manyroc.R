@@ -82,7 +82,7 @@
 #' # --- For numeric vectors objects ---
 #'
 #' data(PlantGrowth)
-#' roc_manyroc(PlantGrowth$weight, PlantGrowth$group)
+#' roc_manyroc(x = PlantGrowth$weight, gr = PlantGrowth$group)
 #'
 #'
 #' # --- For dataframes objects ---
@@ -135,7 +135,7 @@ roc_manyroc.matrix <- function(x,
     levs  <- levels(gr)
     cmb   <- t(combn(levels(gr), 2))
     n_cmb <- nrow(cmb)
-    if (n_cmb == 2) n_cmb <- 1 # prevent from excessive calculations
+    if (n_cmb == 2) n_cmb <- 1 # prevents from excessive calculations
 
     # Pre-allocate variables
     Compared <- paste0(cmb[, 1], gr_sep, cmb[, 2])
@@ -151,11 +151,11 @@ roc_manyroc.matrix <- function(x,
 
         # For each feature (column) in matrix `x`
         optimal <- apply(x_subset, 2,
-                         FUN = roc_analysis,
-                         gr = included_gr,
-                         pos_label = included_levels[2],
-                         optimize_by = optimize_by,
-                         results = "optimal")
+            FUN = roc_analysis,
+            gr = included_gr,
+            pos_label = included_levels[2],
+            optimize_by = optimize_by,
+            results = "optimal")
 
         # Collect the results
         grouppair_results[[u]] <- t(optimal)
@@ -169,21 +169,27 @@ roc_manyroc.matrix <- function(x,
     #                   "BAC","Youden", "Kappa","AUC",
     #                   "median_neg", "median_pos")
 
-    result_names <- c("cutoff", "tp","fn","fp","tn",
-                      "sens","spec","ppv","npv",
-                      "bac","youden", "kappa","auc",
-                      "median_neg", "median_pos")
+    result_names <- c(
+        "cutoff", "tp","fn","fp","tn",
+        "sens","spec","ppv","npv",
+        "bac","youden", "kappa","auc",
+        "median_neg", "median_pos"
+    )
 
     # Clean the result
-    OBJ <- grouppair_results  %>%
-        purrr::map(~.x %>%
-                       as.data.frame() %>%
-                       magrittr::set_colnames(result_names)  %>%
-                       tibble::rownames_to_column(var = "feature")) %>%
+    OBJ <-
+        grouppair_results  %>%
+        purrr::map(
+            ~.x %>%
+                as.data.frame() %>%
+                magrittr::set_colnames(result_names)  %>%
+                tibble::rownames_to_column(var = "feature")
+        ) %>%
         dplyr::bind_rows(.id = "compared_groups")  %>%
-        dplyr::select(compared_groups, feature,
-                      median_neg, cutoff, median_pos,
-                      dplyr::everything())
+        dplyr::select(
+            compared_groups, feature, median_neg, cutoff, median_pos,
+            dplyr::everything()
+        )
 
     # Output
     add_class_label(OBJ, "manyroc_result")
@@ -192,20 +198,20 @@ roc_manyroc.matrix <- function(x,
 #' @rdname roc_manyroc
 #' @export
 roc_manyroc.numeric <- function(x, gr = NULL, optimize_by = "bac",  ...) {
-    roc_manyroc(as.matrix(x), gr, optimize_by, ...)
+    roc_manyroc(x = as.matrix(x), gr = gr, optimize_by = optimize_by, ...)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_manyroc
 #' @export
 roc_manyroc.data.frame <- function(x, gr = NULL, optimize_by = "bac",  ...) {
-    roc_manyroc(as.matrix(x), gr, optimize_by, ...)
+    roc_manyroc(x = as.matrix(x), gr = gr, optimize_by = optimize_by, ...)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_manyroc
 #' @export
 roc_manyroc.hyperSpec <- function(x, gr = NULL, optimize_by = "bac",  ...) {
     assert_class(x, "hyperSpec")
-    roc_manyroc(x[[]], gr, optimize_by, ...)
+    roc_manyroc(x = x[[]], gr = gr, optimize_by = optimize_by, ...)
 }
 # =============================================================================
 
