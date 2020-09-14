@@ -110,7 +110,8 @@ print.manyroc_result <- function(x, ..., show_all = FALSE,
         dplyr::mutate_at(
             perf_names, sprintf, fmt = glue::glue("%.{perf_digits}f")
         ) %>%
-        dplyr::mutate_if(is.numeric, sprintf, fmt = fmt)
+        dplyr::mutate_if(is.numeric, sprintf, fmt = fmt) %>%
+        as.data.frame()
 
     # For long dataframes, only a few lines are printed
     # [!!!] 10 may be converted to a parameter.
