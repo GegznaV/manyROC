@@ -13,12 +13,15 @@ knitr::opts_chunk$set(
 
 ***
 
+<!-- badges: start -->
 [![DOI](https://zenodo.org/badge/98945258.svg)](https://zenodo.org/badge/latestdoi/98945258)
 [![CRAN version](https://www.r-pkg.org/badges/version/manyROC)](https://cran.rstudio.com/web/packages/manyROC/index.html)
 [![GitHub version](https://img.shields.io/badge/GitHub-v`r packageVersion("manyROC")`-brightgreen.svg)](https://github.com/GegznaV/manyROC)
-[![Travis-CI Build Status](https://travis-ci.org/GegznaV/manyROC.svg?branch=master)](https://travis-ci.org/GegznaV/manyROC)
-[![codecov](https://codecov.io/gh/GegznaV/manyROC/branch/master/graph/badge.svg)](https://codecov.io/gh/GegznaV/manyROC)
+[![R build status](https://github.com/GegznaV/manyROC/workflows/R-CMD-check/badge.svg)](https://github.com/GegznaV/manyROC/actions)[![codecov](https://codecov.io/gh/GegznaV/manyROC/branch/master/graph/badge.svg)](https://codecov.io/gh/GegznaV/manyROC)
 [![Last-update](https://img.shields.io/badge/last%20update-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](/commits/master)
+<!-- badges: end -->
+
+
 
 ***
 
