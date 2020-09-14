@@ -107,7 +107,13 @@ roc_manyroc_cv <- function(x,
     # identical(names(tmp2),  names(mat2list(x_test)))
 
     tmp1 <- roc_extract_info(rez_train[[i]])
-    tmp2 <- split_by_feature(tmp1, levels = colnames(x_test))
+
+    x_lvls <- colnames(x_test)
+    if (is.null(x_lvls)) {
+      x_lvls <- seq_len(ncol(x_test))
+    }
+
+    tmp2 <- split_by_feature(tmp1, levels = x_lvls)
     tmp3 <- purrr::map2(
       .x = tmp2,
       .y = mat2list(x_test),
