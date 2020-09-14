@@ -8,3 +8,4 @@ docs.*
 ^codecov\.yml$
 ^_pkgdown\.yml$
 ^docs$
+^_tmp$
