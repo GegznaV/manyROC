@@ -45,7 +45,7 @@ roc_extract_info.manyroc_result <- function(obj, ...) {
     purrr::reduce(rbind) %>%
     matrix(ncol = 2)  %>% # prevent failing when only one row is present
     magrittr::set_colnames(c("below", "above")) %>%
-    tibble::as.tibble()  %>%
+    tibble::as_tibble()  %>%
     dplyr::bind_cols(obj2, .)  %>%
     dplyr::select(feature,
       compared_groups,
