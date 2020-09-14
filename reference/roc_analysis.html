@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -78,7 +78,7 @@ specificity, etc." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">manyROC</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -91,6 +91,9 @@ specificity, etc." />
   </a>
 </li>
 <li>
+  <a href="../articles/manyROC.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -101,10 +104,7 @@ specificity, etc." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/multiROC_1_Introduction.html">Introduction to `manyROC`</a>
-    </li>
-    <li>
-      <a href="../articles/multiROC_3_cvo.html">Cross-validation object (cvo)</a>
+      <a href="../articles/manyROC_3_cvo.html">Cross-validation object (cvo)</a>
     </li>
   </ul>
 </li>
@@ -140,58 +140,58 @@ specificity, etc.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for as_str</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/hyperSpec/man/show.html'>print</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for roc_df</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>show_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>perf_digits</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>fmt</span> <span class='kw'>=</span> <span class='st'>"%.3g"</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/hyperSpec/man/show.html'>print</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>, show_all = <span class='fl'>FALSE</span>, perf_digits = <span class='fl'>2</span>, fmt = <span class='st'>"%.3g"</span>)
 
 <span class='co'># S3 method for roc_opt_result</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/hyperSpec/man/show.html'>print</a></span>(<span class='kw'>x</span>, digits = <span class='fl'>3</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for roc_info</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/hyperSpec/man/show.html'>print</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='fu'>roc_analysis</span>(
-  <span class='no'>x</span>,
-  <span class='no'>gr</span>,
-  <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='no'>gr</span>)[<span class='fl'>2</span>],
-  <span class='kw'>pos_is_larger</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>,
-  <span class='kw'>results</span> <span class='kw'>=</span> <span class='st'>"all"</span>,
-  <span class='no'>...</span>
+  <span class='kw'>x</span>,
+  <span class='kw'>gr</span>,
+  pos_label = <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='kw'>gr</span>)[<span class='fl'>2</span>],
+  pos_is_larger = <span class='kw'>NULL</span>,
+  optimize_by = <span class='st'>"bac"</span>,
+  results = <span class='st'>"all"</span>,
+  <span class='kw'>...</span>
 )
 
 <span class='co'># S3 method for default</span>
 <span class='fu'>roc_analysis</span>(
-  <span class='no'>x</span>,
-  <span class='no'>gr</span>,
-  <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='no'>gr</span>)[<span class='fl'>2</span>],
-  <span class='kw'>pos_is_larger</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>,
-  <span class='kw'>results</span> <span class='kw'>=</span> <span class='st'>"all"</span>,
-  <span class='no'>...</span>
+  <span class='kw'>x</span>,
+  <span class='kw'>gr</span>,
+  pos_label = <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='kw'>gr</span>)[<span class='fl'>2</span>],
+  pos_is_larger = <span class='kw'>NULL</span>,
+  optimize_by = <span class='st'>"bac"</span>,
+  results = <span class='st'>"all"</span>,
+  <span class='kw'>...</span>
 )
 
 <span class='co'># S3 method for data.frame</span>
 <span class='fu'>roc_analysis</span>(
-  <span class='no'>x</span>,
-  <span class='no'>gr</span>,
-  <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='no'>gr</span>)[<span class='fl'>2</span>],
-  <span class='kw'>pos_is_larger</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>,
-  <span class='kw'>results</span> <span class='kw'>=</span> <span class='st'>"all"</span>,
-  <span class='no'>...</span>
+  <span class='kw'>x</span>,
+  <span class='kw'>gr</span>,
+  pos_label = <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='kw'>gr</span>)[<span class='fl'>2</span>],
+  pos_is_larger = <span class='kw'>NULL</span>,
+  optimize_by = <span class='st'>"bac"</span>,
+  results = <span class='st'>"all"</span>,
+  <span class='kw'>...</span>
 )
 
 <span class='co'># S3 method for matrix</span>
 <span class='fu'>roc_analysis</span>(
-  <span class='no'>x</span>,
-  <span class='no'>gr</span>,
-  <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='no'>gr</span>)[<span class='fl'>2</span>],
-  <span class='kw'>pos_is_larger</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>,
-  <span class='kw'>results</span> <span class='kw'>=</span> <span class='st'>"all"</span>,
-  <span class='no'>...</span>
+  <span class='kw'>x</span>,
+  <span class='kw'>gr</span>,
+  pos_label = <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='kw'>gr</span>)[<span class='fl'>2</span>],
+  pos_is_larger = <span class='kw'>NULL</span>,
+  optimize_by = <span class='st'>"bac"</span>,
+  results = <span class='st'>"all"</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -293,22 +293,28 @@ several rows, if the performance is equally good. <br /><br /></p></li>
 <code><a href='calculate_performance.html'>calculate_performance</a>()</code>,
 <code><a href='roc_performance_measures.html'>roc_performance_measures</a></code>,
 <code><a href='roc_predict.html'>roc_predict</a>()</code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Vilmantas Gegzna</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>manyROC</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>manyROC</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
 
 <span class='co'># Make some data</span>
 
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
-(<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>))</div><div class='output co'>#&gt;  [1] -0.6264538  0.1836433 -0.8356286  1.5952808  0.3295078 -0.8204684
+(<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>))
+</div><div class='output co'>#&gt;  [1] -0.6264538  0.1836433 -0.8356286  1.5952808  0.3295078 -0.8204684
 #&gt;  [7]  0.4874291  0.7383247  0.5757814 -0.3053884</div><div class='input'>
-(<span class='no'>gr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>length</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"H"</span>,<span class='st'>"S"</span>)))</div><div class='output co'>#&gt;  [1] H H H H H S S S S S
+(<span class='kw'>gr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(n = <span class='fl'>2</span>, k = <span class='fl'>5</span>, length = <span class='fl'>10</span>, labels = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"H"</span>, <span class='st'>"S"</span>)))
+</div><div class='output co'>#&gt;  [1] H H H H H S S S S S
 #&gt; Levels: H S</div><div class='input'>
 
 <span class='co'># Explore the functions</span>
 
-<span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>)</div><div class='output co'>#&gt; $info
+<span class='fu'>roc_analysis</span>(<span class='kw'>x</span>, <span class='kw'>gr</span>)
+</div><div class='output co'>#&gt; $info
 #&gt;  var_name n_total n_neg n_pos neg_label pos_label median_neg median_pos below
 #&gt;                10     5     5         H         S  0.1836433  0.4874291     H
 #&gt;     cutoff above
@@ -337,7 +343,8 @@ several rows, if the performance is equally good. <br /><br /></p></li>
 #&gt; 
 #&gt; attr(,"class")
 #&gt; [1] "roc_result_list" "list"           </div><div class='input'>
-<span class='fu'>roc_analysis</span>(<span class='no'>x</span>, <span class='no'>gr</span>, <span class='kw'>pos_label</span> <span class='kw'>=</span> <span class='st'>"H"</span>)</div><div class='output co'>#&gt; $info
+<span class='fu'>roc_analysis</span>(<span class='kw'>x</span>, <span class='kw'>gr</span>, pos_label = <span class='st'>"H"</span>)
+</div><div class='output co'>#&gt; $info
 #&gt;  var_name n_total n_neg n_pos neg_label pos_label median_neg median_pos below
 #&gt;                10     5     5         S         H  0.4874291  0.1836433     H
 #&gt;     cutoff above
@@ -370,10 +377,11 @@ several rows, if the performance is equally good. <br /><br /></p></li>
 <span class='co'># --- Example 2 ---</span>
 
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
-<span class='no'>x2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>14</span>), <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>20</span>))
-<span class='no'>gr2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='fl'>2</span>, <span class='fl'>50</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Neg"</span>, <span class='st'>"Pos"</span>))
+<span class='kw'>x2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>, mean = <span class='fl'>14</span>), <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>50</span>, mean = <span class='fl'>20</span>))
+<span class='kw'>gr2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='fl'>2</span>, <span class='fl'>50</span>, labels = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Neg"</span>, <span class='st'>"Pos"</span>))
 
-(<span class='no'>roc_rez</span><span class='kw'>&lt;-</span> <span class='fu'>roc_analysis</span>(<span class='no'>x2</span>, <span class='no'>gr2</span>))</div><div class='output co'>#&gt; $info
+(<span class='kw'>roc_rez</span> <span class='op'>&lt;-</span> <span class='fu'>roc_analysis</span>(<span class='kw'>x2</span>, <span class='kw'>gr2</span>))
+</div><div class='output co'>#&gt; $info
 #&gt;  var_name n_total n_neg n_pos neg_label pos_label median_neg median_pos below
 #&gt;               100    50    50       Neg       Pos    14.1291    20.1138   Neg
 #&gt;    cutoff above
@@ -402,19 +410,21 @@ several rows, if the performance is equally good. <br /><br /></p></li>
 #&gt; 
 #&gt; attr(,"class")
 #&gt; [1] "roc_result_list" "list"           </div><div class='input'>
-<span class='no'>optimal_cutoff2</span> <span class='kw'>&lt;-</span> <span class='no'>roc_rez</span>$<span class='no'>optimal</span>[<span class='fl'>1</span>]
+<span class='kw'>optimal_cutoff2</span> <span class='op'>&lt;-</span> <span class='kw'>roc_rez</span><span class='op'>$</span><span class='kw'>optimal</span>[<span class='fl'>1</span>]
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/qplot.html'>qplot</a></span>(<span class='no'>x2</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>gr2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>gr2</span>,
-      <span class='kw'>geom</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"density"</span>, <span class='st'>"rug"</span>), <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fl'>0.3</span>)) +
-   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='no'>optimal_cutoff2</span>)</div><div class='img'><img src='roc_analysis-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/qplot.html'>qplot</a></span>(<span class='kw'>x2</span>, fill = <span class='kw'>gr2</span>, color = <span class='kw'>gr2</span>,
+  geom = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"density"</span>, <span class='st'>"rug"</span>), alpha = <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fl'>0.3</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(xintercept = <span class='kw'>optimal_cutoff2</span>)
+</div><div class='img'><img src='roc_analysis-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'># --- Example 3 ---</span>
 
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
-<span class='no'>x3</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>11</span>), <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>14</span>))
-<span class='no'>gr3</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='fl'>2</span>, <span class='fl'>100</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Neg"</span>, <span class='st'>"Pos"</span>))
+<span class='kw'>x3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>, mean = <span class='fl'>11</span>), <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>, mean = <span class='fl'>14</span>))
+<span class='kw'>gr3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='fl'>2</span>, <span class='fl'>100</span>, labels = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Neg"</span>, <span class='st'>"Pos"</span>))
 
-(<span class='no'>roc_rez3</span> <span class='kw'>&lt;-</span> <span class='fu'>roc_analysis</span>(<span class='no'>x3</span>, <span class='no'>gr3</span>))</div><div class='output co'>#&gt; $info
+(<span class='kw'>roc_rez3</span> <span class='op'>&lt;-</span> <span class='fu'>roc_analysis</span>(<span class='kw'>x3</span>, <span class='kw'>gr3</span>))
+</div><div class='output co'>#&gt; $info
 #&gt;  var_name n_total n_neg n_pos neg_label pos_label median_neg median_pos below
 #&gt;               200   100   100       Neg       Pos   11.11391   13.82278   Neg
 #&gt;    cutoff above
@@ -443,13 +453,12 @@ several rows, if the performance is equally good. <br /><br /></p></li>
 #&gt; 
 #&gt; attr(,"class")
 #&gt; [1] "roc_result_list" "list"           </div><div class='input'>
-<span class='no'>optimal_cutoff3</span> <span class='kw'>&lt;-</span> <span class='no'>roc_rez3</span>$<span class='no'>optimal</span>[<span class='fl'>1</span>]
+<span class='kw'>optimal_cutoff3</span> <span class='op'>&lt;-</span> <span class='kw'>roc_rez3</span><span class='op'>$</span><span class='kw'>optimal</span>[<span class='fl'>1</span>]
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/qplot.html'>qplot</a></span>(<span class='no'>x3</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>gr3</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>gr3</span>,
-     <span class='kw'>geom</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"density"</span>, <span class='st'>"rug"</span>), <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fl'>0.3</span>)) +
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(<span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='no'>roc_rez3</span>$<span class='no'>optimal</span>[<span class='fl'>1</span>])</div><div class='img'><img src='roc_analysis-2.png' alt='' width='700' height='433' /></div><div class='input'>
-
-</div></pre>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/qplot.html'>qplot</a></span>(<span class='kw'>x3</span>, fill = <span class='kw'>gr3</span>, color = <span class='kw'>gr3</span>,
+  geom = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"density"</span>, <span class='st'>"rug"</span>), alpha = <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='fl'>0.3</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span>(xintercept = <span class='kw'>roc_rez3</span><span class='op'>$</span><span class='kw'>optimal</span>[<span class='fl'>1</span>])
+</div><div class='img'><img src='roc_analysis-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -465,7 +474,7 @@ several rows, if the performance is equally good. <br /><br /></p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -75,7 +75,7 @@ Options of blocking and stratification are available. See more in &quot;Details&
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">manyROC</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -88,6 +88,9 @@ Options of blocking and stratification are available. See more in &quot;Details&
   </a>
 </li>
 <li>
+  <a href="../articles/manyROC.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -98,10 +101,7 @@ Options of blocking and stratification are available. See more in &quot;Details&
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/multiROC_1_Introduction.html">Introduction to `manyROC`</a>
-    </li>
-    <li>
-      <a href="../articles/multiROC_3_cvo.html">Cross-validation object (cvo)</a>
+      <a href="../articles/manyROC_3_cvo.html">Cross-validation object (cvo)</a>
     </li>
   </ul>
 </li>
@@ -134,21 +134,21 @@ Options of blocking and stratification are available. See more in "Details".</p>
     </div>
 
     <pre class="usage"><span class='fu'>cvo_create_folds</span>(
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>folds</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-  <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='fl'>NA_real_</span>,
-  <span class='kw'>kind</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>mode</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"caret"</span>, <span class='st'>"mlr"</span>)[<span class='fl'>1</span>],
-  <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>, <span class='st'>"both"</span>)[<span class='fl'>1</span>],
-  <span class='kw'>predict</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"test"</span>, <span class='st'>"train"</span>, <span class='st'>"both"</span>)[<span class='fl'>1</span>],
-  <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>folds</span>
+  data = <span class='kw'>NULL</span>,
+  stratify_by = <span class='kw'>NULL</span>,
+  block_by = <span class='kw'>NULL</span>,
+  folds = <span class='fl'>5</span>,
+  times = <span class='fl'>1</span>,
+  seeds = <span class='fl'>NA_real_</span>,
+  kind = <span class='kw'>NULL</span>,
+  mode = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"caret"</span>, <span class='st'>"mlr"</span>)[<span class='fl'>1</span>],
+  returnTrain = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>, <span class='st'>"both"</span>)[<span class='fl'>1</span>],
+  predict = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"test"</span>, <span class='st'>"train"</span>, <span class='st'>"both"</span>)[<span class='fl'>1</span>],
+  k = <span class='kw'>folds</span>
 )
 
 <span class='co'># S3 method for cvo</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -240,7 +240,7 @@ Default is &#8220;test&#8221;.</p></td>
     <tr>
       <th>...</th>
       <td><p>(any)<br />
-Further parameters for strategies.<br /></p><dl'>
+Further parameters for strategies.<br /></p><dl>
 <dt>iters (<code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code>)</dt><dd><p>Number of iterations, for &#8220;CV&#8221;, &#8220;Subsample&#8221;
 and &#8220;Bootstrap&#8221;.</p></dd>
 <dt>split (<code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code>)</dt><dd><p>Proportion of training cases for &#8220;Holdout&#8221; and
@@ -303,28 +303,34 @@ folds observations are:</p><ol>
          Function <code><a href='https://mlr.mlr-org.com/reference/makeResampleInstance.html'>makeResampleInstance</a></code> from package
          <span class="pkg">mlr</span>. <br />
 Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_test_bs</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Vilmantas Gegzna</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>manyROC</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>manyROC</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123456</span>)
 
 <span class='co'># Data</span>
-<span class='no'>DataSet1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>ID</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>:<span class='fl'>20</span>, <span class='kw'>each</span> <span class='kw'>=</span> <span class='fl'>2</span>),
-                       <span class='kw'>gr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='fl'>4</span>, <span class='fl'>10</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>4</span>]),
-                       <span class='kw'>.row</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>40</span>)
+<span class='kw'>DataSet1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(ID = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>20</span>, each = <span class='fl'>2</span>),
+  gr = <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='fl'>4</span>, <span class='fl'>10</span>, labels = <span class='kw'>LETTERS</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>]),
+  .row = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>40</span>)
 
 <span class='co'># Explore data</span>
-     <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; 'data.frame':	40 obs. of  3 variables:
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>DataSet1</span>)
+</div><div class='output co'>#&gt; 'data.frame':	40 obs. of  3 variables:
 #&gt;  $ ID  : int  1 1 2 2 3 3 4 4 5 5 ...
 #&gt;  $ gr  : Factor w/ 4 levels "A","B","C","D": 1 1 1 1 1 1 1 1 1 1 ...
 #&gt;  $ .row: int  1 2 3 4 5 6 7 8 9 10 ...</div><div class='input'>
-     <span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>DataSet1</span>[,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gr"</span>,<span class='st'>"ID"</span>)])</div><div class='output co'>#&gt;    ID
+<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='kw'>DataSet1</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gr"</span>, <span class='st'>"ID"</span>)])
+</div><div class='output co'>#&gt;    ID
 #&gt; gr  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
 #&gt;   A 2 2 2 2 2 0 0 0 0  0  0  0  0  0  0  0  0  0  0  0
 #&gt;   B 0 0 0 0 0 2 2 2 2  2  0  0  0  0  0  0  0  0  0  0
 #&gt;   C 0 0 0 0 0 0 0 0 0  0  2  2  2  2  2  0  0  0  0  0
 #&gt;   D 0 0 0 0 0 0 0 0 0  0  0  0  0  0  0  2  2  2  2  2</div><div class='input'>
-     <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>DataSet1</span>)</div><div class='output co'>#&gt;        ID        gr          .row      
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>DataSet1</span>)
+</div><div class='output co'>#&gt;        ID        gr          .row      
 #&gt;  Min.   : 1.00   A:10   Min.   : 1.00  
 #&gt;  1st Qu.: 5.75   B:10   1st Qu.:10.75  
 #&gt;  Median :10.50   C:10   Median :20.50  
@@ -333,17 +339,19 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 #&gt;  Max.   :20.00          Max.   :40.00  </div><div class='input'>
 
 <span class='co'># Explore functions</span>
-     <span class='no'>nFolds</span> <span class='kw'>=</span> <span class='fl'>5</span>
+<span class='kw'>nFolds</span> <span class='op'>&lt;-</span> <span class='fl'>5</span>
 
 <span class='co'># If variables of data frame are provided:</span>
-     <span class='no'>Folds1_a</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>,
-                                 <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='st'>"gr"</span>, <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='st'>"ID"</span>,
-                                  <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>, <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-     <span class='no'>Folds1_a</span></div><div class='output co'>#&gt; --- A cvo object: ----------------------------------------------------
+<span class='kw'>Folds1_a</span> <span class='op'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(data = <span class='kw'>DataSet1</span>,
+  stratify_by = <span class='st'>"gr"</span>, block_by = <span class='st'>"ID"</span>,
+  k = <span class='kw'>nFolds</span>, returnTrain = <span class='fl'>FALSE</span>)
+<span class='kw'>Folds1_a</span>
+</div><div class='output co'>#&gt; --- A cvo object: ----------------------------------------------------
 #&gt;  indices stratified blocked cv_type k repetitions sample_size
 #&gt;     Test       TRUE    TRUE  k-fold 5           1          40
 #&gt; ----------------------------------------------------------------------</div><div class='input'>
-     <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>Folds1_a</span>)</div><div class='output co'>#&gt; List of 5
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>Folds1_a</span>)
+</div><div class='output co'>#&gt; List of 5
 #&gt;  $ Rep1_Fold1: int [1:8] 7 8 19 20 25 26 39 40
 #&gt;  $ Rep1_Fold2: int [1:8] 3 4 13 14 27 28 35 36
 #&gt;  $ Rep1_Fold3: int [1:8] 9 10 17 18 21 22 31 32
@@ -361,7 +369,8 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 #&gt;  - attr(*, "seeds")=List of 2
 #&gt;   ..$ generator: NULL
 #&gt;   ..$ seeds    : NULL</div><div class='input'>
-     <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds1_a</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
+<span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='kw'>Folds1_a</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='kw'>DataSet1</span>)
+</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
 #&gt; 
 #&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
 #&gt; Rep1_Fold1 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
@@ -389,12 +398,13 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 #&gt; 10 (of 20) first columns are displayed.
 #&gt; ************************************************************\n</div><div class='input'>
 <span class='co'># If "free" variables are provided:</span>
-     <span class='no'>Folds1_b</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>gr</span>,
-                                  <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>ID</span>,
-                                  <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>,
-                                  <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-     <span class='co'># str(Folds1_b)</span>
-     <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds1_b</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
+<span class='kw'>Folds1_b</span> <span class='op'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(stratify_by = <span class='kw'>DataSet1</span><span class='op'>$</span><span class='kw'>gr</span>,
+  block_by = <span class='kw'>DataSet1</span><span class='op'>$</span><span class='kw'>ID</span>,
+  k = <span class='kw'>nFolds</span>,
+  returnTrain = <span class='fl'>FALSE</span>)
+<span class='co'># str(Folds1_b)</span>
+<span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='kw'>Folds1_b</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='kw'>DataSet1</span>)
+</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
 #&gt; 
 #&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
 #&gt; Rep1_Fold1 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
@@ -422,11 +432,12 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 #&gt; 10 (of 20) first columns are displayed.
 #&gt; ************************************************************\n</div><div class='input'>
 <span class='co'># Not blocked but stratified</span>
-     <span class='no'>Folds1_c</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>gr</span>,
-                                  <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>,
-                                  <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-     <span class='co'># str(Folds1_c)</span>
-     <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds1_c</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
+<span class='kw'>Folds1_c</span> <span class='op'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(stratify_by = <span class='kw'>DataSet1</span><span class='op'>$</span><span class='kw'>gr</span>,
+  k = <span class='kw'>nFolds</span>,
+  returnTrain = <span class='fl'>FALSE</span>)
+<span class='co'># str(Folds1_c)</span>
+<span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='kw'>Folds1_c</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='kw'>DataSet1</span>)
+</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
 #&gt; 
 #&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
 #&gt; Rep1_Fold1 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
@@ -454,11 +465,12 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 #&gt; 10 (of 20) first columns are displayed.
 #&gt; ************************************************************\n</div><div class='input'>
 <span class='co'># Blocked but not stratified</span>
-     <span class='no'>Folds1_d</span> <span class='kw'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(<span class='kw'>block_by</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>$<span class='no'>ID</span>,
-                                  <span class='kw'>k</span> <span class='kw'>=</span> <span class='no'>nFolds</span>,
-                                  <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-     <span class='co'># str(Folds1_d)</span>
-     <span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='no'>Folds1_d</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
+<span class='kw'>Folds1_d</span> <span class='op'>&lt;-</span> <span class='fu'>cvo_create_folds</span>(block_by = <span class='kw'>DataSet1</span><span class='op'>$</span><span class='kw'>ID</span>,
+  k = <span class='kw'>nFolds</span>,
+  returnTrain = <span class='fl'>FALSE</span>)
+<span class='co'># str(Folds1_d)</span>
+<span class='fu'><a href='cvo_test_bs.html'>cvo_test_bs</a></span>(<span class='kw'>Folds1_d</span>, <span class='st'>"gr"</span>, <span class='st'>"ID"</span>, <span class='kw'>DataSet1</span>)
+</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
 #&gt; 
 #&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
 #&gt; Rep1_Fold1 0 2 4 2  &lt;-Counts | Proportions-&gt;  0.00 0.25 0.50 0.25
@@ -484,9 +496,7 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 #&gt; Table shows number of observations in each fold.
 #&gt; If blocked, the same ID appears just in one fold.
 #&gt; 10 (of 20) first columns are displayed.
-#&gt; ************************************************************\n</div><div class='input'>
-
-</div></pre>
+#&gt; ************************************************************\n</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -502,7 +512,7 @@ Test if folds are blocked and stratified <code><a href='cvo_test_bs.html'>cvo_te
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

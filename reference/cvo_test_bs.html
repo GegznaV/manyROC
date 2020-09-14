@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">manyROC</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -86,6 +86,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/manyROC.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -96,10 +99,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/multiROC_1_Introduction.html">Introduction to `manyROC`</a>
-    </li>
-    <li>
-      <a href="../articles/multiROC_3_cvo.html">Cross-validation object (cvo)</a>
+      <a href="../articles/manyROC_3_cvo.html">Cross-validation object (cvo)</a>
     </li>
   </ul>
 </li>
@@ -130,11 +130,11 @@
     </div>
 
     <pre class="usage"><span class='fu'>cvo_test_bs</span>(
-  <span class='no'>obj</span>,
-  <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>n_col_show</span> <span class='kw'>=</span> <span class='fl'>10</span>
+  <span class='kw'>obj</span>,
+  stratify_by = <span class='kw'>NULL</span>,
+  block_by = <span class='kw'>NULL</span>,
+  data = <span class='kw'>NULL</span>,
+  n_col_show = <span class='fl'>10</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -169,24 +169,28 @@ be shown. Default is 10.</p></td>
 
     <p>Print tables that help to evaluate if data is <strong>(a)</strong> stratified,
  <strong>(b)</strong> blocked.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Vilmantas Gegzna</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>manyROC</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>manyROC</span>)
 
 <span class='co'># [!!!] Load data</span>
-<span class='no'>DataSet1</span> <span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>ID</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>:<span class='fl'>20</span>, <span class='kw'>each</span> <span class='kw'>=</span> <span class='fl'>2</span>),
-                           <span class='kw'>gr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='fl'>4</span>, <span class='fl'>10</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>4</span>]),
-                           <span class='kw'>.row</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>40</span>)
+<span class='kw'>DataSet1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(ID = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>20</span>, each = <span class='fl'>2</span>),
+  gr = <span class='fu'><a href='https://rdrr.io/r/base/gl.html'>gl</a></span>(<span class='fl'>4</span>, <span class='fl'>10</span>, labels = <span class='kw'>LETTERS</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>]),
+  .row = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>40</span>)
 
-<span class='no'>obj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='cvo_create_folds.html'>cvo_create_folds</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>,
-                     <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='st'>"gr"</span>,
-                     <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='st'>"ID"</span>,
-                     <span class='kw'>returnTrain</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='kw'>obj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='cvo_create_folds.html'>cvo_create_folds</a></span>(data = <span class='kw'>DataSet1</span>,
+  stratify_by = <span class='st'>"gr"</span>,
+  block_by = <span class='st'>"ID"</span>,
+  returnTrain = <span class='fl'>FALSE</span>)
 
-<span class='fu'>cvo_test_bs</span>(<span class='no'>obj</span>,
-            <span class='kw'>stratify_by</span> <span class='kw'>=</span> <span class='st'>"gr"</span>,
-            <span class='kw'>block_by</span> <span class='kw'>=</span> <span class='st'>"ID"</span>,
-            <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>DataSet1</span>)</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
+<span class='fu'>cvo_test_bs</span>(<span class='kw'>obj</span>,
+  stratify_by = <span class='st'>"gr"</span>,
+  block_by = <span class='st'>"ID"</span>,
+  data = <span class='kw'>DataSet1</span>)
+</div><div class='output co'>#&gt; ************************************************************\n____________________________________________________________\n                Test for STRATIFICATION 
 #&gt; 
 #&gt;            A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D
 #&gt; Rep1_Fold1 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25
@@ -214,6 +218,32 @@ be shown. Default is 10.</p></td>
 #&gt; 10 (of 20) first columns are displayed.
 #&gt; ************************************************************\n</div><div class='input'>
 
+
+<span class='co'># &gt;  ************************************************************</span>
+<span class='co'># &gt;      Test for STRATIFICATION</span>
+<span class='co'># &gt;</span>
+<span class='co'># &gt;        A B C D      &lt;&lt;&lt;     &gt;&gt;&gt;              A    B    C    D</span>
+<span class='co'># &gt;  Fold1 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25</span>
+<span class='co'># &gt;  Fold2 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25</span>
+<span class='co'># &gt;  Fold3 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25</span>
+<span class='co'># &gt;  Fold4 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25</span>
+<span class='co'># &gt;  Fold5 2 2 2 2  &lt;-Counts | Proportions-&gt;  0.25 0.25 0.25 0.25</span>
+<span class='co'># &gt;</span>
+<span class='co'># &gt;  If stratified, the proportions of each group in each fold</span>
+<span class='co'># &gt;  (row) should be (approximately) equal and with no zero values.</span>
+<span class='co'># &gt;  ____________________________________________________________</span>
+<span class='co'># &gt;  Test for BLOCKING: BLOCKED</span>
+<span class='co'># &gt;</span>
+<span class='co'># &gt;        1 2 3 4 5 6 7 8 9 10 ..</span>
+<span class='co'># &gt;  Fold1 0 0 0 0 2 0 0 2 0  0 ..</span>
+<span class='co'># &gt;  Fold2 2 0 0 0 0 2 0 0 0  0 ..</span>
+<span class='co'># &gt;  Fold3 0 0 2 0 0 0 0 0 2  0 ..</span>
+<span class='co'># &gt;  Fold4 0 0 0 2 0 0 2 0 0  0 ..</span>
+<span class='co'># &gt;  Fold5 0 2 0 0 0 0 0 0 0  2 ..</span>
+<span class='co'># &gt;</span>
+<span class='co'># &gt;  Number of unique IDs in each fold (first 10 columns).</span>
+<span class='co'># &gt;  If blocked, the same ID appears just in one fold.</span>
+<span class='co'># &gt;  ************************************************************</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -230,7 +260,7 @@ be shown. Default is 10.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

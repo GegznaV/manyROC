@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">manyROC</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -85,6 +85,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/manyROC.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -95,10 +98,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/multiROC_1_Introduction.html">Introduction to `manyROC`</a>
-    </li>
-    <li>
-      <a href="../articles/multiROC_3_cvo.html">Cross-validation object (cvo)</a>
+      <a href="../articles/manyROC_3_cvo.html">Cross-validation object (cvo)</a>
     </li>
   </ul>
 </li>
@@ -124,25 +124,25 @@
     </div>
 
     <div class="ref-description">
-    <p>Do the ROC analysis (<code><a href='roc_analysis.html'>roc_analysis</a></code>) for each column of <code>x</code>.</p>
+    <p>Do the ROC analysis (<code><a href='print.as_str.html'>roc_analysis</a></code>) for each column of <code>x</code>.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for manyroc_result</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>show_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>perf_digits</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>fmt</span> <span class='kw'>=</span> <span class='st'>"%.3g"</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/hyperSpec/man/show.html'>print</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>, show_all = <span class='fl'>FALSE</span>, perf_digits = <span class='fl'>2</span>, fmt = <span class='st'>"%.3g"</span>)
 
-<span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
+<span class='fu'>roc_manyroc</span>(<span class='kw'>x</span>, gr = <span class='kw'>NULL</span>, optimize_by = <span class='st'>"bac"</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for matrix</span>
-<span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>, <span class='kw'>gr_sep</span> <span class='kw'>=</span> <span class='st'>" vs. "</span>)
+<span class='fu'>roc_manyroc</span>(<span class='kw'>x</span>, gr = <span class='kw'>NULL</span>, optimize_by = <span class='st'>"bac"</span>, <span class='kw'>...</span>, gr_sep = <span class='st'>" vs. "</span>)
 
 <span class='co'># S3 method for numeric</span>
-<span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
+<span class='fu'>roc_manyroc</span>(<span class='kw'>x</span>, gr = <span class='kw'>NULL</span>, optimize_by = <span class='st'>"bac"</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)
+<span class='fu'>roc_manyroc</span>(<span class='kw'>x</span>, gr = <span class='kw'>NULL</span>, optimize_by = <span class='st'>"bac"</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for hyperSpec</span>
-<span class='fu'>roc_manyroc</span>(<span class='no'>x</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>optimize_by</span> <span class='kw'>=</span> <span class='st'>"bac"</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>roc_manyroc</span>(<span class='kw'>x</span>, gr = <span class='kw'>NULL</span>, optimize_by = <span class='st'>"bac"</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -240,27 +240,41 @@ will be related to this group, and sensitivity to the other group.</p></li>
 at each wavelength.</p></li>
 </ol>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Vilmantas Gegzna</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>manyROC</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>manyROC</span>)
 
 
 <span class='co'># --- For numeric vectors objects ---</span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>PlantGrowth</span>)
-<span class='fu'>roc_manyroc</span>(<span class='no'>PlantGrowth</span>$<span class='no'>weight</span>, <span class='no'>PlantGrowth</span>$<span class='no'>group</span>)</div><div class='output co'>#&gt; <span class='error'>Error: Problem with `mutate()` input `sens`.</span>
-#&gt; <span class='error'><span style='color: #BB0000;'>✖</span><span> invalid format '%.2f'; use format %s for character objects</span>
-#&gt; <span class='error'></span><span style='color: #0000BB;'>ℹ</span><span> Input `sens` is `(function (fmt, ...) ...`.</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>PlantGrowth</span>)
+<span class='fu'>roc_manyroc</span>(x = <span class='kw'>PlantGrowth</span><span class='op'>$</span><span class='kw'>weight</span>, gr = <span class='kw'>PlantGrowth</span><span class='op'>$</span><span class='kw'>group</span>)
+</div><div class='output co'>#&gt;   compared_groups feature median_neg cutoff median_pos tp fn fp tn sens spec
+#&gt; 1   ctrl vs. trt1       1       5.15   4.37       4.55  5  5  1  9 0.50 0.90
+#&gt; 2   ctrl vs. trt2       1       5.15   5.22       5.44  8  2  3  7 0.80 0.70
+#&gt; 3   trt1 vs. trt2       1       4.55    4.9       5.44 10  0  2  8 1.00 0.80
+#&gt;    ppv  npv  bac youden kappa  auc
+#&gt; 1 0.83 0.64 0.70   0.40  0.40 0.67
+#&gt; 2 0.73 0.78 0.75   0.50  0.50 0.75
+#&gt; 3 0.83 1.00 0.90   0.80  0.80 0.84</div><div class='input'>
 
 <span class='co'># --- For dataframes objects ---</span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>CO2</span>)
-<span class='fu'>roc_manyroc</span>(<span class='no'>CO2</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"conc"</span>, <span class='st'>"uptake"</span>)], <span class='no'>CO2</span>$<span class='no'>Type</span>)</div><div class='output co'>#&gt; <span class='error'>Error: Problem with `mutate()` input `sens`.</span>
-#&gt; <span class='error'></span><span style='color: #BB0000;'>✖</span><span> invalid format '%.2f'; use format %s for character objects</span>
-#&gt; <span class='error'></span><span style='color: #0000BB;'>ℹ</span><span> Input `sens` is `(function (fmt, ...) ...`.</span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>OrchardSprays</span>)
-<span class='fu'>roc_manyroc</span>(<span class='no'>OrchardSprays</span>$<span class='no'>decrease</span>, <span class='no'>OrchardSprays</span>$<span class='no'>treatment</span>)</div><div class='output co'>#&gt;     compared_groups feature median_neg cutoff median_pos  tp  fn  fp  tn sens
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>CO2</span>)
+<span class='fu'>roc_manyroc</span>(<span class='kw'>CO2</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"conc"</span>, <span class='st'>"uptake"</span>)], <span class='kw'>CO2</span><span class='op'>$</span><span class='kw'>Type</span>)
+</div><div class='output co'>#&gt;          compared_groups feature median_neg cutoff median_pos tp fn fp tn sens
+#&gt; 1 Quebec vs. Mississippi    conc        350    200        350 18 24 18 24 0.43
+#&gt; 2 Quebec vs. Mississippi  uptake       37.2   32.3       19.3 41  1 13 29 0.98
+#&gt;   spec  ppv  npv  bac youden kappa  auc
+#&gt; 1 0.57 0.50 0.50 0.50   0.00  0.00 0.50
+#&gt; 2 0.69 0.76 0.97 0.83   0.67  0.67 0.84</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>OrchardSprays</span>)
+<span class='fu'>roc_manyroc</span>(<span class='kw'>OrchardSprays</span><span class='op'>$</span><span class='kw'>decrease</span>, <span class='kw'>OrchardSprays</span><span class='op'>$</span><span class='kw'>treatment</span>)
+</div><div class='output co'>#&gt;     compared_groups feature median_neg cutoff median_pos  tp  fn  fp  tn sens
 #&gt; 1           A vs. B       1          4    5.5        7.5   6   2   1   7 0.75
 #&gt; 2           A vs. C       1          4   12.5       16.5   7   1   0   8 0.88
 #&gt; 3           A vs. D       1          4     16         32   8   0   0   8 1.00
@@ -284,8 +298,9 @@ at each wavelength.</p></li>
 #&gt;                                          </div><div class='input'>
 <span class='co'># --- For hyperSpec objects ---</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>hyperSpec</span>)
-<span class='no'>fluorescence</span></div><div class='output co'>#&gt; hyperSpec object
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/cbeleites/hyperSpec'>hyperSpec</a></span>)
+<span class='kw'>fluorescence</span>
+</div><div class='output co'>#&gt; hyperSpec object
 #&gt;    150 spectra
 #&gt;    3 data columns
 #&gt;    501 data points / spectrum
@@ -294,10 +309,27 @@ at each wavelength.</p></li>
 #&gt;    1. gr:  [factor] B B ... A 
 #&gt;    2. class:  [factor] N l ... S1 
 #&gt;    3. spc: I / a.u. [matrix, array501] 159.8996 139.9296 ... 12.11558 </div><div class='input'>
-<span class='fu'>roc_manyroc</span>(<span class='no'>fluorescence</span>[ , , <span class='fl'>500</span>~<span class='fl'>502</span>], <span class='no'>fluorescence</span>$<span class='no'>gr</span>)</div><div class='output co'>#&gt; <span class='error'>Error: Problem with `mutate()` input `sens`.</span>
-#&gt; <span class='error'></span><span style='color: #BB0000;'>✖</span><span> invalid format '%.2f'; use format %s for character objects</span>
-#&gt; <span class='error'></span><span style='color: #0000BB;'>ℹ</span><span> Input `sens` is `(function (fmt, ...) ...`.</span></div><div class='input'>
-</div></span></pre>
+<span class='fu'>roc_manyroc</span>(<span class='kw'>fluorescence</span>[, , <span class='fl'>500</span> <span class='op'>~</span> <span class='fl'>502</span>], <span class='kw'>fluorescence</span><span class='op'>$</span><span class='kw'>gr</span>)
+</div><div class='output co'>#&gt;   compared_groups feature median_neg cutoff median_pos tp fn fp tn sens spec
+#&gt; 1         A vs. B       1        338    335        333 35 20 24 28 0.64 0.54
+#&gt; 2         A vs. B       2        335    328        327 29 26 19 33 0.53 0.63
+#&gt; 3         A vs. B       3        335    332        329 36 19 24 28 0.65 0.54
+#&gt; 4         A vs. C       1        338    329        334 21 22 20 32 0.49 0.62
+#&gt; 5         A vs. C       2        335    329        334 21 22 20 32 0.49 0.62
+#&gt; 6         A vs. C       3        335    340        340 22 21 22 30 0.51 0.58
+#&gt; 7         B vs. C       1        333    343        334 21 22 15 40 0.49 0.73
+#&gt; 8         B vs. C       2        327    344        334 21 22 15 40 0.49 0.73
+#&gt; 9         B vs. C       3        329    339        340 22 21 16 39 0.51 0.71
+#&gt;    ppv  npv  bac youden kappa  auc
+#&gt; 1 0.59 0.58 0.59   0.17  0.18 0.57
+#&gt; 2 0.60 0.56 0.58   0.16  0.16 0.56
+#&gt; 3 0.60 0.60 0.60   0.19  0.19 0.56
+#&gt; 4 0.51 0.59 0.55   0.10  0.10 0.50
+#&gt; 5 0.51 0.59 0.55   0.10  0.10 0.49
+#&gt; 6 0.50 0.59 0.54   0.09  0.09 0.51
+#&gt; 7 0.58 0.65 0.61   0.22  0.22 0.57
+#&gt; 8 0.58 0.65 0.61   0.22  0.22 0.57
+#&gt; 9 0.58 0.65 0.61   0.22  0.22 0.56</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -313,7 +345,7 @@ at each wavelength.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

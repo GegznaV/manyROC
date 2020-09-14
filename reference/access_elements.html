@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">manyROC</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -85,6 +85,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/manyROC.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -95,10 +98,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/multiROC_1_Introduction.html">Introduction to `manyROC`</a>
-    </li>
-    <li>
-      <a href="../articles/multiROC_3_cvo.html">Cross-validation object (cvo)</a>
+      <a href="../articles/manyROC_3_cvo.html">Cross-validation object (cvo)</a>
     </li>
   </ul>
 </li>
@@ -127,29 +127,29 @@
     <p>[!!!] not tested yet.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>roc_get</span>(<span class='no'>obj</span>, <span class='no'>what</span>)
+    <pre class="usage"><span class='fu'>roc_get</span>(<span class='kw'>obj</span>, <span class='kw'>what</span>)
 
 <span class='co'># S3 method for roc_result_list</span>
-<span class='fu'>roc_get</span>(<span class='no'>obj</span>, <span class='no'>what</span>)
+<span class='fu'>roc_get</span>(<span class='kw'>obj</span>, <span class='kw'>what</span>)
 
 <span class='co'># S3 method for roc_results</span>
-<span class='fu'>roc_get</span>(<span class='no'>obj</span>, <span class='no'>what</span>)
+<span class='fu'>roc_get</span>(<span class='kw'>obj</span>, <span class='kw'>what</span>)
 
-<span class='fu'>roc_get_all_results</span>(<span class='no'>obj</span>)
+<span class='fu'>roc_get_all_results</span>(<span class='kw'>obj</span>)
 
-<span class='fu'>roc_cutoff</span>(<span class='no'>obj</span>)
+<span class='fu'>roc_cutoff</span>(<span class='kw'>obj</span>)
 
-<span class='fu'>roc_tp</span>(<span class='no'>obj</span>)
+<span class='fu'>roc_tp</span>(<span class='kw'>obj</span>)
 
-<span class='fu'>roc_fn</span>(<span class='no'>obj</span>)
+<span class='fu'>roc_fn</span>(<span class='kw'>obj</span>)
 
-<span class='fu'>roc_fp</span>(<span class='no'>obj</span>)
+<span class='fu'>roc_fp</span>(<span class='kw'>obj</span>)
 
-<span class='fu'>roc_tn</span>(<span class='no'>obj</span>)
+<span class='fu'>roc_tn</span>(<span class='kw'>obj</span>)
 
-<span class='fu'>roc_sens</span>(<span class='no'>obj</span>)
+<span class='fu'>roc_sens</span>(<span class='kw'>obj</span>)
 
-<span class='fu'>roc_spec</span>(<span class='no'>obj</span>)</pre>
+<span class='fu'>roc_spec</span>(<span class='kw'>obj</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,9 +171,12 @@
 
     <div class='dont-index'><p>Other functions for ROC: 
 <code><a href='calculate_performance.html'>calculate_performance</a>()</code>,
-<code><a href='roc_analysis.html'>print.as_str</a>()</code>,
+<code><a href='print.as_str.html'>print.as_str</a>()</code>,
 <code><a href='roc_performance_measures.html'>roc_performance_measures</a></code>,
 <code><a href='roc_predict.html'>roc_predict</a>()</code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Vilmantas Gegzna</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -190,7 +193,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

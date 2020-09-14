@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">manyROC</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -84,6 +84,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/manyROC.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -94,10 +97,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/multiROC_1_Introduction.html">Introduction to `manyROC`</a>
-    </li>
-    <li>
-      <a href="../articles/multiROC_3_cvo.html">Cross-validation object (cvo)</a>
+      <a href="../articles/manyROC_3_cvo.html">Cross-validation object (cvo)</a>
     </li>
   </ul>
 </li>
@@ -131,7 +131,68 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-the-main-functions-for-roc-analysis" class="hasAnchor"><a href="#section-the-main-functions-for-roc-analysis" class="anchor"></a>The main functions for ROC analysis</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="roc_analysis.html">print(<i>&lt;as_str&gt;</i>)</a></code> <code><a href="roc_analysis.html">print(<i>&lt;roc_df&gt;</i>)</a></code> <code><a href="roc_analysis.html">print(<i>&lt;roc_opt_result&gt;</i>)</a></code> <code><a href="roc_analysis.html">print(<i>&lt;roc_info&gt;</i>)</a></code> <code><a href="roc_analysis.html">roc_analysis()</a></code> </p>
+        </td>
+        <td><p>Carry out the ROC analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="roc_manyroc.html">print(<i>&lt;manyroc_result&gt;</i>)</a></code> <code><a href="roc_manyroc.html">roc_manyroc()</a></code> </p>
+        </td>
+        <td><p>Carry out the manyROC analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="roc_manyroc_cv.html">roc_manyroc_cv()</a></code> </p>
+        </td>
+        <td><p>Carry out the manyROC analysis with cross-validation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="roc_predict.html">roc_predict()</a></code> </p>
+        </td>
+        <td><p>Predict outcome for new data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="roc_predict_performance_by_gr.html">roc_predict_performance_by_gr()</a></code> </p>
+        </td>
+        <td><p>Calculate perfornamce for each pair of groups</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="roc_merge_manyroc_cv_results.html">roc_merge_manyroc_cv_results()</a></code> </p>
+        </td>
+        <td><p>Merge 2 lists with manyROC CV results</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sp_manyroc_with_cv.html">sp_manyroc_with_cv()</a></code> </p>
+        </td>
+        <td><p>Do manyROC analysis with cross-validation for hyperSpec object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sp_manyroc_with_cv_by_variable.html">print(<i>&lt;hide_it&gt;</i>)</a></code> <code><a href="sp_manyroc_with_cv_by_variable.html">sp_manyroc_with_cv_by_variable()</a></code> </p>
+        </td>
+        <td><p>Do manyROC analysis with cross-validation for hyperSpec object for each variable</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-management-functions-for-roc-objects" class="hasAnchor"><a href="#section-management-functions-for-roc-objects" class="anchor"></a>Management functions for ROC objects</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -146,19 +207,20 @@
           <p><code><a href="access_elements.html">roc_get()</a></code> <code><a href="access_elements.html">roc_get_all_results()</a></code> <code><a href="access_elements.html">roc_cutoff()</a></code> <code><a href="access_elements.html">roc_tp()</a></code> <code><a href="access_elements.html">roc_fn()</a></code> <code><a href="access_elements.html">roc_fp()</a></code> <code><a href="access_elements.html">roc_tn()</a></code> <code><a href="access_elements.html">roc_sens()</a></code> <code><a href="access_elements.html">roc_spec()</a></code> </p>
         </td>
         <td><p>[!] Access elements of roc_result_list object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="add_class_label.html">add_class_label()</a></code> <code><a href="add_class_label.html">remove_class_label()</a></code> </p>
-        </td>
-        <td><p>Manage S3 class labels</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="calculate_performance.html">calculate_performance()</a></code> </p>
-        </td>
-        <td><p>Performance measures for two-class classification</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-functions-for-cross-validation-cvo-ojects" class="hasAnchor"><a href="#section-functions-for-cross-validation-cvo-ojects" class="anchor"></a>Functions for cross-validation (CVO) ojects</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="cvo_create_folds.html">cvo_create_folds()</a></code> <code><a href="cvo_create_folds.html">print(<i>&lt;cvo&gt;</i>)</a></code> </p>
@@ -176,24 +238,37 @@
           <p><code><a href="cvo_test_bs.html">cvo_test_bs()</a></code> </p>
         </td>
         <td><p>[+] Test if data in folds is stratified and blocked</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-functions-for-classification-performance" class="hasAnchor"><a href="#section-functions-for-classification-performance" class="anchor"></a>Functions for classification performance</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="calculate_performance.html">calculate_performance()</a></code> </p>
+        </td>
+        <td><p>Performance measures for two-class classification</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="fluorescence.html">fluorescence</a></code> </p>
+          <p><code><a href="roc_extract_info.html">roc_extract_info()</a></code> </p>
         </td>
-        <td><p>Dataset of simulated fluorescence spectra</p></td>
+        <td><p>[!!!] Extract the main information necessary for prediction</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="get_var_values.html">get_var_values()</a></code> </p>
+          <p><code><a href="roc_performance_measures.html">calculate_acc()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_acc()</a></code> <code><a href="roc_performance_measures.html">calculate_bac()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_bac()</a></code> <code><a href="roc_performance_measures.html">calculate_auc()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_auc()</a></code> <code><a href="roc_performance_measures.html">calculate_npv()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_npv()</a></code> <code><a href="roc_performance_measures.html">calculate_ppv()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_ppv()</a></code> <code><a href="roc_performance_measures.html">calculate_sensitivity()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_se()</a></code> <code><a href="roc_performance_measures.html">calculate_specificity()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_sp()</a></code> <code><a href="roc_performance_measures.html">calculate_youdens_j()</a></code> <code><a href="roc_performance_measures.html">roc_youdens_j()</a></code> <code><a href="roc_performance_measures.html">calculate_kappa()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_kappa()</a></code> <code><a href="roc_performance_measures.html">calculate_wkappa()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_wkappa()</a></code> </p>
         </td>
-        <td><p>Get vector of variable values</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="manyROC.html">manyROC</a></code> </p>
-        </td>
-        <td><p>ManyROC -- tools for ROC analysis</p></td>
+        <td><p>[!!!] Performance measures</p></td>
       </tr><tr>
         
         <td>
@@ -206,72 +281,75 @@
           <p><code><a href="measure_wkappa.html">measure_wkappa()</a></code> </p>
         </td>
         <td><p>Weighted Cohen's kappa</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-helper-and-utility-functions" class="hasAnchor"><a href="#section-helper-and-utility-functions" class="anchor"></a>Helper and utility functions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="add_class_label.html">add_class_label()</a></code> <code><a href="add_class_label.html">remove_class_label()</a></code> </p>
+        </td>
+        <td><p>Manage S3 class labels</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_var_values.html">get_var_values()</a></code> </p>
+        </td>
+        <td><p>Get vector of variable values</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="parallelSetSeed.html">parallelSetSeed()</a></code> </p>
         </td>
         <td><p>Set seeds for reproducible parallel computing with 'parallelMap' package</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-datasets" class="hasAnchor"><a href="#section-datasets" class="anchor"></a>Datasets</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
-          <p><code><a href="roc_analysis.html">print(<i>&lt;as_str&gt;</i>)</a></code> <code><a href="roc_analysis.html">print(<i>&lt;roc_df&gt;</i>)</a></code> <code><a href="roc_analysis.html">print(<i>&lt;roc_opt_result&gt;</i>)</a></code> <code><a href="roc_analysis.html">print(<i>&lt;roc_info&gt;</i>)</a></code> <code><a href="roc_analysis.html">roc_analysis()</a></code> </p>
+          <p><code><a href="fluorescence.html">fluorescence</a></code> </p>
         </td>
-        <td><p>Carry out the ROC analysis</p></td>
-      </tr><tr>
+        <td><p>Dataset of simulated fluorescence spectra</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-other-functions" class="hasAnchor"><a href="#section-other-functions" class="anchor"></a>Other functions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
-          <p><code><a href="roc_extract_info.html">roc_extract_info()</a></code> </p>
+          <p><code><a href="manyROC.html">manyROC</a></code> </p>
         </td>
-        <td><p>[!!!] Extract the main information necessary for prediction</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="roc_manyroc.html">print(<i>&lt;manyroc_result&gt;</i>)</a></code> <code><a href="roc_manyroc.html">roc_manyroc()</a></code> </p>
-        </td>
-        <td><p>Carry out the manyROC analysis</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="roc_manyroc_cv.html">roc_manyroc_cv()</a></code> </p>
-        </td>
-        <td><p>Carry out the manyROC analysis with cross-validation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="roc_merge_manyroc_cv_results.html">roc_merge_manyroc_cv_results()</a></code> </p>
-        </td>
-        <td><p>Merge 2 lists with manyROC CV results</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="roc_performance_measures.html">calculate_acc()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_acc()</a></code> <code><a href="roc_performance_measures.html">calculate_bac()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_bac()</a></code> <code><a href="roc_performance_measures.html">calculate_auc()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_auc()</a></code> <code><a href="roc_performance_measures.html">calculate_npv()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_npv()</a></code> <code><a href="roc_performance_measures.html">calculate_ppv()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_ppv()</a></code> <code><a href="roc_performance_measures.html">calculate_sensitivity()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_se()</a></code> <code><a href="roc_performance_measures.html">calculate_specificity()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_sp()</a></code> <code><a href="roc_performance_measures.html">calculate_youdens_j()</a></code> <code><a href="roc_performance_measures.html">roc_youdens_j()</a></code> <code><a href="roc_performance_measures.html">calculate_kappa()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_kappa()</a></code> <code><a href="roc_performance_measures.html">calculate_wkappa()</a></code> <code><a href="roc_performance_measures.html">roc_calculate_wkappa()</a></code> </p>
-        </td>
-        <td><p>[!!!] Performance measures</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="roc_predict.html">roc_predict()</a></code> </p>
-        </td>
-        <td><p>Predict outcome for new data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="roc_predict_performance_by_gr.html">roc_predict_performance_by_gr()</a></code> </p>
-        </td>
-        <td><p>Calculate perfornamce for each pair of groups</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sp_manyroc_with_cv.html">sp_manyroc_with_cv()</a></code> </p>
-        </td>
-        <td><p>Do manyROC analysis with cross-validation for hyperSpec object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sp_manyroc_with_cv_by_variable.html">print(<i>&lt;hide_it&gt;</i>)</a></code> <code><a href="sp_manyroc_with_cv_by_variable.html">sp_manyroc_with_cv_by_variable()</a></code> </p>
-        </td>
-        <td><p>Do manyROC analysis with cross-validation for hyperSpec object for each variable</p></td>
+        <td><p>ManyROC -- tools for ROC analysis</p></td>
       </tr>
     </tbody>
     </table>
@@ -291,7 +369,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

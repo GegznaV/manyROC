@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">manyROC</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -85,6 +85,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/manyROC.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -95,10 +98,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/multiROC_1_Introduction.html">Introduction to `manyROC`</a>
-    </li>
-    <li>
-      <a href="../articles/multiROC_3_cvo.html">Cross-validation object (cvo)</a>
+      <a href="../articles/manyROC_3_cvo.html">Cross-validation object (cvo)</a>
     </li>
   </ul>
 </li>
@@ -128,13 +128,13 @@
     </div>
 
     <pre class="usage"><span class='fu'>sp_manyroc_with_cv</span>(
-  <span class='no'>Var</span>,
-  <span class='no'>Spectra</span>,
-  <span class='kw'>k_folds</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-  <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='fl'>2222222</span>,
-  <span class='kw'>kind</span> <span class='kw'>=</span> <span class='st'>"L'Ecuyer-CMRG"</span>,
-  <span class='kw'>n_min</span> <span class='kw'>=</span> <span class='no'>k_folds</span>
+  <span class='kw'>Var</span>,
+  <span class='kw'>Spectra</span>,
+  k_folds = <span class='fl'>5</span>,
+  times = <span class='fl'>10</span>,
+  seeds = <span class='fl'>2222222</span>,
+  kind = <span class='st'>"L'Ecuyer-CMRG"</span>,
+  n_min = <span class='kw'>k_folds</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -193,16 +193,55 @@ Must be at least <code>k_folds</code> or bigger.</p></td>
     <p>Function <code>sp_manyroc_with_cv</code> will be <b>renamed</b> in the future.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='sp_manyroc_with_cv_by_variable.html'>sp_manyroc_with_cv_by_variable</a></code></p></div>
+    <div class='dont-index'><p><code><a href='print.hide_it.html'>sp_manyroc_with_cv_by_variable</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>manyROC</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>manyROC</span>)
 
-<span class='no'>fluorescence</span>$<span class='no'>ID</span>  <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>fluorescence</span>)
-<span class='fu'>sp_manyroc_with_cv</span>(<span class='st'>"gr"</span>, <span class='no'>fluorescence</span>[,,<span class='fl'>500</span>~<span class='fl'>502</span>], <span class='kw'>k_folds</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='error'>Error: arrange() failed at implicit mutate() step. </span>
-#&gt; <span class='error'><span style='color: #BB0000;'>✖</span><span> Could not create a temporary column for `..1`.</span>
-#&gt; <span class='error'></span><span style='color: #0000BB;'>ℹ</span><span> `..1` is `feature`.</span></div><div class='input'>
-</div></span></pre>
+<span class='kw'>fluorescence</span><span class='op'>$</span><span class='kw'>ID</span>  <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>fluorescence</span>)
+<span class='fu'>sp_manyroc_with_cv</span>(<span class='st'>"gr"</span>, <span class='kw'>fluorescence</span>[, , <span class='fl'>500</span> <span class='op'>~</span> <span class='fl'>502</span>], k_folds = <span class='fl'>3</span>, times = <span class='fl'>2</span>)
+</div><div class='output co'>#&gt; $variable
+#&gt; [1] "gr"
+#&gt; 
+#&gt; $n_included
+#&gt; [1] 150
+#&gt; 
+#&gt; $ind_included_rows
+#&gt;  'as_str' logi [1:150] TRUE TRUE TRUE TRUE TRUE TRUE ...
+#&gt; 
+#&gt; $cvo
+#&gt; --- A cvo object: ----------------------------------------------------
+#&gt;  indices stratified blocked         cv_type k repetitions sample_size
+#&gt;    Train       TRUE   FALSE Repeated k-fold 3           2         150
+#&gt; 
+#&gt; Random number generator: L'Ecuyer-CMRG 
+#&gt; Seeds:  2222222, -30397663
+#&gt; ----------------------------------------------------------------------
+#&gt; 
+#&gt; $results
+#&gt;          set       fold compared_groups feature median_neg cutoff median_pos
+#&gt; 1   training Rep1_Fold1         A vs. B       1        341    335        324
+#&gt; 2   training Rep1_Fold1         A vs. C       1        341    306        344
+#&gt; 3   training Rep1_Fold1         B vs. C       1        324    343        344
+#&gt; 4   training Rep1_Fold2         A vs. B       1        338    348        334
+#&gt; ...      ...        ...             ...     ...        ...    ...        ...
+#&gt; 105     test Rep2_Fold2         B vs. C       3         NA    340         NA
+#&gt; 106     test Rep2_Fold3         A vs. B       3         NA    335         NA
+#&gt; 107     test Rep2_Fold3         A vs. C       3         NA    322         NA
+#&gt; 108     test Rep2_Fold3         B vs. C       3         NA    256         NA
+#&gt;                                                                             
+#&gt;      tp  fn  fp  tn sens spec  ppv  npv  bac youden kappa  auc
+#&gt; 1    26  11  14  21 0.70 0.60 0.65 0.66 0.65   0.30  0.30 0.63
+#&gt; 2    28   1  28   7 0.97 0.20 0.50 0.88 0.58   0.17  0.15 0.55
+#&gt; 3    16  13   8  29 0.55 0.78 0.67 0.69 0.67   0.34  0.34 0.66
+#&gt; 4    29   8  21  14 0.78 0.40 0.58 0.64 0.59   0.18  0.19 0.56
+#&gt; ... ... ... ... ...  ...  ...  ...  ...  ...    ...   ...  ...
+#&gt; 105   7   7   1  17 0.50 0.94 0.88 0.71 0.72   0.44  0.47   NA
+#&gt; 106  10   8   9   8 0.56 0.47 0.53 0.50 0.51   0.03  0.03   NA
+#&gt; 107   3  12   6  11 0.20 0.65 0.33 0.48 0.42  -0.15 -0.16   NA
+#&gt; 108   0  15   0  18 0.00 1.00  NaN 0.55 0.50   0.00  0.00   NA
+#&gt;                                                               
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -218,7 +257,7 @@ Must be at least <code>k_folds</code> or bigger.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">manyROC</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -85,6 +85,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/manyROC.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -95,10 +98,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/multiROC_1_Introduction.html">Introduction to `manyROC`</a>
-    </li>
-    <li>
-      <a href="../articles/multiROC_3_cvo.html">Cross-validation object (cvo)</a>
+      <a href="../articles/manyROC_3_cvo.html">Cross-validation object (cvo)</a>
     </li>
   </ul>
 </li>
@@ -127,7 +127,7 @@
     <p><code>fluorescence</code> is a dataset of simulated spectroscopic data.</p>
     </div>
 
-    <pre class="usage"><span class='no'>fluorescence</span></pre>
+    <pre class="usage"><span class='kw'>fluorescence</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -135,7 +135,7 @@
     <p><code><a href='https://rdrr.io/pkg/hyperSpec/man/hyperSpec-class.html'>hyperSpec</a></code> objects with spectroscopic
 data and additional variables.</p>
 <p>Spectra and these nonspectroscopic variables:</p>
-<dl'>
+<dl>
   <dt>class</dt><dd><p>A factor variable with 4 classes.</p></dd>
   <dt>gr</dt><dd><p>A factor variable with 3 classes.</p></dd>
 
@@ -147,9 +147,13 @@ data and additional variables.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Artificially generated dataset.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Vilmantas Gegzna</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>hyperSpec</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: lattice</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: grid</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: xml2</span></div><div class='output co'>#&gt; <span class='message'>Package hyperSpec, version 0.99-20200527</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/cbeleites/hyperSpec'>hyperSpec</a></span>)
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: lattice</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: grid</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: xml2</span></div><div class='output co'>#&gt; <span class='message'>Package hyperSpec, version 0.99-20200527</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>To get started, try</span>
 #&gt; <span class='message'>   vignette ("hyperspec")</span>
@@ -162,7 +166,8 @@ data and additional variables.</p>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>The project homepage is http://hyperspec.r-forge.r-project.org</span>
 #&gt; <span class='message'></span></div><div class='input'>
-<span class='no'>fluorescence</span></div><div class='output co'>#&gt; hyperSpec object
+<span class='kw'>fluorescence</span>
+</div><div class='output co'>#&gt; hyperSpec object
 #&gt;    150 spectra
 #&gt;    3 data columns
 #&gt;    501 data points / spectrum
@@ -170,8 +175,8 @@ data and additional variables.</p>
 #&gt; data:  (150 rows x 3 columns)
 #&gt;    1. gr:  [factor] B B ... A 
 #&gt;    2. class:  [factor] N l ... S1 
-#&gt;    3. spc: I / a.u. [matrix, array501] 159.8996 139.9296 ... 12.11558 </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/hyperSpec/man/plot.html'>plot</a></span>(<span class='no'>fluorescence</span>[<span class='fl'>30</span>:<span class='fl'>60</span>,])</div><div class='img'><img src='fluorescence-1.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+#&gt;    3. spc: I / a.u. [matrix, array501] 159.8996 139.9296 ... 12.11558 </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/hyperSpec/man/plot.html'>plot</a></span>(<span class='kw'>fluorescence</span>[<span class='fl'>30</span><span class='op'>:</span><span class='fl'>60</span>, ])
+</div><div class='img'><img src='fluorescence-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -187,7 +192,7 @@ data and additional variables.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
