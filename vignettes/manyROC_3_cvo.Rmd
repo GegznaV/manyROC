@@ -1,0 +1,124 @@
+---
+title: "Cross-validation object (cvo)"
+author: "Vilmantas Gegzna"
+date: "`r Sys.Date()` (v`r packageVersion('manyROC')`)"
+output:
+  rmarkdown::html_vignette: 
+    toc: yes
+    number_sections: yes
+vignette: >
+  %\VignetteIndexEntry{manyROC_3_cvo}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r options, echo = FALSE, message = FALSE, warning = FALSE}
+opt_def <- knitr::opts_chunk$get()
+knitr::opts_chunk$set(collapse = FALSE, comment = "#>")
+
+knitr::opts_chunk$set(fig.width = 6, fig.align = 'center')
+```
+
+Load packages
+
+```{r Load packages, include = FALSE, message = FALSE, warning = FALSE}
+library(manyROC)
+```
+```{r}
+library(manyROC)
+```
+
+`cvo_create_folds()`{.r}
+================================================
+
+
+```{r}
+# Make some data
+dataset_1 <- data.frame(
+  ID = rep(1:20, each = 2),
+  gr = gl(4, 10, labels = LETTERS[1:4]),
+  .row = 1:40
+)
+
+# Set parameters
+n_folds = 5
+
+# Explore data
+str(dataset_1)
+
+# table(dataset_1[,c("gr","ID")])
+# summary(dataset_1)
+```
+
+```{r paged.print=FALSE}
+set.seed(1)
+cvo_create_folds(block_by = dataset_1$ID, k = n_folds)
+```
+
+When variable names from data frame are provided:
+```{r paged.print=FALSE}
+folds_1_a <- cvo_create_folds(
+  data = dataset_1,
+  stratify_by = "gr",
+  block_by = "ID",
+  n_folds,
+  returnTrain = FALSE
+)
+# str(folds_1_a)
+cvo_test_bs(
+  folds_1_a,
+  stratify_by = "gr",
+  block_by = "ID",
+  data = dataset_1
+)
+```
+
+When vectors from workspace are provided:
+```{r paged.print=FALSE}
+folds_1_b <- cvo_create_folds(
+  stratify_by = dataset_1$gr,
+  block_by = dataset_1$ID,
+  k = n_folds,
+  returnTrain = FALSE
+)
+# str(folds_1_b)
+cvo_test_bs(
+  folds_1_b,
+  stratify_by = "gr",
+  block_by = "ID",
+  data = dataset_1
+)
+```
+
+Not blocked but stratified:
+```{r paged.print=FALSE}
+folds_1_c <- cvo_create_folds(
+  stratify_by = dataset_1$gr,
+  k = n_folds,
+  returnTrain = FALSE
+)
+# str(folds_1_c)
+cvo_test_bs(
+  folds_1_c, 
+  stratify_by = "gr",
+  block_by = "ID",
+  data = dataset_1
+)
+```
+
+Blocked but not stratified:
+```{r paged.print=FALSE}
+folds_1_d <- cvo_create_folds(
+  block_by = dataset_1$ID,
+  k = n_folds,
+  returnTrain = FALSE
+)
+# str(folds_1_d)
+cvo_test_bs(
+  folds_1_d,
+  stratify_by = "gr",
+  block_by = "ID",
+  dataset_1
+)
+```
+
