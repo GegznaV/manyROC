@@ -7,11 +7,11 @@
 [![CRAN
 version](https://www.r-pkg.org/badges/version/manyROC)](https://cran.rstudio.com/web/packages/manyROC/index.html)
 [![GitHub
-version](https://img.shields.io/badge/GitHub-v0.0.5-brightgreen.svg)](https://github.com/GegznaV/manyROC)
+version](https://img.shields.io/badge/GitHub-v0.0.6-brightgreen.svg)](https://github.com/GegznaV/manyROC)
 [![Travis-CI Build
 Status](https://travis-ci.org/GegznaV/manyROC.svg?branch=master)](https://travis-ci.org/GegznaV/manyROC)
 [![codecov](https://codecov.io/gh/GegznaV/manyROC/branch/master/graph/badge.svg)](https://codecov.io/gh/GegznaV/manyROC)
-[![Last-update](https://img.shields.io/badge/last%20update-2018--08--13-yellowgreen.svg)](/commits/master)
+[![Last-update](https://img.shields.io/badge/last%20update-2020--09--14-yellowgreen.svg)](/commits/master)
 
 -----
 
