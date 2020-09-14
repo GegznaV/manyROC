@@ -1,8 +1,7 @@
 # =============================================================================
-# To do
-# [!!!] the desctription needs revision
+# FIXME: the desctription needs revision
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# [!!!] To do: in
+# FIXME in
 #
 #     roc_manyroc_cv(PlantGrowth$weight, PlantGrowth$group)
 #     roc_manyroc_cv(PlantGrowth[,"weight", drop = FALSE], PlantGrowth$group)
