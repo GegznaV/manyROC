@@ -1,7 +1,8 @@
-pandoc: 2.1.1
-pkgdown: 1.1.0.9000
-pkgdown_sha: b2798656f04ce282edea3e12734ba5588c6acd6e
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
 articles:
-  multiROC_1_Introduction: multiROC_1_Introduction.html
-  multiROC_3_cvo: multiROC_3_cvo.html
+  manyROC: manyROC.html
+  manyROC_3_cvo: manyROC_3_cvo.html
+last_built: 2020-09-14T16:52Z
 
