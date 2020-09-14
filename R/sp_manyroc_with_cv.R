@@ -82,14 +82,16 @@ sp_manyroc_with_cv <-
     )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    list(variable = Var,
+    list(
+      variable = Var,
       n_included = sum(ind_included_rows),
       ind_included_rows = add_class_label(ind_included_rows, "as_str"),
       # x  = add_class_label(x, "as_str"),
       # gr = add_class_label(gr, "as_str"),
       cvo = cvo,
 
-      results = add_class_label(roc_res, "roc_df"))
+      results = add_class_label(roc_res, "roc_df")
+    )
   }
 
 # =============================================================================
