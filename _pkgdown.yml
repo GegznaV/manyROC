@@ -4,6 +4,18 @@ template:
   params:
     bootswatch: cerulean
 
+# -------------------------------------------------------------------------
+
+development:
+  mode: auto
+
+# -------------------------------------------------------------------------
+
+navbar:
+  structure:
+    left:  [version, home, intro, articles, tutorials, reference, news]
+    right: [github]
+
 # navbar:
 #   title: "manyROC | R package"
 #   type: default
@@ -20,6 +32,13 @@ template:
 #   - icon: fa-github fa-lg
 #     href: https://github.com/GegznaV/manyROC
 
+# -------------------------------------------------------------------------
+
+authors:
+  Vilmantas Gegzna:
+    href: https://orcid.org/0000-0002-9500-5167
+
+# -------------------------------------------------------------------------
 
 reference:
 - title: The main functions for ROC analysis
@@ -67,4 +86,18 @@ reference:
   contents:
   - '`manyROC`'
 
+
+# -------------------------------------------------------------------------
+
+figures:
+  dev: grDevices::png
+  dpi: 96
+  dev.args: []
+  fig.ext: png
+  fig.width: 4.854
+  fig.height: 3
+  fig.retina: 2
+  fig.asp: 1.618
+
+# -------------------------------------------------------------------------
 
