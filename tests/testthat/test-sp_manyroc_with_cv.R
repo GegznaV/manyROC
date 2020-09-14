@@ -6,10 +6,12 @@ test_that("sp_manyroc_with_cv works", {
   times <- 2
   fluorescence$ID  <- 1:nrow(fluorescence)
 
-  rez <- sp_manyroc_with_cv("gr",
+  rez <- sp_manyroc_with_cv(
+    "gr",
     fluorescence[, , 500 ~ 502],
     k_folds = k_folds,
-    times = times)
+    times = times
+  )
 
   expect_length(rez, 5)
   expect_equal(rez$variable, "gr")

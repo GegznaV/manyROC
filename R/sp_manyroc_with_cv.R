@@ -46,7 +46,7 @@ sp_manyroc_with_cv <-
     # that group
 
     # Convert to factor and drop unnecessary levels
-    Spectra$ID  %<>% as.factor()
+    Spectra$ID %<>% as.factor()
 
     var_values         <- get_var_values(Var, Spectra) %>% as.factor()
 
@@ -61,21 +61,25 @@ sp_manyroc_with_cv <-
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Make a cross-validation object
-    cvo <- cvo_create_folds(Spectra,
+    cvo <- cvo_create_folds(
+      Spectra,
       block_by = "ID",
       stratify_by = Var,
       k = k_folds,
       times = times,
       seeds = seeds,
-      kind = kind)
+      kind = kind
+    )
 
     x  <- Spectra[[]]
     gr <- Spectra[[, Var, drop = TRUE]]
 
-    roc_res <- roc_manyroc_cv(x = x,
+    roc_res <- roc_manyroc_cv(
+      x = x,
       gr = gr,
       optimize_by = "bac",
-      cvo = cvo)
+      cvo = cvo
+    )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     list(variable = Var,

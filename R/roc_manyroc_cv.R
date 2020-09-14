@@ -89,9 +89,11 @@ roc_manyroc_cv <- function(x,
     x_test   <-  x[-training_ind, ]
     gr_test  <- gr[-training_ind]
 
-    rez_train[[i]] <- roc_manyroc(x  = x_train,
+    rez_train[[i]] <- roc_manyroc(
+      x  = x_train,
       gr = gr_train,
-      optimize_by = optimize_by)
+      optimize_by = optimize_by
+    )
 
     # [!!!] The function must fail when there are more than 2 classes.
     # An assertion / a test is needed.
@@ -107,10 +109,12 @@ roc_manyroc_cv <- function(x,
 
     tmp1 <- roc_extract_info(rez_train[[i]])
     tmp2 <- split_by_feature(tmp1, levels = colnames(x_test))
-    tmp3 <- purrr::map2(.x = tmp2,
+    tmp3 <- purrr::map2(
+      .x = tmp2,
       .y = mat2list(x_test),
       .f = roc_predict_performance_by_gr,
-      gr_new = gr_test)
+      gr_new = gr_test
+    )
 
     rez_test[[i]] <- dplyr::bind_rows(tmp3, .id = "feature")
 
@@ -135,8 +139,8 @@ roc_manyroc_cv <- function(x,
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res2df <- function(res) {
   res %>%
-    dplyr::bind_rows(.id = "fold")  %>%
-    dplyr::arrange(feature)  %>%
+    dplyr::bind_rows(.id = "fold") %>%
+    dplyr::arrange(feature) %>%
     add_class_label("manyroc_result")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
