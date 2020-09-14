@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 
  
 ```{r, fig.align='center', out.height='50%', out.width='50%',echo=FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/GegznaV/manyROC/master/docs/logo.png")
+knitr::include_graphics("https://raw.githubusercontent.com/GegznaV/manyROC/master/pkgdown/logo.png")
 ```
 <!-- "https://raw.githubusercontent.com/GegznaV/manyROC/master/docs/logo.png" -->
 

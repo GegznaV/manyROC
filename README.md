@@ -17,7 +17,7 @@ status](https://github.com/GegznaV/manyROC/workflows/R-CMD-check/badge.svg)](htt
 
 -----
 
-<img src="https://raw.githubusercontent.com/GegznaV/manyROC/master/docs/logo.png" width="50%" height="50%" style="display: block; margin: auto;" />
+<img src="https://raw.githubusercontent.com/GegznaV/manyROC/master/pkgdown/logo.png" width="50%" height="50%" style="display: block; margin: auto;" />
 <!-- "https://raw.githubusercontent.com/GegznaV/manyROC/master/docs/logo.png" -->
 
 # ***manyROC*** – tools for ROC analyis
