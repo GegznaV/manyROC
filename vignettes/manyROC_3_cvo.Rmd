@@ -7,7 +7,7 @@ output:
     toc: yes
     number_sections: yes
 vignette: >
-  %\VignetteIndexEntry{manyROC_3_cvo}
+  %\VignetteIndexEntry{Cross-validation object (cvo)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(collapse = FALSE, comment = "#>")
 knitr::opts_chunk$set(fig.width = 6, fig.align = 'center')
 ```
 
-Load packages
+# Load packages
 
 ```{r Load packages, include = FALSE, message = FALSE, warning = FALSE}
 library(manyROC)
@@ -28,9 +28,7 @@ library(manyROC)
 library(manyROC)
 ```
 
-`cvo_create_folds()`{.r}
-================================================
-
+# Function `cvo_create_folds()`{.r}
 
 ```{r}
 # Make some data

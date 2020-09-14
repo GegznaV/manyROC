@@ -23,14 +23,14 @@ knitr::opts_chunk$set(
 opt_def <- knitr::opts_chunk$get()
 ```
 
-Load package
+# Load package
 
 ```{r Load main package, message = FALSE, warning = FALSE}
 library(manyROC)
 ```
 
-// Introduction is being prepared... //
-============================================================================= 
+
+# // Introduction is being prepared... //
 
 ...
 
