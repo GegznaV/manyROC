@@ -108,10 +108,17 @@ roc_manyroc_cv <- function(x,
 
     tmp1 <- roc_extract_info(rez_train[[i]])
 
-    x_lvls <- colnames(x_test)
-    if (is.null(x_lvls)) {
-      x_lvls <- seq_len(ncol(x_test))
+    if (is.matrix(x_test)) {
+      # If matrix
+      x_lvls <- colnames(x_test)
+      if (is.null(x_lvls)) {
+        x_lvls <- seq_len(ncol(x_test))
+      }
+    } else {
+      # If vector
+      x_lvls <- 1
     }
+
 
     tmp2 <- split_by_feature(tmp1, levels = x_lvls)
     tmp3 <- purrr::map2(
