@@ -28,7 +28,7 @@ library(manyROC)
 
 set.seed(1)
 x <- rnorm(10)
-gr <- gl(n = 2, k = 5, length = 10, labels = c("H","S"))
+gr <- gl(n = 2, k = 5, length = 10, labels = c("H", "S"))
 object <- roc_analysis(x, gr)
 
 roc_predict(object, x_new = 1)
@@ -36,7 +36,6 @@ roc_predict(object, x_new = 1)
 roc_predict(object, x_new = -1)
 
 roc_predict(object, x_new = rnorm(20))
-
 }
 \seealso{
 Other functions for ROC: 

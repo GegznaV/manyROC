@@ -90,7 +90,6 @@ set.seed(123456)
 roc_manyroc_cv(PlantGrowth$weight, PlantGrowth$group)
 
 roc_manyroc_cv(PlantGrowth$weight, gl(2, 1, 30))
-
 }
 \author{
 Vilmantas Gegzna

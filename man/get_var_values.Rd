@@ -33,6 +33,4 @@ get_var_values(x = "group", data = dataset)
 get_var_values(x = c("group", "group"), data = dataset)
 
 get_var_values(x = NULL, data = dataset)
-
-
 }

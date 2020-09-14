@@ -21,4 +21,6 @@ Merge 2 lists with manyROC CV results
 # y <- readr::read_rds(path = "rez_366_b.RDS")
 #
 # roc_merge_manyroc_cv_results(x, y)
+
+# [!!!] unit test are needed.
 }

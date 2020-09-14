@@ -31,8 +31,7 @@ Artificially generated dataset.
 library(hyperSpec)
 
 fluorescence
-plot(fluorescence[30:60,])
-
+plot(fluorescence[30:60, ])
 }
 \author{
 Vilmantas Gegzna

@@ -58,8 +58,7 @@ Function \code{sp_manyroc_with_cv} will be \bold{renamed} in the future.
 library(manyROC)
 
 fluorescence$ID  <- 1:nrow(fluorescence)
-sp_manyroc_with_cv("gr", fluorescence[,,500~502], k_folds = 3, times = 2)
-
+sp_manyroc_with_cv("gr", fluorescence[, , 500 ~ 502], k_folds = 3, times = 2)
 }
 \seealso{
 \code{\link{sp_manyroc_with_cv_by_variable}}

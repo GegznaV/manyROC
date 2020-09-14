@@ -79,11 +79,10 @@ library(manyROC)
 
 fluorescence$ID  <- 1:nrow(fluorescence)
 sp_manyroc_with_cv_by_variable(
-        fluorescence[,,500~501],
-         c("gr", "class"),
-         k_folds = 3,
-         times = 2)
-
+  fluorescence[, , 500 ~ 501],
+  c("gr", "class"),
+  k_folds = 3,
+  times = 2)
 }
 \seealso{
 \code{\link{sp_manyroc_with_cv}}

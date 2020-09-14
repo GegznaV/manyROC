@@ -155,53 +155,51 @@ set.seed(123456)
 
 # Data
 DataSet1 <- data.frame(ID = rep(1:20, each = 2),
-                       gr = gl(4, 10, labels = LETTERS[1:4]),
-                       .row = 1:40)
+  gr = gl(4, 10, labels = LETTERS[1:4]),
+  .row = 1:40)
 
 # Explore data
-     str(DataSet1)
+str(DataSet1)
 
-     table(DataSet1[,c("gr","ID")])
+table(DataSet1[, c("gr", "ID")])
 
-     summary(DataSet1)
+summary(DataSet1)
 
 
 # Explore functions
-     nFolds = 5
+nFolds <- 5
 
 # If variables of data frame are provided:
-     Folds1_a <- cvo_create_folds(data = DataSet1,
-                                 stratify_by = "gr", block_by = "ID",
-                                  k = nFolds, returnTrain = FALSE)
-     Folds1_a
+Folds1_a <- cvo_create_folds(data = DataSet1,
+  stratify_by = "gr", block_by = "ID",
+  k = nFolds, returnTrain = FALSE)
+Folds1_a
 
-     str(Folds1_a)
+str(Folds1_a)
 
-     cvo_test_bs(Folds1_a, "gr", "ID", DataSet1)
+cvo_test_bs(Folds1_a, "gr", "ID", DataSet1)
 
 # If "free" variables are provided:
-     Folds1_b <- cvo_create_folds(stratify_by = DataSet1$gr,
-                                  block_by = DataSet1$ID,
-                                  k = nFolds,
-                                  returnTrain = FALSE)
-     # str(Folds1_b)
-     cvo_test_bs(Folds1_b, "gr", "ID", DataSet1)
+Folds1_b <- cvo_create_folds(stratify_by = DataSet1$gr,
+  block_by = DataSet1$ID,
+  k = nFolds,
+  returnTrain = FALSE)
+# str(Folds1_b)
+cvo_test_bs(Folds1_b, "gr", "ID", DataSet1)
 
 # Not blocked but stratified
-     Folds1_c <- cvo_create_folds(stratify_by = DataSet1$gr,
-                                  k = nFolds,
-                                  returnTrain = FALSE)
-     # str(Folds1_c)
-     cvo_test_bs(Folds1_c, "gr", "ID", DataSet1)
+Folds1_c <- cvo_create_folds(stratify_by = DataSet1$gr,
+  k = nFolds,
+  returnTrain = FALSE)
+# str(Folds1_c)
+cvo_test_bs(Folds1_c, "gr", "ID", DataSet1)
 
 # Blocked but not stratified
-     Folds1_d <- cvo_create_folds(block_by = DataSet1$ID,
-                                  k = nFolds,
-                                  returnTrain = FALSE)
-     # str(Folds1_d)
-     cvo_test_bs(Folds1_d, "gr", "ID", DataSet1)
-
-
+Folds1_d <- cvo_create_folds(block_by = DataSet1$ID,
+  k = nFolds,
+  returnTrain = FALSE)
+# str(Folds1_d)
+cvo_test_bs(Folds1_d, "gr", "ID", DataSet1)
 }
 \seealso{
 Function \code{\link[caret]{createFolds}} from package

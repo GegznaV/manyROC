@@ -124,8 +124,7 @@ roc_manyroc(OrchardSprays$decrease, OrchardSprays$treatment)
 library(hyperSpec)
 fluorescence
 
-roc_manyroc(fluorescence[ , , 500~502], fluorescence$gr)
-
+roc_manyroc(fluorescence[, , 500 ~ 502], fluorescence$gr)
 }
 \author{
 Vilmantas Gegzna

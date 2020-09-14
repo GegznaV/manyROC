@@ -40,7 +40,7 @@ A matrix with the following columns:
 Performance measures for two-class classification
 }
 \examples{
-(truth <- gl(n = 2, k = 3, length = 20, labels = c("H","S")))
+(truth <- gl(n = 2, k = 3, length = 20, labels = c("H", "S")))
 
 (prediction <- rev(truth))
 
@@ -50,7 +50,6 @@ calculate_performance(truth, prediction)
 calculate_performance(truth, prediction, pos_label = "S")
 
 calculate_performance(truth, prediction, pos_label = "H")
-
 }
 \seealso{
 Other functions for ROC: 

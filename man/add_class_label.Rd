@@ -23,5 +23,4 @@ Add or remove S3 cpass labels.
 }
 \examples{
 add_class_label(list("ok"), "ok_list")
-
 }
