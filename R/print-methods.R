@@ -102,25 +102,28 @@ print.manyroc_result <- function(x, ..., show_all = FALSE,
     perf_names <- intersect(
         unique(c("sens","spec","PPV","NPV","BAC","Youden","Kappa","AUC", "ACC",
                  "sens","spec","ppv","npv","bac","youden","kappa","auc", "acc")),
-        colnames(x))
+        colnames(x)
+    )
 
-    x %<>%
-        dplyr::mutate_at(perf_names,
-                         sprintf, fmt = glue::glue("%.{perf_digits}f")) %>%
+    x <-
+        x %>%
+        dplyr::mutate_at(
+            perf_names, sprintf, fmt = glue::glue("%.{perf_digits}f")
+        ) %>%
         dplyr::mutate_if(is.numeric, sprintf, fmt = fmt)
 
-    # For long dataframes anly a few lines are printed
+    # For long dataframes, only a few lines are printed
     # [!!!] 10 may be converted to a parameter.
-    #
+
     if (nrow(x) > 10) {
         print(head_tail(x), ...)
     } else {
         print(x, ...)
     }
 }
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 #' @inheritParams base::print
 #'
 #' @rdname sp_manyroc_with_cv_by_variable
