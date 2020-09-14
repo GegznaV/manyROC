@@ -94,7 +94,7 @@ roc_manyroc_cv <- function(x,
       optimize_by = optimize_by
     )
 
-    # [!!!] The function must fail when there are more than 2 classes.
+    # FIXME: The function must fail when there are more than 2 classes.
     # An assertion / a test is needed.
 
 
