@@ -5,16 +5,22 @@ test_that("roc_manyroc_cv works", {
   data(PlantGrowth)
   data(fluorescence)
 
-  r1 <- roc_manyroc_cv(PlantGrowth$weight,
+  r1 <- roc_manyroc_cv(
+    PlantGrowth$weight,
     PlantGrowth$group,
-    seeds = 1234567)
+    seeds = 1234567
+  )
 
-  r2 <- roc_manyroc_cv(PlantGrowth$weight, gl(2, 1, 30),
-    seeds = 1234567)
+  r2 <- roc_manyroc_cv(
+    PlantGrowth$weight, gl(2, 1, 30),
+    seeds = 1234567
+  )
 
-  r3 <- roc_manyroc_cv(fluorescence[[, , 500 ~ 502]],
+  r3 <- roc_manyroc_cv(
+    fluorescence[[, , 500 ~ 502]],
     fluorescence$class,
-    seeds = 1234567)
+    seeds = 1234567
+  )
 
   expect_is(r1, "data.frame")
   expect_is(r2, "data.frame")
@@ -25,8 +31,8 @@ test_that("roc_manyroc_cv works", {
 
 
 test_that("performance measure values are not constant per folds", {
-  x <- read.table(text =
-    "  a1_m a2_m a3_m a1_1 a2_1 a3_1
+  x <- read.table(text = "
+a1_m a2_m a3_m a1_1 a2_1 a3_1
 1  9.4  9.4  9.4  3.1  1.1  1.1
 2  7.3  7.3  7.3  3.0  3.0  1.0
 3  9.3  9.3  9.3  1.0  3.0  3.0
@@ -49,7 +55,6 @@ test_that("performance measure values are not constant per folds", {
 20 8.9  8.8  8.7  2.4  2.4  0.3 ")
 
 
-
   range_ <- function(x) diff(range(x))
   rezz <- roc_manyroc_cv(x, gl(2, 1, 20, labels = c("A", "B")), seeds = 1)
 
@@ -61,11 +66,13 @@ test_that("performance measure values are not constant per folds", {
     rezz %>%
       dplyr::group_by(set, compared_groups, feature)  %>%
       dplyr::filter(set == "test")  %>%
-      dplyr::summarize_at(dplyr::vars("youden", "kappa", "bac"),
-        dplyr::funs(range_))  %>%
+      dplyr::summarize_at(
+        dplyr::vars("youden", "kappa", "bac"),
+        list(range_)
+      )  %>%
       dplyr::ungroup()  %>%
       dplyr::select("youden", "kappa", "bac")  %>%
-      dplyr::mutate_all(dplyr::funs(. > 0))  %>%
+      dplyr::mutate_all(list(~ . > 0))  %>%
       as.matrix()  %>%
       all()
   )
@@ -73,12 +80,14 @@ test_that("performance measure values are not constant per folds", {
   expect_true(
     rezz %>%
       dplyr::group_by(set, compared_groups, feature)  %>%
-      dplyr::filter(set == "train")  %>%
-      dplyr::summarize_at(dplyr::vars("youden", "kappa", "bac"),
-        dplyr::funs(range_))  %>%
+      dplyr::filter(set == "training")  %>%
+      dplyr::summarize_at(
+        dplyr::vars("youden", "kappa", "bac"),
+        list(range_)
+      )  %>%
       dplyr::ungroup()  %>%
       dplyr::select("youden", "kappa", "bac")  %>%
-      dplyr::mutate_all(dplyr::funs(. > 0))  %>%
+      dplyr::mutate_all(list(~. > 0))  %>%
       as.matrix()  %>%
       all()
   )
