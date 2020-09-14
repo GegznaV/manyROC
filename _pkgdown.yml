@@ -4,21 +4,21 @@ template:
   params:
     bootswatch: cerulean
 
-navbar:
-  title: "manyROC | R package"
-  type: default
-  left:
-  - icon: fa-home fa-lg
-    href: /index.html
-  - icon: fa-book fa-lg
-    text: Functions
-    href: reference/index.html
-  - icon: fa-book fa-lg
-    text: Tutorials and examples
-    href: articles/index.html
-  right:
-  - icon: fa-github fa-lg
-    href: https://github.com/GegznaV/manyROC
+# navbar:
+#   title: "manyROC | R package"
+#   type: default
+#   left:
+#   - icon: fa-home fa-lg
+#     href: /index.html
+#   - icon: fa-book fa-lg
+#     text: Functions
+#     href: reference/index.html
+#   - icon: fa-book fa-lg
+#     text: Tutorials and examples
+#     href: articles/index.html
+#   right:
+#   - icon: fa-github fa-lg
+#     href: https://github.com/GegznaV/manyROC
 
 
 reference:
@@ -30,6 +30,7 @@ reference:
   - '`roc_manyroc_cv`'
   - '`roc_predict`'
   - '`roc_predict_performance_by_gr`'
+  - '`roc_merge_manyroc_cv_results`'
   - '`sp_manyroc_with_cv`'
   - '`sp_manyroc_with_cv_by_variable`'
 - title: Management functions for ROC objects
@@ -56,6 +57,7 @@ reference:
   contents:
   - '`add_class_label`'
   - '`get_var_values`'
+  - '`parallelSetSeed`'
 - title: Datasets
   desc: ~
   contents:
