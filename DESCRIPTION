@@ -8,10 +8,15 @@ Date: 2020-09-14
 Authors@R: person("Vilmantas", "Gegzna", role = c("aut", "cre"), email = "GegznaV@gmail.com")
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
+LazyLoad: yes
+LazyData: yes
 ByteCompile: true
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
+URL: 
+    https://gegznav.github.io/manyROC,
+    https://github.com/gegznav/manyROC
+BugReports: https://github.com/gegznav/manyROC/issues
 Depends:
     R (>= 3.2)
 Imports:
