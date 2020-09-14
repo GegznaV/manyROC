@@ -13,82 +13,82 @@
 #' @author Vilmantas Gegzna
 #' @family functions for ROC
 roc_get <- function(obj, what) {
-    assert_string(what)
-    UseMethod("roc_get")
+  assert_string(what)
+  UseMethod("roc_get")
 }
 # -----------------------------------------------------------------------------
 #' @rdname access_elements
 #' @export
 roc_get.roc_result_list <- function(obj, what) {
-    roc_get(obj$all_results, what)
-    # obj$roc_elements$tp
+  roc_get(obj$all_results, what)
+  # obj$roc_elements$tp
 }
 # -----------------------------------------------------------------------------
 #' @rdname access_elements
 #' @export
 roc_get.roc_results <- function(obj, what) {
-    obj[, colnames(obj) == what]
+  obj[, colnames(obj) == what]
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname access_elements
 #' @export
 roc_get_all_results <- function(obj) {
-    obj$all_results
+  obj$all_results
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname access_elements
 #' @export
 roc_cutoff <- function(obj) {
-    roc_get(obj, "cutoff")
-    # obj$roc_elements$cutoff
-    # obj$roc_elements[, 1]
+  roc_get(obj, "cutoff")
+  # obj$roc_elements$cutoff
+  # obj$roc_elements[, 1]
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname access_elements
 #' @export
 roc_tp <- function(obj) {
-    roc_get(obj, "tp")
-    # obj$roc_elements[, 2]
-    # obj$roc_elements$tp
+  roc_get(obj, "tp")
+  # obj$roc_elements[, 2]
+  # obj$roc_elements$tp
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname access_elements
 #' @export
 roc_fn <- function(obj) {
-    roc_get(obj, "fn")
-    # obj$roc_elements[, 3]
-    # obj$roc_elements$fn
+  roc_get(obj, "fn")
+  # obj$roc_elements[, 3]
+  # obj$roc_elements$fn
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname access_elements
 #' @export
 roc_fp <- function(obj) {
-    roc_get(obj, "fp")
-    # obj$roc_elements[, 4]
-    # obj$roc_elements$fp
+  roc_get(obj, "fp")
+  # obj$roc_elements[, 4]
+  # obj$roc_elements$fp
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname access_elements
 #' @export
 roc_tn <- function(obj) {
-    roc_get(obj, "tn")
-    # obj$roc_elements[, 5]
-    # obj$roc_elements$tn
+  roc_get(obj, "tn")
+  # obj$roc_elements[, 5]
+  # obj$roc_elements$tn
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname access_elements
 #' @export
 roc_sens <- function(obj) {
-    roc_get(obj, "sens")
-    # obj$roc_elements[, 5]
-    # obj$roc_elements$tn
+  roc_get(obj, "sens")
+  # obj$roc_elements[, 5]
+  # obj$roc_elements$tn
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname access_elements
 #' @export
 roc_spec <- function(obj) {
-    roc_get(obj, "spec")
-    # obj$roc_elements[, 5]
-    # obj$roc_elements$tn
+  roc_get(obj, "spec")
+  # obj$roc_elements[, 5]
+  # obj$roc_elements$tn
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

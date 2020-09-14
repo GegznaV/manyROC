@@ -5,7 +5,7 @@
 #' @export
 #' @method print as_str
 print.as_str <- function(x, ...) {
-    tibble::glimpse(x, ...)
+  tibble::glimpse(x, ...)
 }
 
 #' @rdname roc_analysis
@@ -13,31 +13,31 @@ print.as_str <- function(x, ...) {
 #' @export
 #' @method print roc_df
 print.roc_df <- function(x, ..., show_all = FALSE,
-                              perf_digits = 2, fmt = "%.3g") {
-    # [!!!] reikia tobulinti funkciją ir jos aprašymą
-    # print(head_tail(x, ...))
+                         perf_digits = 2, fmt = "%.3g") {
+  # [!!!] reikia tobulinti funkcija ir jos aprašyma
+  # print(head_tail(x, ...))
 
-    x <- as.data.frame(x)
+  x <- as.data.frame(x)
 
-    perf_names <- intersect(
-        c("sens","spec","ppv","npv","bac","youden","kappa","auc", "acc"),
-        colnames(x))
+  perf_names <- intersect(
+    c("sens", "spec", "ppv", "npv", "bac", "youden", "kappa", "auc", "acc"),
+    colnames(x))
 
-    x %<>%
-        dplyr::mutate_at(perf_names,
-                         sprintf, fmt = glue::glue("%.{perf_digits}f")) %>%
-        dplyr::mutate_if(is.numeric, sprintf, fmt = fmt)
+  x %<>%
+    dplyr::mutate_at(perf_names,
+      sprintf, fmt = glue::glue("%.{perf_digits}f")) %>%
+    dplyr::mutate_if(is.numeric, sprintf, fmt = fmt)
 
-    # For long dataframes anly a few lines are printed
-    # [!!!] 10 may be converted to a parameter.
-    #
-    if (nrow(x) > 10) {
-        print(head_tail(x), ...)
-    } else {
-        print(x, ...)
-    }
+  # For long dataframes anly a few lines are printed
+  # [!!!] 10 may be converted to a parameter.
+  #
+  if (nrow(x) > 10) {
+    print(head_tail(x), ...)
+  } else {
+    print(x, ...)
+  }
 
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 }
@@ -47,33 +47,33 @@ print.roc_df <- function(x, ..., show_all = FALSE,
 #' @export
 #' @method print roc_opt_result
 print.roc_opt_result <- function(x, digits = 3, ...) {
-    # [!!!] reikia tobulinti funkciją ir jos aprašymą
-    opt_by <-  attr(x, "optimized_by")
-    x <- signif(x, digits = digits)
-    x <- as.data.frame(x)
-    rownames(x) <- NULL
+  # [!!!] reikia tobulinti funkcija ir jos aprašyma
+  opt_by <-  attr(x, "optimized_by")
+  x <- signif(x, digits = digits)
+  x <- as.data.frame(x)
+  rownames(x) <- NULL
 
 
-    if (nrow(x) == 1) {
-        print(x, row.names = FALSE, ...)
-    } else {
-        print(x, ...)
-    }
-    if (!is.null(opt_by))
-        cat(paste0("\n*The optimal cut-off value selected by: max ",
-                   toupper(opt_by),"\n"))
+  if (nrow(x) == 1) {
+    print(x, row.names = FALSE, ...)
+  } else {
+    print(x, ...)
+  }
+  if (!is.null(opt_by))
+    cat(paste0("\n*The optimal cut-off value selected by: max ",
+      toupper(opt_by), "\n"))
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_analysis
 #' @export
 #' @method print roc_info
 print.roc_info <- function(x,  ...) {
-    # [!!!] reikia tobulinti funkciją ir jos aprašymą
-    if (nrow(x) == 1) {
-        print.data.frame(x, row.names = FALSE, ...)
-    } else {
-        print.data.frame(x, ...)
-    }
+  # [!!!] reikia tobulinti funkcija ir jos aprašyma
+  if (nrow(x) == 1) {
+    print.data.frame(x, row.names = FALSE, ...)
+  } else {
+    print.data.frame(x, ...)
+  }
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # @param x \code{manyroc_result} object for method \code{print}.
@@ -97,30 +97,30 @@ print.roc_info <- function(x,  ...) {
 #' @export
 #' @method print manyroc_result
 print.manyroc_result <- function(x, ..., show_all = FALSE,
-                                  perf_digits = 2, fmt = "%.3g") {
+                                 perf_digits = 2, fmt = "%.3g") {
 
-    perf_names <- intersect(
-        unique(c("sens","spec","PPV","NPV","BAC","Youden","Kappa","AUC", "ACC",
-                 "sens","spec","ppv","npv","bac","youden","kappa","auc", "acc")),
-        colnames(x)
-    )
+  perf_names <- intersect(
+    unique(c("sens", "spec", "PPV", "NPV", "BAC", "Youden", "Kappa", "AUC", "ACC",
+      "sens", "spec", "ppv", "npv", "bac", "youden", "kappa", "auc", "acc")),
+    colnames(x)
+  )
 
-    x <-
-        x %>%
-        dplyr::mutate_at(
-            perf_names, sprintf, fmt = glue::glue("%.{perf_digits}f")
-        ) %>%
-        dplyr::mutate_if(is.numeric, sprintf, fmt = fmt) %>%
-        as.data.frame()
+  x <-
+    x %>%
+    dplyr::mutate_at(
+      perf_names, sprintf, fmt = glue::glue("%.{perf_digits}f")
+    ) %>%
+    dplyr::mutate_if(is.numeric, sprintf, fmt = fmt) %>%
+    as.data.frame()
 
-    # For long dataframes, only a few lines are printed
-    # [!!!] 10 may be converted to a parameter.
+  # For long dataframes, only a few lines are printed
+  # [!!!] 10 may be converted to a parameter.
 
-    if (nrow(x) > 10) {
-        print(head_tail(x), ...)
-    } else {
-        print(x, ...)
-    }
+  if (nrow(x) > 10) {
+    print(head_tail(x), ...)
+  } else {
+    print(x, ...)
+  }
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -131,9 +131,9 @@ print.manyroc_result <- function(x, ..., show_all = FALSE,
 #' @export
 #' @method print hide_it
 print.hide_it <- function(x, ...) {
-    cat("*** First non-empty element: ***\n")
-    ind <- purrr::map_lgl(x, ~!is.null(.x)) %>% which()  %>% .[1]
-    print(x[[ind]])
-    if (length(x) > 1)
-        cat("\n*** Other elements are not shown ***\n\n")
+  cat("*** First non-empty element: ***\n")
+  ind <- purrr::map_lgl(x, ~ !is.null(.x)) %>% which()  %>% .[1]
+  print(x[[ind]])
+  if (length(x) > 1)
+    cat("\n*** Other elements are not shown ***\n\n")
 }

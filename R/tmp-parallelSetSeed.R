@@ -9,6 +9,6 @@
 #' @inheritParams parallel::clusterSetRNGStream
 #' @export
 parallelSetSeed <- function(iseed = NULL, seed = iseed, cl = NULL, ...) {
-    set.seed(seed = seed, ...)
-    parallel::clusterSetRNGStream(iseed = iseed, cl = cl)
+  set.seed(seed = seed, ...)
+  parallel::clusterSetRNGStream(iseed = iseed, cl = cl)
 }

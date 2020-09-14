@@ -43,9 +43,9 @@ NULL
 #
 # @keywords internal
 
-.onAttach = function(libname, pkgname) {
-    # Registration of levels for paralell computing
-    parallelMap::parallelRegisterLevels(
-        package = "manyROC",
-        levels = c("grouping_variables", "group_pairs"))
+.onAttach <- function(libname, pkgname) {
+  # Registration of levels for paralell computing
+  parallelMap::parallelRegisterLevels(
+    package = "manyROC",
+    levels = c("grouping_variables", "group_pairs"))
 }

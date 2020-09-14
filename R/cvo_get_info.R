@@ -67,58 +67,56 @@
 #' cvo_get_inds(cvo, 1, "train")
 #'
 #' cvo_get_inds(cvo, 1, "test")
-#'
 cvo_get_info <- function(cvo) {
-    attr(cvo, "info")
+  attr(cvo, "info")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname cvo_get_info
 #' @export
 cvo_get_sample_size <- function(cvo) {
-    attr(cvo, "info")$sample_size
+  attr(cvo, "info")$sample_size
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname cvo_get_info
 #' @export
 cvo_get_seeds <- function(cvo) {
-    attr(cvo, "seeds")
+  attr(cvo, "seeds")
 }
 # =============================================================================
 #' @rdname cvo_get_info
 #' @export
 cvo_count_folds <- function(cvo) {
-    UseMethod("cvo_count_folds")
+  UseMethod("cvo_count_folds")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname cvo_get_info
 #' @export
 cvo_count_folds.cvo_caret <- function(cvo) {
-    length(names(cvo))
+  length(names(cvo))
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname cvo_get_info
 #' @export
 cvo_count_folds.cvo_mlr <- function(cvo) {
-    cvo$desc$iters
+  cvo$desc$iters
 }
 # =============================================================================
 # =============================================================================
 #' @rdname cvo_get_info
 #' @export
 cvo_get_fold_names <- function(cvo) {
-    UseMethod("cvo_get_fold_names")
+  UseMethod("cvo_get_fold_names")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname cvo_get_info
 #' @export
 cvo_get_fold_names.cvo_caret <- function(cvo) {
-    names(cvo)
+  names(cvo)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname cvo_get_info
 #' @export
 cvo_get_fold_names.cvo_mlr <- function(cvo) {
-    names(cvo$train.inds)
+  names(cvo$train.inds)
 }
 # =============================================================================
-

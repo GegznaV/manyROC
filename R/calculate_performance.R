@@ -37,7 +37,7 @@
 #' @family functions for ROC
 #'
 #' @examples
-#' (truth <- gl(n = 2, k = 3, length = 20, labels = c("H","S")))
+#' (truth <- gl(n = 2, k = 3, length = 20, labels = c("H", "S")))
 #'
 #' (prediction <- rev(truth))
 #'
@@ -47,75 +47,73 @@
 #' calculate_performance(truth, prediction, pos_label = "S")
 #'
 #' calculate_performance(truth, prediction, pos_label = "H")
-#'
-
 calculate_performance <- function(truth,
-                           prediction,
-                           pos_label = levels(truth)[2]
+                                  prediction,
+                                  pos_label = levels(truth)[2]
 ) {
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    # Check the input
-    truth <- droplevels(truth)
-    assert_factor(truth, n.levels = 2)
+  # Check the input
+  truth <- droplevels(truth)
+  assert_factor(truth, n.levels = 2)
 
-    assert_subset(levels(prediction), levels(truth))
-    assert_subset(pos_label, levels(truth))
+  assert_subset(levels(prediction), levels(truth))
+  assert_subset(pos_label, levels(truth))
 
-    # Warn if missing values are present
-    if (any(is.infinite(truth)))
-        warning("Variable `truth` has missing values.\n",
-                "The results may be inprecise.\n")
+  # Warn if missing values are present
+  if (any(is.infinite(truth)))
+    warning("Variable `truth` has missing values.\n",
+      "The results may be inprecise.\n")
 
-    if (any(is.infinite(prediction)))
-        warning("Variable `prediction` has missing values.\n",
-                "The results may be inprecise.\n")
+  if (any(is.infinite(prediction)))
+    warning("Variable `prediction` has missing values.\n",
+      "The results may be inprecise.\n")
 
-    # Lengths of inputs must agree
-    if (length(truth) != length(prediction)) {
-        warning("Number of cases in `truth` and `prediction` must agree." )
-    }
-    assert_set_equal(length(truth), length(prediction))
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ## Reorder levels to get predictabe results:
-    ##  first -  label of negative group,
-    ##  second - label of positive group.
-    neg_label  <- setdiff(levels(truth), pos_label)
-    levels     <- c(pos_label, neg_label)
-    truth      <- ordered(truth, levels = levels)
-    prediction <- ordered(prediction, levels = levels)
-    # ==========================================================================
-    # Calculate performance measures
-    conf_mat <- table(truth, prediction)
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    tp <- conf_mat[1, 1]
-    fp <- conf_mat[2, 1]
-    fn <- conf_mat[1, 2]
-    tn <- conf_mat[2, 2]
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    SE <- calculate_sensitivity(tp, fn)
-    SP <- calculate_specificity(tn, fp)
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    performance <- cbind(tp = tp,
-                         fn = fn,
-                         fp = fp,
-                         tn = tn,
-                         sens = SE,
-                         spec = SP,
-                         ppv  = calculate_ppv(tp, fp),
-                         npv  = calculate_npv(tn, fn),
-                         bac  = calculate_bac(SE, SP),
-                         youden = calculate_youdens_j(SE, SP),
-                         kappa  = calculate_kappa(tp, fn, fp, tn)
+  # Lengths of inputs must agree
+  if (length(truth) != length(prediction)) {
+    warning("Number of cases in `truth` and `prediction` must agree.")
+  }
+  assert_set_equal(length(truth), length(prediction))
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ## Reorder levels to get predictabe results:
+  ##  first -  label of negative group,
+  ##  second - label of positive group.
+  neg_label  <- setdiff(levels(truth), pos_label)
+  levels     <- c(pos_label, neg_label)
+  truth      <- ordered(truth, levels = levels)
+  prediction <- ordered(prediction, levels = levels)
+  # ==========================================================================
+  # Calculate performance measures
+  conf_mat <- table(truth, prediction)
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  tp <- conf_mat[1, 1]
+  fp <- conf_mat[2, 1]
+  fn <- conf_mat[1, 2]
+  tn <- conf_mat[2, 2]
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  SE <- calculate_sensitivity(tp, fn)
+  SP <- calculate_specificity(tn, fp)
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  performance <- cbind(tp = tp,
+    fn = fn,
+    fp = fp,
+    tn = tn,
+    sens = SE,
+    spec = SP,
+    ppv  = calculate_ppv(tp, fp),
+    npv  = calculate_npv(tn, fn),
+    bac  = calculate_bac(SE, SP),
+    youden = calculate_youdens_j(SE, SP),
+    kappa  = calculate_kappa(tp, fn, fp, tn)
 
-                         # , stringsAsFactors = FALSE
+    # , stringsAsFactors = FALSE
 
-    )
-    # ==========================================================================
-    # Output
-    attr(performance, "labels") <- c(pos_label = pos_label,
-                                     neg_label = neg_label)
-    add_class_label(performance, c("two_class_perform","roc_df"))
-    # ==========================================================================
+  )
+  # ==========================================================================
+  # Output
+  attr(performance, "labels") <- c(pos_label = pos_label,
+    neg_label = neg_label)
+  add_class_label(performance, c("two_class_perform", "roc_df"))
+  # ==========================================================================
 }
 # =============================================================================

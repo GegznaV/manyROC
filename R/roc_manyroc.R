@@ -98,12 +98,11 @@
 #' library(hyperSpec)
 #' fluorescence
 #'
-#' roc_manyroc(fluorescence[ , , 500~502], fluorescence$gr)
-#'
+#' roc_manyroc(fluorescence[, , 500 ~ 502], fluorescence$gr)
 #' @name roc_manyroc
 
 roc_manyroc <- function(x, gr = NULL, optimize_by = "bac",  ...) {
-    UseMethod("roc_manyroc")
+  UseMethod("roc_manyroc")
 }
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -116,102 +115,101 @@ roc_manyroc.matrix <- function(x,
                                ...,
                                gr_sep = " vs. ") {
 
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    assert_numeric(x)
-    assert_factor(gr, min.levels = 2)
-    if (nrow(x) != length(gr)) {
-        stop("Number of cases in `x` and `gr` must agree." )
-    }
-    assert_choice(tolower(optimize_by), choices = c("bac", "kappa", "youden"))
-    assert_string(gr_sep)
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  assert_numeric(x)
+  assert_factor(gr, min.levels = 2)
+  if (nrow(x) != length(gr)) {
+    stop("Number of cases in `x` and `gr` must agree.")
+  }
+  assert_choice(tolower(optimize_by), choices = c("bac", "kappa", "youden"))
+  assert_string(gr_sep)
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    # Initial preprocessing
-    gr <- factor(gr, ordered = FALSE)
-    rownames(x) <- NULL
+  # Initial preprocessing
+  gr <- factor(gr, ordered = FALSE)
+  rownames(x) <- NULL
 
-    # Preparation: calculations
-    n_wl  <- ncol(x)
-    levs  <- levels(gr)
-    cmb   <- t(combn(levels(gr), 2))
-    n_cmb <- nrow(cmb)
-    if (n_cmb == 2) n_cmb <- 1 # prevents from excessive calculations
+  # Preparation: calculations
+  n_wl  <- ncol(x)
+  levs  <- levels(gr)
+  cmb   <- t(combn(levels(gr), 2))
+  n_cmb <- nrow(cmb)
+  if (n_cmb == 2) n_cmb <- 1 # prevents from excessive calculations
 
-    # Pre-allocate variables
-    Compared <- paste0(cmb[, 1], gr_sep, cmb[, 2])
-    grouppair_results <- vector("list", n_cmb)
-    names(grouppair_results) <- Compared
+  # Pre-allocate variables
+  Compared <- paste0(cmb[, 1], gr_sep, cmb[, 2])
+  grouppair_results <- vector("list", n_cmb)
+  names(grouppair_results) <- Compared
 
-    # For each pair of classes
-    for (u in 1:n_cmb) {
-        included_levels <- c(cmb[u, 1], cmb[u, 2])
-        included_ind    <- gr %in% included_levels
-        x_subset        <- x[included_ind, , drop = FALSE]
-        included_gr     <- droplevels(gr[included_ind])
+  # For each pair of classes
+  for (u in 1:n_cmb) {
+    included_levels <- c(cmb[u, 1], cmb[u, 2])
+    included_ind    <- gr %in% included_levels
+    x_subset        <- x[included_ind, , drop = FALSE]
+    included_gr     <- droplevels(gr[included_ind])
 
-        # For each feature (column) in matrix `x`
-        optimal <- apply(x_subset, 2,
-            FUN = roc_analysis,
-            gr = included_gr,
-            pos_label = included_levels[2],
-            optimize_by = optimize_by,
-            results = "optimal")
+    # For each feature (column) in matrix `x`
+    optimal <- apply(x_subset, 2,
+      FUN = roc_analysis,
+      gr = included_gr,
+      pos_label = included_levels[2],
+      optimize_by = optimize_by,
+      results = "optimal")
 
-        # Collect the results
-        grouppair_results[[u]] <- t(optimal)
-    }
+    # Collect the results
+    grouppair_results[[u]] <- t(optimal)
+  }
 
-    ## The names of each row of result produced by the `apply` function
-    # in variable `optimal`.
+  ## The names of each row of result produced by the `apply` function
+  # in variable `optimal`.
 
-    # result_names <- c("cutoff", "TP","FN","FP","TN",
-    #                   "sens","spec","PPV","NPV",
-    #                   "BAC","Youden", "Kappa","AUC",
-    #                   "median_neg", "median_pos")
+  # result_names <- c("cutoff", "TP","FN","FP","TN",
+  #                   "sens","spec","PPV","NPV",
+  #                   "BAC","Youden", "Kappa","AUC",
+  #                   "median_neg", "median_pos")
 
-    result_names <- c(
-        "cutoff", "tp","fn","fp","tn",
-        "sens","spec","ppv","npv",
-        "bac","youden", "kappa","auc",
-        "median_neg", "median_pos"
+  result_names <- c(
+    "cutoff", "tp", "fn", "fp", "tn",
+    "sens", "spec", "ppv", "npv",
+    "bac", "youden", "kappa", "auc",
+    "median_neg", "median_pos"
+  )
+
+  # Clean the result
+  OBJ <-
+    grouppair_results  %>%
+    purrr::map(
+      ~ .x %>%
+        as.data.frame() %>%
+        magrittr::set_colnames(result_names)  %>%
+        tibble::rownames_to_column(var = "feature")
+    ) %>%
+    dplyr::bind_rows(.id = "compared_groups")  %>%
+    dplyr::select(
+      compared_groups, feature, median_neg, cutoff, median_pos,
+      dplyr::everything()
     )
 
-    # Clean the result
-    OBJ <-
-        grouppair_results  %>%
-        purrr::map(
-            ~.x %>%
-                as.data.frame() %>%
-                magrittr::set_colnames(result_names)  %>%
-                tibble::rownames_to_column(var = "feature")
-        ) %>%
-        dplyr::bind_rows(.id = "compared_groups")  %>%
-        dplyr::select(
-            compared_groups, feature, median_neg, cutoff, median_pos,
-            dplyr::everything()
-        )
-
-    # Output
-    add_class_label(OBJ, "manyroc_result")
+  # Output
+  add_class_label(OBJ, "manyroc_result")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_manyroc
 #' @export
 roc_manyroc.numeric <- function(x, gr = NULL, optimize_by = "bac",  ...) {
-    roc_manyroc(x = as.matrix(x), gr = gr, optimize_by = optimize_by, ...)
+  roc_manyroc(x = as.matrix(x), gr = gr, optimize_by = optimize_by, ...)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_manyroc
 #' @export
 roc_manyroc.data.frame <- function(x, gr = NULL, optimize_by = "bac",  ...) {
-    roc_manyroc(x = as.matrix(x), gr = gr, optimize_by = optimize_by, ...)
+  roc_manyroc(x = as.matrix(x), gr = gr, optimize_by = optimize_by, ...)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_manyroc
 #' @export
 roc_manyroc.hyperSpec <- function(x, gr = NULL, optimize_by = "bac",  ...) {
-    assert_class(x, "hyperSpec")
-    roc_manyroc(x = x[[]], gr = gr, optimize_by = optimize_by, ...)
+  assert_class(x, "hyperSpec")
+  roc_manyroc(x = x[[]], gr = gr, optimize_by = optimize_by, ...)
 }
 # =============================================================================
-

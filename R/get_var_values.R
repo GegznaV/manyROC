@@ -23,27 +23,25 @@
 #' get_var_values(x = c("group", "group"), data = dataset)
 #'
 #' get_var_values(x = NULL, data = dataset)
-#'
-#'
 get_var_values <- function(x, data) {
 
-    # Prepare data, if needed -------------------------------------------------
-    if (inherits(data,"hyperSpec")) {
-        data <- data$..
-    }
+  # Prepare data, if needed -------------------------------------------------
+  if (inherits(data, "hyperSpec")) {
+    data <- data$..
+  }
 
-    # If x is NULL ------------------------------------------------------------
-    if (is.null(x)) {
-        return(x)
-    }
+  # If x is NULL ------------------------------------------------------------
+  if (is.null(x)) {
+    return(x)
+  }
 
-    # Is either a scalar string or positive integer number --------------------
-    if (checkmate::test_string(x) || checkmate::test_number(x, lower = 1)) {
-        data[[x]]
-        # Is a vector -------------------------------------------------------------
-    } else {
-        checkmate::assert_vector(x, strict = TRUE)
-        x
-    }
-    # -------------------------------------------------------------------------
+  # Is either a scalar string or positive integer number --------------------
+  if (checkmate::test_string(x) || checkmate::test_number(x, lower = 1)) {
+    data[[x]]
+    # Is a vector -------------------------------------------------------------
+  } else {
+    checkmate::assert_vector(x, strict = TRUE)
+    x
+  }
+  # -------------------------------------------------------------------------
 }

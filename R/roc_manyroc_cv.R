@@ -58,76 +58,74 @@
 #' roc_manyroc_cv(PlantGrowth$weight, PlantGrowth$group)
 #'
 #' roc_manyroc_cv(PlantGrowth$weight, gl(2, 1, 30))
-#'
-
 roc_manyroc_cv <- function(x,
-                            gr,
-                            optimize_by = "bac",
-                            cvo = cvo_create_folds(x, gr, seeds = seeds, kind = kind),
-                            seeds = NA_real_,
-                            kind = NULL) {
+                           gr,
+                           optimize_by = "bac",
+                           cvo = cvo_create_folds(x, gr, seeds = seeds, kind = kind),
+                           seeds = NA_real_,
+                           kind = NULL) {
 
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    x <- as.matrix(x)
-    assert_numeric(x)
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  x <- as.matrix(x)
+  assert_numeric(x)
 
-    assert_factor(gr, min.levels = 2)
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # Number of folds in total
-    n_repetitions <- cvo_count_folds(cvo)
+  assert_factor(gr, min.levels = 2)
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Number of folds in total
+  n_repetitions <- cvo_count_folds(cvo)
 
-    # Prealocate variables
-    rez_train <- vector("list", length = n_repetitions)
-    names(rez_train) <- cvo_get_fold_names(cvo)
-    rez_test <- rez_train
+  # Prealocate variables
+  rez_train <- vector("list", length = n_repetitions)
+  names(rez_train) <- cvo_get_fold_names(cvo)
+  rez_test <- rez_train
 
-    for (i in 1:n_repetitions) {
-        # Return indices of training subset:
-        training_ind <- cvo_get_inds(cvo, fold = i, type = "train")
+  for (i in 1:n_repetitions) {
+    # Return indices of training subset:
+    training_ind <- cvo_get_inds(cvo, fold = i, type = "train")
 
-        x_train  <-  x[ training_ind, ]
-        gr_train <- gr[ training_ind]
+    x_train  <-  x[training_ind, ]
+    gr_train <- gr[training_ind]
 
-        x_test   <-  x[-training_ind, ]
-        gr_test  <- gr[-training_ind]
+    x_test   <-  x[-training_ind, ]
+    gr_test  <- gr[-training_ind]
 
-        rez_train[[i]] <- roc_manyroc(x  = x_train,
-                                      gr = gr_train,
-                                      optimize_by = optimize_by)
+    rez_train[[i]] <- roc_manyroc(x  = x_train,
+      gr = gr_train,
+      optimize_by = optimize_by)
 
-        # [!!!] The function must fail when there are more than 2 classes.
-        # An assertion / a test is needed.
-
-
-        ## The order of names must be identical:
-        #
-        # tmp1 <- roc_extract_info(rez_train[[i]])
-        # tmp2 <- split_by_feature(tmp1, levels = colnames(x_test))
-        #
-        # identical(tmp1$feature, names(tmp2))
-        # identical(names(tmp2),  names(mat2list(x_test)))
-
-        tmp1 <- roc_extract_info(rez_train[[i]])
-        tmp2 <- split_by_feature(tmp1, levels = colnames(x_test))
-        tmp3 <- purrr::map2(.x = tmp2,
-                            .y = mat2list(x_test),
-                            .f = roc_predict_performance_by_gr,
-                            gr_new = gr_test)
-
-        rez_test[[i]] <- dplyr::bind_rows(tmp3, .id = "feature")
-
-        # rez_test[[i]]  <- predict(roc_object, newdata = x_test, gr_test)
-    }
-
-    result <- dplyr::bind_rows(
-        `training` = res2df(rez_train),
-        `test`     = res2df(rez_test),
-        .id = "set"
-    )
+    # [!!!] The function must fail when there are more than 2 classes.
+    # An assertion / a test is needed.
 
 
-    # output
-    add_class_label(result, c("manyroc_cv_result", "roc_df"))
+    ## The order of names must be identical:
+    #
+    # tmp1 <- roc_extract_info(rez_train[[i]])
+    # tmp2 <- split_by_feature(tmp1, levels = colnames(x_test))
+    #
+    # identical(tmp1$feature, names(tmp2))
+    # identical(names(tmp2),  names(mat2list(x_test)))
+
+    tmp1 <- roc_extract_info(rez_train[[i]])
+    tmp2 <- split_by_feature(tmp1, levels = colnames(x_test))
+    tmp3 <- purrr::map2(.x = tmp2,
+      .y = mat2list(x_test),
+      .f = roc_predict_performance_by_gr,
+      gr_new = gr_test)
+
+    rez_test[[i]] <- dplyr::bind_rows(tmp3, .id = "feature")
+
+    # rez_test[[i]]  <- predict(roc_object, newdata = x_test, gr_test)
+  }
+
+  result <- dplyr::bind_rows(
+    `training` = res2df(rez_train),
+    `test`     = res2df(rez_test),
+    .id = "set"
+  )
+
+
+  # output
+  add_class_label(result, c("manyroc_cv_result", "roc_df"))
 
 
 } # [END]
@@ -136,20 +134,20 @@ roc_manyroc_cv <- function(x,
 # Hepler functions:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res2df <- function(res) {
-    res %>%
-        dplyr::bind_rows(.id = "fold")  %>%
-        dplyr::arrange(feature)  %>%
-        add_class_label("manyroc_result")
+  res %>%
+    dplyr::bind_rows(.id = "fold")  %>%
+    dplyr::arrange(feature)  %>%
+    add_class_label("manyroc_result")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 split_by_feature <- function(obj, levels) {
-    # It is crucial to use forcats::as_factor as the levels of factors must
-    # be sorted in order of first appearance of the value.
-    # Othervise incorrect results will apear.
-    factor_var <- factor(obj$feature, levels = levels)
+  # It is crucial to use forcats::as_factor as the levels of factors must
+  # be sorted in order of first appearance of the value.
+  # Othervise incorrect results will apear.
+  factor_var <- factor(obj$feature, levels = levels)
 
-    res <- split(obj, f = factor_var)
-    purrr::map(res, add_class_label, c("roc_info", "roc_df"))
+  res <- split(obj, f = factor_var)
+  purrr::map(res, add_class_label, c("roc_info", "roc_df"))
 }
 # if (is.null(levels)) {
 #     factor_var <-
@@ -161,7 +159,7 @@ split_by_feature <- function(obj, levels) {
 # }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mat2list <- function(x) {
-    as.list(as.data.frame(x, stringsAsFactors = FALSE))
+  as.list(as.data.frame(x, stringsAsFactors = FALSE))
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

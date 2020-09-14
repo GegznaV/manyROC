@@ -145,22 +145,21 @@
 #'
 #' fluorescence$ID  <- 1:nrow(fluorescence)
 #' sp_manyroc_with_cv_by_variable(
-#'         fluorescence[,,500~501],
-#'          c("gr", "class"),
-#'          k_folds = 3,
-#'          times = 2)
-#'
+#'   fluorescence[, , 500 ~ 501],
+#'   c("gr", "class"),
+#'   k_folds = 3,
+#'   times = 2)
 sp_manyroc_with_cv_by_variable <-
-    # -----------------------------------------------------------------------------
-    function(Spectra,
-             variables_to_analyze,
-             k_folds = 3,
-             times = 10,
-             seeds = NULL, #2222222,
-             kind  = NULL) {
+  # -----------------------------------------------------------------------------
+  function(Spectra,
+           variables_to_analyze,
+           k_folds = 3,
+           times = 10,
+           seeds = NULL, # 2222222,
+           kind  = NULL) {
     # -----------------------------------------------------------------------------
     if (!checkmate::test_named(variables_to_analyze))
-        names(variables_to_analyze) <- variables_to_analyze
+      names(variables_to_analyze) <- variables_to_analyze
     # -----------------------------------------------------------------------------
     # Prepare for paralellization
     # [!!!] Check if these parallel export functions are really necessary
@@ -169,61 +168,61 @@ sp_manyroc_with_cv_by_variable <-
     #                              show.info = FALSE)
 
     parallelMap::parallelExport("variables_to_analyze",
-                                "Spectra", "k_folds", "times", "seeds", "kind",
-                                 level = "manyROC.grouping_variables",
-                                 show.info = FALSE)
+      "Spectra", "k_folds", "times", "seeds", "kind",
+      level = "manyROC.grouping_variables",
+      show.info = FALSE)
     # -----------------------------------------------------------------------------
     res_tmp <- parallelMap::parallelLapply(variables_to_analyze,
-                                           purrr::safely(sp_manyroc_with_cv),
-                                           Spectra = Spectra,
-                                           k = k_folds,
-                                           times = times,
-                                           seeds = seeds,
-                                           kind = kind,
+      purrr::safely(sp_manyroc_with_cv),
+      Spectra = Spectra,
+      k = k_folds,
+      times = times,
+      seeds = seeds,
+      kind = kind,
 
-                                           level = "manyROC.grouping_variables")
+      level = "manyROC.grouping_variables")
     # -----------------------------------------------------------------------------
-    not_error <- purrr::map_lgl(res_tmp, ~is.null(.x$error))
+    not_error <- purrr::map_lgl(res_tmp, ~ is.null(.x$error))
     t_tez <- purrr::transpose(res_tmp)
 
     res_not_err <- t_tez$result[not_error]
-    names(res_not_err) <- purrr::map_chr(res_not_err, ~.x$variable)
+    names(res_not_err) <- purrr::map_chr(res_not_err, ~ .x$variable)
     res_final <- purrr::transpose(res_not_err)
 
 
     res_final$cvo %<>%
-        add_class_label("hide_it")
+      add_class_label("hide_it")
 
     res_final$results <-
-        dplyr::bind_rows(res_final$results, .id = "grouping")
+      dplyr::bind_rows(res_final$results, .id = "grouping")
 
     res_final$ind_included_rows %<>%
-        as.data.frame() %>%
-        add_class_label("roc_df")
+      as.data.frame() %>%
+      add_class_label("roc_df")
 
     res_final$n_included %<>%
-        dplyr::bind_cols() %>%
-        as.data.frame()
+      dplyr::bind_cols() %>%
+      as.data.frame()
 
     res_final$variables_included <-
-        res_final$variable %>%
-        purrr::reduce(c)
+      res_final$variable %>%
+      purrr::reduce(c)
 
     res_final$variables_errored <-
-        variables_to_analyze[!not_error] %>%
-        remove_names()
+      variables_to_analyze[!not_error] %>%
+      remove_names()
 
     res_final$variable <- NULL
 
     res_final$error_messages <-
-        add_class_label(t_tez$error, "hide_it")
+      add_class_label(t_tez$error, "hide_it")
     # -------------------------------------------------------------------------
     res_final
-}
+  }
 
 # =============================================================================
 remove_names <- function(x) {
-    names(x) <- NULL
-    x
+  names(x) <- NULL
+  x
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

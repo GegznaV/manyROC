@@ -22,10 +22,9 @@
 #' library(hyperSpec)
 #'
 #' fluorescence
-#' plot(fluorescence[30:60,])
-#'
+#' plot(fluorescence[30:60, ])
 #' @source Artificially generated in \code{R}.
 #' @author Vilmantas Gegzna
 #'
 
-'fluorescence'
+"fluorescence"

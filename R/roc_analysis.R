@@ -83,7 +83,7 @@
 #' set.seed(1)
 #' (x <- rnorm(10))
 #'
-#' (gr <- gl(n = 2, k = 5, length = 10, labels = c("H","S")))
+#' (gr <- gl(n = 2, k = 5, length = 10, labels = c("H", "S")))
 #'
 #'
 #' # Explore the functions
@@ -96,259 +96,256 @@
 #' # --- Example 2 ---
 #'
 #' set.seed(1)
-#' x2 = c(rnorm(50, mean = 14), rnorm(50, mean = 20))
-#' gr2 = gl(2, 50, labels = c("Neg", "Pos"))
+#' x2 <- c(rnorm(50, mean = 14), rnorm(50, mean = 20))
+#' gr2 <- gl(2, 50, labels = c("Neg", "Pos"))
 #'
-#' (roc_rez<- roc_analysis(x2, gr2))
+#' (roc_rez <- roc_analysis(x2, gr2))
 #'
 #' optimal_cutoff2 <- roc_rez$optimal[1]
 #'
 #' qplot(x2, fill = gr2, color = gr2,
-#'       geom = c("density", "rug"), alpha = I(0.3)) +
-#'    geom_vline(xintercept = optimal_cutoff2)
+#'   geom = c("density", "rug"), alpha = I(0.3)) +
+#'   geom_vline(xintercept = optimal_cutoff2)
 #'
 #'
 #' # --- Example 3 ---
 #'
 #' set.seed(1)
-#' x3 = c(rnorm(100, mean = 11), rnorm(100, mean = 14))
-#' gr3 = gl(2, 100, labels = c("Neg", "Pos"))
+#' x3 <- c(rnorm(100, mean = 11), rnorm(100, mean = 14))
+#' gr3 <- gl(2, 100, labels = c("Neg", "Pos"))
 #'
 #' (roc_rez3 <- roc_analysis(x3, gr3))
 #'
 #' optimal_cutoff3 <- roc_rez3$optimal[1]
 #'
 #' qplot(x3, fill = gr3, color = gr3,
-#'      geom = c("density", "rug"), alpha = I(0.3)) +
-#'     geom_vline(xintercept = roc_rez3$optimal[1])
-#'
-#'
-
+#'   geom = c("density", "rug"), alpha = I(0.3)) +
+#'   geom_vline(xintercept = roc_rez3$optimal[1])
 roc_analysis <- function(x,
                          gr,
                          pos_label  = levels(gr)[2],
                          pos_is_larger = NULL,
                          optimize_by = "bac",
                          results = "all", ...) {
-    UseMethod("roc_analysis")
+  UseMethod("roc_analysis")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_analysis
 #' @export
 roc_analysis.default <- function(x,
-                         gr,
-                         pos_label  = levels(gr)[2],
-                         pos_is_larger = NULL,
-                         optimize_by = "bac",
-                         results = "all", ...) {
+                                 gr,
+                                 pos_label  = levels(gr)[2],
+                                 pos_is_larger = NULL,
+                                 optimize_by = "bac",
+                                 results = "all", ...) {
 
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # Check the input
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Check the input
 
-    # [!!!] Inputs `optimize_by = NULL` and `results = "optimize"` are
-    # incompatible. An assertion and warning are needed
+  # [!!!] Inputs `optimize_by = NULL` and `results = "optimize"` are
+  # incompatible. An assertion and warning are needed
 
-    assert_numeric(x)
-    assert_vector(x, strict = TRUE)
+  assert_numeric(x)
+  assert_vector(x, strict = TRUE)
 
-    assert_factor(gr, n.levels = 2)
+  assert_factor(gr, n.levels = 2)
 
-    if (length(x) != length(gr)) {
-        warning("Number of cases in `x` and `gr` must agree." )
-    }
-    assert_set_equal(length(x), length(gr))
+  if (length(x) != length(gr)) {
+    warning("Number of cases in `x` and `gr` must agree.")
+  }
+  assert_set_equal(length(x), length(gr))
 
-    assert_string(pos_label)
-    assert_choice(pos_label, levels(gr))
+  assert_string(pos_label)
+  assert_choice(pos_label, levels(gr))
 
-    assert_flag(pos_is_larger, null.ok = TRUE)
+  assert_flag(pos_is_larger, null.ok = TRUE)
 
-    assert_string(optimize_by, null.ok = TRUE)
-    assert_choice(optimize_by, c("bac", "youden", "kappa"), null.ok = TRUE)
+  assert_string(optimize_by, null.ok = TRUE)
+  assert_choice(optimize_by, c("bac", "youden", "kappa"), null.ok = TRUE)
 
-    assert_choice(results, c("all", "optimal"))
+  assert_choice(results, c("all", "optimal"))
 
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # Capture data to return later
-    # data <- list(x = x, gr = gr)
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Capture data to return later
+  # data <- list(x = x, gr = gr)
 
-    # Remove missing and infinite values
-    finite_bool <- is.finite(x) & is.finite(gr)
-    x  <-  x[finite_bool]
-    gr <- gr[finite_bool]
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ## Reorder levels to get predictabe results:
-    ##  first -  label of negative group,
-    ##  second - label of positive group.
-    neg_label <- setdiff(levels(gr), pos_label)
-    levels <- c(neg_label, pos_label)
-    gr <- ordered(gr, levels = levels)
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # Automatically determine, which group has  smaller `x` values on average
-    medians <- tapply(x, gr, median)
-    dimnames(medians) <- NULL
+  # Remove missing and infinite values
+  finite_bool <- is.finite(x) & is.finite(gr)
+  x  <-  x[finite_bool]
+  gr <- gr[finite_bool]
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ## Reorder levels to get predictabe results:
+  ##  first -  label of negative group,
+  ##  second - label of positive group.
+  neg_label <- setdiff(levels(gr), pos_label)
+  levels <- c(neg_label, pos_label)
+  gr <- ordered(gr, levels = levels)
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Automatically determine, which group has  smaller `x` values on average
+  medians <- tapply(x, gr, median)
+  dimnames(medians) <- NULL
 
-    if (is.null(pos_is_larger)) {
-        decreasing <- medians[1] < medians[2]  # median__neg_gr < median__pos_gr
-    } else {
-        decreasing <- pos_is_larger
-    }
+  if (is.null(pos_is_larger)) {
+    decreasing <- medians[1] < medians[2]  # median__neg_gr < median__pos_gr
+  } else {
+    decreasing <- pos_is_larger
+  }
 
-    # Determine, which group is above threshond, which belod.
-    # Checks if positive group is prone to have larger values
-    if (decreasing) {
-        below <- neg_label
-        above <- pos_label
-    } else {
-        below <- pos_label
-        above <- neg_label
-    }
+  # Determine, which group is above threshond, which belod.
+  # Checks if positive group is prone to have larger values
+  if (decreasing) {
+    below <- neg_label
+    above <- pos_label
+  } else {
+    below <- pos_label
+    above <- neg_label
+  }
 
-    # ==========================================================================
-    # # Do the ROC analysis
-    x_order <- order(x, decreasing = decreasing)
-    x_sorted <- x[x_order]
+  # ==========================================================================
+  # # Do the ROC analysis
+  x_order <- order(x, decreasing = decreasing)
+  x_sorted <- x[x_order]
 
-    # [!!!] Why is `rev()` called at all? Is it necessary?
-    dupls <- rev(duplicated(rev(x_sorted)))
+  # [!!!] Why is `rev()` called at all? Is it necessary?
+  dupls <- rev(duplicated(rev(x_sorted)))
 
-    ##  --- Original algorithm to determine cutoffs ---
-    ## cutofs are values of vector x:
-    ##
-    # SIGN <- if (decreasing == TRUE) 1 else -1
-    # cutoffs <- c(SIGN * Inf, x_sorted[!dupls])
+  ##  --- Original algorithm to determine cutoffs ---
+  ## cutofs are values of vector x:
+  ##
+  # SIGN <- if (decreasing == TRUE) 1 else -1
+  # cutoffs <- c(SIGN * Inf, x_sorted[!dupls])
 
-    ##  --- Improved algorithm to determine cutoffs ---
-    ##  cutoffs are middle values between two adjacent x values
+  ##  --- Improved algorithm to determine cutoffs ---
+  ##  cutoffs are middle values between two adjacent x values
 
-    x_s <- x_sorted[!dupls]
-    n <- length(x_s)
-    if (decreasing == TRUE) {
-        # cutoffs<-c(max(x_s), (x_s[1:(n - 1)] + diff(x_s)/2), min(x_s))
-        cutoffs <- c(+Inf,     (x_s[1:(n - 1)] + diff(x_s)/2), -Inf)
-    } else {
-        # cutoffs<-c(min(x_s), (x_s[1:(n - 1)] - diff(x_s)/2), max(x_s))
-        cutoffs <- c(-Inf,     (x_s[1:(n - 1)] - diff(x_s)/2), +Inf)
-    }
+  x_s <- x_sorted[!dupls]
+  n <- length(x_s)
+  if (decreasing == TRUE) {
+    # cutoffs<-c(max(x_s), (x_s[1:(n - 1)] + diff(x_s)/2), min(x_s))
+    cutoffs <- c(+Inf,     (x_s[1:(n - 1)] + diff(x_s) / 2), -Inf)
+  } else {
+    # cutoffs<-c(min(x_s), (x_s[1:(n - 1)] - diff(x_s)/2), max(x_s))
+    cutoffs <- c(-Inf,     (x_s[1:(n - 1)] - diff(x_s) / 2), +Inf)
+  }
 
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    n_neg <- sum(gr == neg_label)
-    n_pos <- sum(gr == pos_label)
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  n_neg <- sum(gr == neg_label)
+  n_pos <- sum(gr == pos_label)
 
-    # Following variables are vectors
-    tp <- c(0, cumsum(gr[x_order] == pos_label)[!dupls])
-    fp <- c(0, cumsum(gr[x_order] == neg_label)[!dupls])
+  # Following variables are vectors
+  tp <- c(0, cumsum(gr[x_order] == pos_label)[!dupls])
+  fp <- c(0, cumsum(gr[x_order] == neg_label)[!dupls])
 
-    fn = n_pos - tp
-    tn = n_neg - fp
+  fn <- n_pos - tp
+  tn <- n_neg - fp
 
-    SE <- calculate_sensitivity(tp, fn)
-    SP <- calculate_specificity(tn, fp)
+  SE <- calculate_sensitivity(tp, fn)
+  SP <- calculate_specificity(tn, fp)
 
-    ppv <- calculate_ppv(tp, fp)
-    npv <- calculate_npv(tn, fn)
-    bac <- calculate_bac(SE, SP)
-    youden <- calculate_youdens_j(SE, SP)
+  ppv <- calculate_ppv(tp, fp)
+  npv <- calculate_npv(tn, fn)
+  bac <- calculate_bac(SE, SP)
+  youden <- calculate_youdens_j(SE, SP)
 
-    # =========================================================================
-    # The matrix of all numeric results
+  # =========================================================================
+  # The matrix of all numeric results
 
-    all_results <- cbind(cutoff = cutoffs,
-                         tp = tp,
-                         fn = fn,
-                         fp = fp,
-                         tn = tn,
-                         sens = SE,
-                         spec = SP,
-                         ppv  = ppv,
-                         npv  = npv,
-                         bac  = bac,
-                         youden = youden
-                          # pos = tp + fp,
-                          # neg = tn + fn
-    )
-    # [!!!] class names must be reviewed, especially  "roc_results"
-    all_results <- add_class_label(all_results, c("roc_results","roc_df"))
+  all_results <- cbind(cutoff = cutoffs,
+    tp = tp,
+    fn = fn,
+    fp = fp,
+    tn = tn,
+    sens = SE,
+    spec = SP,
+    ppv  = ppv,
+    npv  = npv,
+    bac  = bac,
+    youden = youden
+    # pos = tp + fp,
+    # neg = tn + fn
+  )
+  # [!!!] class names must be reviewed, especially  "roc_results"
+  all_results <- add_class_label(all_results, c("roc_results", "roc_df"))
 
-    # =========================================================================
-    # One row of results, which are considered to be optimal
+  # =========================================================================
+  # One row of results, which are considered to be optimal
 
-    if (!is.null(optimize_by)) {
-        max_ind <- switch(tolower(optimize_by),
-                          "bac"    = bac == max(bac),
-                          "youden" = youden == max(youden),
-                          # Calculations of kappa are relatively slow, thus if
-                          # not needed, it is not computed for the whole vector:
-                          "kappa"  = {
-                              kappa =  calculate_kappa(tp, fn, fp, tn)
-                              kappa == max(kappa)
-                          }
-        )
-
-        # If several equally optimal values are present, the ties are resolved
-        # by choosing the middle (rounded) index of available possibilities
-        if (sum(max_ind) > 1)
-            max_ind <- which(max_ind)[round(sum(max_ind)/2)]
-
-        # Next, the kappa and AUC values are calculated.
-        optimal <- c(all_results[max_ind, ],
-                     kappa = calculate_kappa(tp[max_ind],
-                                             fn[max_ind],
-                                             fp[max_ind],
-                                             tn[max_ind]),
-                     auc = calculate_auc(SE, SP),
-                     median_neg = medians[1],
-                     median_pos = medians[2]
-        )
-        optimal <- t(as.matrix(optimal))
-        attr(optimal, "optimized_by") <- optimize_by
-        optimal <- add_class_label(optimal, c("roc_opt_result", "roc_df"))
-
-    } else {
-        # If optimize_by = NULL
-        optimal <- "*** Not calculated ***"
-    }
-
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # Output if results = "optimal"
-    if (results == "optimal")
-        return(optimal)
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    # ==========================================================================
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # Information about the analysis
-    info <- data.frame(
-        var_name    = "",
-        n_total     = n_neg + n_pos,
-        n_neg       = n_neg,
-        n_pos       = n_pos,
-        neg_label   = neg_label,
-        pos_label   = pos_label,
-        median_neg  = medians[1],
-        median_pos  = medians[2],
-        below  = below,
-        cutoff = optimal[1],
-        above  = above,
-        # pos_is_larger = decreasing,
-
-        stringsAsFactors = FALSE
+  if (!is.null(optimize_by)) {
+    max_ind <- switch(tolower(optimize_by),
+      "bac"    = bac == max(bac),
+      "youden" = youden == max(youden),
+      # Calculations of kappa are relatively slow, thus if
+      # not needed, it is not computed for the whole vector:
+      "kappa"  = {
+        kappa <-  calculate_kappa(tp, fn, fp, tn)
+        kappa == max(kappa)
+      }
     )
 
-    info <- add_class_label(info, c("roc_info", "roc_df"))
+    # If several equally optimal values are present, the ties are resolved
+    # by choosing the middle (rounded) index of available possibilities
+    if (sum(max_ind) > 1)
+      max_ind <- which(max_ind)[round(sum(max_ind) / 2)]
 
-      # ==========================================================================
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # Output
-
-    # otherwise:
-    res <- list(info = info,
-                optimal = optimal,
-                all_results = all_results
-                # , data = data
+    # Next, the kappa and AUC values are calculated.
+    optimal <- c(all_results[max_ind, ],
+      kappa = calculate_kappa(tp[max_ind],
+        fn[max_ind],
+        fp[max_ind],
+        tn[max_ind]),
+      auc = calculate_auc(SE, SP),
+      median_neg = medians[1],
+      median_pos = medians[2]
     )
+    optimal <- t(as.matrix(optimal))
+    attr(optimal, "optimized_by") <- optimize_by
+    optimal <- add_class_label(optimal, c("roc_opt_result", "roc_df"))
 
-    add_class_label(res, c("roc_result_list"))
+  } else {
+    # If optimize_by = NULL
+    optimal <- "*** Not calculated ***"
+  }
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Output if results = "optimal"
+  if (results == "optimal")
+    return(optimal)
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  # ==========================================================================
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Information about the analysis
+  info <- data.frame(
+    var_name    = "",
+    n_total     = n_neg + n_pos,
+    n_neg       = n_neg,
+    n_pos       = n_pos,
+    neg_label   = neg_label,
+    pos_label   = pos_label,
+    median_neg  = medians[1],
+    median_pos  = medians[2],
+    below  = below,
+    cutoff = optimal[1],
+    above  = above,
+    # pos_is_larger = decreasing,
+
+    stringsAsFactors = FALSE
+  )
+
+  info <- add_class_label(info, c("roc_info", "roc_df"))
+
+  # ==========================================================================
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Output
+
+  # otherwise:
+  res <- list(info = info,
+    optimal = optimal,
+    all_results = all_results
+    # , data = data
+  )
+
+  add_class_label(res, c("roc_result_list"))
 
 }
 # =============================================================================
@@ -360,14 +357,14 @@ roc_analysis.data.frame <- function(x,
                                     pos_is_larger = NULL,
                                     optimize_by = "bac",
                                     results = "all", ...) {
-    assert_data_frame(x, types = "numeric", ncols = 1)
-    roc_analysis(as.vector(x),
-                 gr,
-                 pos_label = pos_label,
-                 pos_is_larger = pos_is_larger,
-                 optimize_by = optimize_by,
-                 results = results,
-                 ...)
+  assert_data_frame(x, types = "numeric", ncols = 1)
+  roc_analysis(as.vector(x),
+    gr,
+    pos_label = pos_label,
+    pos_is_larger = pos_is_larger,
+    optimize_by = optimize_by,
+    results = results,
+    ...)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname roc_analysis
@@ -378,13 +375,13 @@ roc_analysis.matrix <- function(x,
                                 pos_is_larger = NULL,
                                 optimize_by = "bac",
                                 results = "all", ...) {
-    assert_matrix(x, ncols = 1)
-    roc_analysis(as.vector(x),
-                 gr,
-                 pos_label = pos_label,
-                 pos_is_larger = pos_is_larger,
-                 optimize_by = optimize_by,
-                 results = results,
-                 ...)
+  assert_matrix(x, ncols = 1)
+  roc_analysis(as.vector(x),
+    gr,
+    pos_label = pos_label,
+    pos_is_larger = pos_is_larger,
+    optimize_by = optimize_by,
+    results = results,
+    ...)
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

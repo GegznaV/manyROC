@@ -112,53 +112,51 @@
 #'
 #' # Data
 #' DataSet1 <- data.frame(ID = rep(1:20, each = 2),
-#'                        gr = gl(4, 10, labels = LETTERS[1:4]),
-#'                        .row = 1:40)
+#'   gr = gl(4, 10, labels = LETTERS[1:4]),
+#'   .row = 1:40)
 #'
 #' # Explore data
-#'      str(DataSet1)
+#' str(DataSet1)
 #'
-#'      table(DataSet1[,c("gr","ID")])
+#' table(DataSet1[, c("gr", "ID")])
 #'
-#'      summary(DataSet1)
+#' summary(DataSet1)
 #'
 #'
 #' # Explore functions
-#'      nFolds = 5
+#' nFolds <- 5
 #'
 #' # If variables of data frame are provided:
-#'      Folds1_a <- cvo_create_folds(data = DataSet1,
-#'                                  stratify_by = "gr", block_by = "ID",
-#'                                   k = nFolds, returnTrain = FALSE)
-#'      Folds1_a
+#' Folds1_a <- cvo_create_folds(data = DataSet1,
+#'   stratify_by = "gr", block_by = "ID",
+#'   k = nFolds, returnTrain = FALSE)
+#' Folds1_a
 #'
-#'      str(Folds1_a)
+#' str(Folds1_a)
 #'
-#'      cvo_test_bs(Folds1_a, "gr", "ID", DataSet1)
+#' cvo_test_bs(Folds1_a, "gr", "ID", DataSet1)
 #'
 #' # If "free" variables are provided:
-#'      Folds1_b <- cvo_create_folds(stratify_by = DataSet1$gr,
-#'                                   block_by = DataSet1$ID,
-#'                                   k = nFolds,
-#'                                   returnTrain = FALSE)
-#'      # str(Folds1_b)
-#'      cvo_test_bs(Folds1_b, "gr", "ID", DataSet1)
+#' Folds1_b <- cvo_create_folds(stratify_by = DataSet1$gr,
+#'   block_by = DataSet1$ID,
+#'   k = nFolds,
+#'   returnTrain = FALSE)
+#' # str(Folds1_b)
+#' cvo_test_bs(Folds1_b, "gr", "ID", DataSet1)
 #'
 #' # Not blocked but stratified
-#'      Folds1_c <- cvo_create_folds(stratify_by = DataSet1$gr,
-#'                                   k = nFolds,
-#'                                   returnTrain = FALSE)
-#'      # str(Folds1_c)
-#'      cvo_test_bs(Folds1_c, "gr", "ID", DataSet1)
+#' Folds1_c <- cvo_create_folds(stratify_by = DataSet1$gr,
+#'   k = nFolds,
+#'   returnTrain = FALSE)
+#' # str(Folds1_c)
+#' cvo_test_bs(Folds1_c, "gr", "ID", DataSet1)
 #'
 #' # Blocked but not stratified
-#'      Folds1_d <- cvo_create_folds(block_by = DataSet1$ID,
-#'                                   k = nFolds,
-#'                                   returnTrain = FALSE)
-#'      # str(Folds1_d)
-#'      cvo_test_bs(Folds1_d, "gr", "ID", DataSet1)
-#'
-#'
+#' Folds1_d <- cvo_create_folds(block_by = DataSet1$ID,
+#'   k = nFolds,
+#'   returnTrain = FALSE)
+#' # str(Folds1_d)
+#' cvo_test_bs(Folds1_d, "gr", "ID", DataSet1)
 #' @seealso Function \code{\link[caret]{createFolds}} from package
 #'          \pkg{caret}. \cr
 #'          Function \code{\link[mlr]{makeResampleInstance}} from package
@@ -180,276 +178,280 @@ cvo_create_folds <- function(data = NULL,
                              k = folds
 
 ) {
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    gr = stratify_by
-    ID = block_by
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    assert_string(mode)
-    assert_choice(mode, c("caret", "mlr"))
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    assert_int(times, lower = 1)
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    if (k < 2) stop("Number of folds `k` must be at least 2.")
-    assert_int(k, lower = 2)
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  gr <- stratify_by
+  ID <- block_by
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  assert_string(mode)
+  assert_choice(mode, c("caret", "mlr"))
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  assert_int(times, lower = 1)
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  if (k < 2) stop("Number of folds `k` must be at least 2.")
+  assert_int(k, lower = 2)
 
-    nFolds <- k
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # Choose seeds for random number generation -------------------------
-    assert_numeric(seeds, null.ok = TRUE)
-    assert_string(kind,   null.ok = TRUE)
+  nFolds <- k
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Choose seeds for random number generation -------------------------
+  assert_numeric(seeds, null.ok = TRUE)
+  assert_string(kind,   null.ok = TRUE)
 
-    # The code in this `if` converts seeds either numeric vector or NULL
-    if (!is.null(seeds) && !any(is.na(seeds))) {
-        # If too few seeds are provided
-        len_seeds <- length(seeds)
+  # The code in this `if` converts seeds either numeric vector or NULL
+  if (!is.null(seeds) && !any(is.na(seeds))) {
+    # If too few seeds are provided
+    len_seeds <- length(seeds)
 
-        if (!is.null(seeds) & (len_seeds < times) & (len_seeds > 1))
-            warning("Number of provided `seeds` is not sufficient. \n",
-                    "Random `seeds` will be added.\n")
+    if (!is.null(seeds) & (len_seeds < times) & (len_seeds > 1))
+      warning("Number of provided `seeds` is not sufficient. \n",
+        "Random `seeds` will be added.\n")
 
-        # If just one seed is provided
-        if (len_seeds == 1 & (len_seeds < times))
-            set.seed(seed = seeds, kind = kind)
+    # If just one seed is provided
+    if (len_seeds == 1 & (len_seeds < times))
+      set.seed(seed = seeds, kind = kind)
 
-        # Generate seeds, if needed
-        if (is.null(seeds) | (len_seeds < times)) {
-            seeds <- c(seeds,
-                       sample(-9e7:9e7, times - len_seeds)
-            )
-        }
-
-        # If too many seeds are provided
-        seeds <- rep_len(seeds, times)
-
-    } else {
-        seeds <- NULL
-        kind  <- NULL
+    # Generate seeds, if needed
+    if (is.null(seeds) | (len_seeds < times)) {
+      seeds <- c(seeds,
+        sample(-9e7:9e7, times - len_seeds)
+      )
     }
 
-    # Force default values, if needed ===================================
-    force(data)
-    force(stratify_by)
-    force(block_by)
+    # If too many seeds are provided
+    seeds <- rep_len(seeds, times)
 
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    if (inherits(data, "hyperSpec")) data <- data$..
+  } else {
+    seeds <- NULL
+    kind  <- NULL
+  }
 
-    # Parse input and prepare data ===========================================
-    # if `data` is provided:
-    ID <- getVarValues(ID, data)
-    gr <- getVarValues(gr, data)
+  # Force default values, if needed ===================================
+  force(data)
+  force(stratify_by)
+  force(block_by)
 
-    # If either `ID` or `gr` is not provided:
-    if (is.null(ID) & length(gr) > 1) {
-        ID <- 1:length(gr) # create unique IDs, if not blocked
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  if (inherits(data, "hyperSpec")) data <- data$..
+
+  # Parse input and prepare data ===========================================
+  # if `data` is provided:
+  ID <- getVarValues(ID, data)
+  gr <- getVarValues(gr, data)
+
+  # If either `ID` or `gr` is not provided:
+  if (is.null(ID) & length(gr) > 1) {
+    ID <- 1:length(gr) # create unique IDs, if not blocked
+  }
+
+  if (is.null(gr) & length(ID) > 1) {
+    gr <- rep(0, length(ID)) # create one level of `gr`, if not stratified
+  }
+
+  if (is.null(gr) & is.null(ID)) {
+    N_ <- nrow(data) %if_null_or_len0% length(data)
+
+    ID <- 1:N_       # create unique IDs, if not blocked
+    gr <- rep(0, N_) # create one level of `gr`, if not stratified
+  }
+
+  sample_size <- length(ID)
+  rm(data)
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  if (length(ID) != length(gr))
+    stop("Lengths of vectors `stratify_by` and `block_by` must agree.")
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # DF_all_ID <- data.frame(ID = ID, gr = gr)
+  DF_all_ID <- data.frame(gr = gr,
+    ID = ID,
+    stringsAsFactors = FALSE)
+
+  # get unique values only: for blocking
+
+  DF_uni_ID <- unique(DF_all_ID)
+
+
+  # Calculations  ==========================================================
+  DF_uni_ID$Fold <- rep(NA, times = nrow(DF_uni_ID))
+  # NA's are not included as a separate level
+  nGr <- DF_uni_ID$gr %>% as.factor() %>% nlevels()
+
+  DFuniID_ByGr <- split(DF_uni_ID, DF_uni_ID$gr)
+  n_ByGr       <- sapply(DFuniID_ByGr, nrow)     # unique IDs per class
+
+  # If Number of observatuions in a group is to small
+  if (any(n_ByGr < nFolds)) {
+    bru("-")
+    cat("Number of unique cases/blocks in each group:\n")
+    print(n_ByGr)
+    print(glue::glue("Number of folds = {nFolds}\n\n"))
+    stop("Number of UNIQUE observations in one of the\n",
+      "groups is smaller than number of folds.\n")
+  }
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # For every repetition
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  # fold_name_format <- paste0("Fold%0",
+  #                            (log10(nFolds * times) %/% 1) + 1,
+  #                            "g%s")
+
+  fold_name_format <-
+    glue::glue("Rep%0{digit_1}g_Fold%0{digit_2}g",
+      digit_1 = (log10(times)  %/% 1) + 1,
+      digit_2 = (log10(nFolds) %/% 1) + 1)
+
+  for (i in 1:times) {
+    if (!is.null(seeds)) set.seed(seeds[i], kind = kind)
+
+    available_folds <- seq_len(nFolds)
+
+    # available_folds = (1:nFolds) + nFolds * (i - 1)
+    # REPETITION <- if (times == 1) "" else paste0("_Rep", i)
+
+    # Assign numbers of fold to each row
+    # Split to folds in a stratified way by group 'gr'
+    for (gr_i in 1:nGr) {
+      GrSize     <-  n_ByGr[gr_i]
+      # modulus - how many times observations are divided
+      #           proportionally to each fold.
+      TimesEach  <-  GrSize %/% nFolds
+
+      # reminder - number of observations, that cannot
+      # be divided proportionally.
+      nRem   <-  GrSize %%  nFolds
+
+      # Separate permutations ensures more proportional distribution when
+      # number of observations is small:
+
+      # Create a list of proportionally distributed per fold
+      Proportionals <-  rep(available_folds, times = TimesEach)
+      # Permute the list of proportionally distributed
+      Proportionals <-  sample(Proportionals, GrSize - nRem)
+      # Permute reminders separately
+      Reminders     <-  sample(available_folds, nRem)
+      # Merge
+      BelongsToFoldNr <- c(Proportionals, Reminders)
+      DFuniID_ByGr[[gr_i]]$Fold <-
+        sprintf(fold_name_format, i, BelongsToFoldNr)
     }
 
-    if (is.null(gr) & length(ID) > 1) {
-        gr <- rep(0, length(ID)) # create one level of `gr`, if not stratified
+    # unsplit the dataframe: NA's removed
+    # df_with_folds <- unsplit(DFuniID_ByGr, DF_uni_ID$gr[!is.na(DF_uni_ID$gr)])
+    # df_with_folds <- do.call("rbind", DFuniID_ByGr)
+
+    df_with_folds <- dplyr::bind_rows(DFuniID_ByGr)
+
+    # data_i <- DF_all_ID %>%
+    #     mutate(ORDER = seq_along(ID)) %>%
+    #     merge(df_with_folds, by = "ID", sort = FALSE)  %>%
+    #     arrange(ORDER)
+
+    data_i <- DF_all_ID %>%
+      dplyr::mutate(ORDER = seq_along(ID)) %>%
+      dplyr::left_join(df_with_folds, by = c("ID", "gr"))  %>%
+      dplyr::arrange(ORDER)
+
+    if (!all(data_i$ID == ID)) {
+      warning("Order of indices does not match order of input data. ",
+        "This might be caused by NA values in the data."
+        # , "Either IDs might be incorrectrly sorted inside",
+        # "function 'cvo_create_folds'"
+      )
     }
 
-    if (is.null(gr) & is.null(ID)) {
-        N_ <- nrow(data) %if_null_or_len0% length(data)
+    Ind_all <- 1:nrow(data_i)
+    data_i$Test_ind <- Ind_all # Additional column with row numbers.
+    # which are treated as indices for test
+    # subset.
 
-        ID <- 1:N_       # create unique IDs, if not blocked
-        gr <- rep(0, N_) # create one level of `gr`, if not stratified
+    DATA <- if (i == 1) data_i else dplyr::bind_rows(DATA, data_i)
+  }
+
+  Test_ind <- split(DATA$Test_ind,
+    factor(DATA$Fold, levels = sort(unique(DATA$Fold))
+    )
+  )
+
+  # Before `return` -------------------------------------------------------
+
+  if (times > 1) {
+    validation_type <- "Repeated k-fold"
+    # cv_type <- "repeated cross-validation"
+  } else if (times == 1) {
+    "k-fold"
+    validation_type <- "k-fold"
+    # cv_type <- "cross-validation"
+  }
+  # Choose which indices (test/train) to remove
+
+  switch(returnTrain %>% as.character() %>% toupper(),
+    "TRUE" = {
+      Train_ind  <- lapply(Test_ind, function(x) {
+        setdiff(Ind_all, x)
+      })
+      ind_type   <- "Train"
+      return_ind <- Train_ind
+      class(return_ind) <- c("cvo_caret", "cvo")
+    },
+    "FALSE" = {
+      ind_type   <- "Test"
+      return_ind <- Test_ind
+      class(return_ind) <- c("cvo_caret", "cvo")
+    },
+    "BOTH" = {
+      ind_type <- "For `mlr`"
+      desc <- list(
+        folds    = nFolds,
+        reps     = times,
+        id       = "repeated cross-validation",
+        iters    = nFolds * times,
+        # [!!!] Next line should be updated approriately:
+        predict  = predict, # c("train", "test", "both")
+        stratify = nGr > 1,
+        # [!!!] Next line should be updated approriately:
+        stratify.cols = NULL
+      )
+
+      # addClasses(desc, stri_paste(method, "Desc"))
+      desc %<>% add_class_label(c("RepCVDesc", "ResampleDesc"))
+
+      # [!!!] The next line must be updated appropriately
+      group_ <- factor()
+
+      return_ind <- list(
+        desc = desc,
+        size = sample_size,
+        train.inds = lapply(Test_ind,
+          function(x) {
+            setdiff(Ind_all, x)
+          }
+        ),
+        test.inds  = Test_ind,
+        group = group_
+      )
+      class(return_ind) <- c("ResampleInstance", "cvo_mlr", "cvo")
     }
+  )
 
-    sample_size <- length(ID)
-    rm(data)
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    if (length(ID) != length(gr))
-        stop("Lengths of vectors `stratify_by` and `block_by` must agree.")
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # DF_all_ID <- data.frame(ID = ID, gr = gr)
-    DF_all_ID <- data.frame(gr = gr,
-                            ID = ID,
-                            stringsAsFactors = FALSE)
+  # Add attributtes
+  attr(return_ind, "info") <-
+    data.frame(
+      indices     = ind_type,
+      stratified  = nGr > 1,
+      blocked     = any(duplicated(ID)),
+      cv_type     = validation_type, # type of cross-validation
+      k           = k,
+      repetitions = times,
+      sample_size = sample_size,
+      # cross_validation_type  = validation_type,
 
-    # get unique values only: for blocking
-
-    DF_uni_ID <- unique(DF_all_ID)
-
-
-    # Calculations  ==========================================================
-    DF_uni_ID$Fold <- rep(NA, times = nrow(DF_uni_ID))
-    # NA's are not included as a separate level
-    nGr <- DF_uni_ID$gr %>% as.factor() %>% nlevels()
-
-    DFuniID_ByGr <- split(DF_uni_ID, DF_uni_ID$gr)
-    n_ByGr       <- sapply(DFuniID_ByGr, nrow)     # unique IDs per class
-
-    # If Number of observatuions in a group is to small
-    if (any(n_ByGr < nFolds)) {
-        bru("-")
-        cat('Number of unique cases/blocks in each group:\n')
-        print(n_ByGr)
-        print(glue::glue('Number of folds = {nFolds}\n\n'))
-        stop("Number of UNIQUE observations in one of the\n",
-             "groups is smaller than number of folds.\n")
-    }
-
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # For every repetition
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    # fold_name_format <- paste0("Fold%0",
-    #                            (log10(nFolds * times) %/% 1) + 1,
-    #                            "g%s")
-
-    fold_name_format <-
-        glue::glue("Rep%0{digit_1}g_Fold%0{digit_2}g",
-                   digit_1 = (log10(times)  %/% 1) + 1,
-                   digit_2 = (log10(nFolds) %/% 1) + 1)
-
-    for (i in 1:times) {
-        if (!is.null(seeds)) set.seed(seeds[i], kind = kind)
-
-        available_folds <- seq_len(nFolds)
-
-        # available_folds = (1:nFolds) + nFolds * (i - 1)
-        # REPETITION <- if (times == 1) "" else paste0("_Rep", i)
-
-        # Assign numbers of fold to each row
-        # Split to folds in a stratified way by group 'gr'
-        for (gr_i in 1:nGr) {
-            GrSize     <-  n_ByGr[gr_i]
-            # modulus - how many times observations are divided
-            #           proportionally to each fold.
-            TimesEach  <-  GrSize %/% nFolds
-
-            # reminder - number of observations, that cannot
-            # be divided proportionally.
-            nRem   <-  GrSize %%  nFolds
-
-            # Separate permutations ensures more proportional distribution when
-            # number of observations is small:
-
-            # Create a list of proportionally distributed per fold
-            Proportionals <-  rep(available_folds, times = TimesEach)
-            # Permute the list of proportionally distributed
-            Proportionals <-  sample(Proportionals, GrSize - nRem)
-            # Permute reminders separately
-            Reminders     <-  sample(available_folds, nRem)
-            # Merge
-            BelongsToFoldNr <- c(Proportionals, Reminders)
-            DFuniID_ByGr[[gr_i]]$Fold <-
-                sprintf(fold_name_format, i, BelongsToFoldNr)
-        }
-
-        # unsplit the dataframe: NA's removed
-        # df_with_folds <- unsplit(DFuniID_ByGr, DF_uni_ID$gr[!is.na(DF_uni_ID$gr)])
-        # df_with_folds <- do.call("rbind", DFuniID_ByGr)
-
-        df_with_folds <- dplyr::bind_rows(DFuniID_ByGr)
-
-        # data_i <- DF_all_ID %>%
-        #     mutate(ORDER = seq_along(ID)) %>%
-        #     merge(df_with_folds, by = "ID", sort = FALSE)  %>%
-        #     arrange(ORDER)
-
-        data_i <- DF_all_ID %>%
-            dplyr::mutate(ORDER = seq_along(ID)) %>%
-            dplyr::left_join(df_with_folds, by = c("ID", "gr"))  %>%
-            dplyr::arrange(ORDER)
-
-        if (!all(data_i$ID == ID)) {
-            warning("Order of indices does not match order of input data. ",
-                "This might be caused by NA values in the data."
-                # , "Either IDs might be incorrectrly sorted inside",
-                # "function 'cvo_create_folds'"
-            )
-        }
-
-        Ind_all <- 1:nrow(data_i)
-        data_i$Test_ind <- Ind_all # Additional column with row numbers.
-        # which are treated as indices for test
-        # subset.
-
-        DATA <- if (i == 1) data_i else dplyr::bind_rows(DATA, data_i)
-    }
-
-    Test_ind <- split(DATA$Test_ind,
-                      factor(DATA$Fold, levels = sort(unique(DATA$Fold))
-                      )
+      stringsAsFactors = FALSE
     )
 
-    # Before `return` -------------------------------------------------------
-
-        if (times > 1) {
-            validation_type <- "Repeated k-fold"
-            # cv_type <- "repeated cross-validation"
-        } else if (times == 1) {
-            "k-fold"
-            validation_type <- "k-fold"
-            # cv_type <- "cross-validation"
-        }
-    # Choose which indices (test/train) to remove
-
-    switch(returnTrain %>% as.character() %>% toupper(),
-           "TRUE" = {
-               Train_ind  <- lapply(Test_ind, function(x) {setdiff(Ind_all, x)})
-               ind_type   <- "Train"
-               return_ind <- Train_ind
-               class(return_ind) <- c("cvo_caret", "cvo")
-           },
-           "FALSE" = {
-               ind_type   <- "Test"
-               return_ind <- Test_ind
-               class(return_ind) <- c("cvo_caret", "cvo")
-           },
-           "BOTH" = {
-               ind_type <- "For `mlr`"
-               desc <- list(
-                   folds    = nFolds,
-                   reps     = times,
-                   id       = "repeated cross-validation",
-                   iters    = nFolds * times,
-                   # [!!!] Next line should be updated approriately:
-                   predict  = predict, # c("train", "test", "both")
-                   stratify = nGr > 1,
-                   # [!!!] Next line should be updated approriately:
-                   stratify.cols = NULL
-                   )
-
-               # addClasses(desc, stri_paste(method, "Desc"))
-               desc %<>% add_class_label(c("RepCVDesc", "ResampleDesc"))
-
-               # [!!!] The next line must be updated appropriately
-               group_ <- factor()
-
-               return_ind <- list(
-                   desc = desc,
-                   size = sample_size,
-                   train.inds = lapply(Test_ind,
-                                       function(x) {setdiff(Ind_all, x)}
-                   ),
-                   test.inds  = Test_ind,
-                   group = group_
-               )
-               class(return_ind) <- c("ResampleInstance", "cvo_mlr", "cvo")
-           }
-    )
-
-    # Add attributtes
-    attr(return_ind, "info") <-
-        data.frame(
-            indices     = ind_type,
-            stratified  = nGr > 1,
-            blocked     = any(duplicated(ID)),
-            cv_type     = validation_type, # type of cross-validation
-            k           = k,
-            repetitions = times,
-            sample_size = sample_size,
-            # cross_validation_type  = validation_type,
-
-            stringsAsFactors = FALSE
-        )
-
-    attr(return_ind, "seeds") <- list(generator = kind, seeds = seeds)
-    # -----------------------------------------------------------------------
-    # Return
-    return_ind
+  attr(return_ind, "seeds") <- list(generator = kind, seeds = seeds)
+  # -----------------------------------------------------------------------
+  # Return
+  return_ind
 }
 # [END]
 
@@ -460,25 +462,25 @@ cvo_create_folds <- function(data = NULL,
 #' @export
 #'
 print.cvo <- function(x, ...) {
-    cat("--- A cvo object: ----------------------------------------------------\n")
-    attrs <- attributes(x)
+  cat("--- A cvo object: ----------------------------------------------------\n")
+  attrs <- attributes(x)
 
-    # attributes(x) <- NULL
-    # dplyr::glimpse(x)
+  # attributes(x) <- NULL
+  # dplyr::glimpse(x)
 
-    print(attrs$info, row.names = FALSE)
+  print(attrs$info, row.names = FALSE)
 
-    if (!is.null(attrs$seeds$generator) || !is.null(attrs$seeds$seeds)) {
-        cat("\n")
-    }
-    if (!is.null(attrs$seeds$generator)) {
-        cat(paste("Random number generator:", attrs$seeds$generator), "\n")
-    }
-    if (!is.null(attrs$seeds$seeds)) {
-        paste("Seeds: ", paste(attrs$seeds$seeds, collapse = ', '))  %>%
-            stringr::str_trunc(70)  %>%
-            cat(sep = "\n")
-    }
-    cat("----------------------------------------------------------------------\n")
+  if (!is.null(attrs$seeds$generator) || !is.null(attrs$seeds$seeds)) {
+    cat("\n")
+  }
+  if (!is.null(attrs$seeds$generator)) {
+    cat(paste("Random number generator:", attrs$seeds$generator), "\n")
+  }
+  if (!is.null(attrs$seeds$seeds)) {
+    paste("Seeds: ", paste(attrs$seeds$seeds, collapse = ", "))  %>%
+      stringr::str_trunc(70)  %>%
+      cat(sep = "\n")
+  }
+  cat("----------------------------------------------------------------------\n")
 }
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
