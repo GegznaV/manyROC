@@ -20,5 +20,4 @@ test_that("sp_manyroc_with_cv works", {
   expect_equal(attributes(rez$cvo)$info$k, k_folds)
   expect_equal(attributes(rez$cvo)$info$repetitions, times)
   expect_is(rez$results, "data.frame")
-
 })
